@@ -1,0 +1,602 @@
+node_id,osm_name,dob_nearest_m,dob_n_within,dob_shed,dob_any,dob_types
+n00000,1st Avenue,20.2,8,True,True,Construction Fence|Sidewalk Shed|Suspended Scaffold
+n00001,1st Avenue,9.4,8,True,True,Construction Fence|Sidewalk Shed|Suspended Scaffold
+n00002,1st Avenue,10.7,4,True,True,Sidewalk Shed|Suspended Scaffold
+n00003,1st Avenue,30.7,0,False,False,
+n00004,1st Avenue,50.7,0,False,False,
+n00005,1st Avenue,70.7,0,False,False,
+n00006,1st Avenue,53.1,0,False,False,
+n00007,1st Avenue,34.9,0,False,False,
+n00008,1st Avenue,20.2,1,False,True,Suspended Scaffold
+n00009,1st Avenue,20.0,1,False,True,Suspended Scaffold
+n00010,1st Avenue,34.6,0,False,False,
+n00011,1st Avenue,41.5,0,False,False,
+n00012,1st Avenue,26.6,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00013,1st Avenue,6.6,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00014,1st Avenue,1.1,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00015,1st Avenue,20.1,1,True,True,Sidewalk Shed
+n00016,1st Avenue,40.1,0,False,False,
+n00017,1st Avenue,60.1,0,False,False,
+n00018,1st Avenue,80.1,0,False,False,
+n00019,1st Avenue,100.1,0,False,False,
+n00020,1st Avenue,110.2,0,False,False,
+n00021,1st Avenue,90.2,0,False,False,
+n00022,1st Avenue,70.2,0,False,False,
+n00023,1st Avenue,50.2,0,False,False,
+n00024,1st Avenue,30.3,0,False,False,
+n00025,1st Avenue,10.4,2,False,True,Supported Scaffold
+n00026,1st Avenue,10.0,2,False,True,Supported Scaffold
+n00027,1st Avenue,29.4,2,False,True,Supported Scaffold
+n00028,1st Avenue,26.6,2,False,True,Supported Scaffold
+n00029,1st Avenue,11.5,2,False,True,Supported Scaffold
+n00030,1st Avenue,18.9,2,False,True,Supported Scaffold
+n00031,1st Avenue,37.4,0,False,False,
+n00032,1st Avenue,57.1,0,False,False,
+n00033,1st Avenue,76.7,0,False,False,
+n00034,1st Avenue,82.3,0,False,False,
+n00035,1st Avenue,65.8,0,False,False,
+n00036,1st Avenue,52.4,0,False,False,
+n00037,1st Avenue,48.9,0,False,False,
+n00038,1st Avenue,53.0,0,False,False,
+n00039,1st Avenue,72.9,0,False,False,
+n00040,1st Avenue,92.6,0,False,False,
+n00041,1st Avenue,87.1,0,False,False,
+n00042,1st Avenue,75.1,0,False,False,
+n00043,1st Avenue,65.3,0,False,False,
+n00044,2nd Avenue,78.6,0,False,False,
+n00045,2nd Avenue,97.8,0,False,False,
+n00046,2nd Avenue,102.4,0,False,False,
+n00047,2nd Avenue,92.1,0,False,False,
+n00048,2nd Avenue,72.1,0,False,False,
+n00049,2nd Avenue,52.1,0,False,False,
+n00050,2nd Avenue,32.1,0,False,False,
+n00051,2nd Avenue,12.2,1,False,True,Supported Scaffold
+n00052,2nd Avenue,8.2,1,False,True,Supported Scaffold
+n00053,2nd Avenue,28.0,1,False,True,Supported Scaffold
+n00054,2nd Avenue,52.5,0,False,False,
+n00055,2nd Avenue,47.5,0,False,False,
+n00056,2nd Avenue,29.9,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00057,2nd Avenue,18.1,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00058,2nd Avenue,23.7,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00059,2nd Avenue,32.1,0,False,False,
+n00060,2nd Avenue,33.9,0,False,False,
+n00061,2nd Avenue,45.4,0,False,False,
+n00062,2nd Avenue,61.4,0,False,False,
+n00063,2nd Avenue,71.6,0,False,False,
+n00064,2nd Avenue,51.6,0,False,False,
+n00065,2nd Avenue,31.6,0,False,False,
+n00066,2nd Avenue,11.6,3,True,True,Sidewalk Shed|Suspended Scaffold
+n00067,2nd Avenue,8.4,3,True,True,Sidewalk Shed|Suspended Scaffold
+n00068,2nd Avenue,28.4,3,True,True,Sidewalk Shed|Suspended Scaffold
+n00069,2nd Avenue,48.4,0,False,False,
+n00070,2nd Avenue,42.6,0,False,False,
+n00071,2nd Avenue,36.0,0,False,False,
+n00072,2nd Avenue,39.7,0,False,False,
+n00073,2nd Avenue,41.5,0,False,False,
+n00074,2nd Avenue,23.2,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00075,2nd Avenue,12.6,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00076,3rd Avenue,45.9,0,False,False,
+n00077,3rd Avenue,25.9,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00078,3rd Avenue,5.9,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00079,3rd Avenue,14.2,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00080,3rd Avenue,34.1,0,False,False,
+n00081,3rd Avenue,46.8,0,False,False,
+n00082,3rd Avenue,26.9,2,True,True,Sidewalk Shed|Supported Scaffold
+n00083,3rd Avenue,7.0,2,True,True,Sidewalk Shed|Supported Scaffold
+n00084,3rd Avenue,13.3,2,True,True,Sidewalk Shed|Supported Scaffold
+n00085,3rd Avenue,33.2,0,False,False,
+n00086,3rd Avenue,32.2,0,False,False,
+n00087,3rd Avenue,12.2,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00088,3rd Avenue,7.9,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00089,3rd Avenue,27.9,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00090,3rd Avenue,27.7,1,False,True,Construction Fence
+n00091,3rd Avenue,8.2,1,False,True,Construction Fence
+n00092,3rd Avenue,13.0,7,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00093,3rd Avenue,8.6,22,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00094,3rd Avenue,2.9,16,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00095,3rd Avenue,20.9,10,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00096,3rd Avenue,27.8,2,False,True,Construction Fence|Suspended Scaffold
+n00097,3rd Avenue,7.8,2,False,True,Construction Fence|Suspended Scaffold
+n00098,3rd Avenue,12.2,2,False,True,Construction Fence|Suspended Scaffold
+n00099,3rd Avenue,32.1,0,False,False,
+n00100,3rd Avenue,52.1,0,False,False,
+n00101,3rd Avenue,47.8,0,False,False,
+n00102,3rd Avenue,27.9,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00103,3rd Avenue,8.3,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00104,3rd Avenue,12.7,3,True,True,Sidewalk Shed|Suspended Scaffold
+n00105,3rd Avenue,5.3,1,False,True,Suspended Scaffold
+n00106,3rd Avenue,16.3,1,False,True,Suspended Scaffold
+n00107,3rd Avenue,36.1,0,False,False,
+n00108,3rd Avenue,23.6,4,True,True,Construction Fence|Sidewalk Shed
+n00109,3rd Avenue,16.6,4,True,True,Construction Fence|Sidewalk Shed
+n00110,3rd Avenue,28.1,4,True,True,Construction Fence|Sidewalk Shed
+n00111,East 34th Street,19.5,7,True,True,Sidewalk Shed|Suspended Scaffold
+n00112,East 34th Street,13.2,7,True,True,Sidewalk Shed|Suspended Scaffold
+n00113,East 34th Street,16.9,7,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00114,East 34th Street,1.1,6,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00115,East 34th Street,5.3,6,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00116,East 34th Street,25.2,3,True,True,Sidewalk Shed|Supported Scaffold
+n00117,East 34th Street,45.2,0,False,False,
+n00118,East 34th Street,32.6,0,False,False,
+n00119,East 34th Street,16.3,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00120,East 34th Street,16.4,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00121,East 34th Street,32.7,0,False,False,
+n00122,East 34th Street,45.6,0,False,False,
+n00123,East 34th Street,25.6,1,True,True,Sidewalk Shed
+n00124,East 34th Street,5.6,1,True,True,Sidewalk Shed
+n00125,East 34th Street,14.4,1,True,True,Sidewalk Shed
+n00126,East 34th Street,34.4,0,False,False,
+n00127,East 34th Street,35.2,0,False,False,
+n00128,East 34th Street,37.0,0,False,False,
+n00129,East 34th Street,48.6,0,False,False,
+n00130,East 34th Street,63.7,0,False,False,
+n00131,East 34th Street,81.0,0,False,False,
+n00132,East 34th Street,66.7,0,False,False,
+n00133,East 34th Street,49.2,0,False,False,
+n00134,East 34th Street,34.7,0,False,False,
+n00135,East 34th Street,35.4,0,False,False,
+n00136,East 34th Street,49.2,0,False,False,
+n00137,East 34th Street,66.3,0,False,False,
+n00138,East 34th Street,84.6,0,False,False,
+n00139,East 34th Street,83.3,0,False,False,
+n00140,East 34th Street,83.8,0,False,False,
+n00141,East 34th Street,79.5,0,False,False,
+n00142,East 34th Street,59.8,0,False,False,
+n00143,East 34th Street,40.4,0,False,False,
+n00144,East 34th Street,22.0,1,False,True,Supported Scaffold
+n00145,East 34th Street,24.4,1,False,True,Supported Scaffold
+n00146,East 34th Street,43.1,0,False,False,
+n00147,East 34th Street,25.8,2,False,True,Construction Fence
+n00148,East 34th Street,5.9,4,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00149,East 34th Street,0.6,5,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00150,East 34th Street,7.5,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00151,East 34th Street,27.4,1,False,True,Suspended Scaffold
+n00152,East 34th Street,47.4,0,False,False,
+n00153,East 34th Street,51.8,0,False,False,
+n00154,East 34th Street,34.5,0,False,False,
+n00155,East 34th Street,22.3,8,True,True,Construction Fence|Sidewalk Shed|Suspended Scaffold
+n00156,East 34th Street,5.3,8,True,True,Construction Fence|Sidewalk Shed|Suspended Scaffold
+n00157,East 35th Street,64.2,0,False,False,
+n00158,East 35th Street,69.1,0,False,False,
+n00159,East 35th Street,79.1,0,False,False,
+n00160,East 35th Street,92.4,0,False,False,
+n00161,East 35th Street,90.4,0,False,False,
+n00162,East 35th Street,86.4,0,False,False,
+n00163,East 35th Street,84.1,0,False,False,
+n00164,East 35th Street,84.4,0,False,False,
+n00165,East 35th Street,88.0,0,False,False,
+n00166,East 35th Street,83.8,0,False,False,
+n00167,East 35th Street,75.9,0,False,False,
+n00168,East 35th Street,75.0,0,False,False,
+n00169,East 35th Street,57.6,0,False,False,
+n00170,East 35th Street,37.6,0,False,False,
+n00171,East 35th Street,17.6,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00172,East 35th Street,2.4,6,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00173,East 35th Street,7.8,6,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00174,East 35th Street,27.6,1,True,True,Sidewalk Shed
+n00175,East 35th Street,47.6,0,False,False,
+n00176,East 35th Street,59.3,0,False,False,
+n00177,East 35th Street,48.8,0,False,False,
+n00178,East 35th Street,50.5,0,False,False,
+n00179,East 35th Street,61.9,0,False,False,
+n00180,East 35th Street,59.4,0,False,False,
+n00181,East 35th Street,39.4,0,False,False,
+n00182,East 35th Street,19.4,1,True,True,Sidewalk Shed
+n00183,East 35th Street,0.6,1,True,True,Sidewalk Shed
+n00184,East 35th Street,20.6,1,True,True,Sidewalk Shed
+n00185,East 35th Street,22.0,1,False,True,Supported Scaffold
+n00186,East 35th Street,2.4,1,False,True,Supported Scaffold
+n00187,East 35th Street,18.1,1,False,True,Supported Scaffold
+n00188,East 35th Street,38.1,0,False,False,
+n00189,East 35th Street,58.1,0,False,False,
+n00190,East 35th Street,54.5,0,False,False,
+n00191,East 35th Street,37.9,0,False,False,
+n00192,East 35th Street,26.5,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00193,East 35th Street,27.6,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00194,East 35th Street,40.4,0,False,False,
+n00195,East 35th Street,57.4,0,False,False,
+n00196,East 35th Street,45.2,0,False,False,
+n00197,East 35th Street,25.2,5,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00198,East 35th Street,5.2,8,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00199,East 35th Street,1.4,8,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00200,East 35th Street,19.3,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00201,East 35th Street,31.6,0,False,False,
+n00202,East 36th Street,18.0,3,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00203,East 36th Street,28.3,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00204,East 36th Street,37.4,0,False,False,
+n00205,East 36th Street,52.8,0,False,False,
+n00206,East 36th Street,70.6,0,False,False,
+n00207,East 36th Street,89.3,0,False,False,
+n00208,East 36th Street,74.2,0,False,False,
+n00209,East 36th Street,62.0,0,False,False,
+n00210,East 36th Street,54.5,0,False,False,
+n00211,East 36th Street,53.9,0,False,False,
+n00212,East 36th Street,60.3,0,False,False,
+n00213,East 36th Street,71.9,0,False,False,
+n00214,East 36th Street,77.5,0,False,False,
+n00215,East 36th Street,79.0,0,False,False,
+n00216,East 36th Street,79.0,0,False,False,
+n00217,East 36th Street,79.7,0,False,False,
+n00218,East 36th Street,82.6,0,False,False,
+n00219,East 36th Street,80.7,0,False,False,
+n00220,East 36th Street,78.0,0,False,False,
+n00221,East 36th Street,59.1,0,False,False,
+n00222,East 36th Street,39.1,0,False,False,
+n00223,East 36th Street,19.2,3,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00224,East 36th Street,1.8,3,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00225,East 36th Street,20.9,3,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00226,East 36th Street,80.7,0,False,False,
+n00227,East 36th Street,85.8,0,False,False,
+n00228,East 36th Street,93.7,0,False,False,
+n00229,East 36th Street,104.4,0,False,False,
+n00230,East 36th Street,118.1,0,False,False,
+n00231,East 36th Street,126.8,0,False,False,
+n00232,East 36th Street,106.8,0,False,False,
+n00233,East 36th Street,86.8,0,False,False,
+n00234,East 36th Street,66.8,0,False,False,
+n00235,East 36th Street,46.8,0,False,False,
+n00236,East 36th Street,26.8,1,False,True,Suspended Scaffold
+n00237,East 36th Street,6.9,1,False,True,Suspended Scaffold
+n00238,East 37th Street,13.6,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00239,East 37th Street,17.8,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00240,East 37th Street,30.7,0,False,False,
+n00241,East 37th Street,48.7,0,False,False,
+n00242,East 37th Street,67.8,0,False,False,
+n00243,East 37th Street,81.7,0,False,False,
+n00244,East 37th Street,79.4,0,False,False,
+n00245,East 37th Street,82.1,0,False,False,
+n00246,East 37th Street,71.7,0,False,False,
+n00247,East 37th Street,51.7,0,False,False,
+n00248,East 37th Street,31.7,0,False,False,
+n00249,East 37th Street,11.7,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00250,East 37th Street,28.3,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00251,East 37th Street,48.3,0,False,False,
+n00252,East 37th Street,68.3,0,False,False,
+n00253,East 37th Street,82.4,0,False,False,
+n00254,East 37th Street,76.5,0,False,False,
+n00255,East 37th Street,73.3,0,False,False,
+n00256,East 37th Street,76.2,0,False,False,
+n00257,East 37th Street,68.1,0,False,False,
+n00258,East 37th Street,49.4,0,False,False,
+n00259,East 37th Street,33.9,0,False,False,
+n00260,East 37th Street,31.3,0,False,False,
+n00261,East 37th Street,45.9,0,False,False,
+n00262,East 37th Street,63.5,0,False,False,
+n00263,East 37th Street,77.1,0,False,False,
+n00264,East 37th Street,77.5,0,False,False,
+n00265,East 37th Street,82.9,0,False,False,
+n00266,East 37th Street,64.8,0,False,False,
+n00267,East 37th Street,44.8,0,False,False,
+n00268,East 37th Street,24.8,8,True,True,Sidewalk Shed|Supported Scaffold
+n00269,East 37th Street,4.9,12,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00270,East 37th Street,5.4,12,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00271,East 37th Street,10.9,10,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00272,East 37th Street,5.7,6,True,True,Sidewalk Shed|Supported Scaffold
+n00273,East 37th Street,14.6,6,True,True,Sidewalk Shed|Supported Scaffold
+n00274,East 37th Street,34.5,0,False,False,
+n00275,East 37th Street,54.5,0,False,False,
+n00276,East 37th Street,74.5,0,False,False,
+n00277,East 37th Street,73.1,0,False,False,
+n00278,East 37th Street,53.1,0,False,False,
+n00279,East 37th Street,33.1,0,False,False,
+n00280,East 37th Street,13.1,6,True,True,Sidewalk Shed|Supported Scaffold
+n00281,East 37th Street,7.0,6,True,True,Sidewalk Shed|Supported Scaffold
+n00282,East 37th Street,20.6,6,True,True,Sidewalk Shed|Supported Scaffold
+n00283,East 37th Street,38.6,0,False,False,
+n00284,East 38th Street,19.5,10,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00285,East 38th Street,12.6,12,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00286,East 38th Street,2.9,4,True,True,Sidewalk Shed|Supported Scaffold
+n00287,East 38th Street,22.8,2,True,True,Sidewalk Shed|Supported Scaffold
+n00288,East 38th Street,42.8,0,False,False,
+n00289,East 38th Street,62.8,0,False,False,
+n00290,East 38th Street,82.8,0,False,False,
+n00291,East 38th Street,68.8,0,False,False,
+n00292,East 38th Street,49.2,0,False,False,
+n00293,East 38th Street,30.2,0,False,False,
+n00294,East 38th Street,11.1,6,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00295,East 38th Street,0.2,6,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00296,East 38th Street,20.2,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00297,East 38th Street,29.6,2,True,True,Sidewalk Shed|Supported Scaffold
+n00298,East 38th Street,9.7,3,True,True,Sidewalk Shed|Supported Scaffold
+n00299,East 38th Street,3.3,3,True,True,Sidewalk Shed|Supported Scaffold
+n00300,East 38th Street,22.8,1,True,True,Sidewalk Shed
+n00301,East 38th Street,42.8,0,False,False,
+n00302,East 38th Street,34.6,0,False,False,
+n00303,East 38th Street,14.6,1,False,True,Supported Scaffold
+n00304,East 38th Street,5.4,1,False,True,Supported Scaffold
+n00305,East 38th Street,25.4,1,False,True,Supported Scaffold
+n00306,East 38th Street,43.9,0,False,False,
+n00307,East 38th Street,25.5,10,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00308,East 38th Street,6.2,17,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00309,East 38th Street,10.5,26,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00310,East 38th Street,3.1,19,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00311,East 38th Street,15.0,19,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold
+n00312,East 38th Street,12.1,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00313,East 38th Street,8.0,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00314,East 38th Street,27.9,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00315,East 38th Street,47.9,0,False,False,
+n00316,East 38th Street,67.9,0,False,False,
+n00317,East 38th Street,53.5,0,False,False,
+n00318,East 38th Street,13.5,1,True,True,Sidewalk Shed
+n00319,East 38th Street,6.5,1,True,True,Sidewalk Shed
+n00320,East 38th Street,26.5,1,True,True,Sidewalk Shed
+n00321,East 38th Street,42.3,0,False,False,
+n00322,East 38th Street,22.3,5,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00323,East 38th Street,2.8,5,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00324,East 38th Street,17.9,5,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00325,East 38th Street,37.8,0,False,False,
+n00326,East 38th Street,57.8,0,False,False,
+n00327,East 38th Street,55.0,0,False,False,
+n00328,East 38th Street,49.1,0,False,False,
+n00329,East 39th Street,104.9,0,False,False,
+n00330,East 39th Street,101.7,0,False,False,
+n00331,East 39th Street,90.3,0,False,False,
+n00332,East 39th Street,82.3,0,False,False,
+n00333,East 39th Street,78.6,0,False,False,
+n00334,East 39th Street,79.9,0,False,False,
+n00335,East 39th Street,86.0,0,False,False,
+n00336,East 39th Street,69.9,0,False,False,
+n00337,East 39th Street,50.2,0,False,False,
+n00338,East 39th Street,31.0,0,False,False,
+n00339,East 39th Street,15.4,3,True,True,Sidewalk Shed|Suspended Scaffold
+n00340,East 39th Street,32.8,0,False,False,
+n00341,East 39th Street,22.1,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00342,East 39th Street,2.1,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00343,East 39th Street,6.1,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00344,East 39th Street,26.1,3,True,True,Sidewalk Shed|Supported Scaffold
+n00345,East 39th Street,44.3,0,False,False,
+n00346,East 39th Street,24.3,1,False,True,Suspended Scaffold
+n00347,East 39th Street,4.5,1,False,True,Suspended Scaffold
+n00348,East 39th Street,15.8,3,False,True,Construction Fence|Suspended Scaffold
+n00349,East 39th Street,17.0,2,False,True,Construction Fence|Suspended Scaffold
+n00350,East 39th Street,34.6,0,False,False,
+n00351,East 39th Street,53.8,0,False,False,
+n00352,East 39th Street,38.4,0,False,False,
+n00353,East 39th Street,18.4,2,False,True,Suspended Scaffold
+n00354,East 39th Street,1.7,2,False,True,Suspended Scaffold
+n00355,East 39th Street,21.6,2,False,True,Suspended Scaffold
+n00356,East 39th Street,41.6,0,False,False,
+n00357,East 39th Street,61.6,0,False,False,
+n00358,East 39th Street,75.6,0,False,False,
+n00359,East 39th Street,78.8,0,False,False,
+n00360,East 39th Street,76.5,0,False,False,
+n00361,East 39th Street,56.6,0,False,False,
+n00362,East 39th Street,37.4,0,False,False,
+n00363,East 39th Street,19.9,11,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00364,East 39th Street,13.9,11,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00365,East 39th Street,28.1,11,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00366,East 39th Street,46.6,0,False,False,
+n00367,East 39th Street,32.9,0,False,False,
+n00368,East 39th Street,13.0,1,False,True,Suspended Scaffold
+n00369,East 39th Street,7.2,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00370,East 39th Street,11.4,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00371,East 39th Street,19.0,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00372,East 39th Street,36.4,0,False,False,
+n00373,East 40th Street,32.3,0,False,False,
+n00374,East 40th Street,44.5,0,False,False,
+n00375,East 40th Street,50.5,0,False,False,
+n00376,East 40th Street,62.7,0,False,False,
+n00377,East 40th Street,78.1,0,False,False,
+n00378,East 40th Street,72.2,0,False,False,
+n00379,East 40th Street,53.0,0,False,False,
+n00380,East 40th Street,34.8,0,False,False,
+n00381,East 40th Street,20.3,1,False,True,Suspended Scaffold
+n00382,East 40th Street,20.5,1,False,True,Suspended Scaffold
+n00383,East 40th Street,19.0,1,True,True,Sidewalk Shed
+n00384,East 40th Street,2.8,1,True,True,Sidewalk Shed
+n00385,East 40th Street,21.3,1,True,True,Sidewalk Shed
+n00386,East 40th Street,31.2,0,False,False,
+n00387,East 40th Street,11.3,1,False,True,Construction Fence
+n00388,East 40th Street,9.0,1,False,True,Construction Fence
+n00389,East 40th Street,17.7,6,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00390,East 40th Street,10.7,17,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00391,East 40th Street,9.3,12,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00392,East 40th Street,29.3,12,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00393,East 40th Street,49.3,0,False,False,
+n00394,East 40th Street,69.3,0,False,False,
+n00395,East 40th Street,68.9,0,False,False,
+n00396,East 40th Street,58.6,0,False,False,
+n00397,East 40th Street,56.6,0,False,False,
+n00398,East 40th Street,65.5,0,False,False,
+n00399,East 40th Street,78.6,0,False,False,
+n00400,East 40th Street,65.5,0,False,False,
+n00401,East 40th Street,45.5,0,False,False,
+n00402,East 40th Street,25.5,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00403,East 40th Street,5.6,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00404,East 40th Street,14.5,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00405,East 40th Street,34.5,0,False,False,
+n00406,East 40th Street,54.5,0,False,False,
+n00407,East 40th Street,71.3,0,False,False,
+n00408,East 40th Street,77.3,0,False,False,
+n00409,East 40th Street,76.3,0,False,False,
+n00410,East 40th Street,77.0,0,False,False,
+n00411,East 40th Street,82.0,0,False,False,
+n00412,East 40th Street,91.3,0,False,False,
+n00413,East 40th Street,90.9,0,False,False,
+n00414,East 40th Street,71.9,0,False,False,
+n00415,East 40th Street,53.5,0,False,False,
+n00416,East 40th Street,36.8,0,False,False,
+n00417,East 41st Street,23.7,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00418,East 41st Street,18.2,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00419,East 41st Street,10.9,2,True,True,Sidewalk Shed|Supported Scaffold
+n00420,East 41st Street,19.4,2,True,True,Sidewalk Shed|Supported Scaffold
+n00421,East 41st Street,37.8,0,False,False,
+n00422,East 41st Street,57.4,0,False,False,
+n00423,East 41st Street,53.1,0,False,False,
+n00424,East 41st Street,33.3,0,False,False,
+n00425,East 41st Street,14.2,2,False,True,Suspended Scaffold
+n00426,East 41st Street,9.7,2,False,True,Suspended Scaffold
+n00427,East 41st Street,28.2,2,False,True,Suspended Scaffold
+n00428,East 41st Street,47.8,0,False,False,
+n00429,East 41st Street,67.6,0,False,False,
+n00430,East 41st Street,75.0,0,False,False,
+n00431,East 41st Street,57.9,0,False,False,
+n00432,East 41st Street,43.4,0,False,False,
+n00433,East 41st Street,35.0,0,False,False,
+n00434,East 41st Street,37.1,0,False,False,
+n00435,East 41st Street,48.0,0,False,False,
+n00436,East 41st Street,63.6,0,False,False,
+n00437,East 41st Street,81.1,0,False,False,
+n00438,East 41st Street,64.3,0,False,False,
+n00439,East 41st Street,44.8,0,False,False,
+n00440,East 41st Street,26.0,1,False,True,Suspended Scaffold
+n00441,East 41st Street,20.7,3,True,True,Sidewalk Shed|Suspended Scaffold
+n00442,East 41st Street,38.8,0,False,False,
+n00443,East 41st Street,58.1,0,False,False,
+n00444,East 41st Street,77.8,0,False,False,
+n00445,East 41st Street,84.5,0,False,False,
+n00446,East 41st Street,82.1,0,False,False,
+n00447,East 41st Street,78.2,0,False,False,
+n00448,East 41st Street,79.4,0,False,False,
+n00449,East 41st Street,68.9,0,False,False,
+n00450,East 41st Street,48.9,0,False,False,
+n00451,East 41st Street,9.0,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00452,East 41st Street,11.2,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00453,East 41st Street,2.2,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00454,East 41st Street,10.0,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00455,East 41st Street,29.9,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00456,East 41st Street,49.9,0,False,False,
+n00457,East 41st Street,69.9,0,False,False,
+n00458,East 41st Street,86.0,0,False,False,
+n00459,East 41st Street,71.3,0,False,False,
+n00460,East 42nd Street,9.3,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00461,East 42nd Street,29.2,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00462,East 42nd Street,16.4,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00463,East 42nd Street,3.7,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00464,East 42nd Street,23.6,4,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00465,East 42nd Street,43.6,0,False,False,
+n00466,East 42nd Street,63.6,0,False,False,
+n00467,East 42nd Street,82.5,0,False,False,
+n00468,East 42nd Street,77.2,0,False,False,
+n00469,East 42nd Street,77.0,0,False,False,
+n00470,East 42nd Street,81.8,0,False,False,
+n00471,East 42nd Street,68.3,0,False,False,
+n00472,East 42nd Street,48.3,0,False,False,
+n00473,East 42nd Street,28.3,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00474,East 42nd Street,8.3,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00475,East 42nd Street,11.7,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00476,East 42nd Street,29.5,1,False,True,Suspended Scaffold
+n00477,East 42nd Street,9.5,1,False,True,Suspended Scaffold
+n00478,East 42nd Street,10.5,1,False,True,Suspended Scaffold
+n00479,East 42nd Street,30.5,0,False,False,
+n00480,East 42nd Street,50.5,0,False,False,
+n00481,East 42nd Street,70.5,0,False,False,
+n00482,East 42nd Street,55.2,0,False,False,
+n00483,East 42nd Street,35.2,0,False,False,
+n00484,East 42nd Street,5.1,6,True,True,Construction Fence|Sidewalk Shed|Suspended Scaffold
+n00485,East 42nd Street,8.6,6,True,True,Construction Fence|Sidewalk Shed|Suspended Scaffold
+n00486,East 42nd Street,28.6,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00487,East 42nd Street,32.3,0,False,False,
+n00488,East 42nd Street,12.4,15,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00489,East 42nd Street,3.1,15,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00490,East 42nd Street,16.9,15,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00491,East 42nd Street,36.9,0,False,False,
+n00492,East 42nd Street,56.9,0,False,False,
+n00493,East 42nd Street,55.8,0,False,False,
+n00494,East 42nd Street,24.8,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00495,East 42nd Street,5.0,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00496,East 42nd Street,15.3,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00497,East 42nd Street,35.2,0,False,False,
+n00498,East 42nd Street,55.2,0,False,False,
+n00499,East 42nd Street,57.9,0,False,False,
+n00500,East 42nd Street,41.7,0,False,False,
+n00501,East 42nd Street,30.2,0,False,False,
+n00502,East 42nd Street,29.9,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00503,East 42nd Street,40.9,0,False,False,
+n00504,Lexington Avenue,32.5,0,False,False,
+n00505,Lexington Avenue,29.2,1,False,True,Suspended Scaffold
+n00506,Lexington Avenue,44.2,0,False,False,
+n00507,Lexington Avenue,60.2,0,False,False,
+n00508,Lexington Avenue,20.2,2,True,True,Sidewalk Shed|Supported Scaffold
+n00509,Lexington Avenue,0.2,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00510,Lexington Avenue,7.5,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00511,Lexington Avenue,29.2,12,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00512,Lexington Avenue,43.5,0,False,False,
+n00513,Lexington Avenue,47.7,0,False,False,
+n00514,Lexington Avenue,46.1,0,False,False,
+n00515,Lexington Avenue,50.0,0,False,False,
+n00516,Lexington Avenue,35.6,0,False,False,
+n00517,Lexington Avenue,34.8,0,False,False,
+n00518,Lexington Avenue,48.8,0,False,False,
+n00519,Lexington Avenue,51.9,0,False,False,
+n00520,Lexington Avenue,51.4,0,False,False,
+n00521,Lexington Avenue,62.2,0,False,False,
+n00522,Lexington Avenue,76.8,0,False,False,
+n00523,Lexington Avenue,63.9,0,False,False,
+n00524,Lexington Avenue,46.4,0,False,False,
+n00525,Lexington Avenue,32.1,0,False,False,
+n00526,Lexington Avenue,34.5,0,False,False,
+n00527,Lexington Avenue,49.7,0,False,False,
+n00528,Lexington Avenue,56.6,0,False,False,
+n00529,Lexington Avenue,16.8,1,True,True,Sidewalk Shed
+n00530,Madison Avenue,7.4,7,True,True,Sidewalk Shed|Suspended Scaffold
+n00531,Madison Avenue,13.5,4,True,True,Sidewalk Shed|Suspended Scaffold
+n00532,Madison Avenue,33.4,0,False,False,
+n00533,Madison Avenue,31.8,0,False,False,
+n00534,Madison Avenue,6.0,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00535,Madison Avenue,9.6,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00536,Madison Avenue,10.5,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00537,Madison Avenue,39.1,0,False,False,
+n00538,Madison Avenue,50.4,0,False,False,
+n00539,Madison Avenue,36.7,0,False,False,
+n00540,Madison Avenue,18.4,4,True,True,Sidewalk Shed|Supported Scaffold
+n00541,Madison Avenue,1.9,7,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00542,Madison Avenue,6.4,11,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00543,Madison Avenue,8.0,5,True,True,Sidewalk Shed
+n00544,Madison Avenue,28.0,3,True,True,Sidewalk Shed
+n00545,Madison Avenue,36.8,0,False,False,
+n00546,Madison Avenue,27.7,6,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00547,Madison Avenue,7.8,3,True,True,Sidewalk Shed|Supported Scaffold
+n00548,Madison Avenue,12.5,3,True,True,Sidewalk Shed|Supported Scaffold
+n00549,Madison Avenue,32.4,0,False,False,
+n00550,Madison Avenue,16.9,3,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00551,Madison Avenue,3.1,6,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00552,Madison Avenue,8.7,6,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00553,Madison Avenue,28.6,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00554,Madison Avenue,35.2,0,False,False,
+n00555,Madison Avenue,39.5,0,False,False,
+n00556,Madison Avenue,25.8,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00557,Park Avenue,20.8,3,True,True,Construction Fence|Sidewalk Shed|Suspended Scaffold
+n00558,Park Avenue,10.2,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00559,Park Avenue,26.6,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00560,Park Avenue,45.9,0,False,False,
+n00561,Park Avenue,14.7,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00562,Park Avenue,10.1,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00563,Park Avenue,28.1,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00564,Park Avenue,67.5,0,False,False,
+n00565,Park Avenue,57.7,0,False,False,
+n00566,Park Avenue,44.7,0,False,False,
+n00567,Park Avenue,42.0,0,False,False,
+n00568,Park Avenue,53.3,0,False,False,
+n00569,Park Avenue,39.5,0,False,False,
+n00570,Park Avenue,29.7,1,False,True,Supported Scaffold
+n00571,Park Avenue,29.7,10,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00572,Park Avenue,11.4,10,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00573,Park Avenue,9.7,1,False,True,Suspended Scaffold
+n00574,Park Avenue,22.3,1,False,True,Suspended Scaffold
+n00575,Park Avenue,40.0,0,False,False,
+n00576,Park Avenue,33.9,0,False,False,
+n00577,Park Avenue,27.8,1,False,True,Suspended Scaffold
+n00578,Park Avenue,11.0,1,False,True,Suspended Scaffold
+n00579,Park Avenue,10.8,10,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00580,Park Avenue,24.8,10,True,True,Construction Fence|Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00581,Park Avenue,43.7,0,False,False,
+n00582,Park Avenue,52.3,0,False,False,
+n00583,Park Avenue,61.8,0,False,False,
+n00584,Park Avenue,60.6,0,False,False,
+n00585,Park Avenue,58.6,0,False,False,
+n00586,Park Avenue,67.1,0,False,False,
+n00587,Park Avenue,74.3,0,False,False,
+n00588,Park Avenue,35.3,0,False,False,
+n00589,Park Avenue,17.5,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00590,Park Avenue,13.0,5,True,True,Sidewalk Shed|Supported Scaffold|Suspended Scaffold
+n00591,Park Avenue,47.9,0,False,False,
+n00592,Park Avenue,32.9,0,False,False,
+n00593,Park Avenue,15.2,2,True,True,Sidewalk Shed|Suspended Scaffold
+n00594,Park Avenue,28.6,3,True,True,Construction Fence|Sidewalk Shed|Suspended Scaffold
+n00595,Park Avenue,29.4,2,False,True,Suspended Scaffold
+n00596,Park Avenue,22.1,1,False,True,Suspended Scaffold
+n00597,Park Avenue,10.5,1,False,True,Suspended Scaffold
+n00598,Park Avenue,12.0,1,False,True,Suspended Scaffold
+n00599,Park Avenue,25.0,1,False,True,Suspended Scaffold
+n00600,Park Avenue,25.5,2,False,True,Suspended Scaffold

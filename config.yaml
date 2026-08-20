@@ -1,0 +1,441 @@
+seed: 42
+
+paths:
+  raw: data/raw
+  processed: data/processed
+  imagery: data/raw/svi
+  results: results
+
+study_area:
+  # Madison Ave (W) to First Ave (E), E 34th (S) to E 42nd (N).
+  # Fifth Avenue and the Empire State block are Midtown South / NoMad on
+  # most delimitations. Manhattan neighbourhood boundaries are not
+  # official; cite the source you follow and state it in the methods.
+  bbox: {west: -73.9870, south: 40.7415, east: -73.9655, north: 40.7565}
+  corner_pairs:
+    - ["Madison\\s+Ave",       "East\\s+34th\\s+St"]
+    - ["Madison\\s+Ave",       "East\\s+42nd\\s+St"]
+    - ["(?:1st|First)\\s+Ave", "East\\s+34th\\s+St"]
+    - ["(?:1st|First)\\s+Ave", "East\\s+42nd\\s+St"]
+  corner_buffer_m: 60
+  clip_buffer_m: 25
+  network_type: drive
+  canyon_pattern:    "(?:Madison|Park|Lexington)\\s+Ave"
+  secondary_pattern: "(?:3rd|Third|2nd|Second|1st|First)\\s+Ave"
+  midblock_pattern:  "East\\s+(?:3[4-9]|4[0-2])(?:st|nd|rd|th)\\s+St"
+  exclude_pattern:   "(?:Tunnel|Ramp|Viaduct|Bridge|Expressway|FDR|Pershing|Depew|Vanderbilt|Park Avenue South)"
+
+sampling:
+  grid_spacing_m: 20
+  dedupe_radius_m: 10
+  snap_tol_m: 2.0
+  headings: [0, 90, 180, 270]
+  fov: 90
+  pitch: 0
+  image_size: 640
+  max_pano_offset_m: 15
+  solid_angle_weighting: true
+
+capture:
+  target: "2026-04"
+
+# Manhattan's grid is rotated ~29 deg east of true north (Commissioners'
+# Plan 1811, set perpendicular to the Hudson shoreline). Pedestrian travel
+# bearings follow the grid, not true north.
+directional:
+  grid_bearing: 29.0
+  fov: 180.0            # forward field of view; people do not look behind
+  n_bins: 360           # azimuthal profile resolution, degrees
+  along_street_tol: 35
+
+# Zones are gone, not disabled. The latitude cutoffs matched no published
+# boundary, and a horizontal cut across a grid rotated ~29 deg ran diagonally
+# through the street pattern -- every one of the 15 streets was split between
+# two zones, East 38th St 43 nodes to 1. What the categories were encoding is
+# a monotone north-south gradient in greenness (rho -0.49 node, -0.46 face),
+# now carried continuously as `northing_m` along bearing 029 by gridaxis.py.
+#
+# If a neighbourhood claim is wanted later, it needs a real polygon (the LPC
+# Murray Hill Historic District) or a land-use covariate from PLUTO -- an
+# office-district-versus-residential hypothesis tested with latitude is
+# testing it with a proxy.
+
+segmentation:
+  model: facebook/mask2former-swin-large-ade-semantic
+  batch_size: auto
+  vegetation_labels: [tree, grass, plant, flower, palm]
+  sky_labels: [sky]
+  building_labels: [building, house, skyscraper, hovel, tower]
+
+open_vocabulary:
+  enabled: true
+  model: CIDAS/clipseg-rd64-refined
+  threshold: 0.4
+  # Sidewalk sheds are everywhere in Manhattan and ADE20K has no class for
+  # them, so they are labelled building or road and vanish into the shares.
+  # These prompts replaced an earlier set that could not tell the flagged
+  # shed at n00417 (E 41st) from an ordinary Park Avenue frame: on the
+  # positive it read 6.8% of pixels above threshold against 8.0% on the
+  # negative. The set below reads 14.6% against 4.5% on the same pair.
+  # Still indicative, not a measurement -- see min_scaffold_sep below.
+  scaffold_prompts:
+    - "a sidewalk shed, a temporary overhead walkway canopy on posts above the pavement"
+    - "scaffolding pipes and planks covering a building facade"
+    - "a construction hoarding fence of plywood along the sidewalk"
+  # Scored contrastively: max(positive) - max(negative) per pixel, above
+  # scaffold_contrast. A bare CLIPSeg probability answers "does this look
+  # somewhat like scaffolding", which a distant glass facade does -- it put
+  # 11.8% of an East 42nd frame above threshold on a building with no shed
+  # on it, and 4.5% on Park Avenue. Subtracting what the same pixels score
+  # for "a plain building facade" asks the better question: does this look
+  # MORE like scaffolding than like the ordinary street it sits in. On the
+  # same three frames that reads 6.1% on the true shed and 0.0% on both
+  # false positives.
+  scaffold_negative_prompts:
+    - "a plain building facade"
+    - "a glass office tower"
+    - "an ordinary city street with no construction"
+    - "a stone building wall"
+  scaffold_contrast: 0.15
+
+geometry:
+  corridor_m: 35
+  facade_half_m: 90
+  height_min_m: 3
+  height_max_m: 400
+  footprint_datasets: [5zhs-2jue, qb5r-6dgf, nqwf-w8eh]
+
+# tools/pedestrian.py and tools/face_samples.py. The pedestrian-realm
+# classes, grouped by the role each plays for someone on foot rather than
+# by ADE20K's own tree, and the colour each is drawn in. Matching is EXACT
+# against ADE20K's comma-separated synonyms, never substring -- "tree" is
+# inside "street lamp", "car" inside "placard", "sky" inside "skyscraper",
+# and each of those would put a class in the wrong group invisibly. Every
+# synonym therefore has to be listed in full.
+#
+# "pot" and "stool" are omitted deliberately: both are synonyms of ADE20K's
+# "toilet" class, so including them pulls toilets into vegetation and
+# seating. "flowerpot" is unique to the pot class.
+#
+# clipseg_prompts are what ADE20K cannot label. They are INDICATIVE only --
+# the threshold under open_vocabulary is untuned against hand-labelled
+# data, so they locate features rather than measure them.
+pedestrian:
+  ade_groups:
+    sidewalk:
+    - sidewalk
+    - pavement
+    - path
+    road:
+    - road
+    - route
+    vegetation:
+    - tree
+    - grass
+    - plant
+    - flora
+    - plant life
+    - flower
+    - palm
+    - palm tree
+    - flowerpot
+    seating:
+    - bench
+    - chair
+    - seat
+    - armchair
+    barrier:
+    - fence
+    - fencing
+    - railing
+    - rail
+    - bannister
+    - banister
+    - balustrade
+    - balusters
+    - handrail
+    steps:
+    - stairs
+    - steps
+    - stairway
+    - staircase
+    - step
+    - stair
+    furniture:
+    - pole
+    - streetlight
+    - street lamp
+    - ashcan
+    - trash can
+    - garbage can
+    - wastebin
+    - dustbin
+    - sculpture
+    - fountain
+    - awning
+    - sunshade
+    - signboard
+    - sign
+    - traffic light
+    - traffic signal
+    - booth
+    - kiosk
+    - stall
+    vehicle:
+    - car
+    - auto
+    - automobile
+    - motorcar
+    - truck
+    - motortruck
+    - van
+    - bus
+    - autobus
+    - coach
+    - bicycle
+    - bike
+    - cycle
+    - minibike
+    - motorbike
+    person:
+    - person
+    - individual
+    - someone
+    - somebody
+    building:
+    - building
+    - edifice
+    - house
+    - skyscraper
+    - hovel
+    - hut
+    - tower
+    sky:
+    - sky
+  clipseg_prompts:
+    bollard: a row of short metal bollards on the pavement
+    planter: a raised planter box with shrubs on the street
+    tree_pit: a tree pit with soil or plants around a street tree
+    tactile: yellow tactile paving with raised bumps
+    bike_rack: a bicycle rack or parked bicycles on the sidewalk
+    play_equip: outdoor play equipment or a children's play structure
+  # Hue families, so that a colour collision means the two things really
+  # are related. Greens are vegetation, split by height; purples are
+  # facade; tans and browns are the ground plane; greys are the
+  # carriageway; orange is reserved for temporary structure, which is why
+  # seating moved off it -- scaffolding and a bench were both orange and
+  # unreadable side by side.
+  palette:
+    vegetation_eye: '#14682a'      # below camera height: shrubs, hedges, planters
+    vegetation_canopy: '#86d18d'   # above it: tree crowns, balcony planting
+    vegetation: '#4a9e4a'          # unsplit, for tools that do not have the horizon
+    building: '#b57fd4'
+    scaffolding: '#e6550d'
+    sidewalk: '#d9c9a3'
+    steps: '#a8763e'
+    road: '#8a8a8a'
+    vehicle: '#4d4d4d'
+    barrier: '#b03a48'
+    seating: '#00868b'
+    furniture: '#d9b310'
+    person: '#e8567c'
+    sky: '#7fc4f0'
+    other: '#3f3f3f'
+    bollard: '#c0392b'
+    planter: '#2e8b57'
+    tree_pit: '#6b8e23'
+    tactile: '#e0c200'
+    bike_rack: '#1f77b4'
+    play_equip: '#ff7f0e'
+
+# The Street Interface Matrix of the morphology study, as pixel classes.
+#   SIM = a*GVI_eye + b*EBC + c*TEF + d*SAI
+# Each domain below is one term. Matching is EXACT against this
+# checkpoint's labels, which are bare names -- facebook/mask2former-swin-
+# large-ade-semantic returns "pot", not "pot, flowerpot". A label set that
+# carries the full ADE20K synonym strings would make "pot" and "stool" hit
+# the toilet class (65: "toilet, can, commode, crapper, pot, potty, stool,
+# throne"), so those two stay dangerous on any other checkpoint.
+#
+# What ADE20K simply does not have, checked against the model: arcade,
+# bollard, hedge, shrub, planter, pergola, porch, balcony, gate, grille.
+# Four of the study's named features are in that list, so the terms they
+# belong to are measured from a proxy or not at all -- see the notes.
+sim:
+  groups:
+    # Omega_eye. Split at the horizon into below/above camera height at
+    # draw time; only the below half is the study's eye-level term.
+    eye_green: [tree, grass, plant, flower, palm]
+    # Omega_hard. "walls" in the study means low garden walls; ADE20K's
+    # wall class is the building face, so including it would swallow every
+    # facade. Left out, which undercounts this term.
+    hard_barrier: [fence, railing, bannister, balustrade, handrail, rail]
+    # Omega_soft. Planters and low hedges are the study's examples and
+    # neither exists in ADE20K. "pot" is the flowerpot class and is the
+    # only available proxy, so this term is badly undercounted.
+    soft_buffer: [pot]
+    # Omega_shelter. Arcades and porticos are absent; awning and canopy
+    # are the closest classes. Column is included as the portico/arcade
+    # support, which is a judgement call and the one to revisit first.
+    # In Manhattan this term is dominated by sidewalk sheds, which no
+    # validated detector currently finds -- see tools/scaffold_eval.py.
+    shelter: [awning, canopy, column]
+    # Omega_rest. Stoops are stairs at the building line; ADE20K cannot
+    # tell a stoop from any other step, so this term includes both.
+    rest: [bench, chair, seat, armchair, stool, stairs, step, stairway,
+           staircase, stair]
+    # Denominators named in the SIM formula.
+    building: [building, house, skyscraper, hovel, tower, wall]
+    sky: [sky]
+    sidewalk: [sidewalk, pavement]
+    # Context. Not in any SIM term, drawn so that nothing large lands in
+    # "other" without being visible.
+    road: [road, route]
+    vehicle: [car, truck, van, bus, bicycle, minibike, motorbike]
+    person: [person]
+  palette:
+    eye_green: '#14682a'
+    canopy_green: '#86d18d'
+    hard_barrier: '#b03a48'
+    soft_buffer: '#2e8b57'
+    shelter: '#e6a02c'
+    rest: '#00868b'
+    building: '#b57fd4'
+    sky: '#7fc4f0'
+    sidewalk: '#d9c9a3'
+    road: '#8a8a8a'
+    vehicle: '#4d4d4d'
+    person: '#e8567c'
+    other: '#3f3f3f'
+
+# tools/openvocab_eval.py. Per-class validation of open-vocabulary
+# grounding, against city registers rather than against opinion. The
+# morphology study argues a VLM should replace closed-set segmentation
+# because ADE20K cannot see arcades, planters or bollards. That may well be
+# right, but the one class already tested -- scaffolding, against DOB
+# permits -- came back at AUC 0.51. So each class is tested separately, and
+# street_tree is in the list as a positive control: ADE20K definitely has a
+# tree class, so a harness that cannot score that one is broken.
+#
+# Every truth source is a geocoded city register with a point per object.
+# Their errors (address points, stale rows, objects behind the camera) are
+# unrelated to what a prompt thinks the object looks like, which is what
+# makes them usable as labels.
+openvocab_eval:
+  radius_m: 25
+  n_nodes: 30              # balanced, half with the object in view
+  classes:
+    street_tree:
+      truth: {dataset: uvpi-gqnh, where: "status = 'Alive'"}
+      ade: [tree, palm]
+      prompts:
+        - "a street tree growing from the sidewalk"
+        - "the trunk and canopy of a tree beside the road"
+      negatives:
+        - "a plain building facade"
+        - "an empty paved street with no planting"
+    bench:
+      truth: {dataset: kuxa-tauh}
+      ade: [bench, chair, seat, armchair, stool]
+      prompts:
+        - "a public bench for sitting on the sidewalk"
+        - "a seat or seating ledge at the edge of the pavement"
+      negatives:
+        - "a plain building facade"
+        - "an empty pavement with nothing on it"
+    bus_shelter:
+      truth: {dataset: t4f2-8md7}
+      ade: [awning, canopy, booth]
+      prompts:
+        - "a bus shelter with a roof and glass side panels"
+        - "a covered waiting structure on the pavement"
+      negatives:
+        - "a plain building facade"
+        - "an empty pavement with nothing on it"
+
+# tools/dob_sheds.py. Ground truth for scaffolding, from the permits that
+# put it there. NYC requires a permit for every sidewalk shed, supported or
+# suspended scaffold and construction fence, and DOB NOW records each with
+# an address, a lat/lon, an issue date and an expiry date. That last pair is
+# what makes it usable here: a shed is only ground truth for an image if it
+# was standing on the day the image was taken, and the capture window is a
+# single month. Inside the study bbox, 985 permits were live in 2026-04.
+#
+# It is not perfect ground truth. A permit is filed against a building, not
+# a sidewalk segment, so the lat/lon is the address point rather than the
+# structure; permits are sometimes signed off late, leaving a record live
+# after the shed came down; and a shed on the far side of a wide avenue is
+# in the permit set but may be invisible from the node. Those are stated
+# rather than corrected -- the point is a defensible label to tune the
+# open-vocabulary detector against, not a second measurement.
+dob:
+  dataset: rbx6-tga4          # DOB NOW: Build - Approved Permits
+  work_types:
+    - "Sidewalk Shed"
+    - "Supported Scaffold"
+    - "Suspended Scaffold"
+    - "Construction Fence"
+  match_radius_m: 30          # a node this close to the address point sees it
+  page_size: 50000
+
+# tools/eyelevel.py. Framework parameter 1: eye-level foliage (0.5-2.5 m)
+# is claimed to drive GVI more than canopy above 4 m. At pitch 0 the horizon
+# row of a gnomonic image is the camera-height plane, so anything appearing
+# BELOW it stands below the camera -- about 2.5 m on a Street View car --
+# at any distance. That gives the eye-level band with no depth estimate,
+# which is why the split is stated in degrees of elevation and the ceiling
+# is stated as camera height rather than as a height in metres.
+eyelevel:
+  camera_height_m: 2.5      # nominal Street View mast; the band ceiling
+  bands_deg: [-45, 0, 15, 45]
+  band_labels:
+    - "below camera height"
+    - "0-15 deg above"
+    - "15-45 deg above"
+  n_nodes: 12               # subset size; run the full frame only after this
+  out_name: eyelevel_by_node.csv
+
+# tools/cubemap_check.py. The only thing in the repo that spends money:
+# 6 fresh Street View requests per sampled node. Stratified by GVI quartile
+# so the subsample spans the range rather than the pretty end.
+cubemap:
+  n_subsample: 100
+  cost_per_request: 0.007   # list price, for the cost estimate only
+
+# tools/s03_subset.py. Stage 3 is hours of segmentation over 579 nodes and
+# writes to azimuth_profiles.npz as it goes, so it is the wrong loop to
+# iterate a code change in. The subset runner re-profiles a stratified
+# handful of nodes from the JPEGs already on disk -- no network, no Street
+# View requests -- into a separate file, and diffs the result against the
+# saved profiles in GVI/VEI terms.
+s03_subset:
+  n_nodes: 12
+  out_name: azimuth_profiles_subset.npz
+  report_tol: 0.01        # GVI points / VEI units; below this is float noise
+
+# Stage 7. Band edges come from section 4 of the framework document
+# ("The related parameters pertinent to the green view index"), fixed
+# before any GVI was inspected. That prior specification is what makes the
+# inverted-U testable; see src/s07_enclosure.py for why a failed linear
+# fit would not have been a reason to try one.
+enclosure:
+  bands: [0.0, 0.3, 0.8, 1.5, 3.0, .inf]
+  band_labels:
+    - "<0.3 under-enclosed"
+    - "0.3-0.8 transitional"
+    - "0.8-1.5 human scale"
+    - "1.5-3.0 enclosed"
+    - ">3.0 deep canyon"
+  min_band_n: 30          # below this a band is out of scope, not a null
+  # The envelope diagram: equal-count H/W bins, median GVI in each, with a
+  # confidence interval bootstrapped over block faces rather than nodes.
+  # It is the descriptive counterpart to the Lind-Mehlum test -- the shape
+  # shown as the data draw it, with no functional form imposed.
+  envelope_bins: 8
+
+spatial:
+  moran_radius_m: 60
+  moran_permutations: 199
+  face_gap_m: 40
+  face_max_run_m: 90
+  bootstrap_n: 2000

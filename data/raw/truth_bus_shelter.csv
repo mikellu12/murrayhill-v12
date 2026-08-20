@@ -1,0 +1,55 @@
+the_geom,boro_code,boro_name,boro_cd,coun_dist,assem_dist,st_sen_dist,cong_dist,shelter_id,corner,on_street,cross_stre,longitude,latitude,ntaname,femafldz,femafld_t,hrc_evac
+"{'type': 'Point', 'coordinates': [-73.98457, 40.7454]}",1,Manhattan,105,2,74,28,12,MN01230,NE,MADISON AV,E 30 ST,-73.98457,40.7454,Midtown South-Flatiron-Union Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.983661, 40.746649]}",1,Manhattan,105,4,73,28,12,MN01231,NE,MADISON AV,E 32 ST & E 33 ST,-73.983661,40.746649,Midtown South-Flatiron-Union Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.970515, 40.749219]}",1,Manhattan,106,4,74,59,12,MN0052,NW,E 42 ST,1 AV,-73.970515,40.749219,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.969341, 40.749211]}",1,Manhattan,106,4,74,59,12,MN0053,NE,1 AV,E 42 ST,-73.969341,40.749211,United Nations,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.968391, 40.750595]}",1,Manhattan,106,4,74,59,12,MN0054,SE,1 AV,E 45 ST,-73.968391,40.750595,United Nations,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.966189, 40.753602]}",1,Manhattan,106,4,73,28,12,MN0057,NE,1 AV,MITCHELL PL,-73.966189,40.753602,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.967047, 40.753497]}",1,Manhattan,106,4,73,28,12,MN0058,NW,E 49 ST,1 AV,-73.967047,40.753497,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.968814, 40.754717]}",1,Manhattan,106,4,73,28,12,MN0113,SW,2 AV,E 50 ST,-73.968814,40.754717,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.982047, 40.748857]}",1,Manhattan,106,4,73,28,12,MN01473,SE,MADISON AV,E 36 ST,-73.982047,40.748857,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.969878, 40.748054]}",1,Manhattan,106,4,74,59,12,MN01483,NE,E 41 ST,1 AV,-73.969878,40.748054,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,3
+"{'type': 'Point', 'coordinates': [-73.97975, 40.75312]}",1,Manhattan,105,4,73,28,12,MN01824,NW,E 42 ST,MADISON AV,-73.97975,40.75312,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.972567, 40.749556]}",1,Manhattan,106,4,73,59,12,MN0126,SW,2 AV,E 42 ST,-73.972567,40.749556,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.972496, 40.750054]}",1,Manhattan,106,4,73,59,12,MN0127,NW,E 42 ST,2 AV,-73.972496,40.750054,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.972006, 40.749604]}",1,Manhattan,106,4,74,59,12,MN01305,SE,E 42 ST,2 AV,-73.972006,40.749604,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.976174, 40.745011]}",1,Manhattan,106,4,73,59,12,MN0132,NW,E 34 ST,2 AV,-73.976174,40.745011,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,4
+"{'type': 'Point', 'coordinates': [-73.971497, 40.743611]}",1,Manhattan,106,4,74,59,12,MN01351,SE,FDR DR SRV RD,E 35 ST,-73.971497,40.743611,Murray Hill-Kips Bay,AE,,1
+"{'type': 'Point', 'coordinates': [-73.978582, 40.744875]}",1,Manhattan,106,4,73,59,12,MN01455,SE,3 AV,E 33 ST,-73.978582,40.744875,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,5
+"{'type': 'Point', 'coordinates': [-73.984089, 40.749297]}",1,Manhattan,105,4,75,28,12,MN01495,NW,5 Av,W 35 St,-73.984089,40.749297,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.982689, 40.751218]}",1,Manhattan,105,4,75,28,12,MN01498,NW,5 Av,W 38 St,-73.982689,40.751218,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.982477, 40.751433]}",1,Manhattan,105,4,75,28,12,MN01499,SW,5 Av,W 39 St,-73.982477,40.751433,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.980058, 40.742831]}",1,Manhattan,106,2,74,59,12,MN0150,NE,3 AV,E 29 ST,-73.980058,40.742831,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.982321, 40.751723]}",1,Manhattan,105,4,75,28,12,MN01500,NW,5 Av,W 39 St,-73.982321,40.751723,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.980251, 40.754563]}",1,Manhattan,105,4,75,28,12,MN01503,SW,5 Av,W 44 St,-73.980251,40.754563,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.97844, 40.745956]}",1,Manhattan,106,4,73,59,12,MN0153,NW,E 34 ST,3 AV,-73.97844,40.745956,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.97952, 40.75557]}",1,Manhattan,105,4,75,28,12,MN01536,NW,5 Av,W 45 St,-73.97952,40.75557,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.979282, 40.755899]}",1,Manhattan,105,4,75,28,12,MN01537,SW,5 Av,W 46 St,-73.979282,40.755899,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.976369, 40.747903]}",1,Manhattan,106,4,73,59,12,MN0154,NE,3 AV,E 37 ST,-73.976369,40.747903,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.973823, 40.743803]}",1,Manhattan,106,4,74,59,12,MN01564,SW,E 34 ST,1 AV,-73.973823,40.743803,Murray Hill-Kips Bay,AE,,2
+"{'type': 'Point', 'coordinates': [-73.973885, 40.744049]}",1,Manhattan,106,4,74,59,12,MN01565,NW,E 34 ST,1 AV,-73.973885,40.744049,Murray Hill-Kips Bay,X,0.2 PCT ANNUAL CHANCE FLOOD HAZARD,2
+"{'type': 'Point', 'coordinates': [-73.973151, 40.75233]}",1,Manhattan,106,4,73,28,12,MN0158,SE,3 AV,E 45 ST,-73.973151,40.75233,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.97177, 40.754213]}",1,Manhattan,106,4,73,28,12,MN0159,NE,3 AV,E 47 ST,-73.97177,40.754213,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.969007, 40.749738]}",1,Manhattan,106,4,74,59,12,MN01590,NE,1 AV,E 43 ST,-73.969007,40.749738,United Nations,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.968959, 40.754511]}",1,Manhattan,106,4,73,28,12,MN01596,SW,2 AV,E 50 ST,-73.968959,40.754511,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.971525, 40.755388]}",1,Manhattan,106,4,73,28,12,MN0160,NW,E 49 ST,3 AV,-73.971525,40.755388,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.981854, 40.747373]}",1,Manhattan,106,4,73,28,12,MN01634,NW,E 34 St,Park Av,-73.981854,40.747373,Midtown South-Flatiron-Union Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.97299, 40.744264]}",1,Manhattan,106,4,74,59,12,MN01648,SE,1 AV,E 35 ST,-73.97299,40.744264,Murray Hill-Kips Bay,AE,,1
+"{'type': 'Point', 'coordinates': [-73.981814, 40.752415]}",1,Manhattan,105,4,75,28,12,MN01685,NW,5 Av,W 40 St,-73.981814,40.752415,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.981253, 40.753185]}",1,Manhattan,105,4,75,28,12,MN01689,SW,5 Av,W 42 St,-73.981253,40.753185,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.98184, 40.749165]}",1,Manhattan,106,4,73,28,12,MN01691,NE,MADISON AV,E 36 ST,-73.98184,40.749165,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.979668, 40.755194]}",1,Manhattan,105,4,75,28,12,MN01792,SW,5 AV,W 45 St,-73.979668,40.755194,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.974857, 40.751056]}",1,Manhattan,106,4,73,28,12,MN01796,NW,E 42 St,3 Av,-73.974857,40.751056,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.974869, 40.750846]}",1,Manhattan,106,4,73,28,12,MN01797,SW,E 42 St,3 Av,-73.974869,40.750846,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.97777, 40.75557]}",1,Manhattan,105,4,73,28,12,MN01810,NE,Madison Av,E 46 St,-73.97777,40.75557,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.97698, 40.7558]}",1,Manhattan,105,4,73,28,12,MN01811,SE,Madison Av,E 47 St,-73.97698,40.7558,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.98206, 40.75208]}",1,Manhattan,105,4,75,28,12,MN01875,SW,5 Av,W 40 St,-73.98206,40.75208,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.973989, 40.747613]}",1,Manhattan,106,4,73,59,12,MN0194,SW,2 AV,E 39 ST,-73.973989,40.747613,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,6
+"{'type': 'Point', 'coordinates': [-73.980403, 40.751106]}",1,Manhattan,106,4,73,28,12,MN0195,NE,MADISON AV,E 39 ST,-73.980403,40.751106,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.981816, 40.747359]}",1,Manhattan,106,4,73,28,12,MN0203,NW,E 34 ST,PARK AV,-73.981816,40.747359,Midtown South-Flatiron-Union Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.983142, 40.755954]}",1,Manhattan,105,4,75,28,12,MN0220,SE,6 AV,W 44 ST,-73.983142,40.755954,Midtown-Times Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.98537, 40.747525]}",1,Manhattan,105,4,75,28,12,MN0703A,SW,5 AV,W 33 ST,-73.98537,40.747525,Midtown South-Flatiron-Union Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.980932, 40.746796]}",1,Manhattan,105,4,73,59,12,MN0744,SE,E 34 ST,PARK AV,-73.980932,40.746796,Murray Hill-Kips Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.970387, 40.752536]}",1,Manhattan,106,4,73,28,12,MN9011,NW,2 AV,E 46 ST,-73.970387,40.752536,East Midtown-Turtle Bay,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.9832, 40.747275]}",1,Manhattan,105,4,73,28,12,MNBX041,NE,MADISON AV,E 33 ST,-73.9832,40.747275,Midtown South-Flatiron-Union Square,X,AREA OF MINIMAL FLOOD HAZARD,X
+"{'type': 'Point', 'coordinates': [-73.986306, 40.743004]}",1,Manhattan,105,2,74,28,12,MNBX411,NE,MADISON AV,E 26 ST,-73.986306,40.743004,Midtown South-Flatiron-Union Square,X,AREA OF MINIMAL FLOOD HAZARD,X

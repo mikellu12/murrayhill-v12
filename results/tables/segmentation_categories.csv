@@ -1,0 +1,19 @@
+category,colour,source,matches
+eye_green,#14682a,ADE20K semantic class,"tree, grass, plant, flower, palm"
+hard_barrier,#b03a48,ADE20K semantic class,"fence, railing, bannister, balustrade, handrail, rail"
+soft_buffer,#2e8b57,ADE20K semantic class,pot
+shelter,#e6a02c,ADE20K semantic class,"awning, canopy, column"
+rest,#00868b,ADE20K semantic class,"bench, chair, seat, armchair, stool, stairs, step, stairway, staircase, stair"
+building,#b57fd4,ADE20K semantic class,"building, house, skyscraper, hovel, tower, wall"
+sky,#7fc4f0,ADE20K semantic class,sky
+sidewalk,#d9c9a3,ADE20K semantic class,"sidewalk, pavement"
+road,#8a8a8a,ADE20K semantic class,"road, route"
+vehicle,#4d4d4d,ADE20K semantic class,"car, truck, van, bus, bicycle, minibike, motorbike"
+person,#e8567c,ADE20K semantic class,person
+scaffolding,#e6550d,"open-vocabulary, drawn (threshold 0.4, untuned)","a sidewalk shed, a temporary overhead walkway canopy on posts above the pavement | scaffolding pipes and planks covering a building facade | a construction hoarding fence of plywood along the sidewalk"
+bollard,#c0392b,"open-vocabulary, not drawn (indicative only)",a row of short metal bollards on the pavement
+planter,#2e8b57,"open-vocabulary, not drawn (indicative only)",a raised planter box with shrubs on the street
+tree_pit,#6b8e23,"open-vocabulary, not drawn (indicative only)",a tree pit with soil or plants around a street tree
+tactile,#e0c200,"open-vocabulary, not drawn (indicative only)",yellow tactile paving with raised bumps
+bike_rack,#1f77b4,"open-vocabulary, not drawn (indicative only)",a bicycle rack or parked bicycles on the sidewalk
+play_equip,#ff7f0e,"open-vocabulary, not drawn (indicative only)",outdoor play equipment or a children's play structure
