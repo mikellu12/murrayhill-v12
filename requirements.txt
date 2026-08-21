@@ -20,3 +20,6 @@ pillow>=10.0.0
 matplotlib>=3.7.0
 tqdm>=4.66.0
 pyyaml>=6.0
+# Perceptually uniform, CVD-safe colour maps for the SIM figures.
+cmcrameri>=1.9
+cmocean>=3.1
