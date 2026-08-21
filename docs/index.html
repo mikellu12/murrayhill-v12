@@ -69,8 +69,13 @@ tr:last-child td { border-bottom:none; }
    each below a readable size on a phone. Full width each is legible. */
 .mxwrap { display:grid; grid-template-columns:1fr; gap:34px; margin:26px 0; }
 .mxwrap > div { overflow-x:auto; }
+/* Fixed layout so both matrices share a column grid. Left to itself the
+   count table sizes its columns to two digits and the SIM table to five,
+   and the two stop lining up when stacked. */
 table.mx { border-collapse:separate; border-spacing:3px; font-size:15px;
-  font-variant-numeric:tabular-nums; width:100%; min-width:420px; }
+  font-variant-numeric:tabular-nums; width:100%; min-width:420px;
+  table-layout:fixed; }
+table.mx th:first-child { width:76px; }
 table.mx th { background:none; border:none; padding:7px 6px; font-size:11px;
   letter-spacing:.04em; color:var(--slate); text-transform:none; text-align:center;
   font-weight:500; }
