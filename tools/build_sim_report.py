@@ -5,6 +5,7 @@ def b64(p): return base64.b64encode(pathlib.Path(p).read_bytes()).decode()
 
 FRAME = b64(R/"figures"/"frame_audit.png")
 MAP   = b64(R/"figures"/"sim_dwell_map.png")
+AXON  = b64(R/"figures"/"figure_axonometric_sim_layers.jpg")
 SAMP  = {f.name.replace(".jpg", ".png"): b64(f)
          for f in sorted((R/"figures"/"sim_samples"/"web").glob("sample_*.jpg"))}
 meta  = pd.read_csv(R/"tables"/"sim_samples.csv")
@@ -636,6 +637,16 @@ against 0.76 for nearest-node and 0.54 for the street mean.</p>
   2nd&ndash;98th percentile; the full range is printed on each panel.</figcaption>
 </figure>
 
+<figure>
+  <img src="data:image/jpeg;base64,{AXON}" alt="Exploded axonometric of the SIM layers over Murray Hill">
+  <figcaption>The same quantities as strata rather than panels, over 1,285 extruded footprints.
+  Bottom to top: built fabric, eye-level greenery, then <strong>G</strong>, <strong>M</strong>,
+  <strong>P</strong> and the composite, bar height being the value at each 20&nbsp;m node and red
+  the upper tail. The <strong>green eye</strong> layer is the one to look at &mdash; it is nearly
+  flat where every other stratum has relief, which is the sparsity the saturating transform
+  exists to handle: a median share of 0.0009 against building at 0.43.</figcaption>
+</figure>
+
 <div class="measure">
 <h3>By typology</h3>
 </div>
@@ -693,6 +704,9 @@ Reproducible via <code>tools/s03_sim_profiles.py</code> then <code>tools/sim_dwe
 </footer>
 </div>
 """
-out = pathlib.Path(r"C:\Users\lumic\.claude\jobs\8af8d82f\tmp\sim_report.html")
+# docs/index.html IS the GitHub Pages site. This previously wrote to a
+# scratch directory from a session long gone, so regenerating the report
+# left the published page untouched.
+out = pathlib.Path(__file__).resolve().parent.parent / "docs" / "index.html"
 out.write_text(HTML, encoding="utf-8")
 print("wrote", out, f"{out.stat().st_size/1024/1024:.2f} MB")
