@@ -262,6 +262,23 @@ pedestrian:
 # Four of the study's named features are in that list, so the terms they
 # belong to are measured from a proxy or not at all -- see the notes.
 sim:
+  # Declared, not fitted. There is no measured dwell outcome in this study,
+  # so nothing exists to fit these against -- calling them optimised would be
+  # the one claim a reviewer could not let pass. They are stated priors, and
+  # the index is only ever a weighted restatement of the pixel shares.
+  weights:
+    dimension:     {green: 0.34, morphological: 0.33, permeability: 0.33}
+    green:         {eye: 0.60, ground: 0.40}
+    morphological: {articulation: 0.35, enclosure: 0.40, openness: 0.25}
+    permeability:  {walkable: 0.50, affordance: 0.50}
+  # Several terms are extremely sparse -- eye-level greenery has a median
+  # share of 0.001 and the affordance classes are zero at a third of nodes.
+  # A raw share would contribute nothing against building at 0.43, so the
+  # sparse terms pass through 1 - exp(-x/s0) with s0 set to the term's own
+  # quantile below. That is a diminishing-returns claim, not a rescaling
+  # trick: one bench makes a spot dwellable, ten do not make it ten times
+  # more so. It also means the index is relative to this study area.
+  saturation_quantile: 0.75
   groups:
     # Omega_eye. Split at the horizon into below/above camera height at
     # draw time; only the below half is the study's eye-level term.
@@ -284,6 +301,12 @@ sim:
     # tell a stoop from any other step, so this term includes both.
     rest: [bench, chair, seat, armchair, stool, stairs, step, stairway,
            staircase, stair]
+    # Place Identity's "signboard and architectural detail". ADE20K has no
+    # architectural-detail class, so the facade openings stand in for it:
+    # windows and doors are where articulation actually reads at eye level,
+    # and they double as the ground-floor permeability proxy. Naming the
+    # proxy here rather than in the paper keeps the substitution visible.
+    articulation: [signboard, windowpane, door]
     # Denominators named in the SIM formula.
     building: [building, house, skyscraper, hovel, tower, wall]
     sky: [sky]
@@ -300,6 +323,7 @@ sim:
     soft_buffer: '#2e8b57'
     shelter: '#e6a02c'
     rest: '#00868b'
+    articulation: '#e3c7f5'        # facade openings: a lighter tint of building
     building: '#b57fd4'
     sky: '#7fc4f0'
     sidewalk: '#d9c9a3'

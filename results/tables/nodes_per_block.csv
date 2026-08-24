@@ -1,0 +1,112 @@
+block,street,between,nodes,analytic,excluded
+1st_1,1st Avenue,42nd - 41st,8,8,0
+1st_2,1st Avenue,41st - 40th,9,9,0
+1st_3,1st Avenue,40th - 39th,5,4,1
+1st_4,1st Avenue,39th - 38th,4,4,0
+1st_5,1st Avenue,38th - 37th,4,4,0
+1st_6,1st Avenue,37th - 36th,4,4,0
+1st_7,1st Avenue,36th - 35th,4,4,0
+1st_8,1st Avenue,35th - 34th,5,5,0
+2nd_1,2nd Avenue,42nd - 41st,4,4,0
+2nd_2,2nd Avenue,41st - 40th,4,4,0
+2nd_3,2nd Avenue,40th - 39th,4,4,0
+2nd_4,2nd Avenue,39th - 38th,4,4,0
+2nd_5,2nd Avenue,38th - 37th,4,4,0
+2nd_6,2nd Avenue,37th - 36th,4,4,0
+2nd_7,2nd Avenue,36th - 35th,4,4,0
+2nd_8,2nd Avenue,35th - 34th,5,5,0
+3rd_1,3rd Avenue,42nd - 41st,4,4,0
+3rd_2,3rd Avenue,41st - 40th,4,4,0
+3rd_3,3rd Avenue,40th - 39th,4,4,0
+3rd_4,3rd Avenue,39th - 38th,4,4,0
+3rd_5,3rd Avenue,38th - 37th,4,4,0
+3rd_6,3rd Avenue,37th - 36th,4,4,0
+3rd_7,3rd Avenue,36th - 35th,4,4,0
+3rd_8,3rd Avenue,35th - 34th,5,5,0
+34th_1,East 34th Street,Madison - Park,9,9,0
+34th_2,East 34th Street,Park - Lex,7,7,0
+34th_3,East 34th Street,Lex - 3rd,8,8,0
+34th_4,East 34th Street,3rd - TunnelExit,4,4,0
+34th_5,East 34th Street,TunnelExit - 2nd,7,7,0
+34th_6,East 34th Street,2nd - 1st,12,12,0
+35th_1,East 35th Street,Madison - Park,8,8,0
+35th_2,East 35th Street,Park - Lex,7,7,0
+35th_3,East 35th Street,Lex - 3rd,8,8,0
+35th_4,East 35th Street,3rd - TunnelExit,4,4,0
+35th_5,East 35th Street,TunnelExit - 2nd,7,7,0
+35th_6,East 35th Street,2nd - 1st,12,12,0
+36th_1,East 36th Street,Madison - Park,9,9,0
+36th_2,East 36th Street,Park - Lex,7,7,0
+36th_3,East 36th Street,Lex - 3rd,8,8,0
+36th_4,East 36th Street,3rd - 2nd,11,11,0
+36th_5,East 36th Street,2nd - 1st,12,12,0
+37th_1,East 37th Street,Madison - Park,8,8,0
+37th_2,East 37th Street,Park - Lex,7,7,0
+37th_3,East 37th Street,Lex - 3rd,8,8,0
+37th_4,East 37th Street,3rd - TunnelExit,4,3,1
+37th_5,East 37th Street,TunnelExit - 2nd,7,7,0
+37th_6,East 37th Street,2nd - 1st,12,5,7
+38th_1,East 38th Street,Madison - Park,9,9,0
+38th_2,East 38th Street,Park - Lex,7,7,0
+38th_3,East 38th Street,Lex - 3rd,8,8,0
+38th_4,East 38th Street,3rd - TunnelExit,4,4,0
+38th_5,East 38th Street,TunnelExit - 2nd,7,7,0
+38th_6,East 38th Street,2nd - 1st,12,12,0
+39th_1,East 39th Street,Madison - Park,9,9,0
+39th_2,East 39th Street,Park - Lex,7,7,0
+39th_3,East 39th Street,Lex - 3rd,8,8,0
+39th_4,East 39th Street,3rd - TunnelExit,4,4,0
+39th_5,East 39th Street,TunnelExit - 2nd,7,7,0
+39th_6,East 39th Street,2nd - 1st,12,12,0
+40th_1,East 40th Street,Madison - Park,9,9,0
+40th_2,East 40th Street,Park - Lex,7,7,0
+40th_3,East 40th Street,Lex - 3rd,8,8,0
+40th_4,East 40th Street,3rd - TunnelExit,4,4,0
+40th_5,East 40th Street,TunnelExit - 2nd,7,7,0
+40th_6,East 40th Street,2nd - TudorCity,8,8,0
+40th_7,East 40th Street,TudorCity - 1st,3,3,0
+41st_1,East 41st Street,Madison - Park,8,8,0
+41st_2,East 41st Street,Park - Lex,8,8,0
+41st_3,East 41st Street,Lex - 3rd,8,8,0
+41st_4,East 41st Street,3rd - TunnelExit,4,4,0
+41st_5,East 41st Street,TunnelExit - 2nd,7,7,0
+41st_6,East 41st Street,2nd - TudorCity,8,8,0
+41st_7,East 41st Street,TudorCity - 1st,3,1,2
+42nd_1,East 42nd Street,Madison - Park,8,8,0
+42nd_2,East 42nd Street,Park - Lex,8,8,0
+42nd_3,East 42nd Street,Lex - 3rd,8,8,0
+42nd_4,East 42nd Street,3rd - 2nd,11,11,0
+42nd_5,East 42nd Street,2nd - TudorCity,8,8,0
+42nd_6,East 42nd Street,TudorCity - 1st,5,4,1
+Lex_1,Lexington Avenue,42nd - 41st,4,4,0
+Lex_2,Lexington Avenue,41st - 40th,4,4,0
+Lex_3,Lexington Avenue,40th - 39th,4,3,1
+Lex_4,Lexington Avenue,39th - 38th,4,4,0
+Lex_5,Lexington Avenue,38th - 37th,4,4,0
+Lex_6,Lexington Avenue,37th - 36th,4,4,0
+Lex_7,Lexington Avenue,36th - 35th,4,4,0
+Lex_8,Lexington Avenue,35th - 34th,5,5,0
+Madison_1,Madison Avenue,42nd - 41st,4,4,0
+Madison_2,Madison Avenue,41st - 40th,4,4,0
+Madison_3,Madison Avenue,40th - 39th,4,4,0
+Madison_4,Madison Avenue,39th - 38th,4,4,0
+Madison_5,Madison Avenue,38th - 37th,3,3,0
+Madison_6,Madison Avenue,37th - 36th,4,4,0
+Madison_7,Madison Avenue,36th - 35th,4,4,0
+Madison_8,Madison Avenue,35th - 34th,6,6,0
+Park_1,Park Avenue,42nd - 41st,3,3,0
+Park_2,Park Avenue,41st - 40th,5,2,3
+Park_3,Park Avenue,40th - 39th,4,4,0
+Park_4,Park Avenue,39th - 38th,4,4,0
+Park_5,Park Avenue,38th - 37th,4,4,0
+Park_6,Park Avenue,37th - 36th,4,4,0
+Park_7,Park Avenue,36th - 35th,4,4,0
+Park_8,Park Avenue,35th - 34th,5,5,0
+TudorCity_1,Tudor City Place,42nd - 41st,4,4,0
+TudorCity_2,Tudor City Place,41st - 40th,4,1,3
+TunnelExit_1,Tunnel Exit Street,41st - 40th,3,3,0
+TunnelExit_2,Tunnel Exit Street,40th - 39th,4,4,0
+TunnelExit_3,Tunnel Exit Street,39th - 38th,4,4,0
+TunnelExit_4,Tunnel Exit Street,38th - 37th,4,4,0
+TunnelExit_5,Tunnel Exit Street,37th - 35th,1,1,0
+TunnelExit_6,Tunnel Exit Street,35th - 34th,5,1,4

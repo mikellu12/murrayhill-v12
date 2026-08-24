@@ -47,8 +47,19 @@ def main():
     axis = street_axis(nodes)
     info = nodes.set_index("node_id")
 
-    rows = []
+    rows, empty = [], []
     for nid, p in prof.items():
+        # A profile whose class rows are all zero is not a measurement of an
+        # empty street, it is the absence of a measurement. The weight row
+        # still says images were segmented, so nothing downstream notices:
+        # GVI comes out a plausible 0.0 and is averaged in as real, while VEI
+        # divides by a zero denominator and drops to NaN. That split is the
+        # tell -- the node silently leaves the enclosure analyses and stays in
+        # the greenery ones. Drop it here, once, where the profile is read.
+        cls = p[:-1] if p.shape[0] > 3 else p
+        if not np.any(cls):
+            empty.append(nid)
+            continue
         ax = axis.get(nid, np.nan)
         views = [(lab, b, D["fov"]) for lab, b in DIRECTIONS.items()]
         views.append(("full360", 0.0, 360.0))
@@ -62,6 +73,10 @@ def main():
                          np.nan if lab == "full360" else b, "fov_deg": f,
                          "street_axis_deg": ax, "along_street": al,
                          "GVI": gvi, "VEI": vei})
+
+    if empty:
+        print(f"\ndropped {len(empty)} node(s) with an empty profile "
+              f"(no pixels in any class): {', '.join(sorted(empty))}")
 
     dm = pd.DataFrame(rows)
     for c in ["osm_name", "typology", "northing_m", "lat", "lon"]:

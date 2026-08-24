@@ -57,13 +57,22 @@ def typology_of(names):
     Every stage derives typology from here, so the label set cannot drift
     between the frame and the metrics -- which is how 'avenue_canyon'
     previously ended up absent from the plots while present in the frame.
+
+    Matching is positive for all three, with "other" as the default. It used
+    to fall through to mid_block, which meant midblock_pattern was never
+    consulted and any unrecognised street silently became a rowhouse block.
+    That was invisible while the frame held only the fifteen named streets;
+    the v13 frame adds Tudor City Place and Tunnel Exit Street, neither of
+    which is a mid-block, and both of which would have landed in the
+    typology that currently scores highest.
     """
     sa = CFG["study_area"]
     s = pd.Series(list(names)).astype(str)
     return np.select(
         [s.str.contains(sa["canyon_pattern"], case=False, na=False),
-         s.str.contains(sa["secondary_pattern"], case=False, na=False)],
-        ["avenue_canyon", "avenue_secondary"], default="mid_block")
+         s.str.contains(sa["secondary_pattern"], case=False, na=False),
+         s.str.contains(sa["midblock_pattern"], case=False, na=False)],
+        ["avenue_canyon", "avenue_secondary", "mid_block"], default="other")
 
 
 # zone_of() is gone. It cut the frame by latitude across a grid rotated
@@ -220,8 +229,43 @@ def slice_metrics(prof, centre, fov):
     return gvi, vei
 
 
-def street_axis(nodes):
-    """Street bearing mod 180 per node, from neighbours on the same chain."""
+def street_axis(nodes, k=5):
+    """Street bearing mod 180 per node, from a local fit of nearby chain-mates.
+
+    Taking the bearing to the chain-adjacent node makes the answer depend on
+    the ordering being spatially sequential, which it is not everywhere: 1st
+    Avenue and Park Avenue carry parallel service roadways roughly 24 m
+    apart, so an ordering that alternates between them yields a bearing
+    across the street rather than along it. 41 of 733 v13 nodes came out
+    more than 25 degrees from their own street's median that way, and a
+    rotated axis silently rotates the 180-degree window every metric is
+    integrated over.
+
+    Fitting the principal direction of the k nearest nodes on the same chain
+    removes the dependence on ordering entirely, and still tracks genuine
+    curvature -- Tudor City Place bends, and a per-chain global fit would
+    straighten it.
+    """
+    key_col = "chain" if "chain" in nodes.columns else "osm_name"
+    out = {}
+    for _, grp in nodes.groupby(key_col):
+        P = np.c_[grp.geometry.x.values, grp.geometry.y.values]
+        ids = grp.node_id.values
+        for i, nid in enumerate(ids):
+            d = np.linalg.norm(P - P[i], axis=1)
+            near = P[np.argsort(d)[:min(k, len(P))]]
+            if len(near) < 2:
+                out[nid] = np.nan
+                continue
+            c = near - near.mean(0)
+            # Principal direction of the local run; sign is irrelevant mod 180.
+            v = np.linalg.svd(c, full_matrices=False)[2][0]
+            out[nid] = float(np.degrees(np.arctan2(v[0], v[1])) % 180)
+    return out
+
+
+def _street_axis_adjacent(nodes):
+    """Previous definition, kept for comparison. Ordering-sensitive."""
     key_col = "chain" if "chain" in nodes.columns else "osm_name"
     out = {}
     for _, grp in nodes.groupby(key_col):

@@ -1,0 +1,18 @@
+osm_name,nodes,analytic,typology,excluded
+Lexington Avenue,33,32,avenue_canyon,1
+Madison Avenue,33,33,avenue_canyon,0
+Park Avenue,33,30,avenue_canyon,3
+1st Avenue,43,42,avenue_secondary,1
+2nd Avenue,33,33,avenue_secondary,0
+3rd Avenue,33,33,avenue_secondary,0
+East 34th Street,47,47,mid_block,0
+East 35th Street,46,46,mid_block,0
+East 36th Street,47,47,mid_block,0
+East 37th Street,46,38,mid_block,8
+East 38th Street,47,47,mid_block,0
+East 39th Street,47,47,mid_block,0
+East 40th Street,46,46,mid_block,0
+East 41st Street,46,44,mid_block,2
+East 42nd Street,48,47,mid_block,1
+Tudor City Place,8,5,other,3
+Tunnel Exit Street,21,17,other,4
