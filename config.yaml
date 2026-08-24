@@ -439,3 +439,25 @@ spatial:
   face_gap_m: 40
   face_max_run_m: 90
   bootstrap_n: 2000
+
+# Exploded-axonometric stack. Layers are built from whatever metric columns
+# are handed to tools/export_gis.py, so the drawing is data-driven: two
+# metrics make two planes, five make five. Adding a column later needs no
+# edit here beyond an optional display name.
+diagram:
+  layer_gap_m: 130        # vertical spacing between consecutive planes
+  z_exaggeration: 1.0     # applied to building extrusion only
+  accent: "#c0392b"       # the red in the reference drawing
+  bar_height_m: 95        # tallest bar in a layer; bars are scaled to the
+                          # layer's own range, so a bar height is a drawing
+                          # unit and never a measured metre
+  bar_width_m: 5.5
+  labels:                 # anything absent falls back to the column name
+    GVI:      {title: GREENERY,   unit: "%"}
+    VEI:      {title: ENCLOSURE,  unit: ""}
+    HW_ratio: {title: "H:W RATIO", unit: ""}
+    SVF_band: {title: "SKY BAND",  unit: ""}
+  # A layer is dropped, loudly, below this fraction of nodes carrying a
+  # value. A plane drawn from a tenth of the frame reads as coverage it
+  # does not have.
+  min_layer_coverage: 0.5
