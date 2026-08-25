@@ -463,3 +463,28 @@ spatial:
   face_gap_m: 40
   face_max_run_m: 90
   bootstrap_n: 2000
+
+# Street Interface Matrix as formulated in the 2026-08-24 manuscript, built
+# from VLM-extracted terms rather than pixel shares. Distinct from `sim:`
+# above, which stays on ADE20K pixel counts -- the two are reported side by
+# side, and neither is the other's replacement.
+#
+# Declared, not fitted, for the same reason `sim:` is: there is no measured
+# dwell outcome to fit against. Equal thirds unless a reason exists to differ.
+sim_vlm:
+  weights:
+    dimension:    {imageability: 0.34, identity: 0.33, dependence: 0.33}
+    imageability: {nat_built: 0.34, gvi_eye: 0.33, gmi: 0.33}
+    identity:     {signboard: 0.34, enclosure: 0.33, sfv: 0.33}
+    dependence:   {sidewalk_paver: 0.34, sfv: 0.33, gfapi: 0.33}
+  # P_natural_above / P_built_above is a ratio of two free quantities and is
+  # unbounded, while every other term is a share in [0,1]. Summing them under
+  # weights that total 1 would let the ratio decide the answer on its own --
+  # the same trap sim_dwell.py documents for H/W against SVF. Mapped through
+  # r/(1+r), which is monotone, fixes 1.0 at 0.5, and is bounded.
+  nat_built_transform: ratio_over_one_plus_ratio
+  # Bands for the H/W estimate. The VLM returns a NUMBER and the band is
+  # derived here, so the prompt cannot anchor the model to one category --
+  # which is exactly what happened when the categories were asked for
+  # directly and 1252 of 1252 panoramas came back "human_scale".
+  hw_bands: {under_enclosed: 0.8, deep_canyon: 1.5}
