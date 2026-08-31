@@ -40,11 +40,14 @@ sys.path.insert(0, str(HERE.parent / "src"))
 from common import PROC, RES, banner
 from sim_fields import FIELDS, SYSTEM, prompt
 from sim_scale import prompt7
+from mast import erase_mast
 
 MODEL = "Qwen/Qwen2-VL-7B-Instruct"
 MAX_PIXELS = 1024 * 28 * 28
 NAME_180 = re.compile(r"(\d+)_(n\d+)_([NESW])\.jpg$")
-NAME_90 = re.compile(r"(\d+)_(n\d+)_([NESW])_([LR])\.jpg$")
+# L and R are the two halves of a vehicular street; F is the single wide strip
+# a pedestrian way gets instead. See tools/export_svi_90.py.
+NAME_90 = re.compile(r"(\d+)_(n\d+)_([NESW])_([LRF])\.jpg$")
 ORDER = list(FIELDS)
 
 
@@ -102,6 +105,9 @@ def main():
     global ORDER          # --fields narrows it; must precede any use below
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", type=Path, default=Path("data/raw/svi_180"))
+    ap.add_argument("--mast-set", default=None,
+                    help="mast calibration set (default: the --src folder "
+                         "name); 'none' disables the erase")
     ap.add_argument("--table", type=Path, default=RES / "tables" / "sim_vlm.csv")
     ap.add_argument("--sample", type=int, default=None)
     ap.add_argument("--seed", type=int, default=7)
@@ -194,9 +200,27 @@ def main():
     ids = [tok.encode(str(k), add_special_tokens=False)[0] for k in range(1, 8)]
     ks = np.arange(1, 8)
 
+    WIDE_SET = "svi_90_wide"
+    mast_set = args.mast_set or args.src.name
+    if str(mast_set).lower() == "none":
+        mast_set = None
+        print("mast erase: DISABLED")
+    else:
+        print(f"mast erase: calibration set {mast_set!r}")
+
     out = []
     for r in tqdm(list(fl.itertuples()), desc="images", mininterval=10.0):
         im = Image.open(r.src_path).convert("RGB")
+        # Erase the Google camera mast before the model sees it. The
+        # segmentation arm can exclude the mast from both numerator and
+        # denominator and leave the pixels alone; a VLM has no such option --
+        # it reads whatever is in frame, and it read the mast as a pole and
+        # the "Google" wordmark on it as signage. Erasing is the only way to
+        # keep it out of a rating.
+        if mast_set:
+            # per image, not per folder: a wide strip and a 90 half sit side
+            # by side in the same tree and need different width fractions
+            im, _ = erase_mast(im, WIDE_SET if r.side == "F" else mast_set)
         inp = proc(text=texts, images=[im] * len(ORDER), padding=True,
                    return_tensors="pt").to("cuda")
         with torch.no_grad():

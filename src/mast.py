@@ -55,9 +55,24 @@ from scipy import ndimage
 # `masts` is how many the projection puts in frame. svi_180 is a cylindrical
 # strip spanning enough of the panorama to include the camera part twice, at
 # x ~ 5% and x ~ 55%; svi_90 carries one.
+# svi_90_wide is the 180-degree strip a pedestrian way gets from
+# export_svi_90, at 2880x1833. It is NOT svi_180, which is the older
+# 1440x916 export at half the angular resolution. The numbers here are
+# derived, not separately measured, and the derivation is the whole point of
+# the per-set table: the mast is one object of one angular size, so widening
+# the field of view from 90 to 180 degrees at the same pixels per degree
+# halves its share of the frame width and leaves its share of the height
+# alone, the vertical field being unchanged. Two masts rather than one
+# because a 180-degree strip spans two of the source frames' seams.
+#
+# Confirm rather than assume for a new city: tools/mast_calibrate.py measures
+# these from the imagery itself in about a minute, and the check that matters
+# is whether the capture rig is the same object, not whether the arithmetic
+# is right.
 SETS = {
-    "svi_90":  dict(w=0.140, h=0.170, band=0.22, max_w=0.12, masts=1),
-    "svi_180": dict(w=0.070, h=0.180, band=0.30, max_w=0.06, masts=2),
+    "svi_90":       dict(w=0.140, h=0.170, band=0.22, max_w=0.12, masts=1),
+    "svi_90_wide":  dict(w=0.070, h=0.170, band=0.22, max_w=0.06, masts=2),
+    "svi_180":      dict(w=0.070, h=0.180, band=0.30, max_w=0.06, masts=2),
 }
 DEFAULT = "svi_90"
 
