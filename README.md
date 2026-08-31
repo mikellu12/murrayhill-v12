@@ -327,7 +327,7 @@ ratings**, with a maximum EV drift of 9e-16.
 | `walkable_ground` | V_pave | `map_Sidewalk + Curb + Curb Cut + Pedestrian Area` | +0.248 |
 | `resting_affordance` | IAS | `map_Bench + ade_stairs + ade_step + ade_bench` | +0.234 |
 | `ground_floor_activity` | GFAPI | `ground_floor_glazing` (four-model taxonomy) | +0.143 |
-| `green_softening` | GMI | none that survives scrutiny — see below | — |
+| `green_softening` | GMI | greenery on the lower 3 m of facade | +0.446 |
 | `facade_variation` | SFV | — every source tried is negative | — |
 
 `V_nat`'s twin is whole-frame by the manuscript's own definition — it counts
@@ -343,8 +343,8 @@ it scores +0.694 — higher, but that is validating it against overhead canopy,
 which is the thing GVI_eye exists to exclude. The weaker number against the
 right region is the honest one.
 
-That gap is itself the finding: **the model is not resolving where the greenery
-is.** The bands are genuinely distinct (`veg_above15` vs `veg_eye0_15` correlate
+That gap is itself the finding: **the model resolves how much greenery there is
+far better than where it is.** The bands are genuinely distinct (`veg_above15` vs `veg_eye0_15` correlate
 only +0.510, at shares of 15.25% and 3.95%), yet all three green fields track
 total vegetation better than their own region, and correlate +0.73 to +0.84
 with each other. Asked about greenery at eye height, the model reports
@@ -366,32 +366,38 @@ fires on 83% of frames but anti-correlates with rated seating, flipping the
 twin from +0.14 to −0.07; it appears to be catching facade trim and sills at
 height rather than perchable surfaces.
 
-**GMI's twin was built to the manuscript's own definition and still fails.**
-The paper specifies greenery covering "the lower 3 metres of the building
-facades" -- a distance in the world, not a fraction of the image.
-`tools/seg_gmi_band.py` computes exactly that, per node, from the band probe's
-measured facade distance: `phi = arctan((z - h_cam)/d)` with `d = W_facade/2`
-and the camera at 2.5 m, giving a band that runs +2.3 to -11.5 degrees on
-average and varies from 77 to 451 rows as the street widens. Intersected with
-vegetation adjacent to a building, on 600 frames:
+**GMI's twin is built from the manuscript's own definition.** The paper
+specifies greenery covering "the lower 3 metres of the building facades" -- a
+distance in the world, not a fraction of the image. `tools/seg_gmi_band.py`
+computes exactly that, per node, from the band probe's measured facade
+distance: `phi = arctan((z - h_cam)/d)` with `d = W_facade/2` and the camera at
+2.5 m, giving a band that runs +2.3 to -11.5 degrees on average and varies from
+77 to 451 rows as the street widens. A fixed image band cannot express it: 3 m
+subtends about 14 degrees at a 23 m street and 8 on Park Avenue at 43.6 m.
 
-| candidate | vs `green_softening` | vs `vertical_greenery` |
-|---|---|---|
-| greenery, lower 3 m of facade | 0.446 | 0.449 |
-| greenery in the band | 0.534 | 0.561 |
-| greenery near a facade | 0.567 | 0.669 |
-| greenery, whole frame | **0.617** | 0.723 |
+It scores **+0.446**, against +0.617 for whole-frame vegetation. The lower
+number is the right one, for the same reason GVI_eye is listed at +0.601: the
+higher score comes from counting greenery the definition excludes.
 
-The geometric band scores *worst*, and its two columns are equal -- 0.446
-against GMI and 0.449 against plain greenery -- so it does not separate the two
-fields, it just correlates less with both. Narrowing the region lost signal
-without gaining specificity, which is what the region-blindness above predicts.
+"Structural interaction variable" in the manuscript describes the phenomenon --
+greenery changing how hard surfaces are perceived -- not a multiplicative form.
+The operational heuristic is one measurable quantity, coverage of a surface. So
+GMI is a SUBSET of V_nat, greenery in a particular place, and correlating with
+total greenery is what a correct twin does rather than evidence of redundancy.
+Its -0.323 against `vertical_hardscape` is likewise the expected direction:
+greenery covering a wall means less bare wall in view.
 
-Two other constructions were tried and failed differently. Vegetation adjacent
-to a building correlates +0.857 with total vegetation, so it is confounded with
-sheer amount. The *ratio* of adjacent-to-total is genuinely distinct but
+Two weaker constructions are recorded for completeness. Vegetation adjacent to
+a building at ANY height correlates +0.857 with total vegetation, so it adds
+nothing over plain greenery. The RATIO of adjacent-to-total is distinct but
 inverts (-0.866 with total): sparse greenery in a dense street hugs the facade,
-so a high fraction means little greenery, not more softening.
+so a high fraction means little greenery rather than more softening.
+
+Coverage is the live constraint: `W_facade` exists for 584 of 764 nodes. The
+rest carry inherited H/W and a band from a borrowed width would be a guess, so
+`HW_source` rides along and those rows can be dropped. The 33 open-one-side
+nodes arguably have no GMI at all rather than zero -- with no opposite wall
+there is nothing to soften, the same geometric fact that gives them Omega = 1.0.
 
 **`green_softening`'s best number passes and fails on the construct.**
 +0.701 against `map_Vegetation` is a good correlation, and it is the *same*

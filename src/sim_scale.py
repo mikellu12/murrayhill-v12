@@ -89,10 +89,20 @@ SCALE = {
  # distribution in the set: 60% of images two-peaked and 58% of stored answers
  # on a rung the model ranked below its own runner-up -- it was answering "is
  # there greenery" and "are there walls" alternately rather than combining them.
- # Recast as one observable quantity, which is also how the manuscript appendix
- # operationalises GMI: greenery covering the lower 3 m of the facades.
- # Bimodality 56% -> 8%, decisive 1% -> 9%. No measured twin exists for this
- # field, so it rests on the shape change and not on a correlation.
+ #
+ # Recast as one observable quantity: how much of the building surface has
+ # greenery in front of it. That is the manuscript's own heuristic -- "score 1.00
+ # if vertical green walls or dense planters completely cover the lower 3 metres
+ # of the building facades" -- and it is coverage of a surface, not a product of
+ # two terms. "Structural interaction variable" in the paper names the
+ # PHENOMENON, greenery changing how hard surfaces are perceived; it does not
+ # prescribe a multiplicative form. GMI is therefore a SUBSET of V_nat, greenery
+ # in a particular place, and its correlation with total greenery is what a
+ # correct measure looks like rather than evidence it has collapsed into one.
+ #
+ # Bimodality 56% -> 8%, decisive 1% -> 9%. Twin is greenery on the lower 3 m of
+ # facade, computed per node from the measured facade distance by
+ # tools/seg_gmi_band.py: +0.446.
  "green_softening": [
    "the building surface is bare, no greenery in front of it",
    "a trace of greenery in front of the building surface",
