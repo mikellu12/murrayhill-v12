@@ -59,6 +59,14 @@ def main():
     banner("classify each node vehicular or pedestrian")
 
     nodes = gpd.read_file(PROC / "nodes.gpkg")
+    # The two frames do not agree on storage CRS -- London's is 4326, Murray
+    # Hill's is 32618 -- and the OSM query needs degrees. Taking total_bounds
+    # off a projected frame hands Overpass easting/northing, which surfaces as
+    # a NaN deep inside osmnx rather than as a complaint about units.
+    if nodes.crs is not None and nodes.crs.to_epsg() != 4326:
+        print(f"nodes are {nodes.crs.to_string()}; reprojecting to 4326 "
+              f"for the OSM query")
+        nodes = nodes.to_crs(4326)
     b = nodes.total_bounds
     m = args.margin_deg
     bbox = (b[0] - m, b[1] - m, b[2] + m, b[3] + m)

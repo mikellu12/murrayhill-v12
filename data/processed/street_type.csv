@@ -1,0 +1,767 @@
+node_id,osm_name,hw,snap_m,is_pedestrian,fov
+n00000,1st Avenue,primary,0.07101650788819104,False,90
+n00001,1st Avenue,primary,0.0746364923311173,False,90
+n00002,1st Avenue,primary,0.013685853529411896,False,90
+n00003,1st Avenue,primary,0.048911449279650875,False,90
+n00004,1st Avenue,primary,0.03841915757241239,False,90
+n00005,1st Avenue,primary,0.07216724930466088,False,90
+n00006,1st Avenue,primary,0.06323813209928297,False,90
+n00007,1st Avenue,primary,0.06029260208597312,False,90
+n00008,1st Avenue,primary,0.04613064484719258,False,90
+n00009,1st Avenue,primary,0.0010194967594005125,False,90
+n00010,1st Avenue,primary,0.000110650918588823,False,90
+n00011,1st Avenue,primary,0.029220104954592815,False,90
+n00012,1st Avenue,primary,0.02154376035210768,False,90
+n00013,1st Avenue,primary,0.004300100686570347,False,90
+n00014,1st Avenue,primary,0.005961416642686268,False,90
+n00015,1st Avenue,primary,0.023215239375658236,False,90
+n00016,1st Avenue,primary,0.0016647694484081706,False,90
+n00017,1st Avenue,primary,0.05500218641567448,False,90
+n00018,1st Avenue,primary,0.015180001385525744,False,90
+n00019,1st Avenue,primary,0.03219603035648497,False,90
+n00020,1st Avenue,primary,0.04646108768776117,False,90
+n00021,1st Avenue,primary,0.04095037041723988,False,90
+n00022,1st Avenue,primary,0.04585036106638765,False,90
+n00023,1st Avenue,primary,0.00044806571167896466,False,90
+n00024,1st Avenue,primary_link,0.00965270046909374,False,90
+n00025,1st Avenue,primary,0.01245273211712555,False,90
+n00026,1st Avenue,primary_link,0.0017363928717292769,False,90
+n00027,1st Avenue,primary,0.016499125893562273,False,90
+n00028,1st Avenue,primary,0.03412248255096778,False,90
+n00029,1st Avenue,primary,0.034267565895485554,False,90
+n00030,1st Avenue,primary,0.05457346530502634,False,90
+n00031,1st Avenue,primary,0.027959974357119277,False,90
+n00032,1st Avenue,primary,0.04697663229061567,False,90
+n00033,1st Avenue,primary,0.03951580535267472,False,90
+n00034,1st Avenue,primary,0.02201629842728274,False,90
+n00035,1st Avenue,primary,0.03105308103786625,False,90
+n00036,1st Avenue,primary,0.01501374381719749,False,90
+n00037,1st Avenue,primary,0.043033545674536225,False,90
+n00038,1st Avenue,primary,0.03014613780388278,False,90
+n00039,1st Avenue,primary,0.02072979266392481,False,90
+n00040,1st Avenue,primary,0.01689056176436942,False,90
+n00041,1st Avenue,primary,0.022672761872938086,False,90
+n00042,1st Avenue,primary,0.03352027161743112,False,90
+n00043,1st Avenue,primary,0.052701982869006264,False,90
+n00044,1st Avenue,primary,0.019361268490029872,False,90
+n00045,1st Avenue,primary,0.03143582591329475,False,90
+n00046,2nd Avenue,primary,0.036919260751319787,False,90
+n00047,2nd Avenue,primary,0.08477772708831924,False,90
+n00048,2nd Avenue,primary,0.057929332780237534,False,90
+n00049,2nd Avenue,primary,0.015903340922280573,False,90
+n00050,2nd Avenue,primary,0.027221971727598212,False,90
+n00051,2nd Avenue,primary,0.06399018049193475,False,90
+n00052,2nd Avenue,primary,0.008458420821286016,False,90
+n00053,2nd Avenue,primary,0.026220195739189666,False,90
+n00054,2nd Avenue,primary,0.011137384590374921,False,90
+n00055,2nd Avenue,primary,0.0460302503609534,False,90
+n00056,2nd Avenue,primary,0.005919339713480162,False,90
+n00057,2nd Avenue,primary,0.05893136859226594,False,90
+n00058,2nd Avenue,primary,0.07258326058357101,False,90
+n00059,2nd Avenue,primary,0.015457040462617092,False,90
+n00060,2nd Avenue,primary,0.047861876437400135,False,90
+n00061,2nd Avenue,primary,0.026168085863092425,False,90
+n00062,2nd Avenue,primary,0.009009589219581851,False,90
+n00063,2nd Avenue,primary,0.03590337034176792,False,90
+n00064,2nd Avenue,primary,0.0022098501128709584,False,90
+n00065,2nd Avenue,primary,0.04395985055372926,False,90
+n00066,2nd Avenue,primary,0.04447672739547856,False,90
+n00067,2nd Avenue,primary,0.01905192680715613,False,90
+n00068,2nd Avenue,primary,0.05441447128306623,False,90
+n00069,2nd Avenue,primary,0.012784901409704166,False,90
+n00070,2nd Avenue,primary,0.0489164395863903,False,90
+n00071,2nd Avenue,primary,0.019592275579006252,False,90
+n00072,2nd Avenue,primary,0.0212578343001954,False,90
+n00073,2nd Avenue,primary,0.06583388856124384,False,90
+n00074,2nd Avenue,primary,0.01562038594503542,False,90
+n00075,2nd Avenue,primary,0.023150875938648133,False,90
+n00076,2nd Avenue,primary,0.018008119115240005,False,90
+n00077,2nd Avenue,primary,0.06815750894343693,False,90
+n00078,2nd Avenue,primary,0.051417124722498424,False,90
+n00079,2nd Avenue,primary,0.011209331368805966,False,90
+n00080,3rd Avenue,primary,0.03160310760832847,False,90
+n00081,3rd Avenue,primary,0.07373241482368476,False,90
+n00082,3rd Avenue,primary,0.010846058627428665,False,90
+n00083,3rd Avenue,primary,0.017055027062829485,False,90
+n00084,3rd Avenue,primary,0.06153218621076221,False,90
+n00085,3rd Avenue,primary,0.014549065061874627,False,90
+n00086,3rd Avenue,primary,0.01350700876988081,False,90
+n00087,3rd Avenue,primary,0.02309173733562632,False,90
+n00088,3rd Avenue,primary,0.04705765588931293,False,90
+n00089,3rd Avenue,primary,0.01156993731625225,False,90
+n00090,3rd Avenue,primary,0.005454147372840865,False,90
+n00091,3rd Avenue,primary,0.003681657907126208,False,90
+n00092,3rd Avenue,primary,0.0018428332822008476,False,90
+n00093,3rd Avenue,primary,0.019856834898908562,False,90
+n00094,3rd Avenue,primary,0.036187070521102295,False,90
+n00095,3rd Avenue,primary,0.0534079100819076,False,90
+n00096,3rd Avenue,primary,0.06965002087302567,False,90
+n00097,3rd Avenue,primary,0.04178136201918089,False,90
+n00098,3rd Avenue,primary,0.02533035577962013,False,90
+n00099,3rd Avenue,primary,0.023387230315046945,False,90
+n00100,3rd Avenue,primary,0.021372584193436968,False,90
+n00101,3rd Avenue,primary,0.04502035824243879,False,90
+n00102,3rd Avenue,primary,0.03249738415613877,False,90
+n00103,3rd Avenue,primary,0.014257279673871337,False,90
+n00104,3rd Avenue,primary,0.03167584078875047,False,90
+n00105,3rd Avenue,primary,0.05015329035081088,False,90
+n00106,3rd Avenue,primary,0.007034574627424619,False,90
+n00107,3rd Avenue,primary,0.03925653638446852,False,90
+n00108,3rd Avenue,primary,0.018896182362496947,False,90
+n00109,3rd Avenue,primary,0.02335129980545922,False,90
+n00110,3rd Avenue,primary,0.03379547290277351,False,90
+n00111,3rd Avenue,primary,0.03907227429771107,False,90
+n00112,3rd Avenue,primary,0.02634875272395407,False,90
+n00113,3rd Avenue,primary,0.05661969325591393,False,90
+n00114,Park Avenue,primary,0.022774665961643424,False,90
+n00115,Park Avenue,primary,0.004287897929979057,False,90
+n00116,Park Avenue,primary,0.05096140910578964,False,90
+n00117,Park Avenue,primary,0.013493649175805974,False,90
+n00118,Park Avenue,primary,0.05659989796586835,False,90
+n00119,Park Avenue,primary,0.021292693965697777,False,90
+n00120,Park Avenue,primary,0.006516649428722665,False,90
+n00121,Park Avenue,primary,0.0363404111203665,False,90
+n00122,Park Avenue,primary,0.04053946057579577,False,90
+n00123,Park Avenue,primary,0.011545588644526688,False,90
+n00124,Park Avenue,primary,0.024778278366514597,False,90
+n00125,Park Avenue,primary,0.027406664763290227,False,90
+n00126,Park Avenue,primary,0.001987233952497797,False,90
+n00127,Park Avenue,primary,0.03405282737703277,False,90
+n00128,Park Avenue,primary,0.04564604196567093,False,90
+n00129,Park Avenue,primary,0.043938158634310304,False,90
+n00130,Park Avenue,primary,0.05041633066693806,False,90
+n00131,Park Avenue,primary,0.052593543886193736,False,90
+n00132,Park Avenue,primary,0.07672919255261375,False,90
+n00133,Park Avenue,primary,0.028896766258084947,False,90
+n00134,Park Avenue,primary,0.049225522030544554,False,90
+n00135,Park Avenue,primary,0.01115416426224741,False,90
+n00136,Park Avenue,primary,0.018645551737461536,False,90
+n00137,Park Avenue,primary,0.05782363430138273,False,90
+n00138,Park Avenue,primary,0.03587481717404528,False,90
+n00139,Park Avenue,primary_link,0.029843681244985855,False,90
+n00140,Park Avenue,primary,0.036265596093135746,False,90
+n00141,Park Avenue,residential,0.011121952698054159,False,90
+n00142,Park Avenue,residential,0.015088820021344323,False,90
+n00143,Park Avenue,residential,0.04122872421891322,False,90
+n00144,Park Avenue,primary,0.06118084272938089,False,90
+n00145,Park Avenue,primary,0.022066582308394856,False,90
+n00146,Park Avenue,primary,0.027580129781971153,False,90
+n00147,Park Avenue,primary,0.004798226887822033,False,90
+n00148,Park Avenue,primary,0.008760207689807412,False,90
+n00149,Park Avenue,primary,0.05672384454405524,False,90
+n00150,Park Avenue,primary,0.08249294445809624,False,90
+n00151,Park Avenue,primary,0.009642104116920383,False,90
+n00152,Park Avenue,primary,0.01689029219478855,False,90
+n00153,Park Avenue,primary,0.0023846585255638854,False,90
+n00154,Park Avenue,primary,0.032168089721636074,False,90
+n00155,Park Avenue,primary,0.033609294745191386,False,90
+n00156,Park Avenue,primary,0.0043287912219123,False,90
+n00157,Park Avenue,primary,0.052843288553502364,False,90
+n00158,Park Avenue,primary,0.054215663073032425,False,90
+n00159,Park Avenue,primary,0.010356893108386913,False,90
+n00160,Park Avenue,primary,0.07973617561437847,False,90
+n00161,Park Avenue,primary,0.06397267333886213,False,90
+n00162,Park Avenue,primary,0.029705466405610448,False,90
+n00163,Park Avenue,primary,0.06420786624533639,False,90
+n00164,Park Avenue,primary,0.057257606003343425,False,90
+n00165,Park Avenue,primary,0.04031808411068075,False,90
+n00166,Park Avenue,primary,0.0070837488015522195,False,90
+n00167,Park Avenue,primary,0.037191774914576155,False,90
+n00168,Park Avenue,primary,0.03449265212060322,False,90
+n00169,Park Avenue,primary,0.06306801148789933,False,90
+n00170,Park Avenue,primary,0.015824355325329907,False,90
+n00171,Park Avenue,primary,0.011441319200922832,False,90
+n00172,Park Avenue,primary,0.039018835233062335,False,90
+n00173,Park Avenue,primary,0.011896394541665242,False,90
+n00174,Park Avenue,primary,0.06249969487195063,False,90
+n00175,Park Avenue,unclassified,0.01898375796704337,False,90
+n00176,Park Avenue,primary,0.03552047803019455,False,90
+n00177,Park Avenue,unclassified,0.03925814224260775,False,90
+n00178,Park Avenue,primary,0.08626691982217417,False,90
+n00179,Park Avenue,unclassified,0.05113878453160564,False,90
+n00180,Park Avenue,primary,0.046816673808375064,False,90
+n00181,Park Avenue,unclassified,0.0037797207537249617,False,90
+n00182,Park Avenue,primary,0.07358034653780234,False,90
+n00183,Park Avenue,unclassified,0.00979543816715011,False,90
+n00184,Park Avenue,primary,0.02261849254131885,False,90
+n00185,Park Avenue,unclassified,0.05941656366553014,False,90
+n00186,Park Avenue,primary,0.04923894482651595,False,90
+n00187,Park Avenue,unclassified,0.003017349342652007,False,90
+n00188,Park Avenue,primary,0.0018660438712579264,False,90
+n00189,Park Avenue,unclassified,0.05560749044718726,False,90
+n00190,Park Avenue,primary,0.02461118823003171,False,90
+n00191,Park Avenue,unclassified,0.021163720118597247,False,90
+n00192,Park Avenue,primary,0.05286714685740331,False,90
+n00193,Park Avenue,unclassified,0.017934986123149425,False,90
+n00194,Park Avenue,primary,0.020733878639727355,False,90
+n00195,Park Avenue,unclassified,0.027749764758830973,False,90
+n00196,Park Avenue,primary,0.0011004317631623324,False,90
+n00197,Park Avenue,unclassified,0.03778104741015803,False,90
+n00198,Park Avenue,primary,0.04498982413256539,False,90
+n00199,Park Avenue,primary,0.05257211497717688,False,90
+n00200,Park Avenue,primary,0.04395770872235428,False,90
+n00201,Park Avenue,primary,0.05142523569420246,False,90
+n00202,Park Avenue,primary,0.026856651083185124,False,90
+n00203,Park Avenue,primary,0.05034911361018014,False,90
+n00204,Park Avenue,primary,0.010556406895511648,False,90
+n00205,Park Avenue,primary,0.04934374189832338,False,90
+n00206,Park Avenue,primary,0.022652278778598486,False,90
+n00207,Park Avenue,primary,0.04840912591345742,False,90
+n00208,Park Avenue,primary,0.07134405260145568,False,90
+n00209,Park Avenue,primary,0.004523338638150999,False,90
+n00210,Park Avenue,primary,0.03776936344617973,False,90
+n00211,Park Avenue,primary,0.05594895221046249,False,90
+n00212,Park Avenue,primary,0.03030400948773028,False,90
+n00213,Park Avenue,primary,0.037399219080210135,False,90
+n00214,Park Avenue,primary,0.008202370638609166,False,90
+n00215,Park Avenue,primary,0.004277009287563933,False,90
+n00216,Park Avenue,primary,0.013451017792545174,False,90
+n00217,Park Avenue,primary,0.022552494044309028,False,90
+n00218,Park Avenue,primary,0.0043138858499846295,False,90
+n00219,Park Avenue,primary,0.04247956405006484,False,90
+n00220,Park Avenue,primary,0.016208613101662113,False,90
+n00221,Park Avenue,primary,0.045477337749422274,False,90
+n00222,Park Avenue,primary,0.01372763809378449,False,90
+n00223,Park Avenue,primary,0.008958200822229173,False,90
+n00224,Park Avenue,primary,0.00187428857671226,False,90
+n00225,Park Avenue,primary,0.012635202671616209,False,90
+n00226,Park Avenue,primary,0.01182717848870496,False,90
+n00227,Park Avenue,primary,0.032451356414416196,False,90
+n00228,Park Avenue,primary,0.051559105195466,False,90
+n00229,Park Avenue,primary,0.07073755642218377,False,90
+n00230,Park Avenue,primary,0.013992868025803759,False,90
+n00231,Park Avenue,primary,0.041411946822017785,False,90
+n00232,Park Avenue,primary,0.04875266135331039,False,90
+n00233,Park Avenue,primary,0.0614415409052501,False,90
+n00234,Park Avenue,primary,0.020688207978110877,False,90
+n00235,Park Avenue,residential,0.0368134242898091,False,90
+n00236,Park Avenue,primary,0.005310568920558888,False,90
+n00237,Park Avenue,residential,0.03544691079473256,False,90
+n00238,Park Avenue,primary,0.009994516442252688,False,90
+n00239,Park Avenue,residential,0.0015182871228767328,False,90
+n00240,Park Avenue,primary,0.03962352519293926,False,90
+n00241,Park Avenue,residential,0.03240452971938805,False,90
+n00242,Park Avenue,primary,0.06191466012422808,False,90
+n00243,Park Avenue,primary,0.007577848233933596,False,90
+n00244,Park Avenue,primary,0.060047108696285344,False,90
+n00245,Park Avenue,primary,0.06280452174304389,False,90
+n00246,Tunnel Exit Street,primary,0.011345911967162158,False,90
+n00247,Tunnel Exit Street,primary,0.05491325539807984,False,90
+n00248,Tunnel Exit Street,primary,0.009227777079552925,False,90
+n00249,Tunnel Exit Street,primary,0.060625198843584874,False,90
+n00250,Tunnel Exit Street,primary,0.0033099962666069634,False,90
+n00251,Tunnel Exit Street,motorway_link,0.005508768576681573,False,90
+n00252,Tunnel Exit Street,unclassified,0.030695647424856642,False,90
+n00253,Tunnel Exit Street,unclassified,0.01451581219795658,False,90
+n00254,Tunnel Exit Street,unclassified,0.044815955808293804,False,90
+n00255,Tunnel Exit Street,unclassified,0.03151288866708497,False,90
+n00256,Tunnel Exit Street,unclassified,0.043235166293085464,False,90
+n00257,Tunnel Exit Street,unclassified,0.05086895347938862,False,90
+n00258,Tunnel Exit Street,unclassified,0.03911099875879461,False,90
+n00259,Tunnel Exit Street,unclassified,0.03559812136027146,False,90
+n00260,Tunnel Exit Street,unclassified,0.009689305674233486,False,90
+n00261,Tunnel Exit Street,unclassified,0.026954452809845698,False,90
+n00262,Tunnel Exit Street,unclassified,0.07228184434868837,False,90
+n00263,Tunnel Exit Street,unclassified,0.0053685901959104184,False,90
+n00264,Tunnel Exit Street,unclassified,0.0034501211724080345,False,90
+n00265,Tunnel Exit Street,unclassified,0.0016024204543417483,False,90
+n00266,Tunnel Exit Street,unclassified,0.006174817937477519,False,90
+n00267,East 34th Street,primary,0.05242700683551082,False,90
+n00268,East 34th Street,primary,0.04044318809582644,False,90
+n00269,East 34th Street,primary,0.00024563689976596804,False,90
+n00270,East 34th Street,primary,0.05419158380322403,False,90
+n00271,East 34th Street,primary,0.03627194948125394,False,90
+n00272,East 34th Street,primary,0.032247277768661,False,90
+n00273,East 34th Street,primary,0.020656683801843424,False,90
+n00274,East 34th Street,primary,0.03139376119582768,False,90
+n00275,East 34th Street,primary,0.041602281077961524,False,90
+n00276,East 34th Street,primary,0.03462018259107207,False,90
+n00277,East 34th Street,primary,0.08325019213792438,False,90
+n00278,East 34th Street,primary,0.008935470191211525,False,90
+n00279,East 34th Street,primary,0.021146663592706297,False,90
+n00280,East 34th Street,primary,0.03353456457482501,False,90
+n00281,East 34th Street,primary,0.09377234505298576,False,90
+n00282,East 34th Street,primary,0.022182239438796554,False,90
+n00283,East 34th Street,primary,0.07291198615608838,False,90
+n00284,East 34th Street,primary,0.03011435482427611,False,90
+n00285,East 34th Street,primary,0.014409439458399417,False,90
+n00286,East 34th Street,primary,0.0021602056267386372,False,90
+n00287,East 34th Street,primary,0.05218009100454212,False,90
+n00288,East 34th Street,primary,0.04488302188203307,False,90
+n00289,East 34th Street,primary,0.03831131181961265,False,90
+n00290,East 34th Street,primary,0.044269374706339445,False,90
+n00291,East 34th Street,primary,0.011489247187340476,False,90
+n00292,East 34th Street,primary,0.044701958636283415,False,90
+n00293,East 34th Street,primary,0.01713426026084702,False,90
+n00294,East 34th Street,primary,0.055159485220429204,False,90
+n00295,East 34th Street,primary,0.021506679455457013,False,90
+n00296,East 34th Street,primary,0.013673093992263765,False,90
+n00297,East 34th Street,primary,0.05316846460932232,False,90
+n00298,East 34th Street,primary,0.06135613770401384,False,90
+n00299,East 34th Street,primary,0.07016342494615486,False,90
+n00300,East 34th Street,primary,0.019855110956502362,False,90
+n00301,East 34th Street,primary,0.0672578933397014,False,90
+n00302,East 34th Street,primary,0.009693479975292345,False,90
+n00303,East 34th Street,primary,0.03471891759881848,False,90
+n00304,East 34th Street,primary,0.050177235896748294,False,90
+n00305,East 34th Street,primary,0.04800711477684183,False,90
+n00306,East 34th Street,primary,0.02845395456499004,False,90
+n00307,East 34th Street,primary,0.015194116826439013,False,90
+n00308,East 34th Street,primary,0.05709406906790168,False,90
+n00309,East 34th Street,primary,0.07070800554177212,False,90
+n00310,East 34th Street,primary,0.018295603024636797,False,90
+n00311,East 34th Street,primary,0.046276373624808936,False,90
+n00312,East 34th Street,primary,0.02870768850273263,False,90
+n00313,East 34th Street,primary,0.03874947471935295,False,90
+n00314,East 35th Street,residential,0.01985760726359439,False,90
+n00315,East 35th Street,residential,0.05008191585961685,False,90
+n00316,East 35th Street,residential,0.008054895209685371,False,90
+n00317,East 35th Street,residential,0.032612093784699724,False,90
+n00318,East 35th Street,residential,0.057346318014329344,False,90
+n00319,East 35th Street,residential,0.05810929837609552,False,90
+n00320,East 35th Street,residential,0.03302061423959322,False,90
+n00321,East 35th Street,residential,0.053677335656660045,False,90
+n00322,East 35th Street,residential,0.02797247643399657,False,90
+n00323,East 35th Street,residential,0.03887704527393719,False,90
+n00324,East 35th Street,residential,0.003240417326394599,False,90
+n00325,East 35th Street,residential,0.04553461091357754,False,90
+n00326,East 35th Street,residential,0.051783067417699336,False,90
+n00327,East 35th Street,residential,0.04982302609702163,False,90
+n00328,East 35th Street,residential,0.05030764008138524,False,90
+n00329,East 35th Street,residential,0.0013302783730413544,False,90
+n00330,East 35th Street,residential,0.034429751348147644,False,90
+n00331,East 35th Street,residential,0.06502376912899274,False,90
+n00332,East 35th Street,residential,0.002102957537828791,False,90
+n00333,East 35th Street,residential,0.026072497331891948,False,90
+n00334,East 35th Street,residential,0.05407129392526781,False,90
+n00335,East 35th Street,residential,0.023195957818502387,False,90
+n00336,East 35th Street,residential,0.0508407650388348,False,90
+n00337,East 35th Street,residential,0.017177449447455386,False,90
+n00338,East 35th Street,residential,0.07065051705924189,False,90
+n00339,East 35th Street,residential,0.03296186595694038,False,90
+n00340,East 35th Street,residential,0.0839849469873176,False,90
+n00341,East 35th Street,residential,0.002713437245764246,False,90
+n00342,East 35th Street,secondary,0.07252288436896087,False,90
+n00343,East 35th Street,secondary,0.02773600616464672,False,90
+n00344,East 35th Street,secondary,0.07619465014422248,False,90
+n00345,East 35th Street,secondary,0.018446936914105906,False,90
+n00346,East 35th Street,secondary,0.02687125235670539,False,90
+n00347,East 35th Street,secondary,0.03212177873990478,False,90
+n00348,East 35th Street,residential,0.08201518885591329,False,90
+n00349,East 35th Street,residential,0.029802900561000805,False,90
+n00350,East 35th Street,residential,0.03666852335437269,False,90
+n00351,East 35th Street,residential,0.03674435985889359,False,90
+n00352,East 35th Street,residential,0.03033189452124033,False,90
+n00353,East 35th Street,residential,0.04464119403488429,False,90
+n00354,East 35th Street,residential,0.019911146738823098,False,90
+n00355,East 35th Street,residential,0.055415902729625426,False,90
+n00356,East 35th Street,residential,0.008781646249034825,False,90
+n00357,East 35th Street,residential,0.06689937594377704,False,90
+n00358,East 35th Street,residential,0.0030566248818718767,False,90
+n00359,East 35th Street,residential,0.058821902104138436,False,90
+n00360,East 35th Street,residential,0.0736076096956582,False,90
+n00361,East 36th Street,secondary,0.03231844980584711,False,90
+n00362,East 36th Street,secondary,0.006262943639830242,False,90
+n00363,East 36th Street,secondary,0.0413317532671316,False,90
+n00364,East 36th Street,secondary,0.05066843936717627,False,90
+n00365,East 36th Street,secondary,0.002719865549163044,False,90
+n00366,East 36th Street,secondary,0.04540544190413888,False,90
+n00367,East 36th Street,secondary,0.046062901166157626,False,90
+n00368,East 36th Street,secondary,0.002416287593619941,False,90
+n00369,East 36th Street,secondary,0.028751027925393254,False,90
+n00370,East 36th Street,secondary,0.01600998090869893,False,90
+n00371,East 36th Street,secondary,0.06522568556971585,False,90
+n00372,East 36th Street,secondary,0.027284750929254822,False,90
+n00373,East 36th Street,secondary,0.020155467685856663,False,90
+n00374,East 36th Street,secondary,0.07200025953990004,False,90
+n00375,East 36th Street,secondary,0.02430699747660736,False,90
+n00376,East 36th Street,secondary,0.08242081483471078,False,90
+n00377,East 36th Street,secondary,0.005309940344979777,False,90
+n00378,East 36th Street,secondary,0.031709197335222115,False,90
+n00379,East 36th Street,secondary,0.06529230982117981,False,90
+n00380,East 36th Street,secondary,0.022330641503956413,False,90
+n00381,East 36th Street,secondary,0.020807760692841303,False,90
+n00382,East 36th Street,secondary,0.017367025632441396,False,90
+n00383,East 36th Street,secondary,0.0230743128704998,False,90
+n00384,East 36th Street,secondary,0.06444216148030259,False,90
+n00385,East 36th Street,secondary,0.06098004845322475,False,90
+n00386,East 36th Street,secondary,0.028611794863105233,False,90
+n00387,East 36th Street,secondary,0.06106101313121611,False,90
+n00388,East 36th Street,secondary,0.09333358790976579,False,90
+n00389,East 36th Street,secondary,0.05072786327828148,False,90
+n00390,East 36th Street,secondary,0.07660838747636138,False,90
+n00391,East 36th Street,secondary,0.04788579890998094,False,90
+n00392,East 36th Street,secondary,0.02823238864641406,False,90
+n00393,East 36th Street,secondary,0.002081699262500633,False,90
+n00394,East 36th Street,secondary,0.03780697767308061,False,90
+n00395,East 36th Street,secondary,0.03872220727418428,False,90
+n00396,East 36th Street,secondary,0.010976021938682873,False,90
+n00397,East 36th Street,secondary,0.03838556549570973,False,90
+n00398,East 36th Street,secondary,0.06585840709831872,False,90
+n00399,East 36th Street,residential,0.05230873815038949,False,90
+n00400,East 36th Street,residential,0.08807152738202743,False,90
+n00401,East 36th Street,residential,0.07211759663778114,False,90
+n00402,East 36th Street,residential,0.05634064677456668,False,90
+n00403,East 36th Street,residential,0.04074067565884959,False,90
+n00404,East 36th Street,residential,0.025317679601841343,False,90
+n00405,East 36th Street,residential,0.010071667774488183,False,90
+n00406,East 36th Street,residential,0.05301094764336886,False,90
+n00407,East 36th Street,residential,0.04698584268766974,False,90
+n00408,East 37th Street,secondary,0.0325127947705547,False,90
+n00409,East 37th Street,secondary,0.07687328352210837,False,90
+n00410,East 37th Street,secondary,0.05082553104812557,False,90
+n00411,East 37th Street,secondary,0.03795194941206339,False,90
+n00412,East 37th Street,secondary,0.024901364785220613,False,90
+n00413,East 37th Street,secondary,0.011673781574810697,False,90
+n00414,East 37th Street,secondary,0.0017308015180138036,False,90
+n00415,East 37th Street,secondary,0.02711877269370503,False,90
+n00416,East 37th Street,secondary,0.05068524961303796,False,90
+n00417,East 37th Street,secondary,0.0393014848384338,False,90
+n00418,East 37th Street,secondary,0.017977029362430504,False,90
+n00419,East 37th Street,secondary,0.0035241200686520384,False,90
+n00420,East 37th Street,secondary,0.02520197244505327,False,90
+n00421,East 37th Street,secondary,0.03390419003380957,False,90
+n00422,East 37th Street,secondary,0.011871844045504412,False,90
+n00423,East 37th Street,secondary,0.02388634816942011,False,90
+n00424,East 37th Street,secondary,0.05875665149295646,False,90
+n00425,East 37th Street,secondary,0.006233445463157239,False,90
+n00426,East 37th Street,secondary,0.01306057673666589,False,90
+n00427,East 37th Street,secondary,0.014246777348552958,False,90
+n00428,East 37th Street,secondary,0.05069704530603792,False,90
+n00429,East 37th Street,secondary,0.08185340475375197,False,90
+n00430,East 37th Street,secondary,0.012882417025505034,False,90
+n00431,East 37th Street,secondary,0.009332248318571138,False,90
+n00432,East 37th Street,secondary,0.033828796332364096,False,90
+n00433,East 37th Street,secondary,0.07195487181754844,False,90
+n00434,East 37th Street,secondary,0.021231690176077886,False,90
+n00435,East 37th Street,secondary,0.013626810956440345,False,90
+n00436,East 37th Street,secondary,0.035309789299977815,False,90
+n00437,East 37th Street,secondary,0.02418026308296751,False,90
+n00438,East 37th Street,secondary,0.04074430327575734,False,90
+n00439,East 37th Street,secondary,0.02275368156564662,False,90
+n00440,East 37th Street,secondary,0.006350092233722917,False,90
+n00441,East 37th Street,secondary,0.06982476657137573,False,90
+n00442,East 37th Street,secondary,0.06895930037505797,False,90
+n00443,East 37th Street,secondary,0.05583714035455917,False,90
+n00444,East 37th Street,secondary,0.03924317548928325,False,90
+n00445,East 37th Street,secondary,0.0031469157862386667,False,90
+n00446,East 37th Street,secondary,0.02045632830414841,False,90
+n00447,East 37th Street,secondary,0.012685236171430563,False,90
+n00448,East 37th Street,secondary,0.0241793022217593,False,90
+n00449,East 37th Street,secondary,0.052524020572981917,False,90
+n00450,East 37th Street,secondary,0.04658606958230328,False,90
+n00451,East 37th Street,secondary,0.06331470137186683,False,90
+n00452,East 37th Street,secondary,0.028041645342493236,False,90
+n00453,East 37th Street,secondary,0.0625652485394354,False,90
+n00454,East 37th Street,secondary,0.03584252986542895,False,90
+n00455,East 38th Street,residential,0.029007772376202747,False,90
+n00456,East 38th Street,residential,0.05300851092040677,False,90
+n00457,East 38th Street,residential,0.01531088369424219,False,90
+n00458,East 38th Street,residential,0.08065074925831132,False,90
+n00459,East 38th Street,residential,0.02215984031172289,False,90
+n00460,East 38th Street,residential,0.015005116475415817,False,90
+n00461,East 38th Street,residential,0.08816007808994811,False,90
+n00462,East 38th Street,residential,0.007094102109480211,False,90
+n00463,East 38th Street,residential,0.03453262297706918,False,90
+n00464,East 38th Street,residential,0.0800583512475612,False,90
+n00465,East 38th Street,residential,0.05024282544959751,False,90
+n00466,East 38th Street,residential,0.030455026424965323,False,90
+n00467,East 38th Street,residential,0.048380949107502194,False,90
+n00468,East 38th Street,residential,0.06960240549686648,False,90
+n00469,East 38th Street,residential,0.04683712086557465,False,90
+n00470,East 38th Street,residential,0.02326560510348314,False,90
+n00471,East 38th Street,residential,0.03195340371552081,False,90
+n00472,East 38th Street,residential,0.0016603218953010668,False,90
+n00473,East 38th Street,residential,0.03150539150663756,False,90
+n00474,East 38th Street,residential,0.06484781379354011,False,90
+n00475,East 38th Street,residential,0.04144009465576434,False,90
+n00476,East 38th Street,residential,0.0077438403019279185,False,90
+n00477,East 38th Street,residential,0.08712234771282075,False,90
+n00478,East 38th Street,residential,0.0008910717122638614,False,90
+n00479,East 38th Street,residential,0.017080413578448226,False,90
+n00480,East 38th Street,residential,0.049727945193709044,False,90
+n00481,East 38th Street,residential,0.026189035451888155,False,90
+n00482,East 38th Street,residential,0.04269023367401767,False,90
+n00483,East 38th Street,residential,0.05036632081883506,False,90
+n00484,East 38th Street,residential,0.013512364659040545,False,90
+n00485,East 38th Street,residential,0.01583367319492857,False,90
+n00486,East 38th Street,residential,0.027407103644518357,False,90
+n00487,East 38th Street,residential,0.09690029633874954,False,90
+n00488,East 38th Street,residential,0.03448628640149999,False,90
+n00489,East 38th Street,residential,0.029819560029971975,False,90
+n00490,East 38th Street,residential,0.0318621923723576,False,90
+n00491,East 38th Street,residential,0.03620229254141666,False,90
+n00492,East 38th Street,residential,0.08729488724656195,False,90
+n00493,East 38th Street,residential,0.012348937027712554,False,90
+n00494,East 38th Street,residential,0.034122792964566474,False,90
+n00495,East 38th Street,residential,0.06551584031566202,False,90
+n00496,East 38th Street,residential,0.06389347319385634,False,90
+n00497,East 38th Street,residential,0.05575116576676756,False,90
+n00498,East 38th Street,residential,0.010765313237038221,False,90
+n00499,East 38th Street,residential,0.022031278598204248,False,90
+n00500,East 38th Street,residential,0.03684346060366617,False,90
+n00501,East 38th Street,residential,0.03388507721225339,False,90
+n00502,East 39th Street,residential,0.05798142332595748,False,90
+n00503,East 39th Street,residential,0.029603113009969286,False,90
+n00504,East 39th Street,residential,0.020240092411389,False,90
+n00505,East 39th Street,residential,0.023416950239025843,False,90
+n00506,East 39th Street,residential,0.06312011318287328,False,90
+n00507,East 39th Street,residential,0.03295112995037911,False,90
+n00508,East 39th Street,residential,0.023360187658455395,False,90
+n00509,East 39th Street,residential,0.013591940174963547,False,90
+n00510,East 39th Street,residential,0.019892172387537793,False,90
+n00511,East 39th Street,residential,0.05138732936553812,False,90
+n00512,East 39th Street,residential,0.04035652334465906,False,90
+n00513,East 39th Street,residential,0.03681235576124992,False,90
+n00514,East 39th Street,residential,0.038983908920576606,False,90
+n00515,East 39th Street,residential,0.02533937411056595,False,90
+n00516,East 39th Street,residential,0.02624363478685368,False,90
+n00517,East 39th Street,residential,0.06053646176560757,False,90
+n00518,East 39th Street,residential,0.004433157395860826,False,90
+n00519,East 39th Street,residential,0.06159380857733762,False,90
+n00520,East 39th Street,residential,0.0023718288478719964,False,90
+n00521,East 39th Street,residential,0.014337833597919196,False,90
+n00522,East 39th Street,residential,0.04428130037105068,False,90
+n00523,East 39th Street,residential,0.0074005211551949526,False,90
+n00524,East 39th Street,residential,0.03938285371328018,False,90
+n00525,East 39th Street,residential,0.039155715538087145,False,90
+n00526,East 39th Street,residential,0.05607447575265247,False,90
+n00527,East 39th Street,residential,0.041210262748247205,False,90
+n00528,East 39th Street,residential,0.050947830405686775,False,90
+n00529,East 39th Street,residential,0.004560259284558993,False,90
+n00530,East 39th Street,residential,0.06892571810682117,False,90
+n00531,East 39th Street,residential,0.03638960318267994,False,90
+n00532,East 39th Street,residential,0.002491799666531404,False,90
+n00533,East 39th Street,residential,0.03619652623637512,False,90
+n00534,East 39th Street,residential,0.013081707760501724,False,90
+n00535,East 39th Street,residential,0.02677700422781034,False,90
+n00536,East 39th Street,residential,0.06684813367799905,False,90
+n00537,East 39th Street,residential,0.04278700750443776,False,90
+n00538,East 39th Street,residential,0.007593970195472733,False,90
+n00539,East 39th Street,residential,0.08531680337178296,False,90
+n00540,East 39th Street,residential,0.020322523039905994,False,90
+n00541,East 39th Street,residential,0.0077865009508798,False,90
+n00542,East 39th Street,residential,0.013841294594273537,False,90
+n00543,East 39th Street,residential,0.04004332718951098,False,90
+n00544,East 39th Street,residential,0.035325895437163135,False,90
+n00545,East 39th Street,residential,0.033876024341690875,False,90
+n00546,East 39th Street,residential,0.08241538758072298,False,90
+n00547,East 39th Street,residential,0.06902240016764956,False,90
+n00548,East 39th Street,primary,0.07671134853608697,False,90
+n00549,East 40th Street,residential,0.014729597380456781,False,90
+n00550,East 40th Street,residential,0.056848461956360626,False,90
+n00551,East 40th Street,residential,0.08257314528587835,False,90
+n00552,East 40th Street,residential,0.03187886519758843,False,90
+n00553,East 40th Street,residential,0.00579977494860927,False,90
+n00554,East 40th Street,residential,0.020456313247216047,False,90
+n00555,East 40th Street,residential,0.0468894013401076,False,90
+n00556,East 40th Street,residential,0.07349948816818885,False,90
+n00557,East 40th Street,residential,0.007187921829372601,False,90
+n00558,East 40th Street,residential,0.03152174836150831,False,90
+n00559,East 40th Street,residential,0.06872228720109287,False,90
+n00560,East 40th Street,residential,0.0032773813667881318,False,90
+n00561,East 40th Street,residential,0.06199025067071223,False,90
+n00562,East 40th Street,residential,0.012071482048138642,False,90
+n00563,East 40th Street,residential,0.03305387300115585,False,90
+n00564,East 40th Street,residential,0.038564420985195795,False,90
+n00565,East 40th Street,residential,0.015213652961231217,False,90
+n00566,East 40th Street,residential,0.05193551781493867,False,90
+n00567,East 40th Street,residential,0.014310870038877928,False,90
+n00568,East 40th Street,residential,0.05931488516132286,False,90
+n00569,East 40th Street,residential,0.006576779335879522,False,90
+n00570,East 40th Street,residential,0.06740288010104382,False,90
+n00571,East 40th Street,residential,0.0019349252922190633,False,90
+n00572,East 40th Street,residential,0.06699831506940784,False,90
+n00573,East 40th Street,residential,0.004035904647971748,False,90
+n00574,East 40th Street,residential,0.06992094064812972,False,90
+n00575,East 40th Street,residential,0.003249864044803403,False,90
+n00576,East 40th Street,residential,0.07611544779859941,False,90
+n00577,East 40th Street,residential,0.0005318744742698829,False,90
+n00578,East 40th Street,residential,0.05021873813958549,False,90
+n00579,East 40th Street,residential,0.042728853062379515,False,90
+n00580,East 40th Street,residential,0.07715804298910536,False,90
+n00581,East 40th Street,residential,0.03269020421126535,False,90
+n00582,East 40th Street,residential,0.0006285305999703435,False,90
+n00583,East 40th Street,residential,0.007600665529998475,False,90
+n00584,East 40th Street,residential,0.040853411744277215,False,90
+n00585,East 40th Street,residential,0.0030470430487379054,False,90
+n00586,East 40th Street,residential,0.008868150248554715,False,90
+n00587,East 40th Street,residential,0.02096002074105182,False,90
+n00588,East 40th Street,residential,0.04407434909937442,False,90
+n00589,East 40th Street,residential,0.003427111039600648,False,90
+n00590,East 40th Street,residential,0.03258997537145511,False,90
+n00591,East 40th Street,residential,0.012382206038717128,False,90
+n00592,East 40th Street,residential,0.057531105680216306,False,90
+n00593,East 40th Street,residential,0.04102318749356877,False,90
+n00594,East 40th Street,residential,0.0003567185794703821,False,90
+n00595,East 41st Street,residential,0.024271050881294057,False,90
+n00596,East 41st Street,residential,0.06615800285186905,False,90
+n00597,East 41st Street,residential,0.028646268094621032,False,90
+n00598,East 41st Street,residential,0.009042476119501007,False,90
+n00599,East 41st Street,residential,0.013781481907437141,False,90
+n00600,East 41st Street,residential,0.03617977996427511,False,90
+n00601,East 41st Street,residential,0.05343733642036012,False,90
+n00602,East 41st Street,residential,0.003122240692080041,False,90
+n00603,East 41st Street,residential,0.06834589662615584,False,90
+n00604,East 41st Street,residential,0.06385977862795701,False,90
+n00605,East 41st Street,residential,0.03226520957575481,False,90
+n00606,East 41st Street,residential,0.04777890937557517,False,90
+n00607,East 41st Street,residential,0.01298618028104912,False,90
+n00608,East 41st Street,residential,0.07387828535497315,False,90
+n00609,East 41st Street,residential,0.0816674446102261,False,90
+n00610,East 41st Street,residential,0.00903056151830143,False,90
+n00611,East 41st Street,residential,0.03479647822103253,False,90
+n00612,East 41st Street,residential,9.564885068752941e-05,False,90
+n00613,East 41st Street,residential,0.040876771508947606,False,90
+n00614,East 41st Street,residential,0.05794608196585492,False,90
+n00615,East 41st Street,residential,0.016811139800131932,False,90
+n00616,East 41st Street,residential,0.0834485581298578,False,90
+n00617,East 41st Street,residential,0.05846236373910029,False,90
+n00618,East 41st Street,residential,0.08697760949290068,False,90
+n00619,East 41st Street,residential,0.020028068955734103,False,90
+n00620,East 41st Street,residential,0.037984392818713734,False,90
+n00621,East 41st Street,residential,0.03832170998872681,False,90
+n00622,East 41st Street,residential,0.0248807513872093,False,90
+n00623,East 41st Street,residential,0.06924577695223887,False,90
+n00624,East 41st Street,residential,0.003408298363251247,False,90
+n00625,East 41st Street,residential,0.03662066392052705,False,90
+n00626,East 41st Street,residential,0.01432660830238966,False,90
+n00627,East 41st Street,residential,0.01562559496887793,False,90
+n00628,East 41st Street,residential,0.04187632703792396,False,90
+n00629,East 41st Street,residential,0.05132276477565873,False,90
+n00630,East 41st Street,residential,0.040907087653042615,False,90
+n00631,East 41st Street,residential,0.0315000026038423,False,90
+n00632,East 41st Street,residential,0.003350435841467528,False,90
+n00633,East 41st Street,residential,0.024621516797870172,False,90
+n00634,East 41st Street,residential,0.052415857040965734,False,90
+n00635,East 41st Street,residential,0.059271244788509474,False,90
+n00636,East 41st Street,residential,0.03147355191419692,False,90
+n00637,East 41st Street,residential,0.003853476104753877,False,90
+n00638,East 41st Street,residential,0.005985148021903151,False,90
+n00639,East 41st Street,residential,0.06284432738000574,False,90
+n00640,East 41st Street,unclassified,0.01755147157986188,False,90
+n00641,East 42nd Street,primary,0.017734224882866325,False,90
+n00642,East 42nd Street,primary,0.05128156707225136,False,90
+n00643,East 42nd Street,primary,0.05821461924570024,False,90
+n00644,East 42nd Street,primary,0.024175775529903316,False,90
+n00645,East 42nd Street,primary,0.016916087979398517,False,90
+n00646,East 42nd Street,primary,0.04745116495378815,False,90
+n00647,East 42nd Street,primary,0.08548725069060707,False,90
+n00648,East 42nd Street,primary,0.05935994039780421,False,90
+n00649,East 42nd Street,primary,0.04956626365647041,False,90
+n00650,East 42nd Street,primary,0.05707401993522469,False,90
+n00651,East 42nd Street,primary,0.08547996621774183,False,90
+n00652,East 42nd Street,primary,0.023571917110770817,False,90
+n00653,East 42nd Street,primary,0.04370260649633811,False,90
+n00654,East 42nd Street,primary,0.01785079026114605,False,90
+n00655,East 42nd Street,primary,0.010108240099326536,False,90
+n00656,East 42nd Street,primary,0.04867232148332408,False,90
+n00657,East 42nd Street,primary,0.01412968033342449,False,90
+n00658,East 42nd Street,primary,0.013338401793754714,False,90
+n00659,East 42nd Street,primary,0.0362108052004588,False,90
+n00660,East 42nd Street,primary,0.05925988116100988,False,90
+n00661,East 42nd Street,primary,0.05734069215739866,False,90
+n00662,East 42nd Street,primary,0.0339378469718811,False,90
+n00663,East 42nd Street,primary,0.04852325386541746,False,90
+n00664,East 42nd Street,primary,0.02483281800434144,False,90
+n00665,East 42nd Street,primary,0.01985185057989328,False,90
+n00666,East 42nd Street,primary,0.003908995269554819,False,90
+n00667,East 42nd Street,primary,0.02738021016776609,False,90
+n00668,East 42nd Street,primary,0.05394986498975485,False,90
+n00669,East 42nd Street,primary,0.06125293964257619,False,90
+n00670,East 42nd Street,primary,0.054780203602599845,False,90
+n00671,East 42nd Street,primary,0.007402973104537905,False,90
+n00672,East 42nd Street,primary,0.06535241279340095,False,90
+n00673,East 42nd Street,primary,0.017496741529135554,False,90
+n00674,East 42nd Street,primary,0.05241544471226986,False,90
+n00675,East 42nd Street,primary,0.04574866417978444,False,90
+n00676,East 42nd Street,primary,0.038175977008771955,False,90
+n00677,East 42nd Street,primary,0.014126026196004896,False,90
+n00678,East 42nd Street,primary,0.043351504651477135,False,90
+n00679,East 42nd Street,primary,0.031166508854369453,False,90
+n00680,East 42nd Street,primary,0.03420688205912918,False,90
+n00681,East 42nd Street,primary,0.03995643384218033,False,90
+n00682,East 42nd Street,primary,0.025770830544649466,False,90
+n00683,East 42nd Street,primary,0.048037787123274896,False,90
+n00684,East 42nd Street,primary,0.0217845262754424,False,90
+n00685,East 42nd Street,primary,0.038070339748098106,False,90
+n00686,East 42nd Street,primary,0.04192709703727955,False,90
+n00687,East 42nd Street,primary,0.08726572042083001,False,90
+n00688,East 42nd Street,primary,0.03148110841002797,False,90
+n00689,Lexington Avenue,secondary,0.021416329726234834,False,90
+n00690,Lexington Avenue,secondary,0.024270181795148383,False,90
+n00691,Lexington Avenue,secondary,0.01747294683756893,False,90
+n00692,Lexington Avenue,secondary,0.0009205450802561486,False,90
+n00693,Lexington Avenue,secondary,0.07639399179865694,False,90
+n00694,Lexington Avenue,secondary,0.07726909783879285,False,90
+n00695,Lexington Avenue,secondary,0.011367357734455004,False,90
+n00696,Lexington Avenue,secondary,0.0017849994641698445,False,90
+n00697,Lexington Avenue,secondary,0.02047358011364205,False,90
+n00698,Lexington Avenue,secondary,0.0070919393669290395,False,90
+n00699,Lexington Avenue,secondary,0.02217932142669681,False,90
+n00700,Lexington Avenue,secondary,0.046049073277225204,False,90
+n00701,Lexington Avenue,secondary,0.007590486624128866,False,90
+n00702,Lexington Avenue,secondary,0.007254298752714606,False,90
+n00703,Lexington Avenue,secondary,0.02874054907830593,False,90
+n00704,Lexington Avenue,secondary,0.027214729065503547,False,90
+n00705,Lexington Avenue,secondary,0.04547188616024888,False,90
+n00706,Lexington Avenue,secondary,0.004733017001334044,False,90
+n00707,Lexington Avenue,secondary,0.008307354890347072,False,90
+n00708,Lexington Avenue,secondary,0.007634747218400345,False,90
+n00709,Lexington Avenue,secondary,0.016078498695837575,False,90
+n00710,Lexington Avenue,secondary,0.01400081083114151,False,90
+n00711,Lexington Avenue,secondary,0.0066004668284901525,False,90
+n00712,Lexington Avenue,secondary,0.0007281199391201193,False,90
+n00713,Lexington Avenue,secondary,0.013733884348040404,False,90
+n00714,Lexington Avenue,secondary,0.002196245474013863,False,90
+n00715,Lexington Avenue,secondary,0.019249389218350156,False,90
+n00716,Lexington Avenue,secondary,0.06537635832440328,False,90
+n00717,Lexington Avenue,residential,0.002720438572316933,False,90
+n00718,Lexington Avenue,secondary,0.05595049444866558,False,90
+n00719,Lexington Avenue,secondary,0.07965871726800426,False,90
+n00720,Lexington Avenue,secondary,0.0024775414363979622,False,90
+n00721,Lexington Avenue,secondary,0.04219247911143664,False,90
+n00722,Lexington Avenue,secondary,0.05803718800786137,False,90
+n00723,Madison Avenue,secondary,0.04492795750819703,False,90
+n00724,Madison Avenue,secondary,0.025053680644314087,False,90
+n00725,Madison Avenue,secondary,0.008477994528947102,False,90
+n00726,Madison Avenue,secondary,0.029554037995529775,False,90
+n00727,Madison Avenue,secondary,0.010605710547482569,False,90
+n00728,Madison Avenue,secondary,0.02112145198782701,False,90
+n00729,Madison Avenue,secondary,0.030384835518242757,False,90
+n00730,Madison Avenue,secondary,0.00512666616930542,False,90
+n00731,Madison Avenue,secondary,0.05760442939497225,False,90
+n00732,Madison Avenue,secondary,0.056006447928124876,False,90
+n00733,Madison Avenue,secondary,0.061849377809773565,False,90
+n00734,Madison Avenue,secondary,0.06883971676415812,False,90
+n00735,Madison Avenue,secondary,0.07575752540103071,False,90
+n00736,Madison Avenue,secondary,0.05934245517993269,False,90
+n00737,Madison Avenue,secondary,0.002976989492930228,False,90
+n00738,Madison Avenue,secondary,0.01173657977903471,False,90
+n00739,Madison Avenue,secondary,0.015299016307661081,False,90
+n00740,Madison Avenue,secondary,0.07558979358005419,False,90
+n00741,Madison Avenue,secondary,0.030016537050538757,False,90
+n00742,Madison Avenue,secondary,0.015486730103119628,False,90
+n00743,Madison Avenue,secondary,0.01522671482336809,False,90
+n00744,Madison Avenue,secondary,0.03269723680109637,False,90
+n00745,Madison Avenue,secondary,0.01875967616489667,False,90
+n00746,Madison Avenue,secondary,0.036521635663057876,False,90
+n00747,Madison Avenue,secondary,0.012076881607836114,False,90
+n00748,Madison Avenue,secondary,0.011767418373458911,False,90
+n00749,Madison Avenue,secondary,0.011725181197615472,False,90
+n00750,Madison Avenue,secondary,0.045679692559030746,False,90
+n00751,Madison Avenue,secondary,0.018867506239566855,False,90
+n00752,Madison Avenue,secondary,0.00549164078657141,False,90
+n00753,Madison Avenue,secondary,0.025420029170364046,False,90
+n00754,Madison Avenue,secondary,0.01692892274606766,False,90
+n00755,Madison Avenue,secondary,0.04938792700807014,False,90
+n00756,Madison Avenue,secondary,0.0724989415100068,False,90
+n00757,Tudor City Place,residential,0.053761689364260026,False,90
+n00758,Tudor City Place,residential,0.055144470043271346,False,90
+n00759,Tudor City Place,residential,0.06483827160281813,False,90
+n00760,Tudor City Place,residential,0.0014310671232543356,False,90
+n00761,Tudor City Place,residential,0.04444065362257127,False,90
+n00762,Tudor City Place,residential,0.023660368021043165,False,90
+n00763,Tudor City Place,residential,0.03907706117098967,False,90
+n00764,Tudor City Place,residential,0.004723460117465694,False,90
+n00765,Tudor City Place,residential,0.004909511974297176,False,90
