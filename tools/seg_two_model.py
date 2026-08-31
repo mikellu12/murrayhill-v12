@@ -43,6 +43,7 @@ import pandas as pd
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 from common import PROC, banner
+from mast import mast_mask
 
 MODELS = {
     "map": "facebook/mask2former-swin-large-mapillary-vistas-semantic",
@@ -57,8 +58,20 @@ def main():
     ap.add_argument("--checkpoint", type=int, default=200)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--fp16", action="store_true", default=True)
+    ap.add_argument("--no-mast-mask", action="store_true",
+                    help="count every pixel, including Google's camera mast")
+    ap.add_argument("--mast-set", default=None,
+                    help="mast calibration to use; defaults to the source "
+                         "folder name, which is what names the calibration")
     args = ap.parse_args()
     banner("two-model segmentation: Mapillary Vistas + ADE20K")
+    # The mast's share of the frame scales with the field of view, so the
+    # calibration is per imagery set and the source folder names it. Guessing
+    # would silently apply svi_90's single 14%-wide mast to an svi_180 frame
+    # that has two at 7%.
+    mset = args.mast_set or args.src.name
+    if not args.no_mast_mask:
+        print(f"mast calibration: {mset}")
 
     imgs = sorted(args.src.rglob("*.jpg"))
     rel = [str(p.relative_to(args.src)).replace("\\", "/") for p in imgs]
@@ -99,7 +112,11 @@ def main():
     t0 = time.time()
     for img, r in tqdm(pairs, desc="images", mininterval=30.0):
         im = Image.open(img).convert("RGB")
-        rec = {"file": r}
+        # The mast is excluded from the DENOMINATOR as well as the numerator:
+        # it is not part of the street, so a share should be of the street.
+        keep = ~mast_mask(im, mset) if not args.no_mast_mask else None
+        rec = {"file": r, "mast_share": 0.0 if keep is None
+               else float(1.0 - keep.mean())}
         for tag, (proc, net, lab) in nets.items():
             inp = proc(images=im, return_tensors="pt").to("cuda")
             if args.fp16:
@@ -108,8 +125,9 @@ def main():
                 o = net(**inp)
             seg = proc.post_process_semantic_segmentation(
                 o, target_sizes=[im.size[::-1]])[0].cpu().numpy()
-            n = seg.size
-            ids, cnt = np.unique(seg, return_counts=True)
+            sel = seg if keep is None else seg[keep]
+            n = sel.size
+            ids, cnt = np.unique(sel, return_counts=True)
             # every class gets a column, present or not: a zero share and an
             # absent column are different facts, and the four-model run's five
             # dead classes were only visible because they were written as zeros
