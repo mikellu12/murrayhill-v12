@@ -125,3 +125,11 @@ picks.txt
 # test of whether resolution explains the 90/180 share gap.
 data/raw/svi_180_old/
 data/raw/svi_180_hi/
+
+# Claude Code's own working notes. Local to the machine and never committed:
+# the copy that used to live here documented the v11 GVI/VEI study, went stale
+# as the work moved to the SIM pipeline, and was then read back as if it were
+# the method -- its capture-date note was used to justify discarding three
+# quarters of the London frame. Removed from every branch in 449ed00 and
+# adeb9ad. README.md and the module docstrings are the committed documentation.
+CLAUDE.md
