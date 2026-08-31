@@ -1,213 +1,199 @@
-THE COMPLETE VLM INPUT
-==========================================================================
+==============================================================================
+THE TEN FIELD PROMPTS, EXACTLY AS SENT
+==============================================================================
 
-One call per field per image. The image below is inserted at the
-<|image_pad|> slot. The assistant turn is PREFIXED, not generated:
-generation never runs, the distribution over the next token is read.
+Generated from src/sim_fields.py and src/sim_scale.py.
+One call per field per image. Nothing is cropped; the model sees the whole
+90-degree half-view.
 
-==========================================================================
-vertical_greenery    [manuscript term: V_nat]
-measured twin: vegetation share over the arc
-==========================================================================
-<|im_start|>system
+------------------------------------------------------------------------------
+SYSTEM TURN -- identical for all ten fields
+------------------------------------------------------------------------------
+
 You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"vertical_greenery": <1-7>}, using this scale:
 
-1 = no canopy, green facade or hedge wall anywhere in view
-2 = one or two bare or sparse trees and nothing else
-3 = scattered canopy over part of the frontage
-4 = canopy or green facade along about half the frontage
-5 = near-continuous canopy along the frontage
-6 = dense canopy overhead plus green facade or hedge wall
-7 = canopy and green facade filling the view
-<|im_end|>
-<|im_start|>assistant
-{"vertical_greenery": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
+------------------------------------------------------------------------------
+ASSISTANT PREFIX -- forced, so the next token must be the digit
+------------------------------------------------------------------------------
 
-==========================================================================
-vertical_hardscape    [manuscript term: V_built]
-measured twin: building share over the arc
-==========================================================================
-<|im_start|>system
-You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"vertical_hardscape": <1-7>}, using this scale:
+  {"<field>": 
 
-1 = almost no built surface in view
-2 = a low building or a gap, most of the view open
-3 = a modest frontage occupying part of the view
-4 = a frontage filling about half the view
-5 = a tall frontage filling most of the view
-6 = a tall unbroken wall across nearly the whole view
-7 = building wall, glazing and columns filling the view
-<|im_end|>
-<|im_start|>assistant
-{"vertical_hardscape": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
+The reply is never generated. The distribution over the seven tokens '1'
+through '7' is read at that one position and kept in full, so every answer
+carries its uncertainty rather than a single sampled digit.
 
-==========================================================================
-green_eye_level    [manuscript term: GVI_eye]
-measured twin: vegetation below the horizon
-==========================================================================
-<|im_start|>system
-You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"green_eye_level": <1-7>}, using this scale:
 
-1 = no greenery at or below a standing person's eye
-2 = a trace of greenery at eye height, easily missed
-3 = a little greenery at eye height, here and there
-4 = greenery at eye height along about half the frontage
-5 = greenery at eye height along most of the frontage
-6 = greenery at eye height along nearly all of it
-7 = greenery at eye height along the whole frontage, in layers
-<|im_end|>
-<|im_start|>assistant
-{"green_eye_level": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
+==============================================================================
+1. vertical_greenery                              manuscript term: V_nat
+==============================================================================
 
-==========================================================================
-sky_openness    [manuscript term: SVF]
-measured twin: SVF_band or theoretical_svf(H/W)
-==========================================================================
-<|im_start|>system
-You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"sky_openness": <1-7>}, using this scale:
+USER TURN:
 
-1 = almost no sky visible
-2 = only a narrow strip of sky
-3 = a small amount of sky above
-4 = a moderate amount of sky
-5 = a good deal of sky
-6 = sky across most of the view
-7 = wide open sky across the whole view
-<|im_end|>
-<|im_start|>assistant
-{"sky_openness": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
+  Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"vertical_greenery": <1-7>}, using this scale:
 
-==========================================================================
-walkable_ground    [manuscript term: V_pave]
-measured twin: sidewalk share over the arc
-==========================================================================
-<|im_start|>system
-You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"walkable_ground": <1-7>}, using this scale:
+  1 = no canopy, green facade or hedge wall anywhere in view
+  2 = one or two bare or sparse trees and nothing else
+  3 = scattered canopy over part of the frontage
+  4 = canopy or green facade along about half the frontage
+  5 = near-continuous canopy along the frontage
+  6 = dense canopy overhead plus green facade or hedge wall
+  7 = canopy and green facade filling the view
 
-1 = the sidewalk is very narrow or missing on this side
-2 = a narrow sidewalk, about one person wide
-3 = a standard narrow sidewalk, partly obstructed
-4 = a standard sidewalk with room for two abreast
-5 = a wide sidewalk with clear passing room
-6 = a very wide sidewalk or a paved forecourt
-7 = the ground in view is almost entirely sidewalk and paving
-<|im_end|>
-<|im_start|>assistant
-{"walkable_ground": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
 
-==========================================================================
-green_softening    [manuscript term: GMI]
-measured twin: NONE -- nothing validates this field
-==========================================================================
-<|im_start|>system
-You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"green_softening": <1-7>}, using this scale:
+==============================================================================
+2. vertical_hardscape                             manuscript term: V_built
+==============================================================================
 
-1 = greenery does nothing to relieve the enclosure
-2 = a token amount of greenery against a hard frontage
-3 = some greenery, but the enclosure still dominates
-4 = greenery and hard surface roughly in balance
-5 = greenery noticeably softens the walls
-6 = greenery covers much of the hard edge
-7 = greenery substantially relieves the enclosure
-<|im_end|>
-<|im_start|>assistant
-{"green_softening": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
+USER TURN:
 
-==========================================================================
-signage_detail    [manuscript term: V_sign]
-measured twin: NONE -- nothing validates this field
-==========================================================================
-<|im_start|>system
-You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"signage_detail": <1-7>}, using this scale:
+  Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"vertical_hardscape": <1-7>}, using this scale:
 
-1 = blank, no signage, cornices, mouldings or lettering
-2 = a single sign or a plain entrance
-3 = occasional signage on an otherwise plain frontage
-4 = signage and architectural detail along about half the frontage
-5 = frequent signage, cornices or mouldings
-6 = dense signage and articulated facade detail
-7 = dense signage, cornices and shopfront lettering throughout
-<|im_end|>
-<|im_start|>assistant
-{"signage_detail": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
+  1 = almost no built surface in view
+  2 = a low building or a gap, most of the view open
+  3 = a modest frontage occupying part of the view
+  4 = a frontage filling about half the view
+  5 = a tall frontage filling most of the view
+  6 = a tall unbroken wall across nearly the whole view
+  7 = building wall, glazing and columns filling the view
 
-==========================================================================
-facade_variation    [manuscript term: SFV]
-measured twin: NONE -- nothing validates this field
-==========================================================================
-<|im_start|>system
-You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"facade_variation": <1-7>}, using this scale:
 
-1 = a single unbroken building face, one material, one window pattern
-2 = one building face with a slight change of material
-3 = two building faces, similar in material and rhythm
-4 = three or four distinct faces along the frontage
-5 = frequent changes of material, window pattern or entrance
-6 = many different faces, each clearly its own building
-7 = many different building faces, materials, window patterns and entrances
-<|im_end|>
-<|im_start|>assistant
-{"facade_variation": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
+==============================================================================
+3. green_eye_level                                manuscript term: GVI_eye
+==============================================================================
 
-==========================================================================
-ground_floor_activity    [manuscript term: GFAPI]
-measured twin: NONE -- nothing validates this field
-==========================================================================
-<|im_start|>system
-You are an expert urban morphologist evaluating streetscape quality at eye-level (1.5m).
-<|im_end|>
-<|im_start|>user
-<|vision_start|><|image_pad|><|vision_end|>Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"ground_floor_activity": <1-7>}, using this scale:
+USER TURN:
 
-1 = continuous blank wall at street level
-2 = blank wall with a single doorway
-3 = mostly blank with occasional windows or entrances
-4 = about half glazed shopfront, half blank wall
-5 = mostly active glazed frontage
-6 = continuous shopfronts with entrances and displays
-7 = continuous active glazed shopfronts at street level
-<|im_end|>
-<|im_start|>assistant
-{"ground_floor_activity": 
-     ^ STOPS HERE. next-token distribution over '1'..'7' is read,
-       giving *_ev (expected value), *_argmax, and *_p1.._p7.
+  Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"green_eye_level": <1-7>}, using this scale:
+
+  1 = no greenery at or below a standing person's eye
+  2 = a trace of greenery at eye height, easily missed
+  3 = a little greenery at eye height, here and there
+  4 = greenery at eye height along about half the frontage
+  5 = greenery at eye height along most of the frontage
+  6 = greenery at eye height along nearly all of it
+  7 = greenery at eye height along the whole frontage, in layers
+
+
+==============================================================================
+4. sky_openness                                   manuscript term: SVF
+==============================================================================
+
+USER TURN:
+
+  Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"sky_openness": <1-7>}, using this scale:
+
+  1 = almost no sky visible
+  2 = only a narrow strip of sky
+  3 = a small amount of sky above
+  4 = a moderate amount of sky
+  5 = a good deal of sky
+  6 = sky across most of the view
+  7 = wide open sky across the whole view
+
+
+==============================================================================
+5. walkable_ground                                manuscript term: V_pave
+==============================================================================
+
+  [definition carried in the system turn -- what COUNTS, kept out of
+   the rungs, which say how much]
+
+USER TURN:
+
+  Rate this Manhattan street view. Clear sidewalk means the continuous unobstructed paving a pedestrian can walk on. Scaffolding, bins, parked vehicles and construction reduce it. Reply with ONE JSON object and nothing else: {"walkable_ground": <1-7>}, using this scale:
+
+  1 = no usable sidewalk on this side
+  2 = a trace of clear sidewalk, blocked almost throughout
+  3 = clear sidewalk along a small part of the frontage
+  4 = clear sidewalk along about half the frontage
+  5 = clear sidewalk along most of the frontage
+  6 = clear sidewalk along nearly all of the frontage
+  7 = clear sidewalk along the whole frontage
+
+
+==============================================================================
+6. green_softening                                manuscript term: GMI
+==============================================================================
+
+USER TURN:
+
+  Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"green_softening": <1-7>}, using this scale:
+
+  1 = the building surface is bare, no greenery in front of it
+  2 = a trace of greenery in front of the building surface
+  3 = greenery in front of a small part of the building surface
+  4 = greenery in front of about half the building surface
+  5 = greenery in front of most of the building surface
+  6 = greenery in front of nearly all the building surface
+  7 = greenery hides the building surface almost completely
+
+
+==============================================================================
+7. signage_detail                                 manuscript term: V_sign
+==============================================================================
+
+USER TURN:
+
+  Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"signage_detail": <1-7>}, using this scale:
+
+  1 = blank, no signage, cornices, mouldings or lettering
+  2 = a single sign or a plain entrance
+  3 = occasional signage on an otherwise plain frontage
+  4 = signage and architectural detail along about half the frontage
+  5 = frequent signage, cornices or mouldings
+  6 = dense signage and articulated facade detail
+  7 = dense signage, cornices and shopfront lettering throughout
+
+
+==============================================================================
+8. facade_variation                               manuscript term: SFV
+==============================================================================
+
+USER TURN:
+
+  Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"facade_variation": <1-7>}, using this scale:
+
+  1 = a single unbroken building face, one material, one window pattern
+  2 = one building face with a slight change of material
+  3 = two building faces, similar in material and rhythm
+  4 = three or four distinct faces along the frontage
+  5 = frequent changes of material, window pattern or entrance
+  6 = many different faces, each clearly its own building
+  7 = many different building faces, materials, window patterns and entrances
+
+
+==============================================================================
+9. ground_floor_activity                          manuscript term: GFAPI
+==============================================================================
+
+USER TURN:
+
+  Rate this Manhattan street view. Reply with ONE JSON object and nothing else: {"ground_floor_activity": <1-7>}, using this scale:
+
+  1 = continuous blank wall at street level
+  2 = blank wall with a single doorway
+  3 = mostly blank with occasional windows or entrances
+  4 = about half glazed shopfront, half blank wall
+  5 = mostly active glazed frontage
+  6 = continuous shopfronts with entrances and displays
+  7 = continuous active glazed shopfronts at street level
+
+
+==============================================================================
+10. resting_affordance                            manuscript term: IAS
+==============================================================================
+
+  [definition carried in the system turn -- what COUNTS, kept out of
+   the rungs, which say how much]
+
+USER TURN:
+
+  Rate this Manhattan street view. Places to sit means masonry stoops 0.9-1.5 m high, ledges or planter rims 0.4-0.6 m high and at least 0.3 m deep, low walls, or benches. Elements blocked by spikes or railings do not count. Reply with ONE JSON object and nothing else: {"resting_affordance": <1-7>}, using this scale:
+
+  1 = nothing to sit or lean on anywhere in view
+  2 = a trace: one perchable ledge or step, nothing more
+  3 = places to sit along a small part of the frontage
+  4 = places to sit along about half the frontage
+  5 = places to sit along most of the frontage
+  6 = places to sit along nearly all of the frontage
+  7 = continuous places to sit along the whole frontage
