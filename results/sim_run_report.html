@@ -1,0 +1,399 @@
+<title>SIM Run Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#EFF2EF; --panel:#E5EAE6; --code-bg:#E8EDE9;
+  --ink:#151F1B; --muted:#63736C; --rule:#CFD8D2;
+  --accent:#1C5A49; --accent-soft:#DAE7E0; --flag:#9A4A31;
+  --flag-soft:#F0DED6; --ok:#1C5A49;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1411; --panel:#161F1A; --code-bg:#121A16;
+    --ink:#DCE4DF; --muted:#8B9A93; --rule:#253029;
+    --accent:#5CBB9E; --accent-soft:#16281F; --flag:#D9906E;
+    --flag-soft:#2C1D17; --ok:#5CBB9E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1411; --panel:#161F1A; --code-bg:#121A16;
+  --ink:#DCE4DF; --muted:#8B9A93; --rule:#253029;
+  --accent:#5CBB9E; --accent-soft:#16281F; --flag:#D9906E;
+  --flag-soft:#2C1D17; --ok:#5CBB9E;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 96px;}
+.mast{padding:56px 0 26px;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:14px;}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+h1{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;
+  font-size:clamp(2rem,6vw,3rem);line-height:1.04;letter-spacing:-.025em;
+  margin:0;text-wrap:balance;}
+.standfirst{max-width:64ch;color:var(--muted);font-size:1.05rem;margin:0;}
+.standfirst strong{color:var(--ink);font-weight:600;}
+section{padding-top:52px;display:flex;flex-direction:column;gap:16px;}
+h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:clamp(1.3rem,4vw,1.65rem);font-weight:700;letter-spacing:-.02em;
+  margin:0;text-wrap:balance;}
+p.lede{max-width:66ch;margin:0;}
+code,.mono{font-family:"JetBrains Mono",monospace;font-size:.85em;}
+
+.formula{
+  border:1px solid var(--rule);border-radius:3px;background:var(--code-bg);
+  padding:20px 22px;overflow-x:auto;
+  font-family:"JetBrains Mono",monospace;font-size:13px;line-height:2.1;
+}
+.formula .lhs{color:var(--accent);font-weight:700;}
+.formula .w{color:var(--flag);}
+.formula .note{color:var(--muted);font-style:normal;font-size:11.5px;}
+
+.dimgrid{display:grid;gap:14px;grid-template-columns:1fr;}
+@media (min-width:820px){.dimgrid{grid-template-columns:repeat(3,1fr);}}
+.dimcard{
+  border:1px solid var(--rule);border-radius:3px;background:var(--panel);
+  display:flex;flex-direction:column;
+}
+.dimcard header{
+  padding:11px 14px;border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+}
+.dimcard h3{
+  margin:0;font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:1.02rem;font-weight:700;letter-spacing:-.01em;
+}
+.dimcard .dw{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);}
+.term{padding:11px 14px;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:3px;}
+.term:last-child{border-bottom:0;}
+.term .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+.term .name{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;
+  color:var(--accent);}
+.term .tw{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+  font-variant-numeric:tabular-nums;}
+.term .src{font-size:.88rem;color:var(--muted);}
+.term .src b{color:var(--ink);font-weight:600;font-family:"JetBrains Mono",monospace;
+  font-size:.92em;}
+.twice{color:var(--flag);font-weight:600;}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;}
+table{border-collapse:collapse;width:100%;min-width:720px;background:var(--panel);}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--rule);
+  vertical-align:middle;}
+thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--code-bg);}
+tbody tr:last-child td{border-bottom:0;}
+td.f{font-family:"JetBrains Mono",monospace;font-size:12.5px;white-space:nowrap;
+  font-weight:500;}
+td.n{font-family:"JetBrains Mono",monospace;font-size:12px;
+  font-variant-numeric:tabular-nums;white-space:nowrap;}
+.bar{display:flex;align-items:center;gap:8px;min-width:190px;}
+.bar .track{flex:1 1 auto;height:9px;background:var(--code-bg);border-radius:1px;
+  overflow:hidden;}
+.bar .fill{height:100%;background:var(--accent);}
+.bar .fill.big{background:var(--flag);}
+.bar .pct{font-family:"JetBrains Mono",monospace;font-size:11.5px;
+  font-variant-numeric:tabular-nums;color:var(--muted);width:44px;text-align:right;}
+.pill{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;
+  letter-spacing:.07em;text-transform:uppercase;border:1px solid currentColor;
+  border-radius:2px;padding:2px 7px;white-space:nowrap;}
+.pill.ok{color:var(--ok);}
+.pill.no{color:var(--flag);}
+tr.warn td{background:var(--flag-soft);}
+
+.pill.meas{color:var(--accent);background:var(--accent-soft);}
+.pill.vlm{color:var(--flag);}
+.pill.open{color:var(--flag);background:var(--flag-soft);}
+.formula .dim{color:var(--accent);font-weight:700;}
+.formula .fn{color:var(--flag);}
+.sig{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+  border:1px solid var(--rule);border-radius:2px;padding:2px 7px;white-space:nowrap;}
+.dimcard header .sig{margin-left:auto;}
+.rec{border-left:2px solid var(--accent);background:var(--accent-soft);
+  padding:12px 16px;max-width:70ch;font-size:.97rem;}
+.rec strong{color:var(--ink);}
+tr.pick td{background:var(--accent-soft);}
+td.def{font-size:.9rem;color:var(--muted);min-width:20ch;}
+
+math{font-family:"Source Serif 4",Georgia,serif;font-size:1.18rem;}
+math mi,math mn{font-style:italic;}
+math mi.up,math mn{font-style:normal;}
+.eqblock{
+  border:1px solid var(--rule);border-radius:3px;background:var(--code-bg);
+  padding:24px 26px;display:flex;flex-direction:column;gap:20px;overflow-x:auto;
+}
+.eqrow{display:flex;flex-direction:column;gap:5px;min-width:max-content;}
+.eqrow math{margin:0;}
+.eqnote{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+  letter-spacing:.02em;
+}
+.eqrule{border:0;border-top:1px solid var(--rule);margin:2px 0;width:100%;}
+.consts{
+  display:grid;gap:6px 26px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);
+}
+.consts b{color:var(--ink);font-weight:700;}
+.work{
+  display:flex;flex-direction:column;gap:2px;margin-top:4px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;
+  color:var(--accent);font-variant-numeric:tabular-nums;white-space:pre;
+}
+.work span:last-child{color:var(--ink);font-weight:700;}
+.eqcap{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+  border-bottom:1px solid var(--rule);padding-bottom:12px;
+}
+ul.plain{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;
+  gap:8px;max-width:68ch;}
+ul.plain li{padding-left:20px;position:relative;font-size:.98rem;color:var(--muted);}
+ul.plain li::before{content:"—";position:absolute;left:0;color:var(--flag);}
+ul.plain li strong{color:var(--ink);font-weight:600;}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--muted);font-size:.92rem;max-width:68ch;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="eyebrow">murrayhill-v12 &middot; 2,724 half-views &middot; 24,516 model calls</div>
+    <h1>SIM Run Results</h1>
+    <p class="standfirst">Qwen2-VL-7B rated nine fields on every 90&deg; half-view of
+      Murray Hill, one field per call, batched nine to a generate(). 3.7 hours on an
+      RTX 3080 Ti in 4-bit. Zero unparsable answers.</p>
+  </header>
+
+  <section>
+    <h2>The equation</h2>
+    <p class="lede">Section 2.7 of the manuscript. Multiplicative, not additive
+      &mdash; if any dimension goes to zero the whole score collapses, which a
+      weighted sum cannot express. The exponents are elasticities and sum to 1;
+      they are not mixing weights.</p>
+<div class='eqblock'><div class='eqcap'>worked on <b>east_41st_street/west_to_east/11_n00605_E_L.jpg</b> &mdash; the median-scoring half-view. ratings: greenery 1, hardscape 6, eye-level 1, sky 3, walkable 3, softening 1, signage 5, facade 7, ground floor 5</div><div class='eqrow'><math display='block'><mi>M</mi><mo>=</mo><msup><mi>I</mi><mi>a</mi></msup><mo>&#8290;</mo><msup><mi>Y</mi><mi>b</mi></msup><mo>&#8290;</mo><msup><mi>D</mi><mi>c</mi></msup><mo>&#8290;</mo><mi>&#937;</mi></math><span class='eqnote'>the score &mdash; multiplicative, so any dimension at zero collapses it</span><div class='work'><span>= 0.138^0.30 &#215; 0.778^0.10 &#215; 1.000^0.60 &#215; 0.839</span><span>= 0.553 &#215; 0.975 &#215; 1.000 &#215; 0.839</span><span>= 0.452</span></div></div><hr class='eqrule'><div class='eqrow'><math display='block'><msub><mi>I</mi><mi class='up'>raw</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><mfrac><msub><mi>V</mi><mi class='up'>nat</mi></msub><msub><mi>V</mi><mi class='up'>built</mi></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><msub><mi>GVI</mi><mi class='up'>eye</mi></msub><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><mi class='up'>GMI</mi></math><span class='eqnote'>the three Imageability terms, equally weighted</span><div class='work'><span>= &#8531;(1 / (1 + 6)) + &#8531;(0.000) + &#8531;(0.000)</span><span>= &#8531;(0.143) + &#8531;(0.000) + &#8531;(0.000)</span><span>= 0.048</span></div></div><div class='eqrow'><math display='block'><mi>I</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi class='up'>e</mi><mrow><mo>&#8722;</mo><msub><mi>&#954;</mi><mi class='up'>I</mi></msub><mo>&#8289;</mo><mo fence='true'>(</mo><msub><mi>I</mi><mi class='up'>raw</mi></msub><mo>&#8722;</mo><msub><mi>&#964;</mi><mi class='up'>I</mi></msub><mo fence='true'>)</mo></mrow></msup></mrow></mfrac></math><span class='eqnote'>then through the perceptual threshold</span><div class='work'><span>= 1 / (1 + e^(&#8722;12 &#215; (0.048 &#8722; 0.2)))</span><span>= 1 / (1 + e^(+1.829))</span><span>= 0.138</span></div></div><hr class='eqrule'><div class='eqrow'><math display='block'><mi>Y</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><msub><mi>V</mi><mi class='up'>sign</mi></msub><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><mo fence='true'>(</mo><mn>1</mn><mo>&#8722;</mo><mi class='up'>SVF</mi><mo fence='true'>)</mo><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><mi class='up'>SFV</mi></math><span class='eqnote'>Identity &mdash; linear, no threshold</span><div class='work'><span>= &#8531;(0.667) + &#8531;(1 &#8722; 0.333) + &#8531;(1.000)</span><span>= &#8531;(0.667) + &#8531;(0.667) + &#8531;(1.000)</span><span>= 0.778</span></div></div><hr class='eqrule'><div class='eqrow'><math display='block'><msub><mi>D</mi><mi class='up'>raw</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><msub><mi>V</mi><mi class='up'>pave</mi></msub><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><mi class='up'>SFV</mi><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&#8290;</mo><mi class='up'>GFAPI</mi></math><span class='eqnote'>the three Dependence terms</span><div class='work'><span>= &#8531;(0.333) + &#8531;(1.000) + &#8531;(0.667)</span><span>= 0.667</span></div></div><div class='eqrow'><math display='block'><mi>D</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi class='up'>e</mi><mrow><mo>&#8722;</mo><msub><mi>&#954;</mi><mi class='up'>D</mi></msub><mo>&#8289;</mo><mo fence='true'>(</mo><msub><mi>D</mi><mi class='up'>raw</mi></msub><mo>&#8722;</mo><msub><mi>&#964;</mi><mi class='up'>D</mi></msub><mo fence='true'>)</mo></mrow></msup></mrow></mfrac></math><span class='eqnote'>then through its own threshold</span><div class='work'><span>= 1 / (1 + e^(&#8722;15 &#215; (0.667 &#8722; 0.15)))</span><span>= 1 / (1 + e^(-7.750))</span><span>= 1.000</span></div></div><hr class='eqrule'><div class='eqrow'><math display='block'><mi>&#937;</mi><mo>=</mo><msup><mi class='up'>e</mi><mrow><mo>&#8722;</mo><mi>&#968;</mi><mo>&#8289;</mo><mo fence='true'>(</mo><mi class='up'>max</mi><mo>&#8289;</mo><mo fence='true'>(</mo><mn>0</mn><mo>,</mo><mfrac><mi>H</mi><mi>W</mi></mfrac><mo>&#8722;</mo><msub><mi>&#937;</mi><mi class='up'>th</mi></msub><mo fence='true'>)</mo><mo fence='true'>)</mo></mrow></msup></math><span class='eqnote'>canyon discount, exactly 1 until H/W passes the threshold</span><div class='work'><span>H/W = 3.17  (measured)</span><span>= e^(&#8722;0.15 &#215; max(0, 3.17 &#8722; 2))</span><span>= e^(-0.176)</span><span>= 0.839</span></div></div><div class='consts'><span>&kappa;<sub>I</sub> = <b>12</b></span><span>&tau;<sub>I</sub> = <b>0.2</b></span><span>&kappa;<sub>D</sub> = <b>15</b></span><span>&tau;<sub>D</sub> = <b>0.15</b></span><span>&psi; = <b>0.15</b></span><span>&Omega;<sub>th</sub> = <b>2</b></span><span>a / b / c = <b>0.4 / 0.2 / 0.4</b></span><span>1-7 &rarr; [0,1] by <b>(r &minus; 1) / 6</b></span></div></div>
+    <p class="lede">SFV enters <strong>Y and D_raw both</strong>, as the manuscript
+      specifies, which is why facade variation carries more influence than any other
+      single input. V<sub>nat</sub>/V<sub>built</sub> is a ratio of two raw ratings
+      rather than a normalised one, so it spans 0.125 to 0.875 and cannot reach
+      either end.</p>
+  </section>
+
+  <section>
+    <h2>The nine ratings</h2>
+    <p class="lede">The bar is the share of answers landing on the single most
+      common value &mdash; the failure signature of the twelve-field schema this
+      replaces, where the model wrote one number into every slot. The last column
+      is that share before and after.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>field</th><th>term</th><th>mean</th><th>sd</th>
+          <th>share on the modal answer</th><th>distinct</th><th>was &rarr; now</th></tr></thead>
+        <tbody>
+          <tr><td class="f">vertical_greenery</td><td class="n">V_nat</td><td class="n">1.44</td><td class="n">0.85</td><td><div class="bar"><div class="track"><div class="fill" style="width:73%"></div></div><span class="pct">73%</span></div></td><td class="n">5</td><td class="n" style="color:var(--accent)">90% &rarr; 73%</td></tr>
+          <tr><td class="f">vertical_hardscape</td><td class="n">V_built</td><td class="n">4.59</td><td class="n">1.53</td><td><div class="bar"><div class="track"><div class="fill" style="width:35%"></div></div><span class="pct">35%</span></div></td><td class="n">6</td><td class="n" style="color:var(--accent)">90% &rarr; 35%</td></tr>
+          <tr><td class="f">green_eye_level</td><td class="n">GVI_eye</td><td class="n">1.80</td><td class="n">1.05</td><td><div class="bar"><div class="track"><div class="fill" style="width:55%"></div></div><span class="pct">55%</span></div></td><td class="n">5</td><td class="n" style="color:var(--accent)">90% &rarr; 55%</td></tr>
+          <tr class="warn"><td class="f">sky_openness</td><td class="n">SVF</td><td class="n">3.02</td><td class="n">0.80</td><td><div class="bar"><div class="track"><div class="fill big" style="width:84%"></div></div><span class="pct">84%</span></div></td><td class="n">5</td><td class="n" style="color:var(--accent)">89% &rarr; 84%</td></tr>
+          <tr><td class="f">walkable_ground</td><td class="n">V_pave</td><td class="n">3.87</td><td class="n">1.44</td><td><div class="bar"><div class="track"><div class="fill" style="width:59%"></div></div><span class="pct">59%</span></div></td><td class="n">5</td><td class="n" style="color:var(--accent)">73% &rarr; 59%</td></tr>
+          <tr><td class="f">green_softening</td><td class="n">GMI</td><td class="n">2.00</td><td class="n">1.26</td><td><div class="bar"><div class="track"><div class="fill" style="width:53%"></div></div><span class="pct">53%</span></div></td><td class="n">5</td><td class="n" style="color:var(--accent)">90% &rarr; 53%</td></tr>
+          <tr><td class="f">signage_detail</td><td class="n">V_sign</td><td class="n">2.50</td><td class="n">1.58</td><td><div class="bar"><div class="track"><div class="fill" style="width:46%"></div></div><span class="pct">46%</span></div></td><td class="n">5</td><td class="n" style="color:var(--accent)">72% &rarr; 46%</td></tr>
+          <tr><td class="f">facade_variation</td><td class="n">SFV</td><td class="n">4.87</td><td class="n">1.68</td><td><div class="bar"><div class="track"><div class="fill" style="width:42%"></div></div><span class="pct">42%</span></div></td><td class="n">4</td><td class="n" style="color:var(--accent)">74% &rarr; 42%</td></tr>
+          <tr><td class="f">ground_floor_activity</td><td class="n">GFAPI</td><td class="n">2.83</td><td class="n">1.19</td><td><div class="bar"><div class="track"><div class="fill" style="width:61%"></div></div><span class="pct">61%</span></div></td><td class="n">6</td><td class="n" style="color:var(--accent)">74% &rarr; 61%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rec"><strong>Eight of nine cleared 80%.</strong> The greenery trio
+      now inter-correlates at 0.79 / 0.75 / 0.92 rather than the 1.00 that showed
+      the schema was collapsing them into one answer. <code>sky_openness</code> is
+      the exception at 84% &mdash; consistent, but answering coarsely.</div>
+  </section>
+
+  <section>
+    <h2>Checked against the measured arc</h2>
+    <p class="lede">Four fields have a pixel counterpart in the azimuthal profiles.
+      Each half-view is scored against the share over the exact 90&deg; it was
+      rendered from, not against the node &mdash; a half facing a blank wall while
+      the trees stand opposite should rate low, and a node-level target would count
+      those trees. Bootstrapped clustered on 21 block faces.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>field</th><th>vs measured</th><th>rho</th>
+          <th>95% CI (faces)</th><th>n</th></tr></thead>
+        <tbody>
+          <tr><td class="f">vertical_greenery</td><td class="def">vegetation share</td><td class="n">+0.641</td><td class="n">[+0.579, +0.700]</td><td class="n">2724</td></tr>
+          <tr><td class="f">green_eye_level</td><td class="def">vegetation share</td><td class="n">+0.737</td><td class="n">[+0.695, +0.780]</td><td class="n">2724</td></tr>
+          <tr><td class="f">green_softening</td><td class="def">vegetation share</td><td class="n">+0.758</td><td class="n">[+0.718, +0.799]</td><td class="n">2724</td></tr>
+          <tr><td class="f">vertical_hardscape</td><td class="def">building share</td><td class="n">+0.373</td><td class="n">[+0.275, +0.470]</td><td class="n">2724</td></tr>
+          <tr><td class="f">sky_openness</td><td class="def">sky share</td><td class="n">+0.472</td><td class="n">[+0.375, +0.549]</td><td class="n">2724</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede">Every interval excludes zero. <code>green_softening</code> is
+      listed against vegetation share as a related check, not a twin &mdash; GMI is
+      how far greenery relieves enclosure, which no pixel class measures. The other
+      four judgement fields have no counterpart at all; segmentation-mask comparison
+      is a separate arm.</p>
+  </section>
+
+  <section>
+    <h2>The index</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>min</th><th>median</th><th>mean</th><th>max</th>
+          <th>sd</th></tr></thead>
+        <tbody>
+          <tr><td class="f">I_raw</td><td class="n">0.042</td><td class="n">0.111</td><td class="n">0.183</td><td class="n">0.841</td><td class="n">0.161</td></tr>
+          <tr><td class="f">I &middot; Imageability</td><td class="n">0.130</td><td class="n">0.256</td><td class="n">0.426</td><td class="n">1.000</td><td class="n">0.312</td></tr>
+          <tr><td class="f">Y &middot; Identity</td><td class="n">0.111</td><td class="n">0.556</td><td class="n">0.520</td><td class="n">0.944</td><td class="n">0.158</td></tr>
+          <tr><td class="f">D_raw</td><td class="n">0.000</td><td class="n">0.444</td><td class="n">0.476</td><td class="n">0.889</td><td class="n">0.172</td></tr>
+          <tr><td class="f">D &middot; Dependence</td><td class="n">0.095</td><td class="n">0.988</td><td class="n">0.934</td><td class="n">1.000</td><td class="n">0.167</td></tr>
+          <tr><td class="f">&Omega;</td><td class="n">0.317</td><td class="n">1.000</td><td class="n">0.927</td><td class="n">1.000</td><td class="n">0.151</td></tr>
+          <tr style="font-weight:700"><td class="f">M &middot; the score</td><td class="n">0.083</td><td class="n">0.452</td><td class="n">0.526</td><td class="n">0.912</td><td class="n">0.200</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede"><strong>2,656 of 2,724</strong> half-views carry a
+      score. H/W source: 1,860 measured,
+      796 inherited from the street segment,
+      68 absent &mdash; the inherited ones are corner nodes, where
+      facade-to-facade width is undefined rather than mismeasured.</p>
+  </section>
+
+  <section>
+    <h2>H/W, and how it got there</h2>
+    <p class="lede">&Omega; discounts on the canyon aspect ratio and &sect;2.8 picks
+      the elasticity vector from it, so a half-view without H/W has no score at all.
+      Two fixes today took coverage from 465 nodes to 715.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>set</th><th>total</th><th>measured</th><th>inherited</th>
+          <th>absent</th><th>covered</th></tr></thead>
+        <tbody>
+          <tr><td class="f">every node s04 built</td><td class="n">733</td><td class="n">501</td><td class="n">214</td><td class="n">18</td><td class="n">98%</td></tr>
+          <tr><td class="f">the 681 nodes rated</td><td class="n">681</td><td class="n">465</td><td class="n">199</td><td class="n">17</td><td class="n">98%</td></tr>
+          <tr style="font-weight:700"><td class="f">half-views</td><td class="n">2724</td><td class="n">1860</td><td class="n">796</td><td class="n">68</td><td class="n">98%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="plain">
+      <li><strong>The width probe is a cone, not a line.</strong> A zero-width ray
+        slides between footprint polygons and past building edges. The error being
+        tolerated is angular &mdash; the street bearing is fitted, not known &mdash;
+        so the probe widens with distance: 1.2 m across at 14 m, 7.9 m at 90 m.
+        That recovered 36 nodes and left every per-street median intact (East 41st
+        19.0 m, Park Avenue 43.6 m, a 140 ft avenue).</li>
+      <li><strong>Corner nodes inherit their street's H/W.</strong> 87% of nodes
+        within 15 m of a crossing returned nothing, against a flat 12% elsewhere,
+        because the perpendicular points down the cross street and there is no wall
+        on it. That is undefined, not mismeasured, so those nodes take the median
+        of measured nodes on the same street within 120 m.
+        <code>HW_source</code> records which is which.</li>
+      <li><strong>It validates.</strong> Measured H/W against measured enclosure
+        (VEI) runs Spearman <strong>+0.532</strong>, p 5e-38, n 501 &mdash; up from
+        +0.503 before the cone.</li>
+      <li><strong>30% of scored half-views carry an inherited value</strong>, not a
+        measured one. That is an interim position, and it belongs in the methods
+        rather than in a footnote.</li>
+    </ul>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>typology</th><th>measured</th><th>median H (m)</th>
+          <th>median W (m)</th><th>median H/W</th></tr></thead>
+        <tbody>
+          <tr><td class="f">avenue_canyon</td><td class="n">102</td><td class="n">52.4</td><td class="n">27.5</td><td class="n">1.34</td></tr>
+          <tr><td class="f">avenue_secondary</td><td class="n">55</td><td class="n">52.7</td><td class="n">33.8</td><td class="n">0.65</td></tr>
+          <tr><td class="f">mid_block</td><td class="n">292</td><td class="n">41.5</td><td class="n">21.8</td><td class="n">1.18</td></tr>
+          <tr><td class="f">other</td><td class="n">16</td><td class="n">77.3</td><td class="n">16.8</td><td class="n">1.14</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede">H/W across the scored half-views runs
+      0.49 at the 10th percentile, 1.15 median,
+      4.38 at the 90th. <strong>772</strong> half-views sit
+      above &Omega;<sub>th</sub> = 2.0 and take a discount, down to
+      &Omega; = 0.317 at the deepest canyon; below the
+      threshold &Omega; is exactly 1 and the term does nothing.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>elasticities a / b / c</th><th>half-views</th>
+          <th>share</th></tr></thead>
+        <tbody>
+          <tr><td class="f">0.40 / 0.20 / 0.40</td><td class="n">1568</td><td class="n">58%</td></tr>          <tr><td class="f">0.50 / 0.20 / 0.30</td><td class="n">652</td><td class="n">24%</td></tr>          <tr><td class="f">0.30 / 0.10 / 0.60</td><td class="n">504</td><td class="n">19%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede">The canyon regime (0.30 / 0.10 / 0.60) and the mid-block regime
+      (0.50 / 0.20 / 0.30) are assigned from H/W, so the inherited values decide the
+      regime for a third of the frame as well as the discount.</p>
+  </section>
+
+  <section>
+    <h2>Two things that do not work yet</h2>
+    <ul class="plain">
+      <li><strong>Dependence is saturated.</strong> &tau;<sub>D</sub> = 0.15 against a
+        D_raw median of 0.444, so
+        <strong>76%</strong> of observations sit at the rail and D carries no
+        information into M. The paper's thresholds were calibrated for pixel shares;
+        normalised 1&ndash;7 ratings do not sit on that scale. Recentring on this
+        study area's own median &mdash; which the manuscript explicitly sanctions
+        &mdash; drops saturation to 29% and doubles D's spread. I is fine at
+        7%.</li>
+      <li><strong>The typology contrast is absent, and slightly inverted.</strong>
+        The paper reports mid-blocks at 0.78 against canyons at 0.22. We get canyons
+        marginally above mid-blocks, either way round. The mechanism is the
+        &sect;2.8 regime shift: mid-blocks get a &rarr; 0.50 and canyons a &rarr;
+        0.30, so the regime leaning hardest on Imageability is applied exactly where
+        Imageability is weakest &mdash; median I_raw is 0.111
+        because Murray Hill has almost no eye-level greenery anywhere.</li>
+    </ul>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>typology</th><th>half-views</th><th>mean M</th><th>sd</th>
+          <th>paper</th></tr></thead>
+        <tbody>
+          <tr><td class="f">avenue_canyon</td><td class="n">556</td><td class="n">0.560</td><td class="n">0.213</td><td class="n" style="color:var(--flag)">0.22</td></tr>
+          <tr><td class="f">avenue_secondary</td><td class="n">444</td><td class="n">0.525</td><td class="n">0.176</td><td class="n" style="color:var(--flag)">&mdash;</td></tr>
+          <tr><td class="f">mid_block</td><td class="n">1632</td><td class="n">0.520</td><td class="n">0.195</td><td class="n" style="color:var(--flag)">0.78</td></tr>
+          <tr><td class="f">other</td><td class="n">92</td><td class="n">0.436</td><td class="n">0.255</td><td class="n" style="color:var(--flag)">0.65</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rec">Tuning exponents or thresholds until 0.78 / 0.22 appears is the
+      trap CLAUDE.md names: <em>do not fit a functional form because the previous one
+      failed</em>. Either the ratings are too flat to separate typologies here, or
+      the paper's figures came from a pixel-share pipeline the VLM version will not
+      reproduce, or it is a real negative result. That is a judgement about the
+      study, not a parameter to search.</div>
+  </section>
+
+  <section>
+    <h2>Left against right</h2>
+    <p class="lede">The whole case for rating halves rather than the whole view is
+      that a pedestrian walks one sidewalk. Under the old schema L and R were
+      identical to two decimals on every field.</p>
+    <div class="formula">
+walkable_ground     L 3.74   R 4.00
+vertical_greenery   L 1.41   R 1.47
+sky_openness        L 3.06   R 2.97
+<span class="note">M                   L 0.525  R 0.527   &mdash; the separation is in the
+                                       ratings, not yet in the index, because D
+                                       saturates and &Omega; is a node property</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>Ratings from <code>tools/sim_vlm_run.py</code> &rarr;
+      <code>results/tables/sim_vlm.csv</code>; validation from
+      <code>tools/sim_vlm_validate.py</code>; index from
+      <code>tools/sim_compute.py</code> over <code>src/sim_core.py</code>, which
+      implements &sect;2.7&ndash;2.8 of the 24 Aug 2026 manuscript. Every constant
+      lives in <code>config.yaml</code>. H/W from <code>s05_geometry.py</code> with a
+      &plusmn;2.5&deg; cone probe, validating against measured enclosure at
+      &rho; +0.532.</p>
+  </footer>
+</div>

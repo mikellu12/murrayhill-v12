@@ -1,0 +1,51 @@
+node_id,osm_name,segment,wall_m,wall_h,kind
+n00002,1st Avenue,1st_avenue,51.260830315152184,97.084896,wall at 40-90 m
+n00003,1st Avenue,1st_avenue,51.24034858938415,97.084896,wall at 40-90 m
+n00007,1st Avenue,1st_avenue,40.989761898750274,4.51104,wall at 40-90 m
+n00011,1st Avenue,1st_avenue,,,open to 90 m
+n00018,1st Avenue,1st_avenue,,,open to 90 m
+n00019,1st Avenue,1st_avenue,,,open to 90 m
+n00022,1st Avenue,1st_avenue,,,open to 90 m
+n00023,1st Avenue,1st_avenue,,,open to 90 m
+n00025,1st Avenue,1st_avenue,,,open to 90 m
+n00029,1st Avenue,1st_avenue,,,open to 90 m
+n00030,1st Avenue,1st_avenue,,,open to 90 m
+n00031,1st Avenue,1st_avenue,,,open to 90 m
+n00032,1st Avenue,1st_avenue,,,open to 90 m
+n00033,1st Avenue,1st_avenue,,,open to 90 m
+n00034,1st Avenue,1st_avenue,,,open to 90 m
+n00036,1st Avenue,1st_avenue,86.29044416626776,33.321178295280006,wall at 40-90 m
+n00038,1st Avenue,1st_avenue,,,open to 90 m
+n00040,1st Avenue,1st_avenue,,,open to 90 m
+n00042,1st Avenue,1st_avenue,,,open to 90 m
+n00043,1st Avenue,1st_avenue,41.63181432959724,78.24825600000001,wall at 40-90 m
+n00052,2nd Avenue,2nd_avenue,,,open to 90 m
+n00053,2nd Avenue,2nd_avenue,,,open to 90 m
+n00056,2nd Avenue,2nd_avenue,71.84717527518089,58.122312,wall at 40-90 m
+n00198,Park Avenue,Park_Ave_Tunnel_Segment,,,open to 90 m
+n00199,Park Avenue,Park_Ave_Tunnel_Segment,,,open to 90 m
+n00200,Park Avenue,Park_Ave_Tunnel_Segment,,,open to 90 m
+n00201,Park Avenue,Park_Ave_Tunnel_Segment,81.4124986525236,33.321178295280006,wall at 40-90 m
+n00203,Park Avenue,Park_Ave_Tunnel_Segment,77.14429318021614,33.321178295280006,wall at 40-90 m
+n00205,Park Avenue,Park_Ave_Tunnel_Segment,76.23702980239929,33.321178295280006,wall at 40-90 m
+n00207,Park Avenue,Park_Ave_Tunnel_Segment,75.5020418969433,33.321178295280006,wall at 40-90 m
+n00353,East 35th Street,east_35th_street,,,open to 90 m
+n00354,East 35th Street,east_35th_street,,,open to 90 m
+n00355,East 35th Street,east_35th_street,,,open to 90 m
+n00394,East 36th Street,east_36th_street,88.09380655475323,19.784568,wall at 40-90 m
+n00397,East 36th Street,east_36th_street,84.70123076671716,37.231320000000004,wall at 40-90 m
+n00405,East 36th Street,east_36th_street,,,open to 90 m
+n00440,East 37th Street,east_37th_street,87.67411943033146,18.01368,wall at 40-90 m
+n00643,East 42nd Street,east_42nd_street,,,open to 90 m
+n00644,East 42nd Street,east_42nd_street,,,open to 90 m
+n00645,East 42nd Street,east_42nd_street,,,open to 90 m
+n00202,Park Avenue,Park_Ave_Tunnel_Segment,72.64826226609841,33.321178295280006,wall at 40-90 m
+n00204,Park Avenue,Park_Ave_Tunnel_Segment,70.13987730801972,33.321178295280006,wall at 40-90 m
+n00206,Park Avenue,Park_Ave_Tunnel_Segment,69.03317118759279,33.321178295280006,wall at 40-90 m
+n00208,Park Avenue,Park_Ave_Tunnel_Segment,68.55969591451931,33.321178295280006,wall at 40-90 m
+n00447,East 37th Street,east_37th_street,,,open to 90 m
+n00448,East 37th Street,east_37th_street,,,open to 90 m
+n00449,East 37th Street,east_37th_street,,,open to 90 m
+n00451,East 37th Street,east_37th_street,,,open to 90 m
+n00452,East 37th Street,east_37th_street,,,open to 90 m
+n00688,East 42nd Street,east_42nd_street,,,open to 90 m

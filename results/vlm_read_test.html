@@ -1,0 +1,271 @@
+<title>Fully Anchored, Weighted Read</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#EFF2EF; --panel:#E5EAE6; --code-bg:#E8EDE9;
+  --ink:#151F1B; --muted:#63736C; --rule:#CFD8D2;
+  --accent:#1C5A49; --accent-soft:#DAE7E0; --flag:#9A4A31;
+  --flag-soft:#F0DED6; --ok:#1C5A49;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1411; --panel:#161F1A; --code-bg:#121A16;
+    --ink:#DCE4DF; --muted:#8B9A93; --rule:#253029;
+    --accent:#5CBB9E; --accent-soft:#16281F; --flag:#D9906E;
+    --flag-soft:#2C1D17; --ok:#5CBB9E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1411; --panel:#161F1A; --code-bg:#121A16;
+  --ink:#DCE4DF; --muted:#8B9A93; --rule:#253029;
+  --accent:#5CBB9E; --accent-soft:#16281F; --flag:#D9906E;
+  --flag-soft:#2C1D17; --ok:#5CBB9E;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 96px;}
+.mast{padding:56px 0 26px;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:14px;}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+h1{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;
+  font-size:clamp(2rem,6vw,3rem);line-height:1.04;letter-spacing:-.025em;
+  margin:0;text-wrap:balance;}
+.standfirst{max-width:64ch;color:var(--muted);font-size:1.05rem;margin:0;}
+.standfirst strong{color:var(--ink);font-weight:600;}
+section{padding-top:52px;display:flex;flex-direction:column;gap:16px;}
+h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:clamp(1.3rem,4vw,1.65rem);font-weight:700;letter-spacing:-.02em;
+  margin:0;text-wrap:balance;}
+p.lede{max-width:66ch;margin:0;}
+code,.mono{font-family:"JetBrains Mono",monospace;font-size:.85em;}
+
+.formula{
+  border:1px solid var(--rule);border-radius:3px;background:var(--code-bg);
+  padding:20px 22px;overflow-x:auto;
+  font-family:"JetBrains Mono",monospace;font-size:13px;line-height:2.1;
+}
+.formula .lhs{color:var(--accent);font-weight:700;}
+.formula .w{color:var(--flag);}
+.formula .note{color:var(--muted);font-style:normal;font-size:11.5px;}
+
+.dimgrid{display:grid;gap:14px;grid-template-columns:1fr;}
+@media (min-width:820px){.dimgrid{grid-template-columns:repeat(3,1fr);}}
+.dimcard{
+  border:1px solid var(--rule);border-radius:3px;background:var(--panel);
+  display:flex;flex-direction:column;
+}
+.dimcard header{
+  padding:11px 14px;border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+}
+.dimcard h3{
+  margin:0;font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:1.02rem;font-weight:700;letter-spacing:-.01em;
+}
+.dimcard .dw{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);}
+.term{padding:11px 14px;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:3px;}
+.term:last-child{border-bottom:0;}
+.term .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+.term .name{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;
+  color:var(--accent);}
+.term .tw{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+  font-variant-numeric:tabular-nums;}
+.term .src{font-size:.88rem;color:var(--muted);}
+.term .src b{color:var(--ink);font-weight:600;font-family:"JetBrains Mono",monospace;
+  font-size:.92em;}
+.twice{color:var(--flag);font-weight:600;}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;}
+table{border-collapse:collapse;width:100%;min-width:720px;background:var(--panel);}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--rule);
+  vertical-align:middle;}
+thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--code-bg);}
+tbody tr:last-child td{border-bottom:0;}
+td.f{font-family:"JetBrains Mono",monospace;font-size:12.5px;white-space:nowrap;
+  font-weight:500;}
+td.n{font-family:"JetBrains Mono",monospace;font-size:12px;
+  font-variant-numeric:tabular-nums;white-space:nowrap;}
+.bar{display:flex;align-items:center;gap:8px;min-width:190px;}
+.bar .track{flex:1 1 auto;height:9px;background:var(--code-bg);border-radius:1px;
+  overflow:hidden;}
+.bar .fill{height:100%;background:var(--accent);}
+.bar .fill.big{background:var(--flag);}
+.bar .pct{font-family:"JetBrains Mono",monospace;font-size:11.5px;
+  font-variant-numeric:tabular-nums;color:var(--muted);width:44px;text-align:right;}
+.pill{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;
+  letter-spacing:.07em;text-transform:uppercase;border:1px solid currentColor;
+  border-radius:2px;padding:2px 7px;white-space:nowrap;}
+.pill.ok{color:var(--ok);}
+.pill.no{color:var(--flag);}
+tr.warn td{background:var(--flag-soft);}
+
+.pill.meas{color:var(--accent);background:var(--accent-soft);}
+.pill.vlm{color:var(--flag);}
+.pill.open{color:var(--flag);background:var(--flag-soft);}
+.formula .dim{color:var(--accent);font-weight:700;}
+.formula .fn{color:var(--flag);}
+.sig{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+  border:1px solid var(--rule);border-radius:2px;padding:2px 7px;white-space:nowrap;}
+.dimcard header .sig{margin-left:auto;}
+.rec{border-left:2px solid var(--accent);background:var(--accent-soft);
+  padding:12px 16px;max-width:70ch;font-size:.97rem;}
+.rec strong{color:var(--ink);}
+tr.pick td{background:var(--accent-soft);}
+td.def{font-size:.9rem;color:var(--muted);min-width:20ch;}
+
+math{font-family:"Source Serif 4",Georgia,serif;font-size:1.18rem;}
+math mi,math mn{font-style:italic;}
+math mi.up,math mn{font-style:normal;}
+.eqblock{
+  border:1px solid var(--rule);border-radius:3px;background:var(--code-bg);
+  padding:24px 26px;display:flex;flex-direction:column;gap:20px;overflow-x:auto;
+}
+.eqrow{display:flex;flex-direction:column;gap:5px;min-width:max-content;}
+.eqrow math{margin:0;}
+.eqnote{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+  letter-spacing:.02em;
+}
+.eqrule{border:0;border-top:1px solid var(--rule);margin:2px 0;width:100%;}
+.consts{
+  display:grid;gap:6px 26px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);
+}
+.consts b{color:var(--ink);font-weight:700;}
+.work{
+  display:flex;flex-direction:column;gap:2px;margin-top:4px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;
+  color:var(--accent);font-variant-numeric:tabular-nums;white-space:pre;
+}
+.work span:last-child{color:var(--ink);font-weight:700;}
+.eqcap{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+  border-bottom:1px solid var(--rule);padding-bottom:12px;
+}
+ul.plain{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;
+  gap:8px;max-width:68ch;}
+ul.plain li{padding-left:20px;position:relative;font-size:.98rem;color:var(--muted);}
+ul.plain li::before{content:"—";position:absolute;left:0;color:var(--flag);}
+ul.plain li strong{color:var(--ink);font-weight:600;}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--muted);font-size:.92rem;max-width:68ch;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="eyebrow">configuration test &middot; 24 half-views &middot; 216 forward passes</div>
+    <h1>Fully Anchored, Weighted Read</h1>
+    <p class="standfirst">Every rung of the 1&ndash;7 scale named, and the answer
+      taken as the rung closest to the model's belief rather than its tallest
+      single bar. The other two reads and the whole distribution are kept
+      alongside, so this choice can be revisited without touching the GPU.</p>
+  </header>
+
+  <section>
+    <h2>The nine fields under the new read</h2>
+    <p class="lede"><strong>survey</strong> is round(EV) &mdash; what a respondent
+      ticking a box would answer. <strong>agree</strong> is how often that matches
+      the argmax, which is what a generate() call would have written.</p>
+    <div class="tablewrap">
+      <table style="min-width:920px">
+        <thead><tr><th>field</th><th>term</th><th>survey mean</th><th>sd</th>
+          <th>share on modal answer</th><th>distinct</th><th>4s</th>
+          <th>EV mean</th><th>argmax mean</th><th>P(4)</th>
+          <th>agrees with argmax</th></tr></thead>
+        <tbody>
+          <tr><td class="f">vertical_greenery</td><td class="n">V_nat</td><td class="n">2.75</td><td class="n">1.11</td><td><div class="bar"><div class="track"><div class="fill" style="width:33%"></div></div><span class="pct">33%</span></div></td><td class="n">5</td><td class="n">6</td><td class="n">2.78</td><td class="n">2.42</td><td class="n">0.177</td><td class="n" style="color:var(--muted)">62%</td></tr>
+          <tr><td class="f">vertical_hardscape</td><td class="n">V_built</td><td class="n">4.88</td><td class="n">0.80</td><td><div class="bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="pct">50%</span></div></td><td class="n">4</td><td class="n">8</td><td class="n">4.86</td><td class="n">4.96</td><td class="n">0.258</td><td class="n" style="color:var(--muted)">50%</td></tr>
+          <tr><td class="f">green_eye_level</td><td class="n">GVI_eye</td><td class="n">2.54</td><td class="n">0.66</td><td><div class="bar"><div class="track"><div class="fill" style="width:54%"></div></div><span class="pct">54%</span></div></td><td class="n">3</td><td class="n">2</td><td class="n">2.56</td><td class="n">2.17</td><td class="n">0.123</td><td class="n" style="color:var(--muted)">46%</td></tr>
+          <tr><td class="f">sky_openness</td><td class="n">SVF</td><td class="n">3.29</td><td class="n">0.62</td><td><div class="bar"><div class="track"><div class="fill" style="width:67%"></div></div><span class="pct">67%</span></div></td><td class="n">4</td><td class="n">6</td><td class="n">3.25</td><td class="n">2.50</td><td class="n">0.163</td><td class="n" style="color:var(--flag)">12%</td></tr>
+          <tr><td class="f">walkable_ground</td><td class="n">V_pave</td><td class="n">4.25</td><td class="n">0.44</td><td><div class="bar"><div class="track"><div class="fill" style="width:75%"></div></div><span class="pct">75%</span></div></td><td class="n">2</td><td class="n">18</td><td class="n">4.26</td><td class="n">3.92</td><td class="n">0.282</td><td class="n" style="color:var(--muted)">58%</td></tr>
+          <tr><td class="f">green_softening</td><td class="n">GMI</td><td class="n">3.83</td><td class="n">0.76</td><td><div class="bar"><div class="track"><div class="fill" style="width:42%"></div></div><span class="pct">42%</span></div></td><td class="n">3</td><td class="n">10</td><td class="n">3.88</td><td class="n">3.75</td><td class="n">0.132</td><td class="n" style="color:var(--muted)">50%</td></tr>
+          <tr><td class="f">signage_detail</td><td class="n">V_sign</td><td class="n">4.46</td><td class="n">0.78</td><td><div class="bar"><div class="track"><div class="fill" style="width:46%"></div></div><span class="pct">46%</span></div></td><td class="n">4</td><td class="n">11</td><td class="n">4.44</td><td class="n">4.83</td><td class="n">0.158</td><td class="n" style="color:var(--flag)">8%</td></tr>
+          <tr class="warn"><td class="f">facade_variation</td><td class="n">SFV</td><td class="n">5.12</td><td class="n">0.34</td><td><div class="bar"><div class="track"><div class="fill big" style="width:88%"></div></div><span class="pct">88%</span></div></td><td class="n">2</td><td class="n">0</td><td class="n">5.16</td><td class="n">5.92</td><td class="n">0.153</td><td class="n" style="color:var(--flag)">21%</td></tr>
+          <tr><td class="f">ground_floor_activity</td><td class="n">GFAPI</td><td class="n">5.04</td><td class="n">0.62</td><td><div class="bar"><div class="track"><div class="fill" style="width:62%"></div></div><span class="pct">62%</span></div></td><td class="n">3</td><td class="n">4</td><td class="n">5.05</td><td class="n">6.00</td><td class="n">0.118</td><td class="n" style="color:var(--flag)">21%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rec"><strong>The two reads disagree constantly.</strong>
+      <code>signage_detail</code> agrees only 8% of the time,
+      <code>sky_openness</code> 12%. That is not noise &mdash; it is the argmax
+      reporting a tallest bar that sits well away from the centre of belief. On
+      <code>ground_floor_activity</code> the argmax averages 6.00 while the
+      distribution's centre is 5.05.</div>
+  </section>
+
+  <section>
+    <h2>Against the run that exists</h2>
+    <p class="lede">The 2,724-row run used two anchors and the argmax. This uses
+      seven rungs and the weighted read. <strong>Different sample sizes</strong>
+      &mdash; 2,724 rows against 24 &mdash; so read the shape, not
+      the decimal.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>field</th><th>old mean</th><th>old sd</th><th>old mode%</th>
+          <th>old 4s</th><th>new mean</th><th>new sd</th><th>new mode%</th>
+          <th>new 4s</th><th>sd change</th></tr></thead>
+        <tbody>
+          <tr><td class="f">vertical_greenery</td><td class="n">1.44</td><td class="n">0.85</td><td class="n">73%</td><td class="n">0</td><td class="n">2.75</td><td class="n">1.11</td><td class="n">33%</td><td class="n">6</td><td class="n" style="color:var(--accent)">+0.26</td></tr>
+          <tr><td class="f">vertical_hardscape</td><td class="n">4.59</td><td class="n">1.53</td><td class="n">35%</td><td class="n">0</td><td class="n">4.88</td><td class="n">0.80</td><td class="n">50%</td><td class="n">8</td><td class="n" style="color:var(--flag)">-0.74</td></tr>
+          <tr><td class="f">green_eye_level</td><td class="n">1.80</td><td class="n">1.05</td><td class="n">55%</td><td class="n">0</td><td class="n">2.54</td><td class="n">0.66</td><td class="n">54%</td><td class="n">2</td><td class="n" style="color:var(--flag)">-0.39</td></tr>
+          <tr><td class="f">sky_openness</td><td class="n">3.02</td><td class="n">0.80</td><td class="n">84%</td><td class="n">0</td><td class="n">3.29</td><td class="n">0.62</td><td class="n">67%</td><td class="n">6</td><td class="n" style="color:var(--flag)">-0.17</td></tr>
+          <tr><td class="f">walkable_ground</td><td class="n">3.87</td><td class="n">1.44</td><td class="n">59%</td><td class="n">0</td><td class="n">4.25</td><td class="n">0.44</td><td class="n">75%</td><td class="n">18</td><td class="n" style="color:var(--flag)">-1.00</td></tr>
+          <tr><td class="f">green_softening</td><td class="n">2.00</td><td class="n">1.26</td><td class="n">53%</td><td class="n">0</td><td class="n">3.83</td><td class="n">0.76</td><td class="n">42%</td><td class="n">10</td><td class="n" style="color:var(--flag)">-0.49</td></tr>
+          <tr><td class="f">signage_detail</td><td class="n">2.50</td><td class="n">1.58</td><td class="n">46%</td><td class="n">0</td><td class="n">4.46</td><td class="n">0.78</td><td class="n">46%</td><td class="n">11</td><td class="n" style="color:var(--flag)">-0.80</td></tr>
+          <tr><td class="f">facade_variation</td><td class="n">4.87</td><td class="n">1.68</td><td class="n">42%</td><td class="n">0</td><td class="n">5.12</td><td class="n">0.34</td><td class="n">88%</td><td class="n">0</td><td class="n" style="color:var(--flag)">-1.34</td></tr>
+          <tr><td class="f">ground_floor_activity</td><td class="n">2.83</td><td class="n">1.19</td><td class="n">61%</td><td class="n">78</td><td class="n">5.04</td><td class="n">0.62</td><td class="n">62%</td><td class="n">4</td><td class="n" style="color:var(--flag)">-0.57</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="plain">
+      <li><strong>4 exists now.</strong> The old run produced none, on any field,
+        across 24,516 calls. Every field here can reach it.</li>
+      <li><strong>The floor lifted.</strong> Greenery fields sat at 1.44 and 1.80
+        because the two-anchor prompt gave the model nothing between "none at all"
+        and "filling the view". Named rungs let it say "scattered canopy over part
+        of the frontage" instead of rounding down to nothing.</li>
+      <li><strong>Spread is the column to watch.</strong> A field's sd is how
+        much it can discriminate between streets; a term with no spread
+        contributes nothing to the index however well it correlates. Green in the
+        last column means the new read spreads wider, red means narrower.</li>
+      <li><strong>facade_variation is still the problem field</strong> &mdash; 88%
+        on one value here, and the least confident field in every test we have run.
+        It carries 22% of the index and has no measured counterpart.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What is stored</h2>
+    <p class="lede">Nine fields &times; ten columns = 90, plus identity. Every
+      read is derivable from what is on disk, so no future decision about how to
+      summarise an answer needs another pass over the corpus.</p>
+    <div class="formula">
+<span class="lhs">field</span>            the survey answer, round(EV), an integer 1-7
+<span class="lhs">field_ev</span>         the expected value, continuous
+<span class="lhs">field_argmax</span>     the tallest bar, what generate() would write
+<span class="lhs">field_p1 .. p7</span>   the whole distribution
+    </div>
+    <p class="lede">Runtime is <strong>4.93 s per image</strong> against 5.18 s for
+      the old generate() path &mdash; reading logits skips the generation loop, so
+      a full rerun would finish <em>faster</em> than the 3.7 hours already spent.</p>
+  </section>
+
+  <footer>
+    <p>Prompts from <code>src/sim_scale.py</code>, runner
+      <code>tools/sim_vlm_run.py --anchors 7</code>. Smoke test stratified on
+      measured GVI across 24 half-views; the fields with a measured
+      counterpart were separately scored at n = 64 in the scale test, where seven
+      rungs plus the weighted read won on two of three. Nothing here is a
+      full-corpus result.</p>
+  </footer>
+</div>

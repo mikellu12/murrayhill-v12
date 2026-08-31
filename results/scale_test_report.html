@@ -1,0 +1,274 @@
+<title>Anchors and the Missing Four</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#EFF2EF; --panel:#E5EAE6; --code-bg:#E8EDE9;
+  --ink:#151F1B; --muted:#63736C; --rule:#CFD8D2;
+  --accent:#1C5A49; --accent-soft:#DAE7E0; --flag:#9A4A31;
+  --flag-soft:#F0DED6; --ok:#1C5A49;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1411; --panel:#161F1A; --code-bg:#121A16;
+    --ink:#DCE4DF; --muted:#8B9A93; --rule:#253029;
+    --accent:#5CBB9E; --accent-soft:#16281F; --flag:#D9906E;
+    --flag-soft:#2C1D17; --ok:#5CBB9E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1411; --panel:#161F1A; --code-bg:#121A16;
+  --ink:#DCE4DF; --muted:#8B9A93; --rule:#253029;
+  --accent:#5CBB9E; --accent-soft:#16281F; --flag:#D9906E;
+  --flag-soft:#2C1D17; --ok:#5CBB9E;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 96px;}
+.mast{padding:56px 0 26px;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:14px;}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+h1{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;
+  font-size:clamp(2rem,6vw,3rem);line-height:1.04;letter-spacing:-.025em;
+  margin:0;text-wrap:balance;}
+.standfirst{max-width:64ch;color:var(--muted);font-size:1.05rem;margin:0;}
+.standfirst strong{color:var(--ink);font-weight:600;}
+section{padding-top:52px;display:flex;flex-direction:column;gap:16px;}
+h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:clamp(1.3rem,4vw,1.65rem);font-weight:700;letter-spacing:-.02em;
+  margin:0;text-wrap:balance;}
+p.lede{max-width:66ch;margin:0;}
+code,.mono{font-family:"JetBrains Mono",monospace;font-size:.85em;}
+
+.formula{
+  border:1px solid var(--rule);border-radius:3px;background:var(--code-bg);
+  padding:20px 22px;overflow-x:auto;
+  font-family:"JetBrains Mono",monospace;font-size:13px;line-height:2.1;
+}
+.formula .lhs{color:var(--accent);font-weight:700;}
+.formula .w{color:var(--flag);}
+.formula .note{color:var(--muted);font-style:normal;font-size:11.5px;}
+
+.dimgrid{display:grid;gap:14px;grid-template-columns:1fr;}
+@media (min-width:820px){.dimgrid{grid-template-columns:repeat(3,1fr);}}
+.dimcard{
+  border:1px solid var(--rule);border-radius:3px;background:var(--panel);
+  display:flex;flex-direction:column;
+}
+.dimcard header{
+  padding:11px 14px;border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+}
+.dimcard h3{
+  margin:0;font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:1.02rem;font-weight:700;letter-spacing:-.01em;
+}
+.dimcard .dw{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);}
+.term{padding:11px 14px;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:3px;}
+.term:last-child{border-bottom:0;}
+.term .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+.term .name{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;
+  color:var(--accent);}
+.term .tw{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+  font-variant-numeric:tabular-nums;}
+.term .src{font-size:.88rem;color:var(--muted);}
+.term .src b{color:var(--ink);font-weight:600;font-family:"JetBrains Mono",monospace;
+  font-size:.92em;}
+.twice{color:var(--flag);font-weight:600;}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;}
+table{border-collapse:collapse;width:100%;min-width:720px;background:var(--panel);}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--rule);
+  vertical-align:middle;}
+thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--code-bg);}
+tbody tr:last-child td{border-bottom:0;}
+td.f{font-family:"JetBrains Mono",monospace;font-size:12.5px;white-space:nowrap;
+  font-weight:500;}
+td.n{font-family:"JetBrains Mono",monospace;font-size:12px;
+  font-variant-numeric:tabular-nums;white-space:nowrap;}
+.bar{display:flex;align-items:center;gap:8px;min-width:190px;}
+.bar .track{flex:1 1 auto;height:9px;background:var(--code-bg);border-radius:1px;
+  overflow:hidden;}
+.bar .fill{height:100%;background:var(--accent);}
+.bar .fill.big{background:var(--flag);}
+.bar .pct{font-family:"JetBrains Mono",monospace;font-size:11.5px;
+  font-variant-numeric:tabular-nums;color:var(--muted);width:44px;text-align:right;}
+.pill{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;
+  letter-spacing:.07em;text-transform:uppercase;border:1px solid currentColor;
+  border-radius:2px;padding:2px 7px;white-space:nowrap;}
+.pill.ok{color:var(--ok);}
+.pill.no{color:var(--flag);}
+tr.warn td{background:var(--flag-soft);}
+
+.pill.meas{color:var(--accent);background:var(--accent-soft);}
+.pill.vlm{color:var(--flag);}
+.pill.open{color:var(--flag);background:var(--flag-soft);}
+.formula .dim{color:var(--accent);font-weight:700;}
+.formula .fn{color:var(--flag);}
+.sig{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+  border:1px solid var(--rule);border-radius:2px;padding:2px 7px;white-space:nowrap;}
+.dimcard header .sig{margin-left:auto;}
+.rec{border-left:2px solid var(--accent);background:var(--accent-soft);
+  padding:12px 16px;max-width:70ch;font-size:.97rem;}
+.rec strong{color:var(--ink);}
+tr.pick td{background:var(--accent-soft);}
+td.def{font-size:.9rem;color:var(--muted);min-width:20ch;}
+
+math{font-family:"Source Serif 4",Georgia,serif;font-size:1.18rem;}
+math mi,math mn{font-style:italic;}
+math mi.up,math mn{font-style:normal;}
+.eqblock{
+  border:1px solid var(--rule);border-radius:3px;background:var(--code-bg);
+  padding:24px 26px;display:flex;flex-direction:column;gap:20px;overflow-x:auto;
+}
+.eqrow{display:flex;flex-direction:column;gap:5px;min-width:max-content;}
+.eqrow math{margin:0;}
+.eqnote{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+  letter-spacing:.02em;
+}
+.eqrule{border:0;border-top:1px solid var(--rule);margin:2px 0;width:100%;}
+.consts{
+  display:grid;gap:6px 26px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);
+}
+.consts b{color:var(--ink);font-weight:700;}
+.work{
+  display:flex;flex-direction:column;gap:2px;margin-top:4px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;
+  color:var(--accent);font-variant-numeric:tabular-nums;white-space:pre;
+}
+.work span:last-child{color:var(--ink);font-weight:700;}
+.eqcap{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+  border-bottom:1px solid var(--rule);padding-bottom:12px;
+}
+ul.plain{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;
+  gap:8px;max-width:68ch;}
+ul.plain li{padding-left:20px;position:relative;font-size:.98rem;color:var(--muted);}
+ul.plain li::before{content:"—";position:absolute;left:0;color:var(--flag);}
+ul.plain li strong{color:var(--ink);font-weight:600;}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--muted);font-size:.92rem;max-width:68ch;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="eyebrow">scale test &middot; 64 half-views &middot; 640 forward passes</div>
+    <h1>Anchors and the Missing Four</h1>
+    <p class="standfirst">No field ever answered 4 across 24,516 calls. Two
+      candidate fixes, tested on the same images in the same pass: name every
+      rung of the scale, or read the model's probability distribution instead of
+      the token it emits. Only one of them keeps the accuracy.</p>
+  </header>
+
+  <section>
+    <h2>Four cells per field</h2>
+    <p class="lede">Nothing differs between cells but the prompt and the read.
+      Answers come from a single forward pass with the JSON prefix forced, so
+      <code>argmax</code> is exactly the token a generate() call would have
+      written. The bar is the span of values used, as a share of the full 1&ndash;7
+      scale. <span style="color:var(--accent)">Highlighted</span> is the best
+      correlation for that field.</p>
+    <div class="tablewrap">
+      <table style="min-width:980px">
+        <thead><tr><th>field</th><th>prompt</th><th>read</th><th>mean</th>
+          <th>sd</th><th>range</th><th>span of scale used</th><th>distinct</th>
+          <th>P(4)</th><th>times 4</th><th>rho vs measured</th></tr></thead>
+        <tbody>
+          <tr class="pick"><td class="f" rowspan="4">green_eye_level<br><span style="color:var(--muted);font-weight:400">GVI_eye</span></td><td class="n">2-anchor</td><td class="n">argmax</td><td class="n">1.78</td><td class="n">1.16</td><td class="n">1.00&ndash;6.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:83%"></div></div><span class="pct">83%</span></div></td><td class="n">5</td><td class="n">0.085</td><td class="n">0</td><td class="n">+0.765</td></tr>
+          <tr><td class="n">2-anchor</td><td class="n">ev</td><td class="n">2.47</td><td class="n">0.78</td><td class="n">1.56&ndash;4.97</td><td><div class="bar"><div class="track"><div class="fill" style="width:57%"></div></div><span class="pct">57%</span></div></td><td class="n">64</td><td class="n">0.085</td><td class="n">&mdash;</td><td class="n">+0.701</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">argmax</td><td class="n">1.83</td><td class="n">0.86</td><td class="n">1.00&ndash;5.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:67%"></div></div><span class="pct">67%</span></div></td><td class="n">5</td><td class="n">0.111</td><td class="n">2</td><td class="n">+0.618</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">ev</td><td class="n">2.47</td><td class="n">0.55</td><td class="n">1.71&ndash;4.41</td><td><div class="bar"><div class="track"><div class="fill" style="width:45%"></div></div><span class="pct">45%</span></div></td><td class="n">64</td><td class="n">0.111</td><td class="n">&mdash;</td><td class="n">+0.550</td></tr>
+          <tr><td class="f" rowspan="4">vertical_greenery<br><span style="color:var(--muted);font-weight:400">V_nat</span></td><td class="n">2-anchor</td><td class="n">argmax</td><td class="n">1.45</td><td class="n">1.01</td><td class="n">1.00&ndash;6.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:83%"></div></div><span class="pct">83%</span></div></td><td class="n">5</td><td class="n">0.057</td><td class="n">0</td><td class="n">+0.664</td></tr>
+          <tr class="pick"><td class="n">2-anchor</td><td class="n">ev</td><td class="n">2.06</td><td class="n">0.76</td><td class="n">1.27&ndash;4.92</td><td><div class="bar"><div class="track"><div class="fill" style="width:61%"></div></div><span class="pct">61%</span></div></td><td class="n">64</td><td class="n">0.057</td><td class="n">&mdash;</td><td class="n">+0.725</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">argmax</td><td class="n">1.83</td><td class="n">1.34</td><td class="n">1.00&ndash;6.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:83%"></div></div><span class="pct">83%</span></div></td><td class="n">6</td><td class="n">0.097</td><td class="n">1</td><td class="n">+0.717</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">ev</td><td class="n">2.59</td><td class="n">0.75</td><td class="n">1.52&ndash;5.07</td><td><div class="bar"><div class="track"><div class="fill" style="width:59%"></div></div><span class="pct">59%</span></div></td><td class="n">64</td><td class="n">0.097</td><td class="n">&mdash;</td><td class="n">+0.582</td></tr>
+          <tr><td class="f" rowspan="4">sky_openness<br><span style="color:var(--muted);font-weight:400">SVF</span></td><td class="n">2-anchor</td><td class="n">argmax</td><td class="n">3.12</td><td class="n">0.70</td><td class="n">1.00&ndash;5.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:67%"></div></div><span class="pct">67%</span></div></td><td class="n">3</td><td class="n">0.164</td><td class="n">0</td><td class="n">+0.363</td></tr>
+          <tr class="pick"><td class="n">2-anchor</td><td class="n">ev</td><td class="n">3.29</td><td class="n">0.47</td><td class="n">2.14&ndash;4.85</td><td><div class="bar"><div class="track"><div class="fill" style="width:45%"></div></div><span class="pct">45%</span></div></td><td class="n">64</td><td class="n">0.164</td><td class="n">&mdash;</td><td class="n">+0.482</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">argmax</td><td class="n">4.80</td><td class="n">0.57</td><td class="n">3.00&ndash;5.00</td><td><div class="bar"><div class="track"><div class="fill big" style="width:33%"></div></div><span class="pct">33%</span></div></td><td class="n">3</td><td class="n">0.239</td><td class="n">3</td><td class="n"><span style="color:var(--flag)">-0.034</span></td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">ev</td><td class="n">3.96</td><td class="n">0.29</td><td class="n">3.28&ndash;4.69</td><td><div class="bar"><div class="track"><div class="fill big" style="width:24%"></div></div><span class="pct">24%</span></div></td><td class="n">64</td><td class="n">0.239</td><td class="n">&mdash;</td><td class="n">+0.356</td></tr>
+          <tr><td class="f" rowspan="4">facade_variation<br><span style="color:var(--muted);font-weight:400">SFV</span></td><td class="n">2-anchor</td><td class="n">argmax</td><td class="n">5.03</td><td class="n">1.83</td><td class="n">1.00&ndash;7.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="pct">100%</span></div></td><td class="n">4</td><td class="n">0.148</td><td class="n">0</td><td class="n">&mdash;</td></tr>
+          <tr><td class="n">2-anchor</td><td class="n">ev</td><td class="n">4.46</td><td class="n">0.51</td><td class="n">2.59&ndash;5.37</td><td><div class="bar"><div class="track"><div class="fill" style="width:46%"></div></div><span class="pct">46%</span></div></td><td class="n">64</td><td class="n">0.148</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">argmax</td><td class="n">5.41</td><td class="n">0.73</td><td class="n">3.00&ndash;6.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="pct">50%</span></div></td><td class="n">4</td><td class="n">0.210</td><td class="n">6</td><td class="n">&mdash;</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">ev</td><td class="n">4.81</td><td class="n">0.40</td><td class="n">3.48&ndash;5.68</td><td><div class="bar"><div class="track"><div class="fill" style="width:37%"></div></div><span class="pct">37%</span></div></td><td class="n">64</td><td class="n">0.210</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+          <tr><td class="f" rowspan="4">walkable_ground<br><span style="color:var(--muted);font-weight:400">V_pave</span></td><td class="n">2-anchor</td><td class="n">argmax</td><td class="n">3.84</td><td class="n">1.50</td><td class="n">1.00&ndash;6.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:83%"></div></div><span class="pct">83%</span></div></td><td class="n">4</td><td class="n">0.151</td><td class="n">0</td><td class="n">&mdash;</td></tr>
+          <tr><td class="n">2-anchor</td><td class="n">ev</td><td class="n">4.02</td><td class="n">0.53</td><td class="n">2.65&ndash;5.10</td><td><div class="bar"><div class="track"><div class="fill" style="width:41%"></div></div><span class="pct">41%</span></div></td><td class="n">64</td><td class="n">0.151</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">argmax</td><td class="n">3.98</td><td class="n">0.72</td><td class="n">1.00&ndash;6.00</td><td><div class="bar"><div class="track"><div class="fill" style="width:83%"></div></div><span class="pct">83%</span></div></td><td class="n">5</td><td class="n">0.294</td><td class="n">45</td><td class="n">&mdash;</td></tr>
+          <tr><td class="n">7-anchor</td><td class="n">ev</td><td class="n">3.91</td><td class="n">0.42</td><td class="n">2.79&ndash;4.72</td><td><div class="bar"><div class="track"><div class="fill big" style="width:32%"></div></div><span class="pct">32%</span></div></td><td class="n">64</td><td class="n">0.294</td><td class="n">&mdash;</td><td class="n">&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>What the test says</h2>
+    <ul class="plain">
+      <li><strong>Seven anchors do fix the gap.</strong> 4 appears on every
+        field &mdash; 45 of 64 for <code>walkable_ground</code>, where "a standard
+        sidewalk with room for two abreast" is evidently the common case. P(4)
+        rises everywhere.</li>
+      <li><strong>And they cost accuracy on two of the three checkable fields.</strong>
+        <code>sky_openness</code> collapses from +0.363 to <strong>&minus;0.034</strong>
+        &mdash; no relationship left. The seven rungs I wrote for sky pull the model
+        toward judging canyon shape rather than how much sky is visible. That is
+        the same length effect that broke the twelve-field schema, in miniature.</li>
+      <li><strong>Reading the distribution gets the resolution without the cost.</strong>
+        On unchanged two-anchor prompts, expected value gives 64 distinct values
+        instead of 5, no hole at 4, and a better correlation than the argmax on two
+        of three fields. It is also cheaper &mdash; one forward pass, no generation.</li>
+      <li><strong>Expected value always narrows the range</strong>, and that is
+        arithmetic rather than loss: an expected value only reaches 1.00 if the
+        model is certain, and it rarely is. What matters is whether it orders the
+        streets correctly, which the correlations answer.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Is a low-confidence field just noise?</h2>
+    <p class="lede"><code>facade_variation</code> puts only 0.226 of its
+      probability on the digit it emits &mdash; barely above the 0.143 of pure
+      ignorance. That means the model is unsure about each image. It does not
+      follow that the field measures nothing, and two tests separate those,
+      neither needing a pixel counterpart.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>field</th><th>same frontage, opposite approach</th>
+          <th>pairs</th><th>Moran's I</th><th>confidence</th></tr></thead>
+        <tbody>
+          <tr><td class="f">vertical_greenery</td><td class="n">+0.326</td><td class="n">1362</td><td class="n">+0.390</td><td class="n">0.528</td></tr>          <tr><td class="f">vertical_hardscape</td><td class="n">+0.426</td><td class="n">1362</td><td class="n">+0.510</td><td class="n"></td></tr>          <tr><td class="f">green_eye_level</td><td class="n">+0.383</td><td class="n">1362</td><td class="n">+0.453</td><td class="n">0.440</td></tr>          <tr><td class="f">sky_openness</td><td class="n">+0.419</td><td class="n">1362</td><td class="n">+0.340</td><td class="n">0.316</td></tr>          <tr><td class="f">walkable_ground</td><td class="n">+0.386</td><td class="n">1362</td><td class="n">+0.300</td><td class="n"></td></tr>          <tr><td class="f">green_softening</td><td class="n">+0.387</td><td class="n">1362</td><td class="n">+0.453</td><td class="n"></td></tr>          <tr><td class="f">signage_detail</td><td class="n">+0.468</td><td class="n">1362</td><td class="n">+0.516</td><td class="n"></td></tr>          <tr><td class="f">facade_variation</td><td class="n">+0.361</td><td class="n">1362</td><td class="n">+0.478</td><td class="n">0.226</td></tr>          <tr><td class="f">ground_floor_activity</td><td class="n">+0.502</td><td class="n">1362</td><td class="n">+0.546</td><td class="n"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rec"><strong>Not random.</strong> Walking north, the left half
+      faces the west side; walking south, the right half faces that same west
+      side. Those are two photographs of one wall from opposite directions, and
+      every field agrees with itself across them at +0.33 to +0.50 over 1,362
+      pairs. Every field also shows strong spatial structure &mdash; neighbouring
+      nodes rate alike. Shuffling the same values into random spatial order gives
+      Moran's I of <strong>&minus;0.003 &plusmn; 0.011</strong>, so
+      <code>facade_variation</code>'s +0.478 sits some forty standard deviations
+      clear of chance. Uncertain per image is not the same as uninformative.</div>
+  </section>
+
+  <footer>
+    <p>Prompts from <code>src/sim_fields.py</code> (two anchors) and
+      <code>src/sim_scale.py</code> (seven); probe
+      <code>tools/scale_probe.py</code>, scored by
+      <code>tools/scale_probe_score.py</code> against the share measured over each
+      half-view's own 90 degrees, bootstrapped clustered on 18 block faces.
+      Reliability from <code>tools/rating_reliability.py</code> over all 2,724
+      half-views. At n = 64 the intervals overlap throughout &mdash; the
+      direction is consistent and the mechanism understood, but no single number
+      here is settled.</p>
+  </footer>
+</div>

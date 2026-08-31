@@ -1,0 +1,260 @@
+<title>GWR Machinery Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#EFF2EF; --panel:#E5EAE6; --code-bg:#E8EDE9;
+  --ink:#151F1B; --muted:#63736C; --rule:#CFD8D2;
+  --accent:#1C5A49; --accent-soft:#DAE7E0; --flag:#9A4A31;
+  --flag-soft:#F0DED6; --ok:#1C5A49;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1411; --panel:#161F1A; --code-bg:#121A16;
+    --ink:#DCE4DF; --muted:#8B9A93; --rule:#253029;
+    --accent:#5CBB9E; --accent-soft:#16281F; --flag:#D9906E;
+    --flag-soft:#2C1D17; --ok:#5CBB9E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1411; --panel:#161F1A; --code-bg:#121A16;
+  --ink:#DCE4DF; --muted:#8B9A93; --rule:#253029;
+  --accent:#5CBB9E; --accent-soft:#16281F; --flag:#D9906E;
+  --flag-soft:#2C1D17; --ok:#5CBB9E;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 96px;}
+.mast{padding:56px 0 26px;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:14px;}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+h1{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;
+  font-size:clamp(2rem,6vw,3rem);line-height:1.04;letter-spacing:-.025em;
+  margin:0;text-wrap:balance;}
+.standfirst{max-width:64ch;color:var(--muted);font-size:1.05rem;margin:0;}
+.standfirst strong{color:var(--ink);font-weight:600;}
+section{padding-top:52px;display:flex;flex-direction:column;gap:16px;}
+h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:clamp(1.3rem,4vw,1.65rem);font-weight:700;letter-spacing:-.02em;
+  margin:0;text-wrap:balance;}
+p.lede{max-width:66ch;margin:0;}
+code,.mono{font-family:"JetBrains Mono",monospace;font-size:.85em;}
+
+.formula{
+  border:1px solid var(--rule);border-radius:3px;background:var(--code-bg);
+  padding:20px 22px;overflow-x:auto;
+  font-family:"JetBrains Mono",monospace;font-size:13px;line-height:2.1;
+}
+.formula .lhs{color:var(--accent);font-weight:700;}
+.formula .w{color:var(--flag);}
+.formula .note{color:var(--muted);font-style:normal;font-size:11.5px;}
+
+.dimgrid{display:grid;gap:14px;grid-template-columns:1fr;}
+@media (min-width:820px){.dimgrid{grid-template-columns:repeat(3,1fr);}}
+.dimcard{
+  border:1px solid var(--rule);border-radius:3px;background:var(--panel);
+  display:flex;flex-direction:column;
+}
+.dimcard header{
+  padding:11px 14px;border-bottom:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+}
+.dimcard h3{
+  margin:0;font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:1.02rem;font-weight:700;letter-spacing:-.01em;
+}
+.dimcard .dw{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);}
+.term{padding:11px 14px;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:3px;}
+.term:last-child{border-bottom:0;}
+.term .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline;}
+.term .name{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;
+  color:var(--accent);}
+.term .tw{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+  font-variant-numeric:tabular-nums;}
+.term .src{font-size:.88rem;color:var(--muted);}
+.term .src b{color:var(--ink);font-weight:600;font-family:"JetBrains Mono",monospace;
+  font-size:.92em;}
+.twice{color:var(--flag);font-weight:600;}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;}
+table{border-collapse:collapse;width:100%;min-width:720px;background:var(--panel);}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--rule);
+  vertical-align:middle;}
+thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--code-bg);}
+tbody tr:last-child td{border-bottom:0;}
+td.f{font-family:"JetBrains Mono",monospace;font-size:12.5px;white-space:nowrap;
+  font-weight:500;}
+td.n{font-family:"JetBrains Mono",monospace;font-size:12px;
+  font-variant-numeric:tabular-nums;white-space:nowrap;}
+.bar{display:flex;align-items:center;gap:8px;min-width:190px;}
+.bar .track{flex:1 1 auto;height:9px;background:var(--code-bg);border-radius:1px;
+  overflow:hidden;}
+.bar .fill{height:100%;background:var(--accent);}
+.bar .fill.big{background:var(--flag);}
+.bar .pct{font-family:"JetBrains Mono",monospace;font-size:11.5px;
+  font-variant-numeric:tabular-nums;color:var(--muted);width:44px;text-align:right;}
+.pill{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;
+  letter-spacing:.07em;text-transform:uppercase;border:1px solid currentColor;
+  border-radius:2px;padding:2px 7px;white-space:nowrap;}
+.pill.ok{color:var(--ok);}
+.pill.no{color:var(--flag);}
+tr.warn td{background:var(--flag-soft);}
+
+.pill.meas{color:var(--accent);background:var(--accent-soft);}
+.pill.vlm{color:var(--flag);}
+.pill.open{color:var(--flag);background:var(--flag-soft);}
+.formula .dim{color:var(--accent);font-weight:700;}
+.formula .fn{color:var(--flag);}
+.sig{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+  border:1px solid var(--rule);border-radius:2px;padding:2px 7px;white-space:nowrap;}
+.dimcard header .sig{margin-left:auto;}
+.rec{border-left:2px solid var(--accent);background:var(--accent-soft);
+  padding:12px 16px;max-width:70ch;font-size:.97rem;}
+.rec strong{color:var(--ink);}
+tr.pick td{background:var(--accent-soft);}
+td.def{font-size:.9rem;color:var(--muted);min-width:20ch;}
+
+math{font-family:"Source Serif 4",Georgia,serif;font-size:1.18rem;}
+math mi,math mn{font-style:italic;}
+math mi.up,math mn{font-style:normal;}
+.eqblock{
+  border:1px solid var(--rule);border-radius:3px;background:var(--code-bg);
+  padding:24px 26px;display:flex;flex-direction:column;gap:20px;overflow-x:auto;
+}
+.eqrow{display:flex;flex-direction:column;gap:5px;min-width:max-content;}
+.eqrow math{margin:0;}
+.eqnote{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+  letter-spacing:.02em;
+}
+.eqrule{border:0;border-top:1px solid var(--rule);margin:2px 0;width:100%;}
+.consts{
+  display:grid;gap:6px 26px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);
+}
+.consts b{color:var(--ink);font-weight:700;}
+.work{
+  display:flex;flex-direction:column;gap:2px;margin-top:4px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;
+  color:var(--accent);font-variant-numeric:tabular-nums;white-space:pre;
+}
+.work span:last-child{color:var(--ink);font-weight:700;}
+.eqcap{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+  border-bottom:1px solid var(--rule);padding-bottom:12px;
+}
+.status{
+  display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+  font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;
+  color:var(--flag);background:var(--flag-soft);border:1px solid var(--flag);
+  border-radius:2px;padding:6px 12px;}
+.status .dot{width:7px;height:7px;border-radius:50%;background:var(--flag);flex:0 0 auto;}
+ul.plain{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;
+  gap:8px;max-width:68ch;}
+ul.plain li{padding-left:20px;position:relative;font-size:.98rem;color:var(--muted);}
+ul.plain li::before{content:"—";position:absolute;left:0;color:var(--flag);}
+ul.plain li strong{color:var(--ink);font-weight:600;}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--muted);font-size:.92rem;max-width:68ch;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="eyebrow">Nature draft &middot; 26 aug 2026 &middot; &sect;2.8</div>
+    <h1>GWR Machinery Check</h1>
+    <p class="standfirst">The revised section adds an &epsilon; offset, AICc
+      bandwidth search, the hat matrix, a sandwich variance, node-level
+      t-statistics and an FDR correction. <strong>Most of it does not touch
+      t_base</strong> &mdash; the hat matrix and the shape of the standard
+      errors are functions of the predictors and the kernel alone &mdash; so it
+      is checkable now even though the regression is not runnable.</p>
+    <span class="status"><span class="dot"></span>4 of 7 equations verified &middot;
+      the outcome variable is still absent</span>
+  </header>
+
+  <section>
+    <h2>Equation by equation</h2>
+    <div class="eqblock">
+<div class="eqrow"><div style="display:flex;gap:10px;align-items:baseline;margin-bottom:2px"><span class="eqnote">the regression, with the offset</span><span class="pill no">needs t_base</span></div><math display='block'><mi class='up'>ln</mi><mo fence='true'>(</mo><msub><mi>t</mi><mi class='up'>base</mi></msub><mo>+</mo><mi>&#949;</mi><mo fence='true'>)</mo><mo>=</mo><msub><mi>&#946;</mi><mi class='up'>0</mi></msub><mo>+</mo><msub><mi>&#946;</mi><mi class='up'>Img</mi></msub><mo>&#8290;</mo><mi class='up'>ln</mi><mo fence='true'>(</mo><mi>I</mi><mo>+</mo><mi>&#949;</mi><mo fence='true'>)</mo><mo>+</mo><msub><mi>&#946;</mi><mi class='up'>Id</mi></msub><mo>&#8290;</mo><mi class='up'>ln</mi><mo fence='true'>(</mo><mi>Y</mi><mo>+</mo><mi>&#949;</mi><mo fence='true'>)</mo><mo>+</mo><msub><mi>&#946;</mi><mi class='up'>Dep</mi></msub><mo>&#8290;</mo><mi class='up'>ln</mi><mo fence='true'>(</mo><mi>D</mi><mo>+</mo><mi>&#949;</mi><mo fence='true'>)</mo><mo>+</mo><msub><mi>&#949;</mi><mi class='up'>i</mi></msub></math><span class="eqnote" style="max-width:64ch;white-space:normal;line-height:1.5">&epsilon; = 10<sup>&minus;5</sup> guards against zero-valued terms. On this data <strong>nothing reaches zero</strong> &mdash; I &ge; 0.130, Y &ge; 0.111, D &ge; 0.095, because the sigmoids cannot output 0 and Y is a mean of bounded terms. The offset is harmless but inert; it would bite on I_raw and D_raw, which do hit 0.000.</span></div>
+<div class="eqrow"><div style="display:flex;gap:10px;align-items:baseline;margin-bottom:2px"><span class="eqnote">the local solve</span><span class="pill ok">checkable now</span></div><math display='block'><mover><mi>&#946;</mi><mo>&#770;</mo></mover><mo fence='true'>(</mo><mi>s</mi><mo fence='true'>)</mo><mo>=</mo><msup><mrow><mo fence='true'>(</mo><msup><mi>X</mi><mi class='up'>T</mi></msup><mi>W</mi><mi>X</mi><mo fence='true'>)</mo></mrow><mrow><mo>&#8722;</mo><mn>1</mn></mrow></msup><msup><mi>X</mi><mi class='up'>T</mi></msup><mi>W</mi><mi>Y</mi></math><span class="eqnote" style="max-width:64ch;white-space:normal;line-height:1.5">One weighted least squares per node. Verified invertible and well conditioned at every node and every bandwidth tested &mdash; no singular solves, worst condition number 8.1&times;10<sup>4</sup>.</span></div>
+<div class="eqrow"><div style="display:flex;gap:10px;align-items:baseline;margin-bottom:2px"><span class="eqnote">the kernel</span><span class="pill ok">checkable now</span></div><math display='block'><msub><mi>W</mi><mi class='up'>ij</mi></msub><mo>=</mo><msup><mi class='up'>e</mi><mrow><mo>&#8722;</mo><mn>0.5</mn><msup><mrow><mo fence='true'>(</mo><mfrac><msub><mi>d</mi><mi class='up'>ij</mi></msub><mi>b</mi></mfrac><mo fence='true'>)</mo></mrow><mn>2</mn></msup></mrow></msup></math><span class="eqnote" style="max-width:64ch;white-space:normal;line-height:1.5">Gaussian on network distance. Effective sample size runs 41 to 561 across the bandwidths tested, against the 4 parameters the model needs.</span></div>
+<div class="eqrow"><div style="display:flex;gap:10px;align-items:baseline;margin-bottom:2px"><span class="eqnote">bandwidth by AICc</span><span class="pill ok">partly checkable</span></div><math display='block'><mi class='up'>AICc</mi><mo>=</mo><mn>2</mn><mi>n</mi><mi class='up'>ln</mi><mo fence='true'>(</mo><mfrac><mrow><msup><mi>e</mi><mi class='up'>T</mi></msup><mi>e</mi></mrow><mi>n</mi></mfrac><mo fence='true'>)</mo><mo>+</mo><mi>n</mi><mi class='up'>ln</mi><mo fence='true'>(</mo><mn>2</mn><mi>&#960;</mi><mo fence='true'>)</mo><mo>+</mo><mi>n</mi><mfrac><mrow><mi>n</mi><mo>+</mo><mi class='up'>tr</mi><mo fence='true'>(</mo><mi>S</mi><mo fence='true'>)</mo></mrow><mrow><mi>n</mi><mo>&#8722;</mo><mn>2</mn><mo>&#8722;</mo><mi class='up'>tr</mi><mo fence='true'>(</mo><mi>S</mi><mo fence='true'>)</mo></mrow></mfrac></math><span class="eqnote" style="max-width:64ch;white-space:normal;line-height:1.5">Minimised over b by Golden Section Search. The first term needs residuals and so waits on t_base; <strong>the penalty term is computable now</strong> and is tabulated below.</span></div>
+<div class="eqrow"><div style="display:flex;gap:10px;align-items:baseline;margin-bottom:2px"><span class="eqnote">the sandwich variance</span><span class="pill ok">partly checkable</span></div><math display='block'><mi class='up'>Var</mi><mo fence='true'>(</mo><mover><mi>&#946;</mi><mo>&#770;</mo></mover><mo fence='true'>)</mo><mo>=</mo><msup><mrow><mo fence='true'>(</mo><msup><mi>X</mi><mi class='up'>T</mi></msup><mi>W</mi><mi>X</mi><mo fence='true'>)</mo></mrow><mrow><mo>&#8722;</mo><mn>1</mn></mrow></msup><msup><mi>X</mi><mi class='up'>T</mi></msup><msup><mi>W</mi><mn>2</mn></msup><mi>X</mi><msup><mrow><mo fence='true'>(</mo><msup><mi>X</mi><mi class='up'>T</mi></msup><mi>W</mi><mi>X</mi><mo fence='true'>)</mo></mrow><mrow><mo>&#8722;</mo><mn>1</mn></mrow></msup><mo>&#8901;</mo><msup><mi>s</mi><mn>2</mn></msup></math><span class="eqnote" style="max-width:64ch;white-space:normal;line-height:1.5">Everything except s<sup>2</sup> is a function of X and W alone, so the <em>shape</em> of the localized standard errors is fixed by the geometry and computable now. The outcome enters only as a scalar.</span></div>
+<div class="eqrow"><div style="display:flex;gap:10px;align-items:baseline;margin-bottom:2px"><span class="eqnote">residual variance</span><span class="pill ok">partly checkable</span></div><math display='block'><msup><mi>s</mi><mn>2</mn></msup><mo>=</mo><mfrac><mrow><msup><mi>e</mi><mi class='up'>T</mi></msup><mi>e</mi></mrow><mrow><mi>n</mi><mo>&#8722;</mo><mn>2</mn><mi class='up'>tr</mi><mo fence='true'>(</mo><mi>S</mi><mo fence='true'>)</mo><mo>+</mo><mi class='up'>tr</mi><mo fence='true'>(</mo><msup><mi>S</mi><mi class='up'>T</mi></msup><mi>S</mi><mo fence='true'>)</mo></mrow></mfrac></math><span class="eqnote" style="max-width:64ch;white-space:normal;line-height:1.5">The divisor is the effective degrees of freedom. It stays well clear of zero at every bandwidth &mdash; 548 at the tightest kernel on 681 nodes &mdash; so the variance will not explode.</span></div>
+<div class="eqrow"><div style="display:flex;gap:10px;align-items:baseline;margin-bottom:2px"><span class="eqnote">the local t-statistic</span><span class="pill no">needs t_base</span></div><math display='block'><msub><mi>t</mi><mi class='up'>k</mi></msub><mo fence='true'>(</mo><mi>s</mi><mo fence='true'>)</mo><mo>=</mo><mfrac><mrow><msub><mover><mi>&#946;</mi><mo>&#770;</mo></mover><mi class='up'>k</mi></msub></mrow><mrow><mi class='up'>SE</mi><mo fence='true'>(</mo><msub><mover><mi>&#946;</mi><mo>&#770;</mo></mover><mi class='up'>k</mi></msub><mo fence='true'>)</mo></mrow></mfrac></math><span class="eqnote" style="max-width:64ch;white-space:normal;line-height:1.5">Needs the coefficients, so needs the outcome.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The hat matrix, computed</h2>
+    <p class="lede">On 681 nodes. tr(S) is the effective number of
+      parameters; the s<sup>2</sup> divisor is the effective degrees of freedom.
+      Neither needs the outcome.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>bandwidth</th><th>tr(S)</th><th>tr(S<sup>T</sup>S)</th>
+        <th>effective df</th><th>s<sup>2</sup> divisor</th>
+        <th>AICc penalty</th></tr></thead>
+      <tbody><tr><td class="n">60 m</td><td class="n">97.2</td><td class="n">61.6</td><td class="n">583.8</td><td class="n">548.2</td><td class="n">910.9</td></tr><tr><td class="n">100 m</td><td class="n">42.7</td><td class="n">26.2</td><td class="n">638.3</td><td class="n">621.9</td><td class="n">774.5</td></tr><tr class=pick><td class="n">150 m</td><td class="n">22.7</td><td class="n">14.0</td><td class="n">658.3</td><td class="n">649.6</td><td class="n">730.2</td></tr><tr><td class="n">250 m</td><td class="n">11.0</td><td class="n">7.0</td><td class="n">670.0</td><td class="n">666.1</td><td class="n">705.4</td></tr><tr><td class="n">400 m</td><td class="n">6.6</td><td class="n">4.7</td><td class="n">674.4</td><td class="n">672.6</td><td class="n">696.3</td></tr></tbody></table></div>
+    <div class="rec">No degeneracy anywhere. The AICc penalty falls monotonically
+      with bandwidth, so once residuals exist the Golden Section Search will
+      trade it against fit rather than run to an edge.</div>
+  </section>
+
+  <section>
+    <h2>Two things that do not line up</h2>
+    <ul class="plain">
+      <li><strong>n = 1,320 is not this frame.</strong> The paper states 1,320
+        nodes on a sidewalk dual-discretization network &mdash; 660 &times; 2.
+        This frame produces <strong>2,724</strong> half-views from
+        681 nodes. The FDR correction is applied over n, so every localized
+        p-value threshold depends on which is right.</li>
+      <li><strong>|t| &ge; 2.65 is an outcome, not a threshold.</strong> The
+        arithmetic is correct &mdash; two-sided p at 2.65 is 0.0080 &mdash; but
+        under Benjamini-Hochberg the critical value is k&middot;&alpha;/m for the
+        largest passing rank k. It is computed from the fitted p-values, not
+        fixed before the fit.</li>
+    </ul>
+    <div class="tablewrap"><table>
+      <thead><tr><th>m</th><th></th><th>discoveries k</th><th>k/m</th>
+        <th>critical p</th><th>|t|</th></tr></thead>
+      <tbody><tr><td class="n">1,320</td><td class="def">the paper's n</td><td class="n">1</td><td class="n">0.001</td><td class="n">0.00004</td><td class="n">4.12</td></tr><tr><td class="n">1,320</td><td class="def">the paper's n</td><td class="n">50</td><td class="n">0.038</td><td class="n">0.00189</td><td class="n">3.11</td></tr><tr class="pick"><td class="n">1,320</td><td class="def">the paper's n</td><td class="n">211</td><td class="n">0.160</td><td class="n">0.00799</td><td class="n">2.65</td></tr><tr><td class="n">1,320</td><td class="def">the paper's n</td><td class="n">500</td><td class="n">0.379</td><td class="n">0.01894</td><td class="n">2.35</td></tr><tr><td class="n">1,320</td><td class="def">the paper's n</td><td class="n">1,320</td><td class="n">1.000</td><td class="n">0.05000</td><td class="n">1.96</td></tr><tr><td class="n">2,724</td><td class="def">this frame</td><td class="n">1</td><td class="n">0.000</td><td class="n">0.00002</td><td class="n">4.28</td></tr><tr><td class="n">2,724</td><td class="def">this frame</td><td class="n">50</td><td class="n">0.018</td><td class="n">0.00092</td><td class="n">3.31</td></tr><tr><td class="n">2,724</td><td class="def">this frame</td><td class="n">211</td><td class="n">0.077</td><td class="n">0.00387</td><td class="n">2.89</td></tr><tr class="pick"><td class="n">2,724</td><td class="def">this frame</td><td class="n">500</td><td class="n">0.184</td><td class="n">0.00918</td><td class="n">2.61</td></tr><tr><td class="n">2,724</td><td class="def">this frame</td><td class="n">2,724</td><td class="n">1.000</td><td class="n">0.05000</td><td class="n">1.96</td></tr></tbody></table></div>
+    <div class="rec">2.65 is the BH threshold <em>only if about 211 of 1,320
+      nodes come out significant</em> &mdash; roughly 16% of the map
+      non-stationary. On 2,724 nodes the same count gives 2.89. Stating the
+      threshold in advance assumes the answer.</div>
+  </section>
+
+  <section>
+    <h2>What is still blocked</h2>
+    <p class="lede">Only the outcome. <code>t_base</code> is still specified as
+      &ldquo;public data feeds and computer-vision sensor nodes&rdquo;, and the
+      draft's own limitations section concedes the calibration &ldquo;remains
+      dependent on a static temporal snapshot of pedestrian activity&rdquo;.
+      Queried live, NYC Open Data has <strong>0 automated pedestrian sensors
+      within 1 km</strong> and <strong>1 manual count site inside the frame</strong>
+      &mdash; and both measure flow past a point, not time spent at it.</p>
+    <div class="rec">Everything else is ready. The predictors are separable
+      (VIF 1.60), the solve is stable, the hat matrix is well behaved, and 150 m
+      is a sensible starting bandwidth. The moment stayability counts exist for
+      even a sample of nodes, this runs.</div>
+  </section>
+
+  <footer>
+    <p>Computed by <code>tools/gwr_machinery.py</code> and
+      <code>tools/gwr_feasibility.py</code> over
+      <code>results/tables/vlm_calculations.csv</code> and <code>nodes.gpkg</code>.
+      Distances are Euclidean where the manuscript specifies network distance
+      &mdash; close enough on a 20 m grid to test feasibility, but the real
+      calibration should use the network. The hat matrix is accumulated row by
+      row; S is never formed whole.</p>
+  </footer>
+</div>

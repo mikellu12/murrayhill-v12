@@ -13,7 +13,7 @@ Six strata over the Murray Hill grid, read bottom to top:
 | **G** | green dimension | 0.00 – 0.72 |
 | **M** | morphological dimension | 0.05 – 0.90 |
 | **P** | permeability dimension | 0.00 – 0.76 |
-| **SIM** | weighted composite, 0.34 G + 0.33 M + 0.33 P | 0.04 – 0.61 |
+| **SIM** | weighted composite, equal thirds of G, M, P | 0.04 – 0.61 |
 
 Every range matches `data/processed/sim_index.csv` exactly, so the drawing is of
 the current frame and not an earlier one. Bar height is the value at each 20 m
