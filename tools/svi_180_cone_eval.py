@@ -48,9 +48,13 @@ import pandas as pd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-sys.path.insert(0, str(HERE))
 from common import PROC, RES, banner
-from svi_180_sim_vlm import RATE
+
+# Listed here rather than imported from svi_180_sim_vlm, which pulls torch --
+# absent from .venv by design, since that env is analysis-only.
+RATE = ["vertical_greenery", "vertical_hardscape", "green_eye_level",
+        "green_softening", "signage_detail", "enclosure", "facade_variation",
+        "walking_room", "ground_floor_activity"]
 
 CONES = ("left", "centre", "right")
 CANDIDATES = {
@@ -89,7 +93,8 @@ def lmg(X, y):
             cur = r2(y, A @ beta)
             share[j] += max(cur - prev, 0.0)
             prev = cur
-    share /= np.math.factorial(k)
+    import math
+    share /= math.factorial(k)
     return share / share.sum() if share.sum() > 0 else share
 
 

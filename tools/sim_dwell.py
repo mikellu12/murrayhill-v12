@@ -32,10 +32,11 @@ import pandas as pd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import CFG, PROC, RES, banner, bin_mask
+from common import CFG, PROC, RES, banner, bin_mask, weights
 
 FOV = CFG["directional"]["fov"]
-W = CFG["sim"]["weights"]
+W = {k: weights(v) if isinstance(v, dict) else v
+     for k, v in CFG["sim"]["weights"].items()}
 SATQ = CFG["sim"]["saturation_quantile"]
 
 # Terms whose raw share is too sparse to weigh against building or road.

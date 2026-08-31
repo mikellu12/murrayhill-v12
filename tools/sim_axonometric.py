@@ -86,17 +86,24 @@ def main():
     ap.add_argument("--layers", nargs="+",
                     default=["GVI", "G", "M", "P", "SIM"],
                     help="bottom to top; any column of the joined table")
-    ap.add_argument("--out", type=Path,
-                    default=RES / "figures" / "figure_axonometric_sim.png")
+    ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--nodes", type=Path, default=PROC / "nodes.gpkg",
                     help="coordinate source. A file without node_id (e.g. "
                          "final_nodes_cleaned.gpkg) is matched spatially, and "
                          "any sim_index node it does not contain is dropped.")
+    ap.add_argument("--source", default="pixel", choices=["pixel", "vlm"],
+                    help="pixel reads sim_index.csv (G/M/P/SIM); vlm reads "
+                         "vlm_calculations.csv (I_raw/Y/D_raw/M), pooling the "
+                         "four half-views of each node")
     ap.add_argument("--dpi", type=int, default=300)
     ap.add_argument("--elev", type=float, default=28.0)
     ap.add_argument("--azim", type=float, default=-72.0)
     args = ap.parse_args()
-    banner("exploded axonometric of the SIM layers")
+    if args.out is None:
+        args.out = RES / "figures" / (
+            "figure_axonometric_vlm.png" if args.source == "vlm"
+            else "figure_axonometric_sim.png")
+    banner(f"exploded axonometric, {args.source} layers")
 
     nodes = gpd.read_file(PROC / "nodes.gpkg").to_crs(UTM)
     alt = None
@@ -105,16 +112,37 @@ def main():
         if "original_id" in alt.columns:
             alt = alt.drop_duplicates("original_id")
         print(f"coordinate source: {args.nodes.name} ({len(alt)} locations)")
-    sim = pd.read_csv(PROC / "sim_index.csv")
+    if args.source == "vlm":
+        # Four half-views per node -- two walks by two sides -- and the
+        # strata are drawn per node, so they pool here. Mean, not median:
+        # the layers are meant to show where a dimension is high, and the
+        # median of four discards the pair that differ.
+        v = pd.read_csv(RES / "tables" / "vlm_calculations.csv")
+        sim = (v.groupby("node_id")[["I_raw", "Y", "D_raw", "M"]]
+                 .mean().reset_index())
+        print(f"{len(v)} half-views pooled to {len(sim)} nodes")
+        if args.layers == ["GVI", "G", "M", "P", "SIM"]:
+            args.layers = ["I_raw", "Y", "D_raw", "M"]
+    else:
+        sim = pd.read_csv(PROC / "sim_index.csv")
     met = pd.read_csv(PROC / "metrics.csv")[["node_id", "GVI", "VEI"]]
 
     # The join the banner was worried about. On node_id, exactly.
+    met = met.drop(columns=[c for c in met.columns
+                            if c != "node_id" and c in sim.columns])
     d = sim.merge(met, on="node_id", how="left").merge(
         nodes[["node_id", "geometry"]], on="node_id", how="left")
     miss = d.geometry.isna().sum()
     print(f"{len(d)} rows; matched to a coordinate: {len(d) - miss}, unmatched: {miss}")
     if miss:
         sys.exit("unmatched node_id -- refusing to draw a figure with guessed positions")
+    # A layer with no value at a node would draw a zero-height bar, which
+    # reads as a measured minimum rather than an absence. Drop those rows.
+    need = [c for c in args.layers if c in d.columns]
+    before = len(d)
+    d = d.dropna(subset=need).reset_index(drop=True)
+    if len(d) < before:
+        print(f"  dropped {before - len(d)} node(s) missing a layer value")
     d = gpd.GeoDataFrame(d, geometry="geometry", crs=UTM)
     if alt is not None:
         # The alternative frame carries no node_id, so membership is decided

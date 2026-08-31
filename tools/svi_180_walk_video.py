@@ -17,11 +17,27 @@ H.264 needs even dimensions and the comparison frames are 1440x1853, an odd
 height, so the scale filter rounds to even (-2) instead of cropping a row off
 the mask.
 
+--gif writes a GIF beside each mp4, from the same frame list. Two passes with
+palettegen/paletteuse rather than one: GIF is capped at 256 colours, and the
+default web-safe palette turns a streetscape's sky and facade gradients into
+posterised bands. stats_mode=diff weights the palette toward what changes
+between frames, which is the frontage rather than the sky.
+
+The dwell converts exactly -- GIF delays are in centiseconds and 0.2s is 20cs
+-- but the concat demuxer emits a variable-rate stream, so the chain forces
+CFR with an fps filter first. Without it the delays land on whatever the
+encoder infers.
+
+GIFs are written narrower than the mp4 by default. An uncompressed-ish 256
+colour format at 1440 px runs to tens of MB for a single walk, which is not
+what anyone wants to drop in a slide or a message.
+
 Street View pixels, so the output is gitignored like the frames it is built
 from.
 
     .venv/Scripts/python tools/svi_180_walk_video.py
     .venv/Scripts/python tools/svi_180_walk_video.py --dwell 0.4 --width 1080
+    .venv/Scripts/python tools/svi_180_walk_video.py --src data/raw/svi_180 --gif
 """
 import argparse
 import shutil
@@ -63,6 +79,12 @@ def main():
     ap.add_argument("--crf", type=int, default=20,
                     help="x264 quality, lower is better and larger")
     ap.add_argument("--street", default=None, help="only this street folder")
+    ap.add_argument("--gif", action="store_true",
+                    help="also write a GIF beside each mp4")
+    ap.add_argument("--gif-width", type=int, default=720,
+                    help="GIF output width (default 720)")
+    ap.add_argument("--no-mp4", action="store_true",
+                    help="skip the mp4 and write only the GIF")
     args = ap.parse_args()
     banner("one video per walk")
 
@@ -99,20 +121,38 @@ def main():
                                          encoding="utf-8") as fh:
             fh.write("\n".join(lines))
             listfile = fh.name
+        concat = [ffmpeg, "-y", "-loglevel", "error", "-f", "concat",
+                  "-safe", "0", "-i", listfile]
+        jobs = []
+        if not args.no_mp4:
+            jobs.append((dest, concat + [
+                "-vf", f"scale={args.width}:-2",
+                "-c:v", "libx264", "-preset", "medium", "-crf", str(args.crf),
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(dest)]))
+        if args.gif:
+            gif = dest.with_suffix(".gif")
+            jobs.append((gif, concat + [
+                "-vf",
+                f"fps={1 / args.dwell:g},"
+                f"scale={args.gif_width}:-2:flags=lanczos,"
+                "split[a][b];[a]palettegen=stats_mode=diff[p];"
+                "[b][p]paletteuse=dither=bayer:bayer_scale=3",
+                "-loop", "0", str(gif)]))
+
+        mb, err = 0.0, None
         try:
-            r = subprocess.run(
-                [ffmpeg, "-y", "-loglevel", "error", "-f", "concat", "-safe",
-                 "0", "-i", listfile, "-vf", f"scale={args.width}:-2",
-                 "-c:v", "libx264", "-preset", "medium", "-crf", str(args.crf),
-                 "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(dest)],
-                capture_output=True, text=True)
+            for out, cmd in jobs:
+                r = subprocess.run(cmd, capture_output=True, text=True)
+                if r.returncode != 0 or not out.exists():
+                    err = f"{out.suffix}: {r.stderr.strip()[:160]}"
+                    break
+                mb += out.stat().st_size / 1024 / 1024
         finally:
             Path(listfile).unlink(missing_ok=True)
 
-        if r.returncode != 0 or not dest.exists():
-            failed.append((street, direction, r.stderr.strip()[:200]))
+        if err:
+            failed.append((street, direction, err))
             continue
-        mb = dest.stat().st_size / 1024 / 1024
         made.append((street, direction, len(frames),
                      len(frames) * args.dwell, mb))
         print(f"  {street:<22}{direction:<16}{len(frames):>4} frames  "

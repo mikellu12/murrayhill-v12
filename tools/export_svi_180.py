@@ -48,10 +48,11 @@ from tqdm.auto import tqdm
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import CFG, PROC, banner, image_path
+from common import CFG, PROC, banner, street_grouping, image_path
 
 FOV = CFG["directional"]["fov"]           # 180
-UTM = 32618                               # metric CRS for the along-walk sort
+UTM = 32618
+SEQ_WIDTH = 3          # zero-pad the sequence to this many digits
 CARDINALS = {"N": 0, "E": 90, "S": 180, "W": 270}
 
 
@@ -201,15 +202,17 @@ def main():
                     help="keep tunnel interiors and viaduct deck nodes")
     ap.add_argument("--limit", type=int, default=None,
                     help="only the first N streets, for a quick check")
+    ap.add_argument("--no-segments", action="store_true",
+                    help="ignore street_segment and fall back to "
+                         "cleaned_street; segments are the default")
     args = ap.parse_args()
     banner("export 180-degree panoramas")
 
     manifest = pd.read_csv(PROC / "manifest.csv")
     nodes = gpd.read_file(PROC / "nodes.gpkg")
-    if "in_study" in nodes.columns:
-        nodes = nodes[nodes.in_study]
-    # Drop the split suffix so folders match the street names already in use.
-    nodes["folder"] = nodes.chain.str.split("#").str[0]
+    nodes, label = street_grouping(nodes, prefer_segments=not args.no_segments)
+    print(f"grouping by {label} ({nodes.folder.nunique()} streets, "
+          f"{len(nodes)} nodes)")
 
     info = nodes[nodes.node_id.isin(set(manifest.node_id))].copy()
 
@@ -253,7 +256,12 @@ def main():
                 _proj=np.round(g._e * e + g._n * n_),
                 _perp=g._e * n_ - g._n * e,
             ).sort_values(["_proj", "_perp"])
-            width = len(str(len(ordered)))
+            # FIXED width, never len(ordered). Deriving it from the batch
+            # made the filename depend on how many nodes that run happened to
+            # export: a --missing-only pass over 4 nodes wrote 1_, 2_ into a
+            # folder the full run had written 01_, 02_ into. Same node, two
+            # names, and a sorted listing that puts 10_ before 1_.
+            width = SEQ_WIDTH
             folder = args.out / street / walk
             folder.mkdir(parents=True, exist_ok=True)
 

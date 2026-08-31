@@ -58,11 +58,12 @@ from transformers import (AutoProcessor, BitsAndBytesConfig,
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import CFG, PROC, RES, banner
+from common import CFG, PROC, RES, banner, weights
 
 MODEL = "Qwen/Qwen2-VL-7B-Instruct"
 MAX_PIXELS = 1024 * 28 * 28
-W = CFG["sim_vlm"]["weights"]
+W = {k: weights(v) if isinstance(v, dict) else v
+     for k, v in CFG["sim_vlm"]["weights"].items()}
 
 SYSTEM = ("You are an expert urban morphologist evaluating streetscape "
           "quality at eye-level (1.5m).")
