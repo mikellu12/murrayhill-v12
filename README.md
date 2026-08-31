@@ -4,17 +4,27 @@ Measuring the Street Interface Matrix — Place Imageability, Place Identity,
 Place Dependence — at 20 m sampling nodes across Murray Hill, Manhattan, from
 Google Street View imagery.
 
-Two tracks run over the same frame. A **segmentation track** produces Green
-View Index, Visual Enclosure Index and azimuthal class profiles with an
-open-weight semantic segmenter. A **VLM track** rates ten perceptual fields
-with a vision-language model, for the terms no segmenter can produce. The
-first exists largely to validate the second: five of the ten VLM fields have a
-measured counterpart in the same 90 degrees of view, and those five are the
-only evidence that the five without one come from a model reading this imagery
-sensibly.
+Two tracks run over the same frame. A **segmentation track** produces class
+shares from two open-weight semantic segmenters, plus Green View Index, Visual
+Enclosure Index and azimuthal profiles. A **VLM track** rates ten perceptual
+fields with a vision-language model, for the terms no segmenter can produce.
+The first exists largely to validate the second: **eight of the ten** VLM
+fields now have a measured counterpart in the same 90 degrees of view, and
+those eight are the only evidence that the model is reading this imagery
+sensibly rather than producing plausible numbers.
 
-The specification is `Nature.8.27.docx`, sections 2.7 and 2.8. Where the code
-departs from it, the departure is stated here and in `config.yaml`, never left
+Read the twin table in section 4 before trusting any field. The correlations
+run from +0.718 down to +0.143, two fields have no usable counterpart at all,
+and the three greenery fields turn out not to be separable from one another —
+which matters, because eye-level greenness is the framework's headline claim.
+
+The specification is `Nature.8.31spacesyntax.docx` with
+`formulawithspacesyntax.docx` alongside it. The two currently disagree on one
+point: the canyon penalty is `Ω_i` and trails the product in the second, and is
+`A_i` and leads it in the first. They are mathematically identical, but `A_i`
+collides with the Stayability Amplification Factor, which the first document
+renames `F_i` and the second still calls `A_i`. Where the code departs from the
+specification, the departure is stated here and in `config.yaml`, never left
 implicit.
 
 ---
@@ -24,9 +34,9 @@ implicit.
 ```
 1  nodes          OSM network -> 20 m nodes, headings, sequence
 2  imagery        Street View metadata -> panoramas -> reprojected views
-3  segmentation   per-node azimuthal profiles -> GVI, VEI, arc shares
+3  segmentation   two segmenters -> class shares; azimuthal profiles -> GVI, VEI
 4  VLM ratings    ten fields, one call per field, logits read not generated
-5  compose        I, Y, D, Omega -> M, and validate against the segmenter
+5  compose        I, Y, D, Omega -> M, and validate against the segmenters
 6  figures        maps, sections, cubes, ribbons
 ```
 
