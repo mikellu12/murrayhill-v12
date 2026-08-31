@@ -193,8 +193,21 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, required=True,
                     help="destination; street/direction folders are made inside")
-    ap.add_argument("--width", type=int, default=1440,
-                    help="panorama width in px (default 1440, ~8 px per degree)")
+    # 2880, not 1440. Both exports defaulted to 1440, but this one spreads it
+    # over 180 degrees and export_svi_90 spreads it over 90, so the same number
+    # meant half the angular resolution here -- 8 px/degree against 16 -- and,
+    # because the vertical field is derived from fc, half the height as well:
+    # 1440x916 against 1440x1833, from identical source pixels. That was a
+    # copied default, never a choice. Matching px/degree makes the two
+    # comparable, which is what the street-type split in export_svi_90 needs.
+    #
+    # Existing data/raw/svi_180 was written at 1440 and is 8 px/degree. It fed
+    # only exploratory tools -- no rating in results/tables came from it -- but
+    # re-running here at the new default will put two sizes in one folder
+    # unless the old tree is cleared first.
+    ap.add_argument("--width", type=int, default=2880,
+                    help="panorama width in px (default 2880, 16 px per "
+                         "degree, matching export_svi_90)")
     ap.add_argument("--quality", type=int, default=88)
     ap.add_argument("--no-pad", action="store_true",
                     help="bare sequence numbers instead of zero padded")
