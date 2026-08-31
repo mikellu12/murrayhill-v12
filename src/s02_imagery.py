@@ -117,10 +117,33 @@ def main():
         sys.exit(f"{len(stale)} images in {IMG} belong to node IDs that are "
                  f"not in the current frame. Delete {IMG} and re-run.")
 
+    # Off-target captures are excluded by default because mixing capture dates
+    # mixes seasons into the greenery variables the study measures. Enabled
+    # deliberately here: 29 of the 31 affected nodes are leaf-on (May-Sep), so
+    # the seasonal objection applies to two nodes rather than all of them, and
+    # the built morphology those nodes contribute is stable across the gap.
+    # pano_date rides along in the manifest so any analysis can exclude them.
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--include-offtarget", action="store_true")
+    args, _ = ap.parse_known_args()
+
     use = meta[meta.usable]
-    print(f"\nimagery: {len(use)*4} requests "
-          f"(${len(use)*4*0.007:.2f} at list price; free tier covers "
-          f"10,000/month)")
+    if args.include_offtarget:
+        extra = meta[ok & near & ~meta.usable]
+        if len(extra):
+            print(f"\n--include-offtarget: adding {len(extra)} node(s) whose "
+                  f"panorama is not {CAP['target']}")
+            print(extra.pano_date.value_counts().to_string())
+            use = pd.concat([use, extra], ignore_index=True)
+    # Count what is actually missing, not len(use)*4. The loop skips any file
+    # already on disk, so quoting the full total reads as a bill for a re-fetch
+    # that never happens -- 3,064 requests announced against 124 performed.
+    todo = sum(1 for _, r in use.iterrows() for h in SP["headings"]
+               if not (IMG / f"{r.node_id}_{h:03d}.jpg").exists())
+    cached = len(use) * len(SP["headings"]) - todo
+    print(f"\nimagery: {todo} request(s) to make, {cached} already cached "
+          f"(${todo * 0.007:.2f} at list price; free tier covers 10,000/month)")
 
     man, failed = [], 0
     for _, r in tqdm(list(use.iterrows()), desc="imagery", mininterval=2.0):
@@ -141,7 +164,9 @@ def main():
                         print(f"\n  HTTP {resp.status_code}: {resp.content[:120]}")
                     continue
                 fp.write_bytes(resp.content)
-            man.append({"node_id": r.node_id, "heading": h, "path": str(fp)})
+            man.append({"node_id": r.node_id, "heading": h, "path": str(fp),
+                        "pano_date": r.pano_date,
+                        "on_target": bool(r.pano_date == CAP["target"])})
 
     mf = pd.DataFrame(man)
     mf.to_csv(PROC / "manifest.csv", index=False)

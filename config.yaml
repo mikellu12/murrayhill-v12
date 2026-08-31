@@ -7,10 +7,24 @@ paths:
   results: results
 
 study_area:
-  # Madison Ave (W) to First Ave (E), E 34th (S) to E 42nd (N).
+  # THE STUDY AREA IS THE QUADRILATERAL BELOW, NOT THE BBOX.
+  #
+  # Murray Hill: Madison Ave (W) to First Ave (E), E 34th (S) to E 42nd (N).
+  # That boundary is set by `corner_pairs` -- the four named intersections
+  # are located in the downloaded network, the quadrilateral between them is
+  # built, and everything outside it plus clip_buffer_m is discarded in s01.
+  # 766 nodes across 19 street segments come out of it.
+  #
   # Fifth Avenue and the Empire State block are Midtown South / NoMad on
   # most delimitations. Manhattan neighbourhood boundaries are not
   # official; cite the source you follow and state it in the methods.
+  #
+  # `bbox` is a DOWNLOAD BOUND for OSMnx, nothing more. It is 3.04 km2 to the
+  # study area's 1.16 -- 250 to 400 m of margin on every side -- because the
+  # corner intersections have to sit inside the downloaded graph to be found
+  # by name, and the street chains have to run past the clip line to be cut
+  # cleanly rather than ending ragged at the edge. Nothing in that margin is
+  # ever studied: it is dropped in s01 and never reaches s02.
   bbox: {west: -73.9870, south: 40.7415, east: -73.9655, north: 40.7565}
   corner_pairs:
     - ["Madison\\s+Ave",       "East\\s+34th\\s+St"]
@@ -100,7 +114,134 @@ open_vocabulary:
 
 geometry:
   corridor_m: 35
-  facade_half_m: 90
+  # How far each side of the probe reaches. 40 m caps a measurable street at
+  # 80 m facade to facade, which no street in the study area exceeds -- the
+  # readings above that were crossings measured diagonally, not sections.
+  #
+  # The cost is asymmetry: a node with facades at 10 m and 45 m totals 55 m,
+  # well inside 80, but its 45 m side fails a 40 m reach and the node is lost
+  # rather than clipped. At 90 m reach 627 nodes measured; at 40 m, 584.
+  # Capping the TOTAL at 80 m instead would keep 569 and lose only genuinely
+  # wide readings -- see hw_max_w_m below, which does that as well.
+  facade_half_m: 40
+  # The width probe is a CONE, not a line. A thin ray slides through gaps
+  # between footprint polygons and past building edges: 12 per cent of
+  # mid-block nodes failed that way. The error being tolerated is angular --
+  # a mis-estimated street bearing displaces the ray in proportion to
+  # distance -- so the tolerance is angular too: 1.2 m wide at 14 m, 7.9 m at
+  # 90 m. Measured at +/-1, 2.5, 5 and 10 degrees; per-street median widths
+  # are unchanged at 2.5 (East 41st 19.0 m, Park Avenue 43.6 m) while 37
+  # more nodes resolve.
+  #
+  # Widened 2.5 -> 10 after finding 169 nodes where the probe found a facade
+  # on one side only. Re-measuring the 502 nodes that already had a width:
+  # median 30.4 -> 29.6 m, median shift -0.07 m, and 118 more nodes resolve.
+  # 25 degrees was also tried and moves the median a further 2.3 m -- it
+  # starts catching buildings down the block rather than across the street --
+  # so 10 is the widest setting that leaves the existing measurements alone.
+  facade_cone_deg: 10
+  # Used only to decide WHY a side came back empty, never to measure a width.
+  # A side with no footprint even in this much wider fan is genuinely open --
+  # no wall there to find -- rather than one the probe aimed past.
+  facade_open_test_deg: 25
+  # ...and it reaches further than the measuring probe, deliberately. These are
+  # two different questions and one distance cannot serve both: "how far to the
+  # opposite wall" is capped at facade_half_m because nothing beyond that is a
+  # street, but "is there NO wall at all" must look past that cap or a 50 m gap
+  # gets certified as open sky. Sharing the 40 m reach put 17 nodes into
+  # open_one_side that have a wall at 40-90 m -- eight consecutive Park Avenue
+  # tunnel nodes among them -- each taking Omega = 1.0 on the strength of a
+  # wall the probe was too short to see.
+  facade_open_reach_m: 90
+  # ...unless the empty bearing happens to point down a cross street, which
+  # is also empty for 90 m and looks identical to open sky. A corner node
+  # caught this way is the crossing case, not an open street, and belongs in
+  # the segment-median fill.
+  #
+  # Measured against that street's fitted AXIS, not the bearing to its nearest
+  # node. Small angle = looking along the corridor = a crossing; large angle =
+  # looking across it, which can be genuinely open. The nearest-node version
+  # demoted n00030, whose empty side is the East River: 18.4 deg to the
+  # nearest tunnel-segment node but 84.8 deg to that road's axis.
+  open_cross_angle_deg: 20
+  open_cross_dist_m: 25
+  # Which probe measures the width.
+  #
+  # `cone` is a wedge from the node that widens with distance, tolerating an
+  # angular error in the fitted street bearing. `band` is a parallel-sided
+  # corridor one node-spacing wide, sampled by hw_band_rays parallel rays; it
+  # tiles the street so adjacent nodes never measure the same frontage twice,
+  # and unlike the cone it does not widen at range, so it cannot punch through
+  # a gap onto the next block.
+  #
+  # hw_band_stat picks how the rays are reduced. `min` takes the nearest wall
+  # any ray found, which is the same question the cone asks. `median` takes the
+  # typical wall distance across the corridor, a different quantity: on a
+  # broken frontage the two disagree by a lot (n00527 gives 18.9 against 33.3)
+  # because half the rays escape through a gap.
+  #
+  # WHY band+min AND NOT THE CONE. Pooled over all nodes the cone correlates
+  # better with measured enclosure -- rho +0.543 against +0.482 vs VEI -- and
+  # that comparison is a Simpson's paradox. Split by whether a node sits at a
+  # crossing, band+min matches the imagery at least as well in every subgroup:
+  #
+  #                                band - cone      95% CI
+  #   mid-block     vs VEI              +0.005   [-0.017, +0.030]
+  #   mid-block     vs sky share        +0.004   [-0.022, +0.029]
+  #   at a crossing vs VEI              +0.025   [-0.090, +0.154]
+  #   at a crossing vs sky share        +0.004   [-0.100, +0.127]
+  #   pooled        vs VEI              -0.064   [-0.103, -0.032]
+  #
+  # The cone's pooled lead comes from returning enormous widths at crossings
+  # -- 110 m at n00377, on a street whose corner buildings stand 10 m away --
+  # which splits the data into two clumps that happen to track crossing versus
+  # mid-block. Crossings really are more open, so the cone is rewarded for
+  # encoding crossing-ness rather than for measuring width. Every within-group
+  # CI spans zero, so this does not make band+min better; it removes the
+  # cone's apparent advantage and leaves the physical argument to decide.
+  #
+  # That argument: a pedestrian's enclosure responds to the nearest facade in
+  # view, the band tiles the street so adjacent nodes never measure the same
+  # frontage twice, and it does not report 110 m on a 20 m street.
+  hw_probe: band            # cone | band
+  hw_band_stat: min         # min | median
+  hw_band_rays: 9
+  # Total facade-to-facade width accepted. Anything wider is a crossing being
+  # measured across its diagonal, not a street. Redundant with a 40 m reach
+  # (2 x 40 = 80) but kept explicit so the reach can change without silently
+  # changing what counts as a street.
+  hw_min_w_m: 4
+  hw_max_w_m: 80
+  # A node inside a crossing has no facade on the perpendicular -- the ray
+  # points down the cross street. 87 per cent of nodes within 15 m of a
+  # crossing fail, against a flat 12 per cent everywhere else. H/W is not
+  # mismeasured there, it is undefined: there is no street wall to measure.
+  # Those nodes inherit the median of measured nodes on the same street
+  # within this radius, because the canyon they sit in is the street's, and
+  # HW_source records which nodes were filled rather than measured.
+  # 20 * sqrt(2) = 28.28 m: the diagonal of one 20 m sampling cell, so a node
+  # inherits only from its immediate neighbours. Nodes on a street are
+  # collinear, so this reaches the node before and after at 20 m and stops
+  # short of the next at 40 m -- a one-donor "median" is a copy of the
+  # neighbour, not a smoothed estimate. Wider radii were measured: 60 m gives
+  # 4 donors and rho +0.752 against VEI, 120 m gives 6 donors, spread 1.40 and
+  # rho +0.708. All three are indistinguishable under a face-clustered
+  # bootstrap, so this is chosen on the principle that a borrowed aspect ratio
+  # should come from the adjacent street section, not from 120 m away.
+  hw_fill_radius_m: 28.2842712474619
+  # mean or median over the donors. At this radius the pool is one or two
+  # nodes and the two agree to 0.000, so the choice is inert here; it matters
+  # only at wide radii, where a donor pool can straddle a morphological break
+  # (East 40th runs 0.87-7.89 within 120 m) and the mean lands in a gap no
+  # node on the street occupies.
+  hw_fill_stat: mean        # mean | median
+  # Fill order, both operating on the street's own ordered series:
+  #   1. mean of every measured node on the same street within the radius
+  #   2. if none, walk the series outward and take the first measured node
+  #      found either way, nearer side winning
+  # Step 2 exists because a radius reaching one spacing cannot fill a RUN --
+  # every node inside a run has an unmeasured neighbour by construction. Every
+  # street here holds at least one measured node, so step 2 always resolves.
   height_min_m: 3
   height_max_m: 400
   footprint_datasets: [5zhs-2jue, qb5r-6dgf, nqwf-w8eh]
@@ -267,7 +408,8 @@ sim:
   # the one claim a reviewer could not let pass. They are stated priors, and
   # the index is only ever a weighted restatement of the pixel shares.
   weights:
-    dimension:     {green: 0.34, morphological: 0.33, permeability: 0.33}
+    # relative, normalised by common.weights(); 1/1/1 is exact equal thirds
+    dimension:     {green: 1, morphological: 1, permeability: 1}
     green:         {eye: 0.60, ground: 0.40}
     morphological: {articulation: 0.35, enclosure: 0.40, openness: 0.25}
     permeability:  {walkable: 0.50, affordance: 0.50}
@@ -473,16 +615,48 @@ spatial:
 # dwell outcome to fit against. Equal thirds unless a reason exists to differ.
 sim_vlm:
   weights:
-    dimension:    {imageability: 0.34, identity: 0.33, dependence: 0.33}
-    imageability: {nat_built: 0.34, gvi_eye: 0.33, gmi: 0.33}
-    identity:     {signboard: 0.34, enclosure: 0.33, sfv: 0.33}
-    dependence:   {sidewalk_paver: 0.34, sfv: 0.33, gfapi: 0.33}
+    # relative, normalised by common.weights(); 1/1/1 is exact equal thirds
+    dimension:    {imageability: 1, identity: 1, dependence: 1}
+    imageability: {nat_built: 1, gvi_eye: 1, gmi: 1}
+    identity:     {signboard: 1, enclosure: 1, sfv: 1}
+    # Section 2.7: D_raw = g1*V_pave + g2*IAS + g3*GFAPI. `ias` was `sfv`
+    # until the resting_affordance field existed -- which put facade
+    # variation in both Y and D and left Dependence with no affordance term,
+    # so the dimension measured walkable ground, an Identity trait, and
+    # ground-floor glazing rather than physical utility.
+    dependence:   {sidewalk_paver: 1, ias: 1, gfapi: 1}
   # P_natural_above / P_built_above is a ratio of two free quantities and is
   # unbounded, while every other term is a share in [0,1]. Summing them under
   # weights that total 1 would let the ratio decide the answer on its own --
   # the same trap sim_dwell.py documents for H/W against SVF. Mapped through
   # r/(1+r), which is monotone, fixes 1.0 at 0.5, and is bounded.
   nat_built_transform: ratio_over_one_plus_ratio
+  # ---- manuscript section 2.7, Cobb-Douglas coupling -------------------
+  # M_i = I^a * Y^b * D^c * Omega_i.  The exponents are elasticities and must
+  # sum to 1; they are NOT mixing weights and the composition is NOT a sum.
+  # Only Imageability and Dependence are sigmoidal -- Identity is linear,
+  # because greenery and walkability have activation thresholds and
+  # legibility does not.
+  cobb_douglas:
+    exponents:            {imageability: 0.40, identity: 0.20, dependence: 0.40}
+    imageability_sigmoid: {kappa: 12.0, tau: 0.20}
+    dependence_sigmoid:   {kappa: 15.0, tau: 0.15}
+    omega:                {psi: 0.15, hw_threshold: 2.0}
+    # section 2.8 regimes, classified on H/W
+    canyon_hw: 3.0
+    midblock_hw: [0.8, 1.2]
+    elasticity_by_regime:
+      # canyon: c -> 0.60, b -> 0.10 are stated; a is the remainder
+      avenue_canyon:     {imageability: 0.30, identity: 0.10, dependence: 0.60}
+      # mid-block: only a -> 0.50 is stated. b holds at its global 0.20 and c
+      # takes the remainder. That inference lives here, not in the code.
+      covenant_midblock: {imageability: 0.50, identity: 0.20, dependence: 0.30}
+      # POPS: all three stated
+      pops_setback:      {imageability: 0.45, identity: 0.15, dependence: 0.40}
+  # t_effective = t_base * (1 + lambda * M_i). The manuscript gives no value
+  # for lambda, so this is a placeholder and must not be reported as fitted.
+  dwell_lambda: 1.0
+
   # Bands for the H/W estimate. The VLM returns a NUMBER and the band is
   # derived here, so the prompt cannot anchor the model to one category --
   # which is exactly what happened when the categories were asked for

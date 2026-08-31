@@ -100,9 +100,20 @@ def main():
     metrics = (dm[dm.direction.eq("full360")]
                .drop(columns=["direction", "bearing_deg", "fov_deg",
                               "along_street"])
-               .merge(nodes[["node_id", "geometry", "chain", "chain_pos_m"]],
+               .merge(nodes[["node_id", "geometry", "chain", "chain_pos_m"]
+                            + [c for c in ("street_segment", "cross_dist",
+                                           "along_dist", "mapping_id")
+                               if c in nodes.columns]],
                       on="node_id"))
-    metrics = gpd.GeoDataFrame(metrics, geometry="geometry", crs=32618)
+    # Assert the CRS from what nodes.gpkg actually carries, never a literal.
+    # Stamping crs=32618 onto lat/lon degrees produces a frame that looks
+    # right, plots right and silently breaks every distance downstream: s05's
+    # 90 m probe found 0 of 764 facades because it was casting metres across
+    # a space measured in degrees.
+    metrics = gpd.GeoDataFrame(metrics, geometry="geometry", crs=nodes.crs)
+    if metrics.crs is None:
+        sys.exit("nodes.gpkg has no CRS -- refusing to guess")
+    metrics = metrics.to_crs(32618)
     sc = PROC / "scaffold_by_node.csv"
     if sc.exists():
         metrics = metrics.merge(pd.read_csv(sc), on="node_id", how="left")

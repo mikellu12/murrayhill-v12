@@ -302,3 +302,58 @@ def theoretical_svf_band(hw, band_deg=BAND_DEG):
     hw = np.asarray(hw, dtype=float)
     blocked = np.degrees(np.arctan(2.0 * hw))
     return np.clip(band_deg - blocked, 0, band_deg) / band_deg
+
+
+def weights(d):
+    """Normalise a weight mapping so it sums to exactly 1.
+
+    Weights live in config as RELATIVE numbers, not as decimals that already
+    sum to 1. Writing equal thirds as 0.34/0.33/0.33 is not equal weighting --
+    it hands one term an extra point purely for being listed first, and which
+    term that is was never a decision anyone made. Writing 1/1/1 and dividing
+    here says what was meant, keeps the sum exact, and lets a genuine
+    unequal weighting be expressed as 2/1/1 without hand-computing decimals.
+    """
+    if not d:
+        raise ValueError("empty weight mapping")
+    if any(v < 0 for v in d.values()):
+        raise ValueError(f"negative weight in {d}")
+    total = sum(d.values())
+    if total <= 0:
+        raise ValueError(f"weights sum to {total} in {d}")
+    return {k: v / total for k, v in d.items()}
+
+
+def street_grouping(nodes, prefer_segments=True):
+    """Attach a `folder` column naming the street each node belongs to.
+
+    One precedence, used by every exporter, so a frame and its coordinate CSV
+    are the only inputs the pipeline needs:
+
+      street_segment   the coordinate mapping's own labels, when present.
+                       Splits Park Avenue into west / tunnel / east, which
+                       matters because the tunnel approach runs 100 m facade
+                       to facade against 44 m on the boulevard.
+      cleaned_street   the earlier hand-checked labelling, plus its
+                       `in_cleaned` filter.
+      chain            the raw network chains, split suffix dropped.
+
+    Returns (frame, label) where label names which was used. The frame is
+    filtered to rows that have that label, so a node the mapping does not
+    cover is dropped rather than silently folded into a neighbouring street.
+    """
+    n = nodes
+    if (prefer_segments and "street_segment" in n.columns
+            and n.street_segment.notna().any()):
+        n = n[n.street_segment.notna()].copy()
+        n["folder"] = n.street_segment
+        return n, "street_segment"
+    if "cleaned_street" in n.columns and n.cleaned_street.notna().any():
+        n = n[n.in_cleaned & n.cleaned_street.notna()].copy()
+        n["folder"] = n.cleaned_street
+        return n, "cleaned_street"
+    if "in_study" in n.columns:
+        n = n[n.in_study]
+    n = n.copy()
+    n["folder"] = n.chain.str.split("#").str[0]
+    return n, "chain"
