@@ -69,6 +69,7 @@ def main():
     # calibration is per imagery set and the source folder names it. Guessing
     # would silently apply svi_90's single 14%-wide mast to an svi_180 frame
     # that has two at 7%.
+    WIDE_SET = "svi_90_wide"
     mset = args.mast_set or args.src.name
     if not args.no_mast_mask:
         print(f"mast calibration: {mset}")
@@ -114,7 +115,11 @@ def main():
         im = Image.open(img).convert("RGB")
         # The mast is excluded from the DENOMINATOR as well as the numerator:
         # it is not part of the street, so a share should be of the street.
-        keep = ~mast_mask(im, mset) if not args.no_mast_mask else None
+        # per image, not per folder: the street-type split puts 90-degree
+        # halves and 180-degree strips in one tree, and the mast's share of
+        # the frame width differs between them
+        mset_i = WIDE_SET if img.stem.endswith("_F") else mset
+        keep = ~mast_mask(im, mset_i) if not args.no_mast_mask else None
         rec = {"file": r, "mast_share": 0.0 if keep is None
                else float(1.0 - keep.mean())}
         for tag, (proc, net, lab) in nets.items():
