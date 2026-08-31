@@ -46,7 +46,13 @@ sys.path.insert(0, str(HERE.parent / "src"))
 from common import PROJ_CRS, PROC, banner
 
 UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
-BRING = ["is_tunnel", "is_bridge", "heading_fwd_deg", "heading_rev_deg"]
+# seq_fwd/seq_rev order the nodes along each direction of travel. They were
+# dropped for years, which forced the exporter to re-derive the walk ordering
+# by projecting onto a fitted street axis -- adequate on a grid, wrong on a
+# curving street. Carried through now so the frame supplies both the bearing
+# and the order; see tools/export_svi_90.py._plan_street.
+BRING = ["is_tunnel", "is_bridge", "heading_fwd_deg", "heading_rev_deg",
+         "seq_fwd", "seq_rev"]
 
 
 def main():
