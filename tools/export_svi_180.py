@@ -104,7 +104,9 @@ TUNNEL_MAX_MASS = 0.78
 #
 # node_id is POSITIONAL -- see CLAUDE.md. Rebuild the frame and these ids
 # point somewhere else, so this list must be re-checked by eye, not trusted.
-VIADUCT_NODES = {"n00144", "n00145", "n00146", "n00147"}
+# From config, because node IDs are positional and a hardcoded set silently
+# follows the code into another study area. See config.yaml: excluded_nodes.
+VIADUCT_NODES = set(CFG.get("excluded_nodes", {}).get("viaduct", []))
 
 
 def _tunnel_nodes(node_ids) -> dict[str, tuple[float, float]]:

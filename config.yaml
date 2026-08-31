@@ -12,6 +12,18 @@ paths:
 # is UTM 18N, centred on 75 W -- correct for Manhattan, badly distorted anywhere
 # else. A second study area sets its own (config_london.yaml uses 27700, OSGB36
 # British National Grid).
+# Nodes whose imagery is not street, listed by ID because nothing in the data
+# distinguishes them. n00144-n00147 sit on the Park Avenue viaduct ramp beside
+# Grand Central, where the panorama faces the underside of the structure.
+#
+# NODE IDS ARE POSITIONAL, so this list belongs to THIS frame and no other. It
+# was a module constant in tools/export_svi_180.py and silently applied to
+# London, where the same four IDs are Bishopsgate -- four nodes on one of the
+# City's main streets dropped for sharing a number with a Manhattan viaduct.
+# A second study area sets its own list or leaves it empty.
+excluded_nodes:
+  viaduct: ["n00144", "n00145", "n00146", "n00147"]
+
 projected_crs: 32618
 
 study_area:

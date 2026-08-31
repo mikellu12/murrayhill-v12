@@ -698,3 +698,9 @@ sim_vlm:
 # it here would put the City of London 75 degrees off the central meridian and
 # rotate every street axis, and with it every walk bearing the renders centre on.
 projected_crs: 27700
+
+# No viaduct exclusions in the City of London frame. Murray Hill's list is
+# four Park Avenue IDs; those same IDs here are Bishopsgate, and inheriting
+# them dropped four nodes on a main street.
+excluded_nodes:
+  viaduct: []
