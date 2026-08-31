@@ -118,3 +118,10 @@ results/tables/*_backup_*.csv
 # look at. Regenerates with a find, and every path in it points into
 # data/raw/svi_90_seg, which is ignored anyway.
 picks.txt
+
+# --- Superseded imagery trees. Rebuilt by their exporters in a minute or two,
+# and covered by data/raw/svi_*/ above in any case: svi_180_old is the 627-node
+# export before the tunnel heuristic was dropped, svi_180_hi a 2880 px width
+# test of whether resolution explains the 90/180 share gap.
+data/raw/svi_180_old/
+data/raw/svi_180_hi/

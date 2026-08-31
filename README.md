@@ -85,13 +85,25 @@ svi_90    two 90-degree halves, left and right of the walk direction
           1440 x 1833 px, 16 px/degree          <- the rating set
 
 svi_180   one 180-degree strip centred on the walk bearing
-          627 nodes x 2 walks = 1,254 images
-          8 px/degree                            <- superseded; holdout only
+          766 nodes x 2 walks = 1,532 images
+          1440 x 916 px, 8 px/degree
 ```
+
+Both are rendered from the **raw four frames**, not from each other:
+`export_svi_90.py` and `export_svi_180.py` each call the same cylindrical
+reprojection on `data/raw/svi`, differing only in output field of view. One
+resample each, no intermediate.
 
 Rendered, not cropped. Halving the field of view doubles both the angular
 resolution and the vertical extent, so the 90-degree halves carry twice the
 detail of a crop from the 180 strip.
+
+Both sets now cover **all 766 nodes**. svi_180 previously held 627: a
+sky-share tunnel heuristic and a hardcoded four-node viaduct list were dropping
+139, of which 106 were Park Avenue in one contiguous run — the deepest canyons
+in the study area, absent from one imagery set and present in the other. Tunnel
+and bridge nodes are carried with their OSM flags and filtered downstream,
+which is what svi_90 already did.
 
 Left and right are relative to **direction of travel**, not compass. Two walks
 per street and two halves per walk give four views per node, covering two
@@ -99,11 +111,57 @@ frontages each seen from both approaches — a free consistency check, since a
 frontage that rates differently depending on which way it is passed is either
 a real directional effect or model noise.
 
-**Planned, not implemented:** selecting the field of view by street type — 90
-degrees where the camera sits far from the frontage on a wide vehicular road,
-180 degrees on narrow pedestrian ways. Nothing in the code makes that choice
-today; `svi_180` is a strict subset of `svi_90` covering the same streets, and
-every node has both.
+### Why the field of view should depend on the street
+
+Street View is captured **from a vehicle on the roadway**, and that fixes where
+the camera stands relative to what a pedestrian sees.
+
+On a **wide vehicular street** the camera sits in the carriageway, tens of
+metres from either frontage. What a walker on that sidewalk experiences is
+mostly the building line on their own side; the opposite frontage is far away
+and read peripherally. A 90-degree half centred on each side captures that
+frontage squarely, and at 16 px/degree — twice the angular resolution of the
+wider render. Splitting into two halves also gives one observation per
+*sidewalk* rather than one per street, which is the unit a pedestrian actually
+occupies: `L` and `R` are two different walking experiences, not two views of
+one thing to be averaged.
+
+On a **narrow pedestrian way** the camera and the walker are in the same place,
+and both frontages are within a few metres. Enclosure there is experienced
+across nearly the whole visual field, not in a 90-degree cone facing one wall,
+and a half-view would cut out most of what makes the space feel as it does. The
+180-degree strip is the honest render of that situation.
+
+So the field of view is not a nuisance parameter to be corrected away — it is
+**part of what is being measured**, chosen to match the perceptual situation.
+That has a consequence worth stating: an `M` from a 180-degree walkway and an
+`M` from a 90-degree street are not strictly on the same scale, and the paper
+should report them as typology-specific rather than compare them directly.
+
+**Planned, not implemented.** Nothing in the code makes that choice today;
+every node has both renders and everything downstream uses svi_90.
+
+Three things are known about that plan, none of them blocking:
+
+**OSM states the street type.** `highway=footway | pedestrian | steps | path |
+cycleway | living_street` against `residential | primary | secondary | service`.
+The study bbox holds 3,609 pedestrian-class ways against 1,084 vehicular. But
+`s01` builds the frame from the *street* network, so only 6 of our 766 nodes
+land on a pedestrian way, and those look like snapping noise at intersections.
+Murray Hill's frame contains no pedestrian-only routes to test the rule on.
+
+**The two field of views are more comparable than expected.** Measured on 1,524
+matched captures — same nodes, same source frames, differing only in render —
+rank correlations run **0.92 to 0.99** on the large classes and the means move
+by 3% or less: building +3%, sky −5 to −7%. Both renders are cylindrical and
+cover the same solid angle, so mixing them needs no correction for seven of the
+fields.
+
+**Except on the ground plane.** `map_Sidewalk` comes out at a ratio of 0.84 and
+`Lane Marking - Crosswalk` at 0.69 — thin features, and svi_180 renders at 8
+px/degree against svi_90's 16. That is a resolution difference, not a
+projection one, and rendering the 180s at `--width 2880` would match the two
+exactly. Untested.
 
 **Imagery is not redistributable.** Google caps caching at 30 days. Derived
 profiles and metrics are ours to publish; the JPEGs are scratch and are
@@ -112,6 +170,64 @@ git-ignored.
 ---
 
 ## 3. Segmentation
+
+Two segmenters run over every rendered view in one process,
+`tools/seg_two_model.py`, at **0.38 s per image** — 3,064 frames in 19 minutes:
+
+```
+Mapillary Vistas   65 classes, street-level.  Curb, Curb Cut, Pedestrian Area,
+                   Bench, Trash Can, Banner, Billboard, front/back Traffic
+                   Signs, Bridge, Tunnel.
+ADE20K            150 classes.  windowpane and door, which Mapillary lacks.
+```
+
+Neither covers the ten fields alone. Mapillary supplies six twins, ADE20K
+contributes to one (`stairs` for IAS), and one field needs a third source.
+
+**This replaced a four-model taxonomy pipeline** that took 15.3 hours and whose
+30 purpose-built classes scored *worse* than plain ADE20K wherever both had a
+class — greenery +0.686 against +0.720, sky +0.548 against +0.584, hardscape
++0.178 against +0.388. Five of its classes never fire at all (`shrub_hedge`,
+`ground_vegetation`, `vertical_green_wall`, `arcade_column`, `arcade_soffit`,
+each written into all 3,064 files with exactly zero pixels). It is still
+required for one field: its `ground_floor_glazing` fires on 93% of frames and
+gives GFAPI its only positive twin, where ADE20K's `windowpane` fires on 1%.
+`data/processed/seg90_shares.csv` holds that run.
+
+### Google's camera mast
+
+Every frame carries the capture vehicle's mast rising from the bottom edge with
+the Google wordmark on it. Neither segmenter has a class for it, so both label
+it as something: masking removes **47% of Mapillary's `Pole`, 60% of ADE20K's
+`pole`, and 29% of ADE20K's `signboard`** — that last being the wordmark read
+as a sign. The VLM is fooled differently, and only by the text: erasing the
+mast moves `signage_detail` by −0.104 of a rung (Wilcoxon p<0.0001, n=47) while
+`walkable_ground` and `vertical_hardscape` do not move at all.
+
+`src/mast.py` detects it without either model — keying off `Pole` would miss
+the frames ADE20K called `signboard`. Three measured properties do the work:
+the blob reaches the bottom edge, is a fixed 16.1% of frame height, and a fixed
+5.4% of width. A real pole is detected as a blob floating higher: of 143 blobs,
+85% of those stopping below 20% height touched the bottom and **0%** of every
+other height band did.
+
+Calibration is **per imagery set**, named by the source folder. The mast
+subtends a fixed angle, so svi_180 — twice the horizontal span in the same
+pixel width — carries *two* masts at 2.71% wide against svi_90's one at 5.4%,
+almost exactly half, which is the check that these are the same object. An
+uncalibrated set raises rather than guessing. To calibrate a new one, average a
+few hundred frames: fixed elements stay sharp while streetscape blurs away.
+
+Effect on the twins is small — only `signage_detail` moves, +0.420 to +0.439.
+Half of `Pole` was camera hardware and no twin used `Pole`. This is a
+correctness fix, not an improvement.
+
+**A prompt line telling the VLM to ignore the mast was tested and rejected.** It
+moved signage the *wrong way* (+0.237 against the pixel edit's −0.103) and
+shifted `walkable_ground` by +0.469 — a field the mast does not affect at all.
+Adding a sentence perturbs the model globally rather than surgically.
+
+### Azimuthal profiles
 
 `src/s03_profiles.py` segments the four frames per node with Mask2Former and
 projects the class shares into **360 one-degree azimuth bins**.
@@ -147,6 +263,31 @@ the model never answered 4 on any field: the midpoint carried real probability
 but was never the tallest single token, so greedy decoding could not emit it.
 Naming all seven rungs fixed that — every field now uses 4.
 
+**One metric per ladder.** Three fields changed what they measured partway up
+and have been rewritten (`src/sim_scale.py` carries the old wording and the
+measured justification in comments beside each):
+
+| field | the defect | result |
+|---|---|---|
+| `walkable_ground` | width at rungs 1/2/4/5/6, obstruction at 3, share of view at 7 | no accuracy change on 3,064 |
+| `resting_affordance` | counted objects at 2–4, switched to extent at 5–7 | bimodality 35% → 5%, decisive 12% → 22% |
+| `green_softening` | asked for a judgement about an *effect*, and rungs 3–4 described a ratio between two subjects | bimodality 60% → 8% |
+
+`walkable_ground` looked like a large win on a 300-image pilot (+0.188 →
++0.333, CI just clearing zero) and **did not replicate** on the full set
+(+0.342 → +0.336). The pilot was a false positive. What survives is the shape
+change on the other two — the models commit far more often — and that is why
+the rewrites are kept.
+
+A separate check found nothing wrong with the *other* seven ladders. Embedding
+the rung sentences and projecting them onto their own scale flagged inversions
+in six of ten fields and near-duplicate pairs in all ten, which looked
+damning — but grouping nodes by assigned rung and reading the measured share of
+each group came out **monotone on every field**, including at exactly the rungs
+the embedding called inverted. The embedding measures sentence similarity, not
+whether the model uses the rungs in order. It is recorded here so nobody
+repeats it.
+
 **Logits are read, not generated.** The assistant turn is prefixed with
 `{"field": ` so the next token must be the digit, and the full distribution
 over `1`–`7` is read at that one position. Verified identical to
@@ -166,18 +307,50 @@ ratings**, with a maximum EV drift of 9e-16.
 
 ### The ten fields
 
-| field | manuscript term | measured twin |
-|---|---|---|
-| `vertical_greenery` | V_nat | vegetation share over the arc |
-| `vertical_hardscape` | V_built | building share over the arc |
-| `green_eye_level` | GVI_eye | vegetation below the horizon |
-| `sky_openness` | SVF | sky share over the arc |
-| `green_softening` | GMI | — |
-| `walkable_ground` | V_pave | — |
-| `signage_detail` | V_sign | — |
-| `facade_variation` | SFV | — |
-| `ground_floor_activity` | GFAPI | — |
-| `resting_affordance` | IAS | — |
+| field | manuscript term | measured twin | ρ |
+|---|---|---|---|
+| `vertical_greenery` | V_nat | `map_Vegetation` | +0.718 |
+| `green_eye_level` | GVI_eye | `map_Vegetation` | +0.694 |
+| `sky_openness` | SVF | `map_Sky` | +0.482 |
+| `vertical_hardscape` | V_built | `map_Building + map_Wall` | +0.479 |
+| `signage_detail` | V_sign | `map_Billboard` | +0.439 |
+| `walkable_ground` | V_pave | `map_Sidewalk + Curb + Curb Cut + Pedestrian Area` | +0.248 |
+| `resting_affordance` | IAS | `map_Bench + ade_stairs + ade_step + ade_bench` | +0.234 |
+| `ground_floor_activity` | GFAPI | `ground_floor_glazing` (four-model taxonomy) | +0.143 |
+| `green_softening` | GMI | `map_Vegetation` — but see below | +0.701 |
+| `facade_variation` | SFV | — every source tried is negative | — |
+
+Eight of ten now have a counterpart, against four before the two-model
+segmentation. `resting_affordance` in particular went from nothing to a
+validated +0.234, which is weak but real and clustered on `face_id` excludes
+zero. Two things are worth knowing about that table:
+
+`ade_signboard` is **excluded** from the signage twin despite being the obvious
+candidate. 29% of its pixels sit on Google's camera mast — the wordmark read as
+a sign — and adding it drops the correlation from +0.439 to +0.375.
+
+`wall_ledge` is **excluded** from the IAS twin for the same class of reason. It
+fires on 83% of frames but anti-correlates with rated seating, flipping the
+twin from +0.14 to −0.07; it appears to be catching facade trim and sills at
+height rather than perchable surfaces.
+
+**`green_softening`'s twin passes on the number and fails on the construct.**
++0.701 against `map_Vegetation` is a good correlation, and it is the *same*
+class `vertical_greenery` is validated against at +0.718. The two fields
+correlate **+0.836** with each other, so the table would be showing twice that
+a greenery field tracks greenery. GMI is defined as an interaction — "how
+eye-level greenery softens the visual impact of vertical hardscape walls" — and
+its correlation with `vertical_hardscape` is **−0.323**, so it carries almost
+none of the hardscape half.
+
+The rung rewrite made this worse rather than better: alignment with
+`vertical_greenery` went +0.726 → +0.836. Recasting the question as one
+observable quantity fixed the field's real pathology (60% of its answers were
+two-peaked, 58% landed on a rung the model ranked below its own runner-up) by
+removing the interaction that made it hard. Whether GMI should be an
+interaction term or a greenery measure is a question for the manuscript, not
+one to settle by wording, and until it is settled this row should not be read
+as GMI being validated.
 
 `tools/sim_vlm_run.py --show-prompts` prints every prompt exactly as sent.
 
@@ -239,13 +412,68 @@ low, and a node-level share would count them.
 The unrounded EV wins on all five. Rounding discards information the index
 never needed, since every rating is normalised to [0,1] before use.
 
+#### Which readout — and why it is not settled
+
+The seven rungs are **ordered categories**, and an expected value over them
+assumes the step from rung 2 to 3 equals the step from 3 to 4. That is
+measurably false here. Grouping nodes by the rung the model assigned and taking
+the median measured share of each group gives, for `vertical_greenery`:
+
+```
+rung      2       3       4       5       6
+share  0.0016  0.0220  0.0608  0.1689  0.4334
+ratio      -    14.0x    2.8x    2.8x    2.6x
+```
+
+Each rung is roughly a constant **multiple** of the previous, not a constant
+increment: `log(share) ~ rung` fits at R² 0.941 against 0.809 for the linear
+form. The scale is perceptual (Weber-Fechner), which is arguably the right
+thing for a study of experienced quality, but it means a mean over rung
+*numbers* is not defined on the quantity being measured, and it must be stated
+rather than assumed.
+
+Every scale is nonetheless **monotone in practice** — the medians above rise
+without a single reversal, on every field with a twin — so the instrument
+works even where the arithmetic on top of it is questionable.
+
+Five alternatives were tested against the measured twins on the full 3,064:
+
+| readout | assumes | result |
+|---|---|---|
+| expected value | even spacing | the current pipeline |
+| argmax | ordering only | −0.003 vs EV |
+| interpolated median | ordering only | **+0.010 to +0.014 vs EV** |
+| prune below 1/7, then EV | even spacing | +0.026 [+0.015, +0.040] |
+| prune, then re-ask the model | even spacing | +0.047 [+0.004, +0.106] |
+| re-ask to a single rung | nothing | **−0.043**, worse than EV |
+
+The interpolated median is the defensible choice — it needs only ordering, and
+it beats the mean on four of five fields. Pruning scores marginally higher but
+is a mean, so it inherits the problem. Eliminating to a single rung is the most
+defensible of all and the worst performing, which is the trade stated plainly.
+`results/tables/sim_vlm_converged.csv` holds that run.
+
+Nothing is switched over: `sim_compute.py` still stores `round(EV)`.
+
 ### Outputs
 
 ```
-results/tables/vlm_observations.csv       3,064 x 111   everything observed
-results/tables/vlm_calculations.csv   3,064 x  26   everything derived
+results/tables/vlm_observations.csv    3,064 x 121   everything observed
+results/tables/vlm_calculations.csv   3,064 x  27   everything derived
 results/tables/vlm_sections.csv         121 x   5   per-section aggregate
 results/tables/README.md                            generated data dictionary
+
+data/processed/seg90_two_model.csv    3,064 x 217   class shares, svi_90
+data/processed/seg180_two_model.csv   1,532 x 217   class shares, svi_180
+data/processed/seg90_shares.csv       3,064 x  30   four-model taxonomy run
+```
+
+Alternative runs kept beside the live tables because the questions they answer
+are open, not because they are in use:
+
+```
+results/tables/sim_vlm_v2.csv         3,064 x 107   rungs rewritten for three fields
+results/tables/sim_vlm_converged.csv  3,064 x 101   rated by elimination, not EV
 ```
 
 Joined on `file`.
@@ -299,12 +527,18 @@ not dwell. The machinery is implemented and checkable
 **Not implemented:** the Stayability Amplification Factor `A_i`, peripheral
 GVI (`pGVI`), and the generative ANN/NURBS design loop of section 3.
 
-**Five of ten fields have no measured counterpart** — GMI, V_sign, SFV, GFAPI
-and IAS. Nothing in this repository validates them. Place Dependence is the
-weakest founded of the three dimensions: two of its three terms are
-unvalidated and the third, `walkable_ground`, correlates with nothing
-measurable (ρ −0.04 against building share, +0.04 against sky). Street View is
-captured from the roadway, so the near sidewalk is often cropped or occluded.
+**Two of ten fields have no usable measured counterpart** — SFV, where every
+class tried comes out negative, and GMI, where the twin correlates well but
+with the wrong thing (see section 4). This was five before the two-model
+segmentation; V_sign, GFAPI and IAS now have one.
+
+**Place Dependence remains the weakest founded of the three dimensions.**
+`resting_affordance` reaches only +0.234 against actual seating classes where
+greenery reaches +0.718, and neither rewording the rungs nor any of five
+readouts moved it — the model can barely see seating in a 90-degree view.
+`walkable_ground` reaches +0.248. Street View is captured from the roadway, so
+the near sidewalk is often cropped or occluded, and that is the likely cause
+for both.
 
 ---
 
@@ -340,9 +574,41 @@ python preflight.py                       # what is present, what is missing
 python make_dashboard.py                  # results/dashboard.html
 ```
 
+GPU stages, in the order they would be re-run from scratch:
+
+```bash
+.venv/Scripts/python tools/export_svi_90.py                     # raw -> svi_90
+.venv/Scripts/python tools/export_svi_180.py --out data/raw/svi_180 --keep-tunnels
+.venv-gpu/Scripts/python tools/seg_two_model.py                 # 19 min
+.venv-gpu/Scripts/python tools/seg_two_model.py --src data/raw/svi_180 \
+    --out data/processed/seg180_two_model.csv                   # 12 min
+.venv-gpu/Scripts/python tools/sim_vlm_run.py --src data/raw/svi_90 \
+    --table results/tables/sim_vlm.csv                          # 4.3 h
+```
+
+`--keep-tunnels` on the 180 export is not optional: without it a sky-share
+heuristic and a hardcoded viaduct list drop 139 nodes, 106 of them Park Avenue
+in one run, and the two imagery sets stop covering the same frame.
+
+`seg_two_model.py` picks its mast calibration from the source folder name, so
+`--src data/raw/svi_180` selects the two-mast one automatically. A folder with
+no calibration raises rather than guessing.
+
+**Long GPU jobs must be launched detached.** The harness reaps background
+processes during model loading; the segmentation batch and two VLM runs were
+killed that way before this was understood. Use PowerShell:
+
+```powershell
+Start-Process -FilePath ".venv-gpu\Scripts\python.exe" `
+  -ArgumentList "tools/sim_vlm_run.py","--src","data/raw/svi_90" `
+  -RedirectStandardOutput "run.log" -RedirectStandardError "run.err" `
+  -WindowStyle Hidden
+```
+
 Full VLM re-rating is about 4.3 hours on an RTX 3080 Ti for 3,064 images ×
-ten fields. Never run the full `main.py` to test a change to stages 4–8; it
-re-checks every image and can trigger a re-fetch.
+ten fields; rating by elimination is 9.4 h. Never run the full `main.py` to
+test a change to stages 4–8; it re-checks every image and can trigger a
+re-fetch.
 
 Two environments, deliberately split. `.venv` is analysis-only and is the
 mirror of what runs on a laptop with only `data/processed/` copied across.
