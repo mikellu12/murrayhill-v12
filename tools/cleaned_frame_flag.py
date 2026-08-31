@@ -40,7 +40,7 @@ import pandas as pd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import PROC, banner
+from common import PROJ_CRS, PROC, banner
 
 TOL_M = 1.0
 
@@ -56,8 +56,8 @@ def main():
 
     if not args.source.exists():
         sys.exit(f"no such file: {args.source}")
-    n = gpd.read_file(PROC / "nodes.gpkg").to_crs(32618)
-    c = gpd.read_file(args.source).to_crs(32618)
+    n = gpd.read_file(PROC / "nodes.gpkg").to_crs(PROJ_CRS)
+    c = gpd.read_file(args.source).to_crs(PROJ_CRS)
     if "original_id" in c.columns:
         c = c.drop_duplicates("original_id")
     print(f"frame {len(n)} nodes   cleaned source {len(c)} locations")

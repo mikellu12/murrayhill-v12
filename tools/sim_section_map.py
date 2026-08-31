@@ -32,9 +32,9 @@ from matplotlib.lines import Line2D
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import PROC, RAW, RES, banner
+from common import PROJ_CRS, PROC, RAW, RES, banner
 
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 CMAP = LinearSegmentedColormap.from_list(
     "sim", ["#F0DED6", "#E2D9B8", "#A9C4A0", "#4E8A72", "#1C5A49"])
 

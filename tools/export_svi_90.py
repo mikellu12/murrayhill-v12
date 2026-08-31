@@ -56,11 +56,11 @@ from tqdm.auto import tqdm
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 sys.path.insert(0, str(HERE))
-from common import CFG, PROC, banner, street_grouping
+from common import PROJ_CRS, CFG, PROC, banner, street_grouping
 from export_svi_180 import (_cardinal, _street_axis, _walks, _load,
                             _tunnel_nodes, VIADUCT_NODES)
 
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 HALF_FOV = 90.0
 # Each half is centred 45 degrees off the walk bearing, so left spans -90 to 0
 # and right spans 0 to +90 -- together exactly the forward 180.

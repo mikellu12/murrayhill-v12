@@ -32,7 +32,7 @@ from shapely.geometry import LineString, box
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import CFG, PROC, RES, banner
+from common import PROJ_CRS, CFG, PROC, RES, banner
 
 GIS = PROC / "nyc_gis"
 TILES = PROC / "tiles"
@@ -78,9 +78,9 @@ def _study_box(nodes: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     detail map uses the node hull: the bbox is a fetch window, larger than
     what was actually measured.
     """
-    g = nodes.to_crs(32618)
+    g = nodes.to_crs(PROJ_CRS)
     rect = g.buffer(35).union_all().minimum_rotated_rectangle
-    return gpd.GeoDataFrame(geometry=[rect], crs=32618).to_crs(WEB)
+    return gpd.GeoDataFrame(geometry=[rect], crs=PROJ_CRS).to_crs(WEB)
 
 
 def _hull(nodes: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
@@ -90,9 +90,9 @@ def _hull(nodes: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     the close view the honest outline is the sample's own footprint rather
     than the download request.
     """
-    g = nodes.to_crs(32618)
+    g = nodes.to_crs(PROJ_CRS)
     return gpd.GeoDataFrame(geometry=[g.buffer(45).union_all().buffer(-15)],
-                            crs=32618).to_crs(WEB)
+                            crs=PROJ_CRS).to_crs(WEB)
 
 
 def _sampled_lines(nodes: gpd.GeoDataFrame) -> gpd.GeoDataFrame:

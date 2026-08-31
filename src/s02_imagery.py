@@ -16,7 +16,7 @@ from pathlib import Path
 from tqdm.auto import tqdm
 
 sys.path.insert(0, str(Path(__file__).parent))
-from common import CFG, PROC, RAW, IMG, banner, require
+from common import PROJ_CRS, CFG, PROC, RAW, IMG, banner, require
 
 SP, CAP = CFG["sampling"], CFG["capture"]
 META = "https://maps.googleapis.com/maps/api/streetview/metadata"
@@ -68,13 +68,27 @@ def main():
     g = meta.dropna(subset=["pano_lat"])
     if len(g):
         a = gpd.GeoSeries(gpd.points_from_xy(g.pano_lon, g.pano_lat),
-                          crs=4326).to_crs(32618)
+                          crs=4326).to_crs(PROJ_CRS)
         b = gpd.GeoSeries(gpd.points_from_xy(g.node_lon, g.node_lat),
-                          crs=4326).to_crs(32618)
+                          crs=4326).to_crs(PROJ_CRS)
         meta.loc[g.index, "pano_offset_m"] = a.distance(b, align=False).values
 
     ok = meta.status.eq("OK")
-    on_date = meta.pano_date.eq(CAP["target"]) if CAP["target"] else True
+    # `target` pins a single capture campaign, which is what Murray Hill has.
+    # `months` is the looser option for a frame with no single campaign. Both
+    # are opt-in: with neither set every node with imagery is kept, and the
+    # capture spread is reported rather than filtered. pano_date rides along in
+    # the manifest either way, so an analysis can condition on it after the
+    # fact instead of losing the nodes here.
+    if CAP.get("target"):
+        on_date = meta.pano_date.eq(CAP["target"])
+    elif CAP.get("months"):
+        lo, hi = CAP["months"]
+        on_date = meta.month.between(lo, hi)
+        print(f"capture window: months {lo}-{hi} "
+              f"({int((meta.month.between(lo, hi) & ok).sum())} nodes)")
+    else:
+        on_date = True
     near = meta.pano_offset_m.le(SP["max_pano_offset_m"])
     meta["usable"] = ok & on_date & near
     # Drop columns carried in from a cache written AFTER a previous merge;

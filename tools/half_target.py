@@ -30,10 +30,10 @@ import pandas as pd
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 sys.path.insert(0, str(HERE))
-from common import PROC, RES, banner, slice_metrics
+from common import PROJ_CRS, PROC, RES, banner, slice_metrics
 from export_svi_180 import _street_axis, _walks
 
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 HALF_FOV, OFFSET = 90.0, 45.0
 SIDE_OFF = {"L": -OFFSET, "R": +OFFSET}
 

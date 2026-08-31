@@ -29,11 +29,11 @@ import pandas as pd
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 sys.path.insert(0, str(HERE))
-from common import PROC, RES, banner
+from common import PROJ_CRS, PROC, RES, banner
 from export_svi_180 import _cardinal, _street_axis, _walks
 from export_svi_90 import SEQ_WIDTH
 
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 NAME = re.compile(r"^(\d+)_(n\d+)_([NESW])(?:_([LR]))?\.jpg$")
 TABLES = ["vlm_observations.csv", "vlm_calculations.csv", "sim_vlm_v3.csv",
           "sim_vlm_v4_clean.csv", "sim_vlm_180_holdout.csv"]

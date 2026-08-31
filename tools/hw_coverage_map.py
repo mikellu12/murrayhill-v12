@@ -25,10 +25,10 @@ from matplotlib.lines import Line2D
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import CFG, PROC, RAW, RES, banner
+from common import PROJ_CRS, CFG, PROC, RAW, RES, banner
 
 G = CFG["geometry"]
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 COL = {"measured": "#1C5A49", "segment_median": "#C9932F", "none": "#9A4A31"}
 LAB = {"measured": "measured from footprints",
        "segment_median": "inherited from the street segment",

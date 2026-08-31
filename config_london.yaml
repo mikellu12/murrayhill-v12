@@ -1,18 +1,13 @@
 seed: 42
 
+# LONDON -- City of London / Bank. Same model, same thresholds, same protocol
+# as config.yaml; only the paths and the study area differ. Node IDs are
+# positional, so the two cities must not share data/processed.
 paths:
-  raw: data/raw
-  processed: data/processed
-  imagery: data/raw/svi
-  results: results
-
-# Metre-based CRS for every distance, bearing and street-axis computation.
-# Not cosmetic: the axis fitted in this projection sets the walk bearings that
-# each render is centred on, so a wrong zone rotates every exported view. 32618
-# is UTM 18N, centred on 75 W -- correct for Manhattan, badly distorted anywhere
-# else. A second study area sets its own (config_london.yaml uses 27700, OSGB36
-# British National Grid).
-projected_crs: 32618
+  raw: data/london/raw
+  processed: data/london/processed
+  imagery: data/london/raw/svi
+  results: results/london
 
 study_area:
   # THE STUDY AREA IS THE QUADRILATERAL BELOW, NOT THE BBOX.
@@ -59,7 +54,17 @@ sampling:
   solid_angle_weighting: true
 
 capture:
-  target: "2026-04"
+  # Murray Hill uses an exact date because Google captured it in one pass, so
+  # the value pins that campaign rather than expressing a seasonal rule. There
+  # is no such campaign in London: the frame is 15 years of accumulated
+  # drive-bys, 2008 to 2026, and no single date covers more than 464 of the
+  # 1,806 nodes. Every node is kept. The 225 captured Nov-Mar are spread over
+  # 90 streets, at most 17 on any one, so leaf-off imagery does not concentrate
+  # anywhere it would bias a street's greenery reading -- and the manuscript
+  # does not restrict the measurement to leaf-on in the first place. The year
+  # and season spread is reported as a limitation, not filtered away; pano_date
+  # is carried in the manifest so any later analysis can condition on it.
+  target: null
 
 # Manhattan's grid is rotated ~29 deg east of true north (Commissioners'
 # Plan 1811, set perpendicular to the Hudson shoreline). Pedestrian travel
@@ -688,3 +693,8 @@ sim_vlm:
   # which is exactly what happened when the categories were asked for
   # directly and 1252 of 1252 panoramas came back "human_scale".
   hw_bands: {under_enclosed: 0.8, deep_canyon: 1.5}
+
+# OSGB36 / British National Grid. Murray Hill's 32618 is UTM 18N on 75 W; using
+# it here would put the City of London 75 degrees off the central meridian and
+# rotate every street axis, and with it every walk bearing the renders centre on.
+projected_crs: 27700

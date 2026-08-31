@@ -38,9 +38,9 @@ import pandas as pd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import PROC, RES, banner
+from common import PROJ_CRS, PROC, RES, banner
 
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 BANDWIDTHS = [60, 100, 150, 250, 400]   # metres
 
 

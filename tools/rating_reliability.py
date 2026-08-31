@@ -31,7 +31,7 @@ import pandas as pd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import PROC, RES, banner
+from common import PROJ_CRS, PROC, RES, banner
 from sim_fields import FIELDS
 
 RNG = np.random.default_rng(0)
@@ -53,7 +53,7 @@ def morans_i(v, xy, band=120.0):
 def main():
     banner("is a low-confidence field random?")
     d = pd.read_csv(RES / "tables" / "sim_vlm.csv")
-    g = gpd.read_file(PROC / "nodes.gpkg").to_crs(32618)[["node_id", "geometry"]]
+    g = gpd.read_file(PROC / "nodes.gpkg").to_crs(PROJ_CRS)[["node_id", "geometry"]]
 
     # walk bearing decides which compass side L and R face. Two walks per
     # street, so for each node exactly one L and one R look at the same side.

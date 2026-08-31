@@ -27,7 +27,7 @@ from shapely.geometry import LineString, box
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import CFG, PROC, RAW, RES, banner
+from common import PROJ_CRS, CFG, PROC, RAW, RES, banner
 
 GIS = PROC / "nyc_gis"
 AVENUE_HALF_M = 15.0        # 100 ft right of way, 1811 grid
@@ -46,13 +46,13 @@ def _sampled_lines(nodes):
 
 def _corridors():
     """Centrelines buffered to their right of way, dissolved."""
-    cl = gpd.read_file(GIS / "centerline_mh.gpkg").to_crs(32618)
+    cl = gpd.read_file(GIS / "centerline_mh.gpkg").to_crs(PROJ_CRS)
     name = cl.get("stname_label", cl.get("street", "")).astype(str).str.upper()
     half = np.where(name.str.contains("AVENUE|AVE\\b|BROADWAY", regex=True),
                     AVENUE_HALF_M, STREET_HALF_M)
     cl["geometry"] = [g.buffer(h, cap_style=2, join_style=2)
                       for g, h in zip(cl.geometry, half)]
-    return gpd.GeoDataFrame(geometry=[cl.union_all()], crs=32618)
+    return gpd.GeoDataFrame(geometry=[cl.union_all()], crs=PROJ_CRS)
 
 
 def main():

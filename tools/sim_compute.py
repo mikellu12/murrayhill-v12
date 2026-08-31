@@ -75,26 +75,67 @@ def main():
 
     d["I_raw"] = (a_w["nat_built"] * d.nat_built + a_w["gvi_eye"] * d.GVI_eye
                   + a_w["gmi"] * d.GMI)
-    d["I"] = S.sigmoid(d.I_raw, kI, tI)
     d["Y"] = (b_w["signboard"] * d.V_sign + b_w["enclosure"] * (1 - d.SVF)
               + b_w["sfv"] * d.SFV)
     d["D_raw"] = (g_w["sidewalk_paver"] * d.V_pave + g_w["ias"] * d.IAS
                   + g_w["gfapi"] * d.GFAPI)
-    d["D"] = S.sigmoid(d.D_raw, kD, tD)
     porous = (d.HW_source.eq("open_one_side") if "HW_source" in d.columns
               else None)
-    d["Omega"] = S.omega(d.HW_effective, C["omega"]["psi"],
-                         C["omega"]["hw_threshold"], open_one_side=porous)
 
-    e = S.regime_exponents(d.HW_effective.to_numpy(), C, porous=porous)
-    d["a"], d["b"], d["c"] = e["imageability"], e["identity"], e["dependence"]
-    d["M"] = S.matrix_score(d.I, d.Y, d.D, d.Omega, d.a, d.b, d.c)
+    # ---- two calibrations, because one number cannot answer both questions --
+    # LOCAL is CWMC applied as the protocol states it (Nature.8.31 para 129):
+    # "dynamically set to the city-wide median values of raw metrics". It
+    # centres the sigmoid on THIS frame, so M is a relative index within the
+    # study area and the ranking has full variance -- but every city's median
+    # lands at 0.5 by construction, so two cities cannot be compared on it.
+    #
+    # GLOBAL uses the thresholds the manuscript states, which carry an external
+    # justification the median does not: tau_I = 0.20 is defended as the
+    # minimum foveal vegetation for cognitive restoration, separating canyon
+    # GVI_eye <= 0.06 from mid-block 0.22. Fixed across cities, so London and
+    # Murray Hill sit on one scale -- at the cost of saturating wherever a
+    # city's distribution sits far from it.
+    #
+    # For this frame they agree on D (median D_raw 0.500 against the stated
+    # 0.50) and differ on I (0.395 against 0.20). Ranking is barely affected:
+    # rho +0.930 between the two Ms.
+    CAL = {"local": dict(tI=float(d.I_raw.median()), tD=float(d.D_raw.median()),
+                         hw=float(np.nanmedian(d.HW_effective))),
+           "global": dict(tI=tI, tD=tD, hw=C["omega"]["hw_threshold"])}
+    for tag, c in CAL.items():
+        suf = "" if tag == "global" else "_local"
+        I = S.sigmoid(d.I_raw, kI, c["tI"])
+        D = S.sigmoid(d.D_raw, kD, c["tD"])
+        om = S.omega(d.HW_effective, C["omega"]["psi"], c["hw"],
+                     open_one_side=porous)
+        e = S.regime_exponents(d.HW_effective.to_numpy(), C, porous=porous)
+        d["I" + suf], d["D" + suf], d["Omega" + suf] = I, D, om
+        d["a" + suf], d["b" + suf], d["c" + suf] = (
+            e["imageability"], e["identity"], e["dependence"])
+        d["M" + suf] = S.matrix_score(I, d.Y, D, om, e["imageability"],
+                                      e["identity"], e["dependence"])
+        # ...and the same score with the canyon penalty switched off. A study
+        # area without building heights cannot compute A_i at all, so its M is
+        # I^a Y^b D^c with nothing discounting it and sits systematically
+        # higher -- Murray Hill's median moves 0.472 to 0.610 when Omega is
+        # dropped, and the minimum rises 0.016 to 0.271, because the penalty is
+        # what creates the bottom of the scale. Comparing a city that has it
+        # against one that does not compares the presence of the term, not the
+        # streets. This column is the like-for-like one.
+        d["M" + suf + "_noA"] = S.matrix_score(
+            I, d.Y, D, 1.0, e["imageability"], e["identity"], e["dependence"])
+    for tag, c in CAL.items():
+        print(f"  tau {tag:<7} I {c['tI']:.3f}   D {c['tD']:.3f}   "
+              f"Omega_th {c['hw']:.3f}")
+    print()
 
     print(f"{len(d)} half-views, {d.node_id.nunique()} nodes")
     print(f"{d.M.notna().sum()} with a score, "
           f"{d.M.isna().sum()} lost to a missing H/W\n")
     print(f"  {'':<12}{'min':>8}{'median':>9}{'mean':>8}{'max':>8}{'sd':>8}")
-    for c in ["I_raw", "I", "Y", "D_raw", "D", "Omega", "M"]:
+    for c in ["I_raw", "I", "I_local", "Y", "D_raw", "D", "D_local",
+              "Omega", "Omega_local", "M", "M_local",
+              "M_noA", "M_local_noA"]:
         v = d[c].dropna()
         print(f"  {c:<12}{v.min():>8.3f}{v.median():>9.3f}{v.mean():>8.3f}"
               f"{v.max():>8.3f}{v.std():>8.3f}")

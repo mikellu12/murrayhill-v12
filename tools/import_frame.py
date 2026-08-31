@@ -36,7 +36,7 @@ import pandas as pd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import CFG, PROC, banner, typology_of, grid_northing, grid_easting
+from common import PROJ_CRS, CFG, PROC, banner, typology_of, grid_northing, grid_easting
 
 # Source category -> the name typology_of() matches against. Park Avenue's
 # three chains share one street name so the canyon pattern still fires.
@@ -69,7 +69,7 @@ def main():
     args = ap.parse_args()
     banner("import frame")
 
-    src = gpd.read_file(args.source).to_crs(32618)
+    src = gpd.read_file(args.source).to_crs(PROJ_CRS)
     key = "original_id" if "original_id" in src.columns else "image_id"
     n = src.drop_duplicates(key).copy().reset_index(drop=True)
     print(f"source rows {len(src)}  ->  unique nodes {len(n)}")
@@ -88,7 +88,7 @@ def main():
         g["chain_pos_m"] = np.cumsum(step)
         out.append(g)
     n = pd.concat(out).sort_values(["chain", "chain_pos_m"]).reset_index(drop=True)
-    n = gpd.GeoDataFrame(n, geometry="geometry", crs=32618)
+    n = gpd.GeoDataFrame(n, geometry="geometry", crs=PROJ_CRS)
 
     n["node_id"] = [f"n{i:05d}" for i in range(len(n))]
     w = n.to_crs(4326)

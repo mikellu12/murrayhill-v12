@@ -43,9 +43,9 @@ from shapely.geometry import Point
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import PROC, banner
+from common import PROJ_CRS, PROC, banner
 
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 BRING = ["is_tunnel", "is_bridge", "heading_fwd_deg", "heading_rev_deg"]
 
 

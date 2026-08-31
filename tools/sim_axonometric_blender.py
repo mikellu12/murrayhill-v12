@@ -186,10 +186,10 @@ def build_spec():
     import pandas as pd
 
     sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-    from common import PROC, RAW, banner
+    from common import PROJ_CRS, PROC, RAW, banner
     banner("axonometric geometry for blender")
 
-    UTM, GAP, BAR, TAIL = 32618, 620.0, 150.0, 0.80
+    UTM, GAP, BAR, TAIL = PROJ_CRS, 620.0, 150.0, 0.80
     nodes = gpd.read_file(PROC / "nodes.gpkg").to_crs(UTM)
     sim = pd.read_csv(PROC / "sim_index.csv")
     met = pd.read_csv(PROC / "metrics.csv")[["node_id", "GVI"]]

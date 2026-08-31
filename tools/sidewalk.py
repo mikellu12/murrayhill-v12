@@ -236,7 +236,7 @@ def regressions(dm, t, out):
 def run(nodes_path="data/processed/nodes.gpkg",
         dm_path="data/processed/directional_metrics.csv",
         raw_dir="data/raw", out_dir="results/tables"):
-    nodes = gpd.read_file(nodes_path).to_crs(32618)
+    nodes = gpd.read_file(nodes_path).to_crs(PROJ_CRS)
     dm = pd.read_csv(dm_path)
     raw = Path(raw_dir)
     raw.mkdir(parents=True, exist_ok=True)
@@ -250,9 +250,9 @@ def run(nodes_path="data/processed/nodes.gpkg",
     if bd is None:
         sys.exit("no building footprints; cannot measure setback")
 
-    bd = bd.to_crs(32618)
+    bd = bd.to_crs(PROJ_CRS)
     if sw is not None:
-        sw = sw.to_crs(32618)
+        sw = sw.to_crs(PROJ_CRS)
 
     t = measure(nodes, sw, bd)
     t.to_csv(Path(raw).parent / "processed" / "sidewalk_geometry.csv",

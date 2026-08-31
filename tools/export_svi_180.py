@@ -48,10 +48,10 @@ from tqdm.auto import tqdm
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import CFG, PROC, banner, street_grouping, image_path
+from common import PROJ_CRS, CFG, PROC, banner, street_grouping, image_path
 
 FOV = CFG["directional"]["fov"]           # 180
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 SEQ_WIDTH = 3          # zero-pad the sequence to this many digits
 CARDINALS = {"N": 0, "E": 90, "S": 180, "W": 270}
 

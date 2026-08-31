@@ -5,13 +5,25 @@ import pandas as pd
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CFG = yaml.safe_load((ROOT / "config.yaml").read_text())
+# SIM_CONFIG selects the study area. Node IDs are positional and every cached
+# artefact keys off them, so two cities cannot share data/processed -- a London
+# n00042 and a Murray Hill n00042 are different street corners and any tool
+# joining on node_id would pair imagery with the wrong place. A second config
+# redirects paths wholesale rather than relying on every caller to remember.
+CFG = yaml.safe_load(
+    (ROOT / os.environ.get("SIM_CONFIG", "config.yaml")).read_text())
 SEED = CFG["seed"]
 
 RAW = ROOT / CFG["paths"]["raw"]
 PROC = ROOT / CFG["paths"]["processed"]
 IMG = ROOT / CFG["paths"]["imagery"]
 RES = ROOT / CFG["paths"]["results"]
+
+# Every metre-space computation goes through this: street axes, walk bearings,
+# nearest-neighbour spacing, snap distances. Defaulting to Manhattan's zone
+# rather than requiring the key keeps older configs working, but a second city
+# MUST set it -- a wrong zone does not error, it silently rotates the frame.
+PROJ_CRS = int(CFG.get("projected_crs", 32618))
 for _d in (RAW, PROC, IMG, RES / "figures", RES / "tables"):
     _d.mkdir(parents=True, exist_ok=True)
 

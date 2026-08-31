@@ -30,6 +30,7 @@ import pandas as pd
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 from common import PROC, RES, banner
+from mast import mast_mask
 
 MODELS = {
     "Mapillary Vistas": "facebook/mask2former-swin-large-mapillary-vistas-semantic",
@@ -91,6 +92,10 @@ def main():
         axes = axes[None, :]
     for r, f in enumerate(files):
         im = Image.open(args.src / f).convert("RGB")
+        # the same mask seg_two_model.py excludes from the shares. Without it
+        # the figure shows Google's camera mast painted as Pole or signboard
+        # while the numbers beside it have already dropped those pixels.
+        drop = mast_mask(im, args.src.name)
         axes[r, 0].imshow(im)
         axes[r, 0].set_title(f, color=FG, fontsize=9, loc="left", pad=6)
         for c, (tag, (proc, net, lab)) in enumerate(nets.items(), start=1):
@@ -100,8 +105,9 @@ def main():
                 o = net(**inp)
             seg = proc.post_process_semantic_segmentation(
                 o, target_sizes=[im.size[::-1]])[0].cpu().numpy()
-            ids, cnt = np.unique(seg, return_counts=True)
-            share = {int(i): c_ / seg.size for i, c_ in zip(ids, cnt)}
+            sel = seg[~drop]
+            ids, cnt = np.unique(sel, return_counts=True)
+            share = {int(i): c_ / sel.size for i, c_ in zip(ids, cnt)}
             rgb = np.zeros(seg.shape + (3,), float)
             named = []
             for i, s in sorted(share.items(), key=lambda kv: -kv[1]):
@@ -109,6 +115,7 @@ def main():
                     continue
                 rgb[seg == i] = colour(lab[i])
                 named.append((lab[i], s))
+            rgb[drop] = 0.10          # masked pixels read as unlabelled
             axes[r, c].imshow(rgb)
             # wrapped, not truncated: the two titles collided in the first
             # version and the ADE20K label overprinted Mapillary's.

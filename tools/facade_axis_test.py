@@ -29,12 +29,12 @@ from shapely.ops import nearest_points
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 sys.path.insert(0, str(HERE))
-from common import CFG, PROC, RAW, banner, street_axis
+from common import PROJ_CRS, CFG, PROC, RAW, banner, street_axis
 from export_svi_180 import _street_axis
 
 G = CFG["geometry"]
 HALF = G["facade_half_m"]
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 
 
 def cleaned_axis(nodes):

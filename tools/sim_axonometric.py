@@ -43,9 +43,9 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import PROC, RAW, RES, banner
+from common import PROJ_CRS, PROC, RAW, RES, banner
 
-UTM = 32618
+UTM = PROJ_CRS       # metre CRS from config; 32618 for Manhattan
 # Vertical gap between strata, in metres of the same UTM space the plan uses,
 # so the explosion reads at the same scale as the neighbourhood.
 GAP = 620.0
