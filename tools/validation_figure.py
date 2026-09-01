@@ -38,8 +38,16 @@ from common import PROC, RES, banner
 from sim_readout import prune_once, interpolated_median, K
 from scipy.stats import spearmanr
 
-BG, FG, MUT = "#0e0f12", "#e8e6e1", "#9a9aa2"
-ACC, NEG, GHOST = "#5fbf6a", "#c0392b", "#6b7480"
+# White ground: these two go on slides beside body text, where a dark panel
+# reads as a hole in the page. --dark restores the palette used by the map
+# figures, which are dark because a basemap is.
+LIGHT = dict(bg="#ffffff", fg="#1a1a1a", mut="#6b7078", grid="#e6e6e8",
+             spine="#c8c8cc", box="#2f7d3e", boxneg="#a33", face="#dcecdf",
+             faceneg="#f2dede")
+DARK = dict(bg="#0e0f12", fg="#e8e6e1", mut="#9a9aa2", grid="#20242a",
+            spine="#3a3f46", box="#5fbf6a", boxneg="#c0392b", face="#1d5c2a",
+            faceneg="#5c1d1d")
+GHOST = "#8b929c"
 
 # field, label, twin description, the columns that make the twin.
 # __band and __gmi are joined from their own tables rather than summed here.
@@ -89,7 +97,11 @@ def main():
                     default=RES / "tables" / "sim_vlm_v3.csv")
     ap.add_argument("--slide", default="16:9", choices=["16:9", "free"])
     ap.add_argument("--dpi", type=int, default=200)
+    ap.add_argument("--dark", action="store_true",
+                    help="dark ground instead of white")
     args = ap.parse_args()
+    PAL = DARK if args.dark else LIGHT
+    BG, FG, MUT = PAL["bg"], PAL["fg"], PAL["mut"]
     banner("validation: the rungs against measured pixel shares")
 
     j = build(pd.read_csv(args.table),
@@ -134,7 +146,7 @@ def main():
     d = R.dropna(subset=["rho"]).sort_values("rho").reset_index(drop=True)
     y = np.arange(len(d))
     ax.barh(y, d.rho, height=.62, zorder=3,
-            color=[ACC if v > 0 else NEG for v in d.rho])
+            color=[PAL["box"] if v > 0 else PAL["boxneg"] for v in d.rho])
     ax.scatter(d.ev, y, s=30, facecolor="none", edgecolor=GHOST, linewidths=1.4,
                zorder=4, label="the same answer read as round(EV)")
     ax.set_yticks(y)
@@ -143,7 +155,7 @@ def main():
     for i, v in zip(y, d.rho):
         ax.text(v + (.012 if v > 0 else -.012), i, f"{v:+.3f}", va="center",
                 ha="left" if v > 0 else "right", color=FG, fontsize=9.5)
-    ax.axvline(0, color="#3a3f46", lw=1)
+    ax.axvline(0, color=PAL["spine"], lw=1)
     ax.set_xlim(-.18, float(d.rho.max()) * 1.20)
     ax.set_ylim(-.7, len(d) - .3)
     ax.set_xlabel("Spearman rho against the measured pixel share",
@@ -151,15 +163,15 @@ def main():
     ax.tick_params(colors=MUT, labelsize=9)
     for s in ("top", "right", "left"):
         ax.spines[s].set_visible(False)
-    ax.spines["bottom"].set_color("#3a3f46")
-    ax.grid(axis="x", color="#20242a", lw=.8, zorder=0)
-    ax.legend(loc="lower right", facecolor="#15171b", edgecolor="#23262b",
+    ax.spines["bottom"].set_color(PAL["spine"])
+    ax.grid(axis="x", color=PAL["grid"], lw=.8, zorder=0)
+    ax.legend(loc="lower right", facecolor=BG, edgecolor=PAL["spine"],
               labelcolor=FG, fontsize=9)
     miss = R[R.rho.isna()]
     if len(miss):
         ax.text(.005, .015, "  ".join(f"{m.label}: {m.twin}"
                                       for _, m in miss.iterrows()),
-                transform=ax.transAxes, color=NEG, fontsize=9)
+                transform=ax.transAxes, color=PAL["boxneg"], fontsize=9)
     fig.tight_layout()
     o1 = RES / "figures" / "validation_rho.png"
     fig.savefig(o1, dpi=args.dpi, facecolor=BG)
@@ -175,11 +187,11 @@ def main():
             bp = axx.boxplot([x for _, x in keep], positions=[k for k, _ in keep],
                              widths=.62, patch_artist=True, showfliers=False,
                              medianprops=dict(color=FG, lw=1.3),
-                             whiskerprops=dict(color="#4a505a"),
-                             capprops=dict(color="#4a505a"))
+                             whiskerprops=dict(color=PAL["spine"]),
+                             capprops=dict(color=PAL["spine"]))
             for b in bp["boxes"]:
-                b.set(facecolor="#1d5c2a" if r["rho"] > 0 else "#5c1d1d",
-                      edgecolor="#4a505a", lw=.8)
+                b.set(facecolor=PAL["face"] if r["rho"] > 0 else PAL["faceneg"],
+                      edgecolor=PAL["spine"], lw=.9)
         axx.set_title(f"{r['label']}    rho {r['rho']:+.2f}", color=FG,
                       fontsize=9.5, pad=5)
         axx.set_xlim(.4, 7.6)
@@ -188,7 +200,7 @@ def main():
         for s in ("top", "right"):
             axx.spines[s].set_visible(False)
         for s in ("bottom", "left"):
-            axx.spines[s].set_color("#3a3f46")
+            axx.spines[s].set_color(PAL["spine"])
     for axx in axes.ravel()[len(have):]:
         axx.set_visible(False)
     fig.text(.5, .014, "rated rung", color=FG, ha="center", fontsize=10.5)

@@ -43,6 +43,12 @@ def main():
     ap.add_argument("--ms", type=int, default=280)
     ap.add_argument("--alpha", type=float, default=0.5)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--reverse", action="store_true",
+                    help="walk the corridor from its far end. The frames are "
+                         "unchanged -- each still faces the way the camera "
+                         "faced -- only the order of arrival flips, which is "
+                         "what to use when the corridor's own numbering runs "
+                         "against the direction you want to present")
     ap.add_argument("--segment", default=None,
                     help="source corridor to walk; default is the longest")
     args = ap.parse_args()
@@ -84,10 +90,12 @@ def main():
     seg = args.segment or nf._seg.value_counts().idxmax()
     nf = nf[nf._seg == seg].sort_values(order)
     print(f"{w.name}: corridor {seg}, {len(nf)} of {len(files)} nodes, "
-          f"ordered by {order}")
+          f"ordered by {order}" + (", reversed" if args.reverse else ""))
     if len(nf) < 3:
         sys.exit("too few nodes in that corridor")
     nodes = [files[n] for n in nf.node_id if n in files]
+    if args.reverse:
+        nodes = nodes[::-1]
     if args.limit:
         nodes = nodes[:args.limit]
 
@@ -151,7 +159,8 @@ def main():
 
     out = RES / "figures" / "walks"; out.mkdir(parents=True, exist_ok=True)
     for imgs, tag in ((raw, "raw"), (seg, "segmented")):
-        o = out / f"{args.street}__{w.name}__{tag}.gif"
+        suffix = "__rev" if args.reverse else ""
+        o = out / f"{args.street}__{w.name}{suffix}__{tag}.gif"
         imgs[0].save(o, save_all=True, append_images=imgs[1:],
                      duration=args.ms, loop=0, optimize=True)
         print(f"  wrote {o.name}  {o.stat().st_size/1048576:.1f} MB")
