@@ -1,0 +1,11 @@
+field,label,twin,rho,ev,n
+vertical_greenery,vertical greenery,"map Vegetation, whole frame",0.7649188564947058,0.7183755949449948,3064
+green_eye_level,green at eye level,vegetation 0-15 deg below horizon,0.6575844624308684,0.6011860930085052,3064
+green_softening,green softening,greenery on the lower 3 m of facade,0.5023445459363439,0.44577567866452583,600
+vertical_hardscape,vertical hardscape,map Building + Wall,0.5697259631992947,0.4793635434727243,3064
+sky_openness,sky openness,map Sky,0.4973825304013202,0.4817751199435775,3064
+signage_detail,signage detail,map Billboard,0.45435876533875563,0.438743751836491,3064
+walkable_ground,walkable ground,sidewalk + curb + pedestrian area,0.3059054294956059,0.2482680568240641,3064
+resting_affordance,resting affordance,bench + stairs + step,0.27034057300126674,0.23406825968278092,3064
+ground_floor_activity,ground floor activity,windowpane + door,-0.08880560056074205,-0.084232485652111,3064
+facade_variation,facade variation,no twin found,,,0
