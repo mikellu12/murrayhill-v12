@@ -40,6 +40,9 @@ def main():
                     help="context around the frame, as a fraction of its span")
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--dpi", type=int, default=300)
+    ap.add_argument("--no-cache", dest="cache", action="store_false",
+                    default=True, help="refetch tiles rather than trusting "
+                                       "the cache, which can hold error tiles")
     args = ap.parse_args()
     name = CFG.get("study_area_name", "study area")
     banner(f"sampling nodes: {name}")
@@ -64,14 +67,29 @@ def main():
     ax.set_xlim(cxm - h, cxm + h); ax.set_ylim(cym - h, cym + h)
     ax.set_aspect("equal"); ax.set_axis_off()
 
+    # THE CACHE CAN POISON THE FIGURE. contextily stores whatever came back,
+    # including a provider's "requires API key" placeholder, and then serves it
+    # forever without another request -- the London map carried that watermark
+    # across the whole basemap while every live tile fetched fine. --no-cache
+    # bypasses it; deleting the directory is the cure once it has happened.
     cache = PROC / "tiles"
-    cache.mkdir(parents=True, exist_ok=True)
-    cx.set_cache_dir(str(cache))
+    if args.cache:
+        cache.mkdir(parents=True, exist_ok=True)
+        cx.set_cache_dir(str(cache))
     for prov, alpha in ((src, 1.0), (lbl, 0.85)):
         try:
             cx.add_basemap(ax, source=prov, alpha=alpha, attribution=False)
         except Exception as e:
             print(f"  basemap layer skipped: {e}")
+
+    # A dark basemap that comes back bright is a page of placeholders, not a
+    # map. Cheap to check, and it fails silently otherwise.
+    fig.canvas.draw()
+    buf = np.asarray(fig.canvas.buffer_rgba())[:, :, :3].astype(float)
+    if args.dark and buf.mean() > 110:
+        print(f"  WARNING: basemap mean brightness {buf.mean():.0f} on a dark "
+              f"style -- these are probably error tiles. Re-run with "
+              f"--no-cache, or delete {cache}")
 
     ax.scatter(x, y, s=args.size, c=args.colour, linewidths=0, zorder=5)
 

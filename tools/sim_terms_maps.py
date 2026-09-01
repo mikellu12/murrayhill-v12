@@ -55,6 +55,9 @@ def main():
     ap.add_argument("--out", type=Path,
                     default=Path("results/figures/sim_terms_two_cities.png"))
     ap.add_argument("--dpi", type=int, default=200)
+    ap.add_argument("--slide", default="16:9", choices=["16:9", "4:3", "free"],
+                    help="size the canvas to a PowerPoint page. 16:9 is "
+                         "13.333x7.5 in, 4:3 is 10x7.5, free is 13.6x9.6")
     args = ap.parse_args()
     banner("the three terms, one row per city")
 
@@ -77,10 +80,20 @@ def main():
         norms[col] = np.percentile(v, [2, 98])
         print(f"  {col:<8}scale {norms[col][0]:.3f} to {norms[col][1]:.3f}")
 
-    fig = plt.figure(figsize=(13.6, 9.6), facecolor=BG)
+    # A slide is wide and short, and six square-ish map panels are the
+    # opposite, so the panels are what has to give: the margins tighten and the
+    # colourbars move up under the bottom row rather than sitting in a band of
+    # their own. Filling the page exactly means no rescaling in PowerPoint,
+    # which is where figure text usually goes soft.
+    SIZE = {"16:9": (13.333, 7.5), "4:3": (10.0, 7.5), "free": (13.6, 9.6)}
+    fig = plt.figure(figsize=SIZE[args.slide], facecolor=BG)
+    tight = args.slide != "free"
     gs = fig.add_gridspec(2, 3, height_ratios=[s / S for s in spans],
-                          hspace=.07, wspace=.03,
-                          left=.055, right=.985, top=.93, bottom=.115)
+                          hspace=.05 if tight else .07,
+                          wspace=.025 if tight else .03,
+                          left=.05, right=.99,
+                          top=.915 if tight else .93,
+                          bottom=.135 if tight else .115)
 
     for r, (name, g) in enumerate(frames):
         for c, (col, label, cmap) in enumerate(TERMS):
@@ -116,8 +129,9 @@ def main():
     # one colourbar per column, under it, so the scale sits with the term
     for c, (col, _, cmap) in enumerate(TERMS):
         box = gs[1, c].get_position(fig)
-        cax = fig.add_axes([box.x0 + box.width * .22, .062,
-                            box.width * .56, .012])
+        cax = fig.add_axes([box.x0 + box.width * .22,
+                            .072 if tight else .062,
+                            box.width * .56, .014 if tight else .012])
         lo, hi = norms[col]
         cb = fig.colorbar(plt.cm.ScalarMappable(norm=plt.Normalize(lo, hi),
                                                 cmap=cmap),
