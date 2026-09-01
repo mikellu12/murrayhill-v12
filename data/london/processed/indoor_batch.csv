@@ -1,0 +1,41 @@
+n,file,tunnel,ground,sky,ceil,old_rule,new_rule,street,why,label,is_strip
+1,pancras_lane/west_to_east/004_n01325_E_L.jpg,0.0,0.044689,0.0,0.354206,True,True,pancras_lane,boundary ground .03-.08,indoor,False
+2,dunster_court/south_to_north/004_n00518_E_L.jpg,0.0,0.154724,0.0,0.022869,True,False,dunster_court,rules disagree,indoor,False
+3,cannon_street/west_to_east/040_n00309_E_R.jpg,0.0,0.108762,0.0,0.448626,True,False,cannon_street,rules disagree,indoor,False
+4,dowgate_hill/north_to_south/002_n00513_S_L.jpg,0.695532,0.245187,0.0,0.400074,True,False,dowgate_hill,tunnel class fires,indoor,False
+5,beehive_passage/north_to_south/002_n00126_S_R.jpg,0.690972,0.0,0.0,0.84365,True,True,beehive_passage,tunnel class fires,indoor,False
+6,abchurch_lane/south_to_north/006_n00005_E_L.jpg,0.965498,0.003003,0.0,0.32889,True,True,abchurch_lane,tunnel class fires,indoor,False
+7,king_william_street/north_to_south/011_n00846_S_R.jpg,0.77618,0.222548,0.0,0.254953,True,False,king_william_street,tunnel class fires,indoor,False
+8,st_paul_s_churchyard/east_to_west/003_n01506_W_L.jpg,0.0,0.0,0.322288,0.0,False,True,st_paul_s_churchyard,very low ground,vehicle,False
+9,fenchurch_street/west_to_east/015_n00567_E_L.jpg,0.999456,0.0,0.0,0.449817,True,True,fenchurch_street,very low ground,indoor,False
+10,college_hill/south_to_north/004_n00432_N_L.jpg,0.0,0.0,0.0,0.103665,True,True,college_hill,very low ground,indoor,False
+11,billingsgate_walk/south_to_north/002_n00129_N_R.jpg,0.0,0.0,0.0,0.014723,False,True,billingsgate_walk,very low ground,indoor,False
+12,sun_street_passage/south_to_north/005_n01592_N_R.jpg,0.0,0.0,0.0,0.0,False,True,sun_street_passage,very low ground,street,False
+13,cavendish_court/south_to_north/001_n00353_N_R.jpg,0.0,0.773679,0.15241,0.0,False,False,cavendish_court,"clear street, control",street,False
+14,bond_court/west_to_east/004_n00199_N_L.jpg,0.0,0.6119570000000001,0.026535,0.0,False,False,bond_court,"clear street, control",street,False
+15,lawrence_lane/south_to_north/005_n00885_N_L.jpg,0.0,0.441076,0.0,0.019183,False,False,lawrence_lane,"clear street, control",street,False
+16,eastcheap/west_to_east/004_n00525_E_L.jpg,0.0,0.7878419999999999,0.125226,0.0,False,False,eastcheap,"clear street, control",street,False
+17,cheapside/west_to_east/010_n00383_S_L.jpg,0.0,0.800915,0.225944,0.0,False,False,cheapside,"clear street, control",street,False
+18,dunster_court/north_to_south/005_n00516_S_R.jpg,0.0,2e-05,0.0,0.0,False,True,dunster_court,rules disagree,indoor,False
+19,fenchurch_street/west_to_east/015_n00567_E_R.jpg,0.550048,0.406408,0.0,0.441797,True,False,fenchurch_street,rules disagree,indoor,False
+20,cullum_street/north_to_south/001_n00481_S_R.jpg,0.0,0.6400790000000001,0.0,0.0,False,False,cullum_street,"clear street, control",street,False
+21,new_change/south_to_north/010_n01240_N_L.jpg,0.0,0.0,0.0,0.0,False,True,new_change,rules disagree,indoor,False
+22,finch_lane/north_to_south/003_n00574_S_L.jpg,0.0,0.010318,0.0,0.006605,False,True,finch_lane,rules disagree,indoor,False
+23,clements_lane/north_to_south/007_n00393_S_L.jpg,0.55081,0.294603,0.0,0.365471,True,False,clements_lane,rules disagree,indoor,False
+24,finsbury_circus/west_to_east/008_n00577_E_R.jpg,0.0,0.055883,0.000382,0.0,False,False,finsbury_circus,boundary ground .03-.08,street,False
+25,king_william_street/south_to_north/023_n00847_N_R.jpg,0.938753,0.039396,0.0,0.65734,False,True,king_william_street,boundary ground .03-.08,indoor,False
+26,custom_house_walkway/west_to_east/003_n00489_E_L.jpg,0.0,0.057992,0.049354,0.0,False,False,custom_house_walkway,boundary ground .03-.08,street,False
+27,cannon_street/west_to_east/012_n00296_E_L.jpg,0.0,0.034847,0.0,0.19625,True,True,cannon_street,boundary ground .03-.08,vehicle,False
+28,laurence_pountney_hill/south_to_north/001_n00866_W_R.jpg,0.0,0.075173,0.108273,0.0,False,False,laurence_pountney_hill,boundary ground .03-.08,street,False
+29,cannon_street/west_to_east/008_n00291_E_L.jpg,0.0,0.031526,0.074191,0.0,False,True,cannon_street,boundary ground .03-.08,vehicle,False
+30,dark_house_walk/west_to_east/001_n00494_E_F.jpg,0.0,0.064288,0.285906,0.0,False,False,dark_house_walk,boundary ground .03-.08,street,True
+31,cousin_lane/north_to_south/006_n00471_S_F.jpg,0.0,0.063673,0.065546,0.0,False,False,cousin_lane,boundary ground .03-.08,indoor,True
+32,abchurch_yard/south_to_north/002_n00010_N_F.jpg,0.0,0.292452,0.0,0.420422,True,False,abchurch_yard,rules disagree,indoor,True
+33,globe_view_walkway/east_to_west/002_n00662_S_F.jpg,0.0,0.037779,0.018372,0.406408,False,True,globe_view_walkway,boundary ground .03-.08,indoor,True
+34,lovat_lane/north_to_south/002_n01071_S_F.jpg,0.0,0.0,0.0,0.0,False,True,lovat_lane,rules disagree,indoor,True
+35,king_william_street/south_to_north/021_n00845_N_F.jpg,0.923331,0.0,0.0,0.379578,True,True,king_william_street,tunnel class fires,indoor,True
+36,new_broad_street/south_to_north/012_n01230_N_F.jpg,0.0,0.040005,0.0,0.012284,False,True,new_broad_street,boundary ground .03-.08,indoor,True
+37,three_cranes_walk/west_to_east/003_n01628_E_F.jpg,0.360453,0.0,0.0,0.434261,True,True,three_cranes_walk,tunnel class fires,indoor,True
+38,globe_view_walkway/east_to_west/004_n00660_W_F.jpg,0.0,0.005685,0.009991,0.0,False,True,globe_view_walkway,rules disagree,street,True
+39,watling_street/west_to_east/001_n01762_E_F.jpg,0.0,0.062337,0.0,0.132344,True,False,watling_street,boundary ground .03-.08,indoor,True
+40,lombard_street/west_to_east/003_n00973_E_F.jpg,0.999391,0.0,0.0,0.410721,True,True,lombard_street,very low ground,indoor,True
