@@ -14,22 +14,42 @@ drawn back to front, so occlusion is exactly the draw order.
 
     x' = (x - y) cos(30)          y' = (x + y) sin(30) + layer_gap * k
 
-EACH STRATUM IS ONE CONTINUOUS SURFACE. The nodes are samples of a field that
-exists everywhere between them, so the honest drawing is a warped sheet, not a
-row of uprights and not a ribbon per street: values are interpolated onto a
-grid, smoothed, and the sheet is lifted by the value at each cell. The top of
-the sheet is the dimension's relief across the study area.
+HEIGHT IS LOCAL, COLOUR IS GLOBAL. Read a ribbon's height against the street
+line directly beneath it and nowhere else. In an axonometric the screen height
+of a mark is its depth plus its elevation, so a node at the far corner of the
+plan sits high on screen because it is far, and no tilt fixes this: for Park
+Avenue's 0.670 to out-top Tudor City Place's 0.581 across 1,100 m of plan the
+ground would have to be flatter than about one degree, which is no axonometric
+at all. The value differences between streets are small against the extent.
 
-INTERPOLATION IS BOUNDED BY DISTANCE, not by the hull. A cubic fit across the
-whole convex hull would invent values in the middle of blocks where no frontage
-was ever photographed, and those inventions would be the largest, smoothest
-features in the picture. Cells further than `--reach` from any node are
-dropped, so the sheet spreads from the streets and stops.
+So colour carries the comparison and height carries the texture. Anyone asking
+which street scores highest should read tools/sim_maps.py, which is flat and
+has no depth axis to confound.
 
-PAINTER'S ALGORITHM, BY CELL. In this projection up-screen is further away, so
-each sheet's cells are drawn in order of decreasing screen height. Sorting
-whole layers is not enough once a sheet has relief: a tall cell at the front of
-a plane must cover a low cell behind it in the same plane.
+THREE WAYS TO DRAW A STRATUM, because they are not equally readable and the
+right one depends on the audience.
+
+  ribbon   (default) a wall along each street, its top edge the profile of the
+           dimension. Continuous exactly where the measurement is continuous --
+           along a frontage -- and discontinuous across blocks, where the
+           measurement genuinely stops. Reads as streets.
+  bars     one upright per node. The rawest view: every mark is a datum and
+           nothing between them is drawn at all.
+  surface  values interpolated onto a grid and lifted into a sheet. Smooth, and
+           the least legible: it reads as terrain, and a reader has to be told
+           that the hills are streets.
+
+The surface was tried first and abandoned for readability. It is kept because
+it is the only one that shows a neighbourhood rather than a line, but two of
+its properties are traps. It interpolates values into blocks where no frontage
+was photographed, so `--reach` stops the sheet a fixed distance from any node.
+And it must use LINEAR interpolation: a cubic fit overshoots its inputs and put
+the imageability peak on the wrong street entirely.
+
+PAINTER'S ALGORITHM, BY MARK. In this projection up-screen is further away, so
+marks are drawn in order of decreasing screen height. Sorting whole layers is
+not enough once a plane has relief: a tall mark at the front must cover a short
+one behind it within the same plane.
 
 No accent colour. An overlaid mark for the top decile sat outside every ramp
 and pulled the eye off the surfaces it was meant to annotate; the ramps already
@@ -75,9 +95,24 @@ LAYERS = [
 ]
 
 
+# Ground tilt, in degrees. NOT 30, and the reason matters: in any axonometric
+# the screen height of a mark is its depth plus its elevation, because both map
+# to the same axis -- y' = (x + y) sin(tilt) + value. At 30 degrees the ground
+# contributes so much vertical that a node in the far corner of the frame sits
+# higher on screen than a tall mark in the near corner, and the reader sees a
+# peak that is only distance. Murray Hill's imageability reads as highest in
+# the north-east on a 30-degree ground, when the north-east is in fact its
+# LOWEST quadrant, 0.351 against the south-west's 0.413.
+#
+# Flattening the ground shrinks the depth term without touching the value term.
+# At 16 degrees the ground spans about a third of the vertical it did, so
+# relief carries the height and the colour and the profile agree.
+TILT = 16.0
+
+
 def iso(x, y, k, gap):
-    """Isometric shear, with layer k lifted by `gap` in projected units."""
-    c, s = np.cos(np.radians(30)), np.sin(np.radians(30))
+    """Axonometric shear, with layer k lifted by `gap` in projected units."""
+    c, s = np.cos(np.radians(30)), np.sin(np.radians(TILT))
     return (x - y) * c, (x + y) * s + k * gap
 
 
@@ -104,14 +139,18 @@ def main():
     ap.add_argument("--gap", type=float, default=0.62,
                     help="layer separation, as a fraction of the frame's span")
     ap.add_argument("--dpi", type=int, default=260)
+    ap.add_argument("--style", default="ribbon",
+                    choices=["ribbon", "bars", "surface"],
+                    help="ribbon: a wall along each street, continuous with "
+                         "the line beneath it. bars: one upright per node. "
+                         "surface: an interpolated sheet -- smooth, but it "
+                         "reads as terrain rather than as streets")
     ap.add_argument("--verify", action="store_true",
                     help="check each surface's peak against the highest node")
     ap.add_argument("--context-km", type=float, default=1.6,
                     help="radius of the wider city plan drawn behind the "
                          "stack; 0 to omit")
-    ap.add_argument("--bars", action="store_true", default=True,
-                    help="extrude each node's value as a bar within its plane")
-    ap.add_argument("--relief", type=float, default=0.20,
+    ap.add_argument("--relief", type=float, default=0.26,
                     help="height of the surface at full value, as a fraction "
                          "of the frame span")
     ap.add_argument("--grid", type=int, default=260,
@@ -201,7 +240,8 @@ def main():
             xs.append(X); ys.append(Y)
         ax.plot(xs, ys, color="#d7d7d7", lw=.35, zorder=0, solid_capstyle="butt")
 
-    # the field, once: grid, interpolate, smooth, mask by distance
+    # the field, once: grid, interpolate, smooth, mask by distance.
+    # Only the surface style needs it; ribbon and bars read the nodes directly.
     from scipy.interpolate import griddata
     from scipy.ndimage import gaussian_filter, distance_transform_edt
     x0, x1 = g._x.min(), g._x.max()
@@ -221,6 +261,8 @@ def main():
 
     pts = np.c_[g._x.to_numpy(), g._y.to_numpy()]
     namecol = "osm_name" if "osm_name" in g.columns else "street_name"
+    if args.style != "surface":
+        print(f"style: {args.style}")
     VERIFY = {}
     for k, (col, label, cmap, short) in enumerate(LAYERS):
         if col == "fabric":
@@ -236,77 +278,48 @@ def main():
 
         v = g[col].to_numpy()
         lo, hi = np.nanpercentile(v, [3, 97])
-        # LINEAR, NOT CUBIC, and this is not a taste. A cubic fit on scattered
-        # points overshoots: it put 48 cells above the highest node in the
-        # frame and invented a ridge on East 37th that outranked Park Avenue's
-        # planted median -- the one greenery feature in Murray Hill that is
-        # genuinely exceptional, and the three highest nodes in the data. The
-        # peak of the drawing landed on the wrong street. Linear cannot exceed
-        # its inputs, and recovers Park Avenue as the maximum in every
-        # configuration tried.
-        #
-        # No nearest-neighbour backfill either. It was covering 15% of the
-        # surviving cells with the value of whatever node happened to be
-        # closest, which is blocky invention wearing the same colours as
-        # measurement.
-        F = griddata(pts, v, (GX, GY), method="linear")
+        X, Y = iso(g._x.to_numpy(), g._y.to_numpy(), k, gap)
+        t = np.clip((v - lo) / max(hi - lo, 1e-9), 0, 1) * args.relief * span
 
-        # Linear only fills the Delaunay hull of the nodes, so cells that are
-        # within reach of a street but outside that hull came out NaN and
-        # punched holes through the sheet -- along every outer frontage and
-        # inside every concave corner of the frame. They are filled by inverse
-        # distance over the nodes within reach, which is a weighted average and
-        # therefore bounded by its inputs: it cannot invent a peak the way the
-        # cubic fit did, and it cannot paste a single node's value across a
-        # block the way nearest-neighbour did.
-        hole = near & ~np.isfinite(F)
-        if hole.any():
-            from scipy.spatial import cKDTree
-            tree = cKDTree(pts)
-            hx, hy = GX[hole], GY[hole]
-            nb = tree.query_ball_point(np.c_[hx, hy], r=args.reach)
-            fill = np.full(len(hx), np.nan)
-            for i, idx in enumerate(nb):
-                if not idx:
-                    continue
-                d = np.hypot(pts[idx, 0] - hx[i], pts[idx, 1] - hy[i])
-                w = 1.0 / np.maximum(d, cell * 0.5) ** 2
-                fill[i] = float(np.sum(w * v[idx]) / np.sum(w))
-            F[hole] = fill
-            print(f"    {col}: filled {int(np.isfinite(fill).sum())} hole cells")
-
-        if args.smooth > 0:
-            # smooth only where there is data, so the filter does not drag the
-            # edges toward the fill value
-            M = np.isfinite(F)
-            num = gaussian_filter(np.where(M, F, 0.0), args.smooth)
-            den = gaussian_filter(M.astype(float), args.smooth)
-            F = np.where(den > 1e-6, num / np.maximum(den, 1e-6), np.nan)
-            F = np.where(M, F, np.nan)
-        F = np.where(near, F, np.nan)
-
-        if args.verify and np.isfinite(F).any():
-            iy, ix = np.unravel_index(np.nanargmax(F), F.shape)
-            d = np.hypot(g._x - gx[ix], g._y - gy[iy])
-            VERIFY[col] = (g[namecol].iloc[int(np.argmax(v))],
-                           g[namecol].iloc[int(np.argmin(d))])
-
-        t = np.clip((F - lo) / max(hi - lo, 1e-9), 0, 1) * args.relief * span
-        SX, SY = iso(GX, GY, k, gap)
-        SY = SY + t
-
-        # quads over the grid, drawn far to near within this stratum
-        a = (slice(0, -1), slice(0, -1)); b = (slice(0, -1), slice(1, None))
-        c_ = (slice(1, None), slice(1, None)); d_ = (slice(1, None), slice(0, -1))
-        val = np.nanmean(np.stack([F[a], F[b], F[c_], F[d_]]), axis=0)
-        ok = np.isfinite(val)
-        quads = np.stack([np.stack([SX[q], SY[q]], -1) for q in (a, b, c_, d_)], -2)
-        quads = quads[ok]; val = val[ok]
-        depth = quads[:, :, 1].mean(axis=1)
-        o = np.argsort(-depth)
-        ax.add_collection(PolyCollection(
-            quads[o], cmap=cmap, array=val[o], norm=plt.Normalize(lo, hi),
-            linewidths=0.28, edgecolors="none", zorder=k * 10 + 1))
+        if args.style in ("ribbon", "bars"):
+            segs = np.c_[X, Y][pairs] if len(pairs) else np.zeros((0, 2, 2))
+            ax.add_collection(LineCollection(segs, colors="#d0d0d0", lw=.6,
+                                             zorder=k * 10 + 1))
+            if args.style == "bars":
+                # one upright per node, drawn far to near so a tall bar in
+                # front covers a short one behind it
+                up = np.stack([np.c_[X, Y], np.c_[X, Y + t]], axis=1)
+                o = np.argsort(-Y)
+                ax.add_collection(LineCollection(
+                    up[o], cmap=cmap, array=v[o], lw=1.25,
+                    norm=plt.Normalize(lo, hi), zorder=k * 10 + 2))
+            else:
+                # a wall along the street: neighbouring quads share an edge, so
+                # the strip is continuous exactly as the street is
+                a, b = pairs[:, 0], pairs[:, 1]
+                quads = np.stack([
+                    np.c_[X[a], Y[a]], np.c_[X[b], Y[b]],
+                    np.c_[X[b], Y[b] + t[b]], np.c_[X[a], Y[a] + t[a]]], axis=1)
+                val = np.nanmean(v[pairs], axis=1)
+                o = np.argsort(-quads[:, :, 1].mean(axis=1))
+                ax.add_collection(PolyCollection(
+                    quads[o], cmap=cmap, array=val[o],
+                    norm=plt.Normalize(lo, hi), linewidths=0,
+                    zorder=k * 10 + 2))
+                top = np.stack([np.c_[X[a], Y[a] + t[a]],
+                                np.c_[X[b], Y[b] + t[b]]], axis=1)
+                ax.add_collection(LineCollection(
+                    top[o], cmap=cmap, array=val[o], lw=.85,
+                    norm=plt.Normalize(lo, hi), zorder=k * 10 + 3))
+            if args.verify:
+                i = int(np.argmax(v))
+                VERIFY[col] = (g[namecol].iloc[i], g[namecol].iloc[i])
+            lx, ly = X.min() - span * 0.20, Y[np.argmin(X)]
+            ax.text(lx, ly, label, color=INK, fontsize=8.2,
+                    ha="right", va="center")
+            ax.text(lx, ly - span * 0.05, f"median {g[col].median():.3f}",
+                    color=MUT, fontsize=6.4, ha="right", va="center")
+            continue
 
         X, Y = iso(g._x.to_numpy(), g._y.to_numpy(), k, gap)
         lx, ly = X.min() - span * 0.20, Y[np.argmin(X)]
