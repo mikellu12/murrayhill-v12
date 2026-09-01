@@ -31,11 +31,14 @@ import geopandas as gpd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import sim_cmap, banner
+from common import banner
 
 BG = "#0e0f12"
 FG = "#e8e6e1"
-CMAP = sim_cmap()
+# magma, matching the M panel of tools/sim_vlm_maps.py and the M row of
+# tools/sim_maps.py. M is drawn in three places and should not change colour
+# between them.
+CMAP = "magma"
 
 
 def load(nodes_gpkg, calc_csv, crs, m_col):
