@@ -66,11 +66,16 @@ def main():
     spans = [max(np.ptp(g.x.values), np.ptp(g.y.values)) for _, g, _, _ in frames]
     S = max(spans)
 
+    # The heading block needs its own space rather than being written over the
+    # top row: two lines of figure text at .975/.955 plus a column title with
+    # padding collided at top=.945, and the collision grows with figure height
+    # because the text is placed in figure fractions and the title in points.
     fig = plt.figure(figsize=(11.4, 4.15 * len(DIMS)), facecolor=BG)
+    head = 0.44 / (4.15 * len(DIMS))          # inches of heading, as a fraction
     gs = fig.add_gridspec(len(DIMS), 2,
                           width_ratios=[s / S for s in spans],
                           hspace=.10, wspace=.04,
-                          left=.045, right=.86, top=.945, bottom=.02)
+                          left=.045, right=.86, top=1 - head - 0.035, bottom=.02)
     for r, (d, label, cmap) in enumerate(DIMS):
         vals = np.concatenate([g[c[d]].dropna().values for _, g, c, _ in frames])
         vmin, vmax = np.percentile(vals, [2, 98])
@@ -88,7 +93,7 @@ def main():
             for s_ in ax.spines.values():
                 s_.set_color("#23262b")
             if r == 0:
-                ax.set_title(name, color=FG, fontsize=12, pad=9)
+                ax.set_title(name, color=FG, fontsize=12, pad=6)
             ax.text(.02, .965, f"median {v.median():.3f}", transform=ax.transAxes,
                     color=MUT, fontsize=8.5, va="top")
             if k == 0:
@@ -102,12 +107,12 @@ def main():
         plt.setp(plt.getp(cb.ax, "yticklabels"), color=FG)
         cb.outline.set_edgecolor("#23262b")
 
-    fig.text(.045, .975, "The three dimensions and M, both study areas",
-             color=FG, fontsize=15)
-    fig.text(.045, .958,
+    fig.text(.045, 1 - head * 0.34, "The three dimensions and M, both study areas",
+             color=FG, fontsize=15, va="center")
+    fig.text(.045, 1 - head * 0.78,
              "Node means. Each row shares one colour scale across the two "
              "cities; rows do not share with each other. Canyon penalty off in "
-             "both, global tau.", color=MUT, fontsize=9)
+             "both, global tau.", color=MUT, fontsize=9, va="center")
     args.out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(args.out, dpi=args.dpi, facecolor=BG)
     print(f"\nwrote {args.out}")
