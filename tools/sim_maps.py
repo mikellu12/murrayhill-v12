@@ -33,10 +33,16 @@ sys.path.insert(0, str(HERE.parent / "src"))
 from common import banner
 
 BG, FG, MUT = "#0e0f12", "#e8e6e1", "#9a9aa2"
-DIMS = [("I", "Imageability", "viridis"),
-        ("Y", "Identity", "viridis"),
-        ("D", "Dependence", "viridis"),
-        ("M", "M, the Street Interface Matrix", "magma")]
+# ONE COLOUR MAP FOR ALL FOUR. M and its three inputs are read side by side,
+# and a different ramp per row makes the eye compare ramps instead of values --
+# a bright patch in I would look like a different KIND of thing from a bright
+# patch in M rather than a higher number. tools/m_maps.py uses magma, so the
+# two figures agree with each other as well.
+CMAP = "magma"
+DIMS = [("I", "Imageability"),
+        ("Y", "Identity"),
+        ("D", "Dependence"),
+        ("M", "M, the Street Interface Matrix")]
 CITIES = [("Murray Hill, Manhattan", "data/processed/nodes.gpkg",
            "results/tables/vlm_calculations.csv", 32618, "M_noA"),
           ("City of London", "data/london/processed/nodes.gpkg",
@@ -56,7 +62,7 @@ def main():
         n = gpd.read_file(gpkg)[["node_id", "geometry"]].to_crs(crs)
         c = pd.read_csv(calc)
         use = mcol if mcol in c.columns else "M"
-        cols = {d: (use if d == "M" else d) for d, _, _ in DIMS}
+        cols = {d: (use if d == "M" else d) for d, _ in DIMS}
         per = c.groupby("node_id")[list(set(cols.values()))].mean().reset_index()
         g = n.merge(per, on="node_id", how="inner")
         g["x"], g["y"] = g.geometry.x, g.geometry.y
@@ -76,14 +82,14 @@ def main():
                           width_ratios=[s / S for s in spans],
                           hspace=.10, wspace=.04,
                           left=.045, right=.86, top=1 - head - 0.035, bottom=.02)
-    for r, (d, label, cmap) in enumerate(DIMS):
+    for r, (d, label) in enumerate(DIMS):
         vals = np.concatenate([g[c[d]].dropna().values for _, g, c, _ in frames])
         vmin, vmax = np.percentile(vals, [2, 98])
         sc = None
         for k, (name, g, cols, _) in enumerate(frames):
             ax = fig.add_subplot(gs[r, k], facecolor=BG)
             v = g[cols[d]]
-            sc = ax.scatter(g.x, g.y, c=v, cmap=cmap, vmin=vmin, vmax=vmax,
+            sc = ax.scatter(g.x, g.y, c=v, cmap=CMAP, vmin=vmin, vmax=vmax,
                             s=9, linewidths=0)
             ax.set_aspect("equal")
             cx, cy = g.x.mean(), g.y.mean()
