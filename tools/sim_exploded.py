@@ -14,11 +14,16 @@ drawn back to front, so occlusion is exactly the draw order.
 
     x' = (x - y) cos(30)          y' = (x + y) sin(30) + layer_gap * k
 
-RED IS THE UPPER TAIL, on every plane, at the same quantile. It is the one
-thing the eye should be able to follow between strata, so it is not a ramp
-value but a fixed mark: this node is in the top decile of THIS dimension. A
-column with red at every level is a street that does well on all three; red at
-the top and nowhere below is a composite carried by a single term.
+EACH PLANE IS A SURFACE, not a row of bars. The measurement is continuous
+along a street -- every 20 m, on a frontage that does not stop between nodes --
+so drawing it as separate uprights says the wrong thing about the data and
+fights the continuous line beneath it. Each pair of neighbouring nodes becomes
+a quadrilateral between the street and the value above it, so the ribbon runs
+unbroken along the street and its top edge is the profile of the dimension.
+
+No accent colour. An overlaid mark for the top decile sat outside every ramp
+and pulled the eye off the surfaces it was meant to annotate; the ramps already
+put the tail at their bright end.
 
 Both study areas, from vlm_calculations.csv and nodes.gpkg alone. Murray Hill
 has building footprints and London does not, so the fabric plane is drawn from
@@ -37,7 +42,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import geopandas as gpd
-from matplotlib.collections import LineCollection
+from matplotlib.collections import LineCollection, PolyCollection
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
@@ -86,18 +91,16 @@ def main():
     ap.add_argument("--calc", type=Path, default=None)
     ap.add_argument("--nodes", type=Path, default=None)
     ap.add_argument("--out", type=Path, default=None)
-    ap.add_argument("--gap", type=float, default=0.30,
+    ap.add_argument("--gap", type=float, default=0.46,
                     help="layer separation, as a fraction of the frame's span")
-    ap.add_argument("--tail", type=float, default=0.90,
-                    help="quantile marked red on every plane")
     ap.add_argument("--dpi", type=int, default=260)
     ap.add_argument("--context-km", type=float, default=1.6,
                     help="radius of the wider city plan drawn behind the "
                          "stack; 0 to omit")
     ap.add_argument("--bars", action="store_true", default=True,
                     help="extrude each node's value as a bar within its plane")
-    ap.add_argument("--bar-scale", type=float, default=0.13,
-                    help="tallest bar, as a fraction of the frame span")
+    ap.add_argument("--bar-scale", type=float, default=0.17,
+                    help="tallest ribbon, as a fraction of the frame span")
     args = ap.parse_args()
     name = CFG.get("study_area_name", "study area")
     banner(f"exploded axonometric: {name}")
@@ -193,19 +196,26 @@ def main():
             ax.add_collection(LineCollection(
                 segs, cmap=cmap, array=vals, lw=2.3,
                 norm=plt.Normalize(lo, hi), zorder=k * 10 + 1))
-            # Bars, so a plane reads as a quantity and not only as a hue.
-            # Height and colour carry the same number on purpose: the colour
-            # survives at thumbnail size, the height survives in print.
-            if args.bars:
-                t = (v - lo) / max(hi - lo, 1e-9)
-                t = np.clip(t, 0, 1) * args.bar_scale * span
-                bar = np.stack([np.c_[X, Y], np.c_[X, Y + t]], axis=1)
+            # A continuous ribbon: one quad per street segment, between the
+            # line and the value above it. Neighbouring quads share an edge, so
+            # the surface runs unbroken and its top edge is the profile.
+            if args.bars and len(pairs):
+                t = np.clip((v - lo) / max(hi - lo, 1e-9), 0, 1)
+                t = t * args.bar_scale * span
+                a, b = pairs[:, 0], pairs[:, 1]
+                quads = np.stack([
+                    np.c_[X[a], Y[a]], np.c_[X[b], Y[b]],
+                    np.c_[X[b], Y[b] + t[b]], np.c_[X[a], Y[a] + t[a]]], axis=1)
+                ax.add_collection(PolyCollection(
+                    quads, cmap=cmap, array=vals, norm=plt.Normalize(lo, hi),
+                    linewidths=0, zorder=k * 10 + 2))
+                # the profile itself, so the top edge stays legible where the
+                # surface is pale
+                top = np.stack([np.c_[X[a], Y[a] + t[a]],
+                                np.c_[X[b], Y[b] + t[b]]], axis=1)
                 ax.add_collection(LineCollection(
-                    bar, cmap=cmap, array=v, lw=.75,
-                    norm=plt.Normalize(lo, hi), zorder=k * 10 + 2))
-            tail = v >= np.nanquantile(v, args.tail)
-            ax.scatter(X[tail], Y[tail], s=5.5, c=RED, linewidths=0,
-                       zorder=k * 10 + 3)
+                    top, cmap=cmap, array=vals, lw=.8,
+                    norm=plt.Normalize(lo, hi), zorder=k * 10 + 3))
         # label to the left, in the reference's manner
         lx = X.min() - span * 0.20
         ly = Y[np.argmin(X)]
@@ -222,7 +232,7 @@ def main():
     fig.text(.06, .965, name, color=INK, fontsize=17)
     fig.text(.06, .945,
              f"M = I^a · Y^b · D^c, drawn as strata.  {len(g)} nodes.  "
-             f"Red marks the top {(1-args.tail)*100:.0f}% of each dimension.",
+             f"Ribbon height and colour both carry the value.",
              color=MUT, fontsize=8.6)
     out = args.out or RES / "figures" / f"sim_exploded_{CFG.get('study_area_slug','area')}.png"
     out.parent.mkdir(parents=True, exist_ok=True)
