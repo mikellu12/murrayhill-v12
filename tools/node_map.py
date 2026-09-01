@@ -40,6 +40,13 @@ def main():
                     help="context around the frame, as a fraction of its span")
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--dpi", type=int, default=300)
+    ap.add_argument("--labels", dest="labels", action="store_true",
+                    default=False,
+                    help="overlay the street-name layer. Off by default: the "
+                         "locator's job is to place the site, the names are "
+                         "small enough to be unreadable at figure size, and "
+                         "that layer is the one that has served placeholder "
+                         "tiles")
     ap.add_argument("--no-cache", dest="cache", action="store_false",
                     default=True, help="refetch tiles rather than trusting "
                                        "the cache, which can hold error tiles")
@@ -76,7 +83,8 @@ def main():
     if args.cache:
         cache.mkdir(parents=True, exist_ok=True)
         cx.set_cache_dir(str(cache))
-    for prov, alpha in ((src, 1.0), (lbl, 0.85)):
+    layers = [(src, 1.0)] + ([(lbl, 0.85)] if args.labels else [])
+    for prov, alpha in layers:
         try:
             cx.add_basemap(ax, source=prov, alpha=alpha, attribution=False)
         except Exception as e:
