@@ -112,11 +112,11 @@ def main():
     ap.add_argument("--relief", type=float, default=0.20,
                     help="height of the surface at full value, as a fraction "
                          "of the frame span")
-    ap.add_argument("--grid", type=int, default=190,
+    ap.add_argument("--grid", type=int, default=260,
                     help="interpolation grid, cells across the frame")
-    ap.add_argument("--reach", type=float, default=55.0,
+    ap.add_argument("--reach", type=float, default=35.0,
                     help="metres from a node beyond which the surface stops")
-    ap.add_argument("--smooth", type=float, default=1.6,
+    ap.add_argument("--smooth", type=float, default=0.8,
                     help="gaussian smoothing of the field, in grid cells")
     args = ap.parse_args()
     name = CFG.get("study_area_name", "study area")
@@ -232,12 +232,28 @@ def main():
 
         v = g[col].to_numpy()
         lo, hi = np.nanpercentile(v, [3, 97])
-        F = griddata(pts, v, (GX, GY), method="cubic")
-        Fl = griddata(pts, v, (GX, GY), method="linear")
-        F = np.where(np.isfinite(F), F, Fl)
-        F = np.where(np.isfinite(F), F,
-                     griddata(pts, v, (GX, GY), method="nearest"))
-        F = gaussian_filter(F, args.smooth)
+        # LINEAR, NOT CUBIC, and this is not a taste. A cubic fit on scattered
+        # points overshoots: it put 48 cells above the highest node in the
+        # frame and invented a ridge on East 37th that outranked Park Avenue's
+        # planted median -- the one greenery feature in Murray Hill that is
+        # genuinely exceptional, and the three highest nodes in the data. The
+        # peak of the drawing landed on the wrong street. Linear cannot exceed
+        # its inputs, and recovers Park Avenue as the maximum in every
+        # configuration tried.
+        #
+        # No nearest-neighbour backfill either. It was covering 15% of the
+        # surviving cells with the value of whatever node happened to be
+        # closest, which is blocky invention wearing the same colours as
+        # measurement.
+        F = griddata(pts, v, (GX, GY), method="linear")
+        if args.smooth > 0:
+            # smooth only where there is data, so the filter does not drag the
+            # edges toward the fill value
+            M = np.isfinite(F)
+            num = gaussian_filter(np.where(M, F, 0.0), args.smooth)
+            den = gaussian_filter(M.astype(float), args.smooth)
+            F = np.where(den > 1e-6, num / np.maximum(den, 1e-6), np.nan)
+            F = np.where(M, F, np.nan)
         F = np.where(near, F, np.nan)
 
         t = np.clip((F - lo) / max(hi - lo, 1e-9), 0, 1) * args.relief * span
