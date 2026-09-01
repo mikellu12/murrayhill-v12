@@ -128,6 +128,21 @@ def _write(sc):
             + [f"{f}_p{k}" for f in RATINGS for k in range(1, 8)])
     have = [c for c in tail if c in sc.columns]
     obs = pd.concat([obs, sc[have]], axis=1)
+    # The interior flag rides along when it exists. Anyone working from this
+    # table would otherwise include station subways and shop interiors without
+    # knowing they are there. It is a candidate flag, not a verdict: measured
+    # against 16 hand-labelled frames it runs 0.70 precision and 0.70 recall,
+    # so it wrongly flags roofed public streets and misses about a third of
+    # true interiors. Filter on it only after checking the frames.
+    ipath = PROC / "indoor_flag.csv"
+    if ipath.exists():
+        fl = pd.read_csv(ipath)[["file", "indoor", "sky_share", "road_share",
+                                 "ceiling_share"]]
+        obs = obs.merge(fl, on="file", how="left")
+        n = int(obs.indoor.fillna(False).sum())
+        print(f"  indoor flag merged: {n} of {len(obs)} frames "
+              f"({n/len(obs)*100:.1f}%) -- UNVALIDATED, see the docstring")
+
     obs = obs.sort_values(["osm_name", "walk", "seq", "side"])
 
     # ---- derived ----------------------------------------------------------
