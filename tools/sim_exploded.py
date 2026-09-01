@@ -104,6 +104,8 @@ def main():
     ap.add_argument("--gap", type=float, default=0.62,
                     help="layer separation, as a fraction of the frame's span")
     ap.add_argument("--dpi", type=int, default=260)
+    ap.add_argument("--verify", action="store_true",
+                    help="check each surface's peak against the highest node")
     ap.add_argument("--context-km", type=float, default=1.6,
                     help="radius of the wider city plan drawn behind the "
                          "stack; 0 to omit")
@@ -218,6 +220,8 @@ def main():
           f"{near.mean()*100:.0f}% of cells within {args.reach:g} m of a node")
 
     pts = np.c_[g._x.to_numpy(), g._y.to_numpy()]
+    namecol = "osm_name" if "osm_name" in g.columns else "street_name"
+    VERIFY = {}
     for k, (col, label, cmap, short) in enumerate(LAYERS):
         if col == "fabric":
             X, Y = iso(g._x.to_numpy(), g._y.to_numpy(), k, gap)
@@ -246,6 +250,31 @@ def main():
         # closest, which is blocky invention wearing the same colours as
         # measurement.
         F = griddata(pts, v, (GX, GY), method="linear")
+
+        # Linear only fills the Delaunay hull of the nodes, so cells that are
+        # within reach of a street but outside that hull came out NaN and
+        # punched holes through the sheet -- along every outer frontage and
+        # inside every concave corner of the frame. They are filled by inverse
+        # distance over the nodes within reach, which is a weighted average and
+        # therefore bounded by its inputs: it cannot invent a peak the way the
+        # cubic fit did, and it cannot paste a single node's value across a
+        # block the way nearest-neighbour did.
+        hole = near & ~np.isfinite(F)
+        if hole.any():
+            from scipy.spatial import cKDTree
+            tree = cKDTree(pts)
+            hx, hy = GX[hole], GY[hole]
+            nb = tree.query_ball_point(np.c_[hx, hy], r=args.reach)
+            fill = np.full(len(hx), np.nan)
+            for i, idx in enumerate(nb):
+                if not idx:
+                    continue
+                d = np.hypot(pts[idx, 0] - hx[i], pts[idx, 1] - hy[i])
+                w = 1.0 / np.maximum(d, cell * 0.5) ** 2
+                fill[i] = float(np.sum(w * v[idx]) / np.sum(w))
+            F[hole] = fill
+            print(f"    {col}: filled {int(np.isfinite(fill).sum())} hole cells")
+
         if args.smooth > 0:
             # smooth only where there is data, so the filter does not drag the
             # edges toward the fill value
@@ -255,6 +284,12 @@ def main():
             F = np.where(den > 1e-6, num / np.maximum(den, 1e-6), np.nan)
             F = np.where(M, F, np.nan)
         F = np.where(near, F, np.nan)
+
+        if args.verify and np.isfinite(F).any():
+            iy, ix = np.unravel_index(np.nanargmax(F), F.shape)
+            d = np.hypot(g._x - gx[ix], g._y - gy[iy])
+            VERIFY[col] = (g[namecol].iloc[int(np.argmax(v))],
+                           g[namecol].iloc[int(np.argmin(d))])
 
         t = np.clip((F - lo) / max(hi - lo, 1e-9), 0, 1) * args.relief * span
         SX, SY = iso(GX, GY, k, gap)
@@ -278,6 +313,20 @@ def main():
         ax.text(lx, ly, label, color=INK, fontsize=8.2, ha="right", va="center")
         ax.text(lx, ly - span * 0.05, f"median {g[col].median():.3f}",
                 color=MUT, fontsize=6.4, ha="right", va="center")
+
+    if args.verify:
+        # The figure is read for where things are highest, so the cheap check
+        # is whether the drawn peak sits on the street holding the highest
+        # node. The cubic fit failed this on imageability and put the peak on
+        # the wrong street entirely, which nothing else would have caught.
+        print("\n  peak check:")
+        print(f"    {'panel':<10}{'highest node is on':<26}{'surface peaks on':<26}")
+        for _col, _, _, _ in LAYERS:
+            if _col not in VERIFY:
+                continue
+            top, hit = VERIFY[_col]
+            print(f"    {_col:<10}{str(top)[:24]:<26}{str(hit)[:24]:<26}"
+                  f"{'ok' if top == hit else 'DIFFERS'}")
 
     # THE WINDOW IS THE STUDY AREA, not everything drawn. autoscale fits the
     # context plan too, and 1.6 km of network around a 1 km study area put the
