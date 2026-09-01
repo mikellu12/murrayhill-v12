@@ -99,7 +99,11 @@ def main():
             ax.set_aspect("equal")
             cx, cy = g.x.mean(), g.y.mean()
             h = S / 2 * 1.06
-            ax.set_xlim(cx - h, cx + h); ax.set_ylim(cy - h, cy + h)
+            # a strip below the data on the last row, so the scale bar does not
+            # sit on top of streets; no corner is reliably empty in either frame
+            foot = h * 0.15 if r == len(DIMS) - 1 else 0.0
+            ax.set_xlim(cx - h, cx + h)
+            ax.set_ylim(cy - h - foot, cy + h)
             ax.set_xticks([]); ax.set_yticks([])
             for s_ in ax.spines.values():
                 s_.set_color("#23262b")
@@ -113,10 +117,10 @@ def main():
             # once, in the caption, not drawn four times.
             if r == len(DIMS) - 1:
                 bar = 200.0
-                bx, by = cx - h * 0.92, cy - h * 0.90
+                bx, by = cx - h * 0.92, cy - h - foot * 0.55
                 ax.plot([bx, bx + bar], [by, by], color=FG, lw=1.8)
-                ax.text(bx + bar / 2, by + h * 0.035, "200 m", color=FG,
-                        ha="center", fontsize=7.5)
+                ax.text(bx + bar / 2, by + foot * 0.18, "200 m", color=FG,
+                        ha="center", va="bottom", fontsize=7.5)
             if k == 0:
                 ax.text(-.035, .5, label, transform=ax.transAxes, color=FG,
                         fontsize=11, rotation=90, va="center", ha="right")

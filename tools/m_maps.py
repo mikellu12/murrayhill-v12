@@ -97,8 +97,13 @@ def main():
         ax.set_aspect("equal")
         cx, cy = g.x.mean(), g.y.mean()
         h = max(spans) / 2 * 1.06
+        # A strip below the data for the scale bar and the north arrow. Placed
+        # inside the plotted area they sat on top of streets, and there is no
+        # corner reliably empty in either frame -- the City of London fills its
+        # bounding box and Murray Hill's grid reaches every edge.
+        foot = h * 0.17
         ax.set_xlim(cx - h, cx + h)
-        ax.set_ylim(cy - h, cy + h)
+        ax.set_ylim(cy - h - foot, cy + h)
         ax.set_xticks([]); ax.set_yticks([])
         for s in ax.spines.values():
             s.set_color("#2a2d33")
@@ -106,23 +111,24 @@ def main():
                      f"   ({used})",
                      color=FG, fontsize=12.5, pad=12)
         bar = 200.0
-        x0, y0 = cx - h * 0.92, cy - h * 0.92
+        y0 = cy - h - foot * 0.55
+        x0 = cx - h * 0.92
         ax.plot([x0, x0 + bar], [y0, y0], color=FG, lw=2.2)
-        ax.text(x0 + bar / 2, y0 + h * 0.03, "200 m", color=FG,
-                ha="center", fontsize=9)
+        ax.text(x0 + bar / 2, y0 + foot * 0.16, "200 m", color=FG,
+                ha="center", va="bottom", fontsize=9)
 
         # North. Both frames are drawn in a projected CRS whose grid north runs
         # straight up the page, so the arrow is vertical in each panel -- it is
         # GRID north, which differs from true north by the meridian convergence
         # of the projection, well under a degree in both study areas.
-        ax_ = cx + h * 0.80
-        ay = cy - h * 0.86
-        arrow = h * 0.13
-        ax.annotate("", xy=(ax_, ay + arrow), xytext=(ax_, ay),
+        nx = cx + h * 0.88
+        ny = cy - h - foot * 0.82
+        arrow = foot * 0.52
+        ax.annotate("", xy=(nx, ny + arrow), xytext=(nx, ny),
                     arrowprops=dict(arrowstyle="-|>", color=FG, lw=1.4,
                                     mutation_scale=13))
-        ax.text(ax_, ay + arrow + h * 0.035, "N", color=FG, ha="center",
-                va="bottom", fontsize=10.5)
+        ax.text(nx - foot * 0.30, ny + arrow * 0.45, "N", color=FG,
+                ha="right", va="center", fontsize=10.5)
 
     if args.title:
         fig.text(.03, 1 - head * 0.36, "M across two study areas, "
