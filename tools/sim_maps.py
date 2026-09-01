@@ -1,22 +1,23 @@
-"""Four maps in the order of the equation: SIM, then G, M, P.
+"""I, Y, D and M mapped for both study areas, one colour scale per dimension.
 
-Each dimension carries the colour it has in the equation -- green for
-habitat, amber for morphological, brick for permeability -- so a reader can
-move between the formula and the map without a legend lookup. SIM keeps
-magma because it is the composite and should not read as any one dimension.
+Four dimensions, two cities, eight panels. The scale is shared ACROSS CITIES
+within a row and free BETWEEN rows: a colour means the same value in Murray
+Hill as in London, which is the comparison, but I and D and M do not share a
+scale with each other because they are not the same quantity.
 
-Ramps run from the page background up to the accent rather than using a
-matplotlib default: on a dark ground a standard sequential map puts its low
-end at near-white, which inverts the reading.
+A_i IS OFF IN BOTH. London has no building heights and cannot compute the
+canyon penalty at all, so M_noA is the like-for-like column; Murray Hill's
+median is 0.630 with the penalty and 0.661 without, and reading one city's M
+against the other's M_noA compares the presence of the term rather than the
+streets.
 
-Values are interpolated to 1 m ALONG each chain and never across one. A
-holdout test puts linear interpolation at R2 = 0.84 for predicting an unseen
-midpoint against 0.76 for nearest-node, so the ribbon is a reconstruction of
-a continuous signal rather than decoration -- but interpolated points are a
-deterministic function of measured ones and must never be treated as data.
+GLOBAL TAU, NOT LOCAL. Local tau recentres each city's sigmoid on its own
+median, which puts every city at 0.5 by construction and makes a cross-city
+panel meaningless. The local columns are for ranking streets inside one city.
 
     .venv/Scripts/python tools/sim_maps.py
 """
+import argparse
 import sys
 from pathlib import Path
 
@@ -26,125 +27,90 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import geopandas as gpd
-from matplotlib.collections import LineCollection
-from matplotlib.colors import LinearSegmentedColormap
-import cmcrameri.cm as cmc          # Crameri scientific colour maps
-import cmocean                      # cmocean, built for ocean data
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import PROC, RES, banner
+from common import banner
 
-BG = "#0d1117"
-FG = "#e6edf3"
-DIM = "#8b949e"
-GAP_M = 40                      # never bridge a real coverage gap
-
-# Four distinct perceptually-uniform ramps rather than four tints of one
-# accent. A dark-to-accent gradient carries most of its range in luminance
-# alone, so a variable with a narrow spread reads as one flat colour; these
-# move through hue as well and separate values that differ slightly.
-# viridis suits G because its mid-range is green, which keeps the panel
-# legible as the greenery map without inventing a scale.
-# Direction matters as much as hue: on a dark ground the high end must be the
-# bright one, or the strongest blocks sink into the page. lajolla_r and ice_r
-# run light-to-dark and are the wrong way round here.
-#
-# Four hue families that do not collide. SIM keeps magma, which travels
-# purple -> red -> orange -> cream; that range is why a red ramp for P read
-# as a second copy of it, and why cividis read as neither amber nor
-# anything else in particular. M is gold-dominant and P is teal, which is
-# the one warm/cool axis magma does not occupy.
-# Direction matters as much as hue: on a dark ground the high end must be the
-# bright one, or the strongest blocks sink into the page. lajolla_r and ice_r
-# run light-to-dark and are the wrong way round here.
-#
-# Four hue families that do not collide. SIM keeps magma, which travels
-# purple -> red -> orange -> cream; that range is why a red ramp for P read
-# as a second copy of it. lajolla and ice are perceptually uniform and
-# colour-vision-deficiency safe, which magma and viridis already are, so the
-# whole set holds together for a reader who cannot separate red from green.
-PANELS = [
-    ("SIM", "magma",         "SIM", "the composite"),
-    ("G",   "viridis",       "G",   "green / habitat"),
-    ("M",   cmc.lajolla,     "M",   "morphological"),
-    ("P",   cmocean.cm.ice,  "P",   "permeability"),
-]
-
-
-def ramp(spec, name):
-    if isinstance(spec, (str,)) or hasattr(spec, "__call__"):
-        return spec
-    return LinearSegmentedColormap.from_list(name, spec)
-
-
-def ribbon(ax, d, col, cmap, lo, hi):
-    segs, vals = [], []
-    for _, g in d.groupby("chain"):
-        g = g.sort_values("chain_pos_m")
-        P = np.c_[g.geometry.x, g.geometry.y]
-        pos, y = g.chain_pos_m.values, g[col].values
-        for k in range(len(g) - 1):
-            if pos[k + 1] - pos[k] > GAP_M:
-                continue
-            t = np.linspace(0, 1, 12)
-            pts = P[k] + np.outer(t, P[k + 1] - P[k])
-            vv = y[k] + t * (y[k + 1] - y[k])
-            for j in range(len(t) - 1):
-                segs.append([pts[j], pts[j + 1]])
-                vals.append((vv[j] + vv[j + 1]) / 2)
-    lc = LineCollection(segs, cmap=cmap, linewidths=5.2, array=np.array(vals),
-                        norm=plt.Normalize(lo, hi))
-    ax.add_collection(lc)
-    ax.autoscale()
-    return lc
+BG, FG, MUT = "#0e0f12", "#e8e6e1", "#9a9aa2"
+DIMS = [("I", "Imageability", "viridis"),
+        ("Y", "Identity", "viridis"),
+        ("D", "Dependence", "viridis"),
+        ("M", "M, the Street Interface Matrix", "magma")]
+CITIES = [("Murray Hill, Manhattan", "data/processed/nodes.gpkg",
+           "results/tables/vlm_calculations.csv", 32618, "M_noA"),
+          ("City of London", "data/london/processed/nodes.gpkg",
+           "results/london/tables/vlm_calculations.csv", 27700, "M")]
 
 
 def main():
-    banner("SIM dimension maps")
-    m = gpd.read_file(PROC / "metrics.gpkg")
-    d = m.merge(pd.read_csv(PROC / "sim_index.csv"), on="node_id")
-    if "in_study" in d.columns:
-        d = d[d.in_study]
-    print(f"nodes: {len(d)}")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path,
+                    default=Path("results/figures/sim_maps_two_cities.png"))
+    ap.add_argument("--dpi", type=int, default=170)
+    args = ap.parse_args()
+    banner("I, Y, D, M for both cities")
 
-    fig, axes = plt.subplots(2, 2, figsize=(16, 11.6), facecolor=BG,
-                             gridspec_kw=dict(hspace=.10, wspace=.02))
-    for ax, (col, spec, sym, label) in zip(axes.ravel(), PANELS):
-        ax.set_facecolor(BG)
-        # Clip the ramp to the 2nd-98th percentile. Across the full range a
-        # handful of extreme nodes flatten everything else to one tone, and
-        # the point of these panels is where a dimension varies.
-        lo, hi = d[col].quantile([.02, .98])
-        lc = ribbon(ax, d, col, ramp(spec, col), lo, hi)
-        cb = fig.colorbar(lc, ax=ax, shrink=.62, pad=.015, aspect=26)
+    frames = []
+    for name, gpkg, calc, crs, mcol in CITIES:
+        n = gpd.read_file(gpkg)[["node_id", "geometry"]].to_crs(crs)
+        c = pd.read_csv(calc)
+        use = mcol if mcol in c.columns else "M"
+        cols = {d: (use if d == "M" else d) for d, _, _ in DIMS}
+        per = c.groupby("node_id")[list(set(cols.values()))].mean().reset_index()
+        g = n.merge(per, on="node_id", how="inner")
+        g["x"], g["y"] = g.geometry.x, g.geometry.y
+        frames.append((name, g, cols, use))
+        print(f"  {name:<26}{len(g):>5} nodes, M column {use}")
+
+    spans = [max(np.ptp(g.x.values), np.ptp(g.y.values)) for _, g, _, _ in frames]
+    S = max(spans)
+
+    fig = plt.figure(figsize=(11.4, 4.15 * len(DIMS)), facecolor=BG)
+    gs = fig.add_gridspec(len(DIMS), 2,
+                          width_ratios=[s / S for s in spans],
+                          hspace=.10, wspace=.04,
+                          left=.045, right=.86, top=.945, bottom=.02)
+    for r, (d, label, cmap) in enumerate(DIMS):
+        vals = np.concatenate([g[c[d]].dropna().values for _, g, c, _ in frames])
+        vmin, vmax = np.percentile(vals, [2, 98])
+        sc = None
+        for k, (name, g, cols, _) in enumerate(frames):
+            ax = fig.add_subplot(gs[r, k], facecolor=BG)
+            v = g[cols[d]]
+            sc = ax.scatter(g.x, g.y, c=v, cmap=cmap, vmin=vmin, vmax=vmax,
+                            s=9, linewidths=0)
+            ax.set_aspect("equal")
+            cx, cy = g.x.mean(), g.y.mean()
+            h = S / 2 * 1.06
+            ax.set_xlim(cx - h, cx + h); ax.set_ylim(cy - h, cy + h)
+            ax.set_xticks([]); ax.set_yticks([])
+            for s_ in ax.spines.values():
+                s_.set_color("#23262b")
+            if r == 0:
+                ax.set_title(name, color=FG, fontsize=12, pad=9)
+            ax.text(.02, .965, f"median {v.median():.3f}", transform=ax.transAxes,
+                    color=MUT, fontsize=8.5, va="top")
+            if k == 0:
+                ax.text(-.035, .5, label, transform=ax.transAxes, color=FG,
+                        fontsize=11, rotation=90, va="center", ha="right")
+        box = gs[r, 1].get_position(fig)
+        cax = fig.add_axes([.875, box.y0 + box.height * .16, .015,
+                            box.height * .68])
+        cb = fig.colorbar(sc, cax=cax)
         cb.ax.yaxis.set_tick_params(color=FG, labelsize=8)
-        cb.outline.set_edgecolor(DIM)
-        plt.setp(plt.getp(cb.ax.axes, "yticklabels"), color=FG)
-        for st, g in d.groupby("osm_name"):
-            i = g.geometry.y.idxmax()
-            ax.annotate(st.replace(" Street", "").replace(" Avenue", " Ave"),
-                        (g.loc[i, "geometry"].x, g.loc[i, "geometry"].y),
-                        fontsize=6, color=DIM, xytext=(3, 3),
-                        textcoords="offset points")
-        ax.set_aspect("equal")
-        ax.set_xticks([]); ax.set_yticks([])
-        for s in ax.spines.values():
-            s.set_visible(False)
-        med = d[col].median()
-        ax.set_title(f"{sym}   {label}", color=FG, fontsize=13.5,
-                     loc="left", pad=20, fontweight="semibold")
-        ax.text(0, 1.006,
-                f"median {med:.3f}    full range {d[col].min():.3f}–{d[col].max():.3f}"
-                f"    ramp clipped to {lo:.3f}–{hi:.3f}",
-                transform=ax.transAxes, color=DIM, fontsize=8, va="bottom")
+        plt.setp(plt.getp(cb.ax, "yticklabels"), color=FG)
+        cb.outline.set_edgecolor("#23262b")
 
-    fig.suptitle("SIM  =  0.34 G  +  0.33 M  +  0.33 P", color=FG,
-                 fontsize=17, y=.985)
-    out = RES / "figures" / "sim_dwell_map.png"
-    fig.savefig(out, dpi=135, bbox_inches="tight", facecolor=BG)
-    print(f"wrote {out}")
-    print(d[["G", "M", "P", "SIM"]].describe().loc[["min", "50%", "max"]].round(3).to_string())
+    fig.text(.045, .975, "The three dimensions and M, both study areas",
+             color=FG, fontsize=15)
+    fig.text(.045, .958,
+             "Node means. Each row shares one colour scale across the two "
+             "cities; rows do not share with each other. Canyon penalty off in "
+             "both, global tau.", color=MUT, fontsize=9)
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(args.out, dpi=args.dpi, facecolor=BG)
+    print(f"\nwrote {args.out}")
 
 
 if __name__ == "__main__":
