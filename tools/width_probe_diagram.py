@@ -171,20 +171,50 @@ def main():
                             [pt.y, pt.y + uy * args.reach],
                             color=RAY, lw=.5, alpha=.55, zorder=3)
             else:
+                # DISTANCE MEASURED FROM THE NODE, not from each ray's own
+                # origin. s05 does the latter -- every ray is perpendicular to
+                # the street, so its reach IS a street width at that offset,
+                # and the minimum is the narrowest cross-section in the 20 m
+                # the node stands for. This measures the shortest straight line
+                # from the node to any facade the corridor touches, which is a
+                # proximity rather than a width and is always the shorter of
+                # the two. Drawn this way on request; the pipeline still
+                # computes the perpendicular version.
                 ux, uy = np.sin(np.radians(b)), np.cos(np.radians(b))
                 px, py = np.sin(np.radians(axis)), np.cos(np.radians(axis))
                 hits = []
                 for off in np.linspace(-band_w / 2, band_w / 2, n_rays):
                     ox, oy = pt.x + px * off, pt.y + py * off
-                    o = Point(ox, oy)
-                    hits.append(cast(o, b, args.reach, tree, geoms))
+                    h = cast(Point(ox, oy), b, args.reach, tree, geoms)
+                    if h is not None:
+                        c = h[1]
+                        hits.append((float(np.hypot(c[0] - pt.x, c[1] - pt.y)), c))
+                    else:
+                        hits.append(None)
                     ax.plot([ox, ox + ux * args.reach], [oy, oy + uy * args.reach],
                             color=RAY, lw=.5, alpha=.55, zorder=3)
             good = [h for h in hits if h]
             if good:
                 d, c = min(good, key=lambda h: h[0])
                 widths.append(d)
-                ax.plot([c[0]], [c[1]], "o", color=HIT, ms=6, zorder=5)
+                # The nearest hit can lie on any ray of the corridor, and a dot
+                # left out there reads as "measured from the far edge of the
+                # band". The DISTANCE is what the probe returns, so it is drawn
+                # back along the node's own perpendicular: same number, and it
+                # reads as the width of the street at this node.
+                if mode == "band":
+                    # straight to the wall it found, which is the quantity now
+                    ax.plot([pt.x, c[0]], [pt.y, c[1]], color=HIT, lw=2.6,
+                            zorder=5, solid_capstyle="butt")
+                    ax.plot([c[0]], [c[1]], "o", color=HIT, ms=6.5, zorder=6)
+                else:
+                    ux, uy = np.sin(np.radians(b)), np.cos(np.radians(b))
+                    ax.plot([pt.x, pt.x + ux * d], [pt.y, pt.y + uy * d],
+                            color=HIT, lw=2.6, zorder=5, solid_capstyle="butt")
+                    ax.plot([pt.x + ux * d], [pt.y + uy * d], "o", color=HIT,
+                            ms=6.5, zorder=6)
+                    ax.plot([c[0]], [c[1]], "o", color=HIT, ms=3.5, alpha=.45,
+                            zorder=5)
             else:
                 widths.append(None)
 
