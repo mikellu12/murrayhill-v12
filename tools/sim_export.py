@@ -131,9 +131,20 @@ def _write(sc):
     obs = obs.sort_values(["osm_name", "walk", "seq", "side"])
 
     # ---- derived ----------------------------------------------------------
+    # The alternative calibrations and the un-penalised score ride along.
+    # M alone is not enough to compare two cities: M_noA is the like-for-like
+    # column, because a study area without building heights cannot compute A_i
+    # at all and its M is I^a Y^b D^c with nothing discounting it. Reading one
+    # city's M against another's M_noA compares the presence of the term, not
+    # the streets -- which is exactly the mistake this column exists to stop,
+    # and it was unavailable to anyone reading the exported table.
+    EXTRA = [c for c in ("M_local", "M_noA", "M_local_noA",
+                         "I_local", "D_local", "Omega_local")
+             if c in sc.columns]
     calc = sc[ID + ["nat_built", "GVI_eye", "GMI", "V_sign", "SVF", "SFV",
                     "V_pave", "GFAPI", "IAS", "I_raw", "I", "Y", "D_raw", "D",
-                    "HW_effective", "Omega", "a", "b", "c", "M"]].copy()
+                    "HW_effective", "Omega", "a", "b", "c", "M"]
+              + EXTRA].copy()
     calc = calc.sort_values(["file"])
     calc = calc.reindex(columns=ID + [
         # normalised inputs, (r-1)/6 except nat_built which is a raw ratio
@@ -143,7 +154,7 @@ def _write(sc):
         "I_raw", "I", "Y", "D_raw", "D",
         # discount and elasticities
         "HW_effective", "Omega", "a", "b", "c",
-        "M"])
+        "M"] + EXTRA)
 
     out = RES / "tables"
     obs.to_csv(out / "vlm_observations.csv", index=False)

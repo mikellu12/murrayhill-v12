@@ -53,6 +53,8 @@ def main():
     ap.add_argument("--n", type=int, default=10)
     ap.add_argument("--seed", type=int, default=3)
     ap.add_argument("--min-share", type=float, default=0.015)
+    ap.add_argument("--mast-set", default=None,
+                    help="mast calibration; defaults to the source folder name")
     ap.add_argument("--out", type=Path,
                     default=RES / "figures" / "seg_two_model_samples.png")
     args = ap.parse_args()
@@ -95,7 +97,11 @@ def main():
         # the same mask seg_two_model.py excludes from the shares. Without it
         # the figure shows Google's camera mast painted as Pole or signboard
         # while the numbers beside it have already dropped those pixels.
-        drop = mast_mask(im, args.src.name)
+        # per image, not per folder: the street-type split puts 90-degree
+        # halves and 180-degree strips in one tree, and the mast covers half
+        # the fractional width in the wider render
+        drop = mast_mask(im, "svi_90_wide" if str(f).endswith("_F.jpg")
+                         else (args.mast_set or args.src.name))
         axes[r, 0].imshow(im)
         axes[r, 0].set_title(f, color=FG, fontsize=9, loc="left", pad=6)
         for c, (tag, (proc, net, lab)) in enumerate(nets.items(), start=1):
