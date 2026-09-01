@@ -29,12 +29,16 @@ has no depth axis to confound.
 THREE WAYS TO DRAW A STRATUM, because they are not equally readable and the
 right one depends on the audience.
 
-  ribbon   (default) a wall along each street, its top edge the profile of the
-           dimension. Continuous exactly where the measurement is continuous --
-           along a frontage -- and discontinuous across blocks, where the
-           measurement genuinely stops. Reads as streets.
-  bars     one upright per node. The rawest view: every mark is a datum and
-           nothing between them is drawn at all.
+  bars     (default) one upright per node. The rawest view: every mark is a
+           datum and nothing between them is drawn at all. Chosen as the
+           default because it is the only one that stays legible once four
+           strata are stacked -- a wall and a sheet both turn into texture at
+           the size these figures are read at.
+  ribbon   a wall along each street, its top edge the profile of the dimension.
+           Continuous where the measurement is continuous, along a frontage,
+           and broken across blocks where it genuinely stops. Truer to the data
+           than bars and harder to read: the walls occlude each other and the
+           strata merge.
   surface  values interpolated onto a grid and lifted into a sheet. Smooth, and
            the least legible: it reads as terrain, and a reader has to be told
            that the hills are streets.
@@ -140,7 +144,7 @@ def main():
     ap.add_argument("--gap", type=float, default=0.62,
                     help="layer separation, as a fraction of the frame's span")
     ap.add_argument("--dpi", type=int, default=260)
-    ap.add_argument("--style", default="ribbon",
+    ap.add_argument("--style", default="bars",
                     choices=["ribbon", "bars", "surface"],
                     help="ribbon: a wall along each street, continuous with "
                          "the line beneath it. bars: one upright per node. "
