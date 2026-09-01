@@ -5,10 +5,17 @@ are the study -- every rating and every segmentation share is attached to one
 of these points -- so a reader who has seen this knows what the other figures
 are made of.
 
-Tiles are CARTO (OpenStreetMap data, ODbL), openly licensed and attributable,
-unlike a screenshot of a commercial web map, which cannot go in a manuscript.
-They cache under the study area's own processed/ folder, so repeat runs are
-offline.
+THE BASEMAP IS DRAWN FROM OSM GEOMETRY, not fetched as tiles. CARTO's tiles now
+carry an "API KEY REQUIRED" watermark diagonally across every few tiles, and a
+watermark cannot go in a manuscript. Switching to another tile host only moves
+the dependency: any of them can start requiring a key, and the failure is
+silent -- the figure renders, looks plausible, and is unusable.
+
+Drawing the streets and water from OSM ourselves removes the dependency
+entirely. It is the same underlying data the tiles are made from, under the
+same ODbL licence, and it costs one Overpass query that caches to a gpkg.
+It also gives control the tiles never did: the network can be drawn thinner
+than the nodes, which is what a locator wants.
 
     .venv/Scripts/python tools/node_map.py
     SIM_CONFIG=config_london.yaml .venv/Scripts/python tools/node_map.py --dark
@@ -40,21 +47,13 @@ def main():
                     help="context around the frame, as a fraction of its span")
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--dpi", type=int, default=300)
-    ap.add_argument("--labels", dest="labels", action="store_true",
-                    default=False,
-                    help="overlay the street-name layer. Off by default: the "
-                         "locator's job is to place the site, the names are "
-                         "small enough to be unreadable at figure size, and "
-                         "that layer is the one that has served placeholder "
-                         "tiles")
     ap.add_argument("--no-cache", dest="cache", action="store_false",
-                    default=True, help="refetch tiles rather than trusting "
-                                       "the cache, which can hold error tiles")
+                    default=True, help="re-query OSM rather than reading the "
+                                       "cached basemap")
     args = ap.parse_args()
     name = CFG.get("study_area_name", "study area")
     banner(f"sampling nodes: {name}")
 
-    import contextily as cx
     nodes = gpd.read_file(PROC / "nodes.gpkg").to_crs(WEB)
     x, y = nodes.geometry.x.values, nodes.geometry.y.values
     span = max(np.ptp(x), np.ptp(y))
@@ -64,10 +63,6 @@ def main():
 
     fg = "#ffffff" if args.dark else "#111111"
     bg = "#0b0b0d" if args.dark else "#ffffff"
-    src = (cx.providers.CartoDB.DarkMatterNoLabels if args.dark
-           else cx.providers.CartoDB.PositronNoLabels)
-    lbl = (cx.providers.CartoDB.DarkMatterOnlyLabels if args.dark
-           else cx.providers.CartoDB.PositronOnlyLabels)
 
     fig, ax = plt.subplots(figsize=(9.6, 9.6), facecolor=bg)
     ax.set_facecolor(bg)
@@ -79,25 +74,44 @@ def main():
     # forever without another request -- the London map carried that watermark
     # across the whole basemap while every live tile fetched fine. --no-cache
     # bypasses it; deleting the directory is the cure once it has happened.
-    cache = PROC / "tiles"
-    if args.cache:
-        cache.mkdir(parents=True, exist_ok=True)
-        cx.set_cache_dir(str(cache))
-    layers = [(src, 1.0)] + ([(lbl, 0.85)] if args.labels else [])
-    for prov, alpha in layers:
+    # streets and water from OSM, cached so a re-run is offline
+    import osmnx as ox
+    from shapely.geometry import box as shapely_box
+    ll = gpd.GeoSeries([shapely_box(cxm - h, cym - h, cxm + h, cym + h)],
+                       crs=WEB).to_crs(4326).iloc[0]
+    w, s_, e, n_ = ll.bounds
+    cache = PROC / f"basemap_{int(args.pad*100)}.gpkg"
+    if cache.exists() and args.cache:
+        roads = gpd.read_file(cache, layer="roads").to_crs(WEB)
         try:
-            cx.add_basemap(ax, source=prov, alpha=alpha, attribution=False)
-        except Exception as e:
-            print(f"  basemap layer skipped: {e}")
+            water = gpd.read_file(cache, layer="water").to_crs(WEB)
+        except Exception:
+            water = None
+    else:
+        print("  querying OSM for the basemap ...")
+        G = ox.graph_from_bbox((w, s_, e, n_), network_type="all",
+                               simplify=True, retain_all=True)
+        roads = ox.graph_to_gdfs(G, nodes=False)[["geometry"]].to_crs(WEB)
+        try:
+            water = ox.features_from_bbox((w, s_, e, n_),
+                                          {"natural": "water",
+                                           "waterway": "riverbank"})
+            water = water[water.geometry.type.isin(
+                ["Polygon", "MultiPolygon"])][["geometry"]].to_crs(WEB)
+        except Exception as ex:
+            print(f"  no water layer: {ex}")
+            water = None
+        roads.to_crs(4326).to_file(cache, layer="roads", driver="GPKG")
+        if water is not None and len(water):
+            water.to_crs(4326).to_file(cache, layer="water", driver="GPKG")
 
-    # A dark basemap that comes back bright is a page of placeholders, not a
-    # map. Cheap to check, and it fails silently otherwise.
-    fig.canvas.draw()
-    buf = np.asarray(fig.canvas.buffer_rgba())[:, :, :3].astype(float)
-    if args.dark and buf.mean() > 110:
-        print(f"  WARNING: basemap mean brightness {buf.mean():.0f} on a dark "
-              f"style -- these are probably error tiles. Re-run with "
-              f"--no-cache, or delete {cache}")
+    if water is not None and len(water):
+        water.plot(ax=ax, color="#16181d" if args.dark else "#e8eef4",
+                   linewidth=0, zorder=1)
+    roads.plot(ax=ax, color="#2b2f36" if args.dark else "#d5d5d5",
+               linewidth=.55, zorder=2)
+    print(f"  basemap: {len(roads)} road segments"
+          + (f", {len(water)} water polygons" if water is not None else ""))
 
     ax.scatter(x, y, s=args.size, c=args.colour, linewidths=0, zorder=5)
 
@@ -134,7 +148,7 @@ def main():
     ax.text(.03, .925, f"{len(nodes)} sampling nodes, {step:.0f} m apart "
             f"along each street",
             transform=ax.transAxes, color=fg, fontsize=11, va="top", alpha=.78)
-    ax.text(.985, .012, "basemap: CARTO, OpenStreetMap contributors (ODbL)",
+    ax.text(.985, .012, "basemap drawn from OpenStreetMap (ODbL)",
             transform=ax.transAxes, color=fg, fontsize=7, ha="right", alpha=.55)
 
     out = args.out or (RES / "figures" /
