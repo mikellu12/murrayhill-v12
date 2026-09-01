@@ -40,6 +40,13 @@ excluded_nodes:
 # "Manhattan"; it needs re-rating before the two cities go in one table.
 prompt_place: null
 
+# What this study area is called. Used for the `city` column in the exported
+# tables and for the shareable filename: both areas otherwise write
+# vlm_observations.csv, and the two are indistinguishable once they leave the
+# repository and sit in someone's downloads folder.
+study_area_name: "Murray Hill, Manhattan"
+study_area_slug: "murrayhill"
+
 projected_crs: 32618
 
 study_area:

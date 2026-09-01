@@ -2,8 +2,15 @@
 
 Four files, two per study area.
 
-    results/tables/                 Murray Hill, Manhattan   766 nodes,  3,064 half-views
-    results/london/tables/          City of London         1,806 nodes, 6,422 views
+    vlm_observations_murrayhill.csv   Murray Hill, Manhattan   766 nodes, 3,064 half-views
+    vlm_calculations_murrayhill.csv
+    vlm_observations_london.csv       City of London         1,806 nodes, 6,422 views
+    vlm_calculations_london.csv
+
+Every row carries a `city` column, so the two areas concatenate directly. The
+repository also writes these without the suffix, as vlm_observations.csv and
+vlm_calculations.csv in each study area's own results folder -- those are what
+the pipeline's own tools read, and they are the same content.
 
 `vlm_observations.csv` is what was observed: the ten VLM ratings per view, the
 full seven-rung probability distribution behind each, and the measured geometry

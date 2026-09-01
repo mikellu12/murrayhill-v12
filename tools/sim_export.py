@@ -29,7 +29,7 @@ import pandas as pd
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 sys.path.insert(0, str(HERE))
-from common import PROC, RES, banner, bin_mask
+from common import CFG, PROC, RES, banner, bin_mask
 from sim_fields import FIELDS
 from half_target import walk_bearings, SIDE_OFF
 
@@ -171,9 +171,26 @@ def _write(sc):
         "HW_effective", "Omega", "a", "b", "c",
         "M"] + EXTRA)
 
+    # The city rides in a column so the two areas can be concatenated without
+    # the reader having to remember which file was which.
+    name = CFG.get("study_area_name", "")
+    if name:
+        obs.insert(0, "city", name)
+        calc.insert(0, "city", name)
+
     out = RES / "tables"
     obs.to_csv(out / "vlm_observations.csv", index=False)
     calc.to_csv(out / "vlm_calculations.csv", index=False)
+
+    # ...and again under a name that survives leaving the repository. Ten tools
+    # read the plain names, so those stay canonical; these are the copies to
+    # hand to somebody. Written in the same call, so they cannot drift.
+    slug = CFG.get("study_area_slug")
+    if slug:
+        obs.to_csv(out / f"vlm_observations_{slug}.csv", index=False)
+        calc.to_csv(out / f"vlm_calculations_{slug}.csv", index=False)
+        print(f"shareable copies: vlm_observations_{slug}.csv, "
+              f"vlm_calculations_{slug}.csv")
 
     print(f"vlm_observations.csv        {len(obs):>5} rows x {obs.shape[1]:>2} cols")
     print(f"  identity            {', '.join(ID)}")
