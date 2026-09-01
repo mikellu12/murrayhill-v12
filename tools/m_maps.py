@@ -77,9 +77,15 @@ def main():
 
     # common metres-per-inch so the two frames are comparable in size
     spans = [max(np.ptp(g.x.values), np.ptp(g.y.values)) for _, g, _ in panels]
-    fig = plt.figure(figsize=(15.5, 8.4), facecolor=BG)
+    # The heading gets a reserved band measured in inches. Placing figure text
+    # at fixed fractions while the panel titles are placed in points below the
+    # axes puts the two on different measures, and they collide as soon as the
+    # figure changes size.
+    fig = plt.figure(figsize=(15.5, 8.9), facecolor=BG)
+    head = 0.86 / 8.9
     gs = fig.add_gridspec(1, 2, width_ratios=[s / max(spans) for s in spans],
-                          wspace=0.06, left=.03, right=.88, top=.88, bottom=.08)
+                          wspace=0.06, left=.03, right=.88,
+                          top=1 - head - 0.045, bottom=.08)
     sc = None
     for i, (name, g, used) in enumerate(panels):
         ax = fig.add_subplot(gs[0, i], facecolor=BG)
@@ -102,6 +108,19 @@ def main():
         ax.text(x0 + bar / 2, y0 + h * 0.03, "200 m", color=FG,
                 ha="center", fontsize=9)
 
+        # North. Both frames are drawn in a projected CRS whose grid north runs
+        # straight up the page, so the arrow is vertical in each panel -- it is
+        # GRID north, which differs from true north by the meridian convergence
+        # of the projection, well under a degree in both study areas.
+        ax_ = cx + h * 0.80
+        ay = cy - h * 0.86
+        arrow = h * 0.13
+        ax.annotate("", xy=(ax_, ay + arrow), xytext=(ax_, ay),
+                    arrowprops=dict(arrowstyle="-|>", color=FG, lw=1.4,
+                                    mutation_scale=13))
+        ax.text(ax_, ay + arrow + h * 0.035, "N", color=FG, ha="center",
+                va="bottom", fontsize=10.5)
+
     cax = fig.add_axes([0.90, 0.14, 0.016, 0.66])
     cb = fig.colorbar(sc, cax=cax)
     cb.set_label("M   (Street Interface Matrix, canyon penalty off in both)",
@@ -110,13 +129,13 @@ def main():
     plt.setp(plt.getp(cb.ax, "yticklabels"), color=FG)
     cb.outline.set_edgecolor("#2a2d33")
 
-    fig.text(.03, .955, "M across two study areas, one shared colour scale",
-             color=FG, fontsize=16.5)
-    fig.text(.03, .922,
+    fig.text(.03, 1 - head * 0.36, "M across two study areas, "
+             "one shared colour scale", color=FG, fontsize=16.5, va="center")
+    fig.text(.03, 1 - head * 0.74,
              "Node-mean M. Both panels drawn at the same metres-per-inch and "
              "the same colour normalisation, so a colour means the same "
              "value in each.",
-             color="#9a9aa2", fontsize=10)
+             color="#9a9aa2", fontsize=10, va="center")
     args.out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(args.out, dpi=args.dpi, facecolor=BG)
     print(f"\nwrote {args.out}")

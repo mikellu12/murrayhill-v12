@@ -107,6 +107,20 @@ def main():
                 ax.set_title(name, color=FG, fontsize=12, pad=6)
             ax.text(.02, .965, f"median {v.median():.3f}", transform=ax.transAxes,
                     color=MUT, fontsize=8.5, va="top")
+            # north and scale, on the bottom row only: repeating them on every
+            # row would say they change between rows, and they do not
+            if r == len(DIMS) - 1:
+                bar = 200.0
+                bx, by = cx - h * 0.92, cy - h * 0.90
+                ax.plot([bx, bx + bar], [by, by], color=FG, lw=1.8)
+                ax.text(bx + bar / 2, by + h * 0.035, "200 m", color=FG,
+                        ha="center", fontsize=7.5)
+                nx, ny, arrow = cx + h * 0.82, cy - h * 0.88, h * 0.12
+                ax.annotate("", xy=(nx, ny + arrow), xytext=(nx, ny),
+                            arrowprops=dict(arrowstyle="-|>", color=FG, lw=1.2,
+                                            mutation_scale=11))
+                ax.text(nx, ny + arrow + h * 0.03, "N", color=FG, ha="center",
+                        va="bottom", fontsize=9)
             if k == 0:
                 ax.text(-.035, .5, label, transform=ax.transAxes, color=FG,
                         fontsize=11, rotation=90, va="center", ha="right")
