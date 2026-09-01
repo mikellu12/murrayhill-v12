@@ -78,3 +78,39 @@ enough to control season leaves a usable frame.
 
 Conditioning after the fact is available to anything that needs it, and is
 the honest place for it.
+
+## Who took the pictures
+
+192 of the 1,806 nodes (10.6%) draw on a panorama somebody uploaded rather than
+one Google captured. Most are individuals -- one contributor accounts for 29
+nodes -- and some are commercial photosphere firms.
+
+They are full 360-degree photospheres, so the directional split holds on them:
+mean between-heading difference 52.5 against Google's 50.4, closest pair 43.5
+against 41.5, and no blank or duplicated heading in either group. Street View
+ingests uploads only in equirectangular form, so this is structural rather than
+luck.
+
+**They do not come in runs.** 128 of the 157 consecutive-user stretches are a
+single isolated node and the longest is three. So along one street the sequence
+alternates between car panoramas and the occasional photosphere taken on a
+different day, at a different height, with a different camera -- heterogeneity
+within a street, on top of the year spread above. Four streets lean on them
+heavily: Throgmorton Avenue 5 of 7 nodes, Custom House Walkway 4 of 7,
+St Paul's Churchyard 5 of 10, Saint Mary Axe 5 of 12.
+
+Provenance is recorded in `provenance.csv` and is **not** used as a filter.
+Against hand-labelled frames, excluding every upload would delete four
+legitimate street views while still missing sixteen interiors that Google
+captured itself -- it drives station subways. 84 of the 150 off-street nodes
+are uploads, which corroborates the ground test without deciding anything.
+
+## What the off-street filter cannot catch
+
+`offstreet_flag.csv` keys on visible public ground, which separates interiors,
+subways and vehicle photospheres in one test because none of them has pavement
+in frame. It cannot separate public pavement from private pavement. A patio
+reached 0.640 ground share and is kept; it is a paved outdoor space that is not
+a street. Segmentation has no class for who owns the ground, so this residual
+is logged rather than thresholded away -- and it fails toward keeping a frame
+rather than deleting a real street, which is the safer direction.
