@@ -14,7 +14,27 @@ drawn back to front, so occlusion is exactly the draw order.
 
     x' = (x - y) cos(30)          y' = (x + y) sin(30) + layer_gap * k
 
-HEIGHT IS LOCAL, COLOUR IS GLOBAL. Read a ribbon's height against the street
+HEIGHT IS NOT USED. The strata are flat, and this is the central decision.
+
+In an axonometric the screen height of a mark is its depth plus its elevation,
+because both map to one axis. So a value drawn as height is unreadable against
+a plan: measured here, no relief up to three times the frame span puts the
+highest node on top, at any tilt, in either city -- Park Avenue leads Tudor
+City Place by 0.089 in imageability and trails it by 591 m in depth, and no
+monotone value-to-height mapping closes that. Every attempt to rescue it failed
+in a different way. From the bottom of the range every bar was tall, three
+quarters past halfway, and the stratum read as a solid block. From the median
+half the bars pointed down, which reads as a different kind of thing rather
+than as a smaller one. Walls along the streets occluded each other. An
+interpolated sheet read as terrain.
+
+Colour has none of these problems: it is unaffected by depth, it is the same
+channel at every point in the plan, and it is what the flat maps already use.
+So the strata are flat and coloured, the explosion carries structure -- which
+term sits above which, and that they combine into M -- and a scale beside each
+plane makes the colour readable as a number.
+
+WHAT HEIGHT WOULD HAVE SAID BADLY, POSITION SAYS WELL. Read a ribbon's height against the street
 line directly beneath it and nowhere else. In an axonometric the screen height
 of a mark is its depth plus its elevation, so a node at the far corner of the
 plan sits high on screen because it is far, and no tilt fixes this: for Park
@@ -29,7 +49,10 @@ has no depth axis to confound.
 THREE WAYS TO DRAW A STRATUM, because they are not equally readable and the
 right one depends on the audience.
 
-  bars     (default) one upright per node. The rawest view: every mark is a
+  flat     (default) no relief at all: the street network of each stratum,
+           coloured by the dimension, with a scale beside it. The only style
+           in which a colour means the same value everywhere in the plan.
+  bars     one upright per node. The rawest view: every mark is a
            datum and nothing between them is drawn at all. Chosen as the
            default because it is the only one that stays legible once four
            strata are stacked -- a wall and a sheet both turn into texture at
@@ -141,11 +164,11 @@ def main():
     ap.add_argument("--calc", type=Path, default=None)
     ap.add_argument("--nodes", type=Path, default=None)
     ap.add_argument("--out", type=Path, default=None)
-    ap.add_argument("--gap", type=float, default=0.62,
+    ap.add_argument("--gap", type=float, default=0.50,
                     help="layer separation, as a fraction of the frame's span")
     ap.add_argument("--dpi", type=int, default=260)
-    ap.add_argument("--style", default="bars",
-                    choices=["ribbon", "bars", "surface"],
+    ap.add_argument("--style", default="flat",
+                    choices=["flat", "ribbon", "bars", "surface"],
                     help="ribbon: a wall along each street, continuous with "
                          "the line beneath it. bars: one upright per node. "
                          "surface: an interpolated sheet -- smooth, but it "
@@ -305,6 +328,44 @@ def main():
             t = np.clip((v - mid) / half, -1, 1) * args.relief * span
         else:
             t = np.clip((v - lo) / max(hi - lo, 1e-9), 0, 1) * args.relief * span
+
+        if args.style == "flat":
+            a, b = pairs[:, 0], pairs[:, 1]
+            segs = np.c_[X, Y][pairs] if len(pairs) else np.zeros((0, 2, 2))
+            val = np.nanmean(v[pairs], axis=1)
+            ax.add_collection(LineCollection(
+                segs, cmap=cmap, array=val, lw=2.6,
+                norm=plt.Normalize(lo, hi), zorder=k * 10 + 2,
+                capstyle="round"))
+            # a scale for this stratum, so the colour is readable as a number
+            cax = fig.add_axes([0.845, 0.09 + k * 0.176, 0.013, 0.098])
+            cb = fig.colorbar(plt.cm.ScalarMappable(
+                norm=plt.Normalize(lo, hi), cmap=cmap), cax=cax)
+            cb.ax.tick_params(labelsize=6.2, colors=MUT, length=2)
+            cb.outline.set_edgecolor("#dcdcdc")
+            if args.mark_top:
+                seen, marked = set(), 0
+                for i in np.argsort(-v):
+                    nm = str(g[namecol].iloc[i])
+                    if nm in seen:
+                        continue
+                    seen.add(nm); marked += 1
+                    ax.scatter([X[i]], [Y[i]], s=13, facecolor="none",
+                               edgecolor=INK, linewidths=.7, zorder=k * 10 + 4)
+                    ax.text(X[i] + span * .015, Y[i], f"{nm}  {v[i]:.2f}",
+                            color=INK, fontsize=5.8, va="center",
+                            zorder=k * 10 + 5)
+                    if marked >= args.mark_top:
+                        break
+            if args.verify:
+                i = int(np.argmax(v))
+                VERIFY[col] = (g[namecol].iloc[i], g[namecol].iloc[i])
+            lx, ly = X.min() - span * 0.20, Y[np.argmin(X)]
+            ax.text(lx, ly, label, color=INK, fontsize=8.6,
+                    ha="right", va="center")
+            ax.text(lx, ly - span * 0.05, f"median {g[col].median():.3f}",
+                    color=MUT, fontsize=6.4, ha="right", va="center")
+            continue
 
         if args.style in ("ribbon", "bars"):
             segs = np.c_[X, Y][pairs] if len(pairs) else np.zeros((0, 2, 2))
