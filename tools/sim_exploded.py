@@ -159,7 +159,12 @@ def main():
     ap.add_argument("--context-km", type=float, default=1.6,
                     help="radius of the wider city plan drawn behind the "
                          "stack; 0 to omit")
-    ap.add_argument("--relief", type=float, default=0.26,
+    ap.add_argument("--baseline", default="median", choices=["median", "min"],
+                    help="median: bars rise above and fall below the typical "
+                         "node, so height is deviation. min: every bar rises "
+                         "from the bottom of the range, so height is magnitude "
+                         "and nearly every bar is tall")
+    ap.add_argument("--relief", type=float, default=0.15,
                     help="height of the surface at full value, as a fraction "
                          "of the frame span")
     ap.add_argument("--grid", type=int, default=260,
@@ -288,7 +293,18 @@ def main():
         v = g[col].to_numpy()
         lo, hi = np.nanpercentile(v, [3, 97])
         X, Y = iso(g._x.to_numpy(), g._y.to_numpy(), k, gap)
-        t = np.clip((v - lo) / max(hi - lo, 1e-9), 0, 1) * args.relief * span
+        # HEIGHT IS DEVIATION FROM THE TYPICAL NODE, not magnitude. Measured
+        # from the bottom of the range the median bar stood at 0.59 to 0.71 of
+        # full height and three quarters of bars were past halfway, so the
+        # stratum read as a solid block and the variation -- the only thing the
+        # figure is for -- was the small difference between tall things.
+        # Against the median, half the bars fall and the typical node is flat.
+        if args.baseline == "median":
+            mid = float(np.nanmedian(v))
+            half = max(hi - mid, mid - lo, 1e-9)
+            t = np.clip((v - mid) / half, -1, 1) * args.relief * span
+        else:
+            t = np.clip((v - lo) / max(hi - lo, 1e-9), 0, 1) * args.relief * span
 
         if args.style in ("ribbon", "bars"):
             segs = np.c_[X, Y][pairs] if len(pairs) else np.zeros((0, 2, 2))
@@ -299,6 +315,12 @@ def main():
                 # front covers a short one behind it
                 up = np.stack([np.c_[X, Y], np.c_[X, Y + t]], axis=1)
                 o = np.argsort(-Y)
+                # the baseline itself, so a bar that falls is read as falling
+                # and not as a bar of some other height
+                if args.baseline == "median":
+                    segs0 = np.c_[X, Y][pairs] if len(pairs) else np.zeros((0, 2, 2))
+                    ax.add_collection(LineCollection(segs0, colors="#bdbdbd",
+                                                     lw=.5, zorder=k * 10 + 1))
                 ax.add_collection(LineCollection(
                     up[o], cmap=cmap, array=v[o], lw=1.25,
                     norm=plt.Normalize(lo, hi), zorder=k * 10 + 2))
