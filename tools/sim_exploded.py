@@ -263,7 +263,19 @@ def main():
         ax.text(lx, ly - span * 0.05, f"median {g[col].median():.3f}",
                 color=MUT, fontsize=6.4, ha="right", va="center")
 
-    ax.autoscale_view()
+    # THE WINDOW IS THE STUDY AREA, not everything drawn. autoscale fits the
+    # context plan too, and 1.6 km of network around a 1 km study area put the
+    # stack in the middle third of the frame at a third of the size. The
+    # context is meant to run off the edges; that is what makes it context.
+    cx_all, cy_all = [], []
+    for k in range(len(LAYERS)):
+        X, Y = iso(g._x.to_numpy(), g._y.to_numpy(), k, gap)
+        cx_all.append(X); cy_all.append(Y)
+    cx_all = np.concatenate(cx_all); cy_all = np.concatenate(cy_all)
+    mx = (cx_all.max() - cx_all.min()) * 0.06
+    # room on the left for the stratum labels, and above for the top relief
+    ax.set_xlim(cx_all.min() - span * 0.30, cx_all.max() + mx)
+    ax.set_ylim(cy_all.min() - mx, cy_all.max() + args.relief * span * 1.25 + mx)
     ax.set_aspect("equal")
     fig.text(.06, .965, name, color=INK, fontsize=17)
     fig.text(.06, .945,
