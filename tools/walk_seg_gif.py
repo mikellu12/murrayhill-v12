@@ -43,6 +43,13 @@ def main():
     ap.add_argument("--ms", type=int, default=280)
     ap.add_argument("--alpha", type=float, default=0.5)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--geometry", default="any", choices=["any", "180", "90"],
+                    help="keep only nodes rendered as a 180 strip or as 90 "
+                         "halves. Street type is per NODE, so a street can "
+                         "hold both -- Watling Street is 9 pedestrian and 5 "
+                         "vehicular -- and a walk through the mixture changes "
+                         "field of view every few frames, which reads as the "
+                         "camera jumping rather than as the street changing")
     ap.add_argument("--reverse", action="store_true",
                     help="walk the corridor from its far end. The frames are "
                          "unchanged -- each still faces the way the camera "
@@ -93,6 +100,11 @@ def main():
           f"ordered by {order}" + (", reversed" if args.reverse else ""))
     if len(nf) < 3:
         sys.exit("too few nodes in that corridor")
+    want = {"180": "F", "90": "L"}.get(args.geometry)
+    if want:
+        files = {k: v for k, v in files.items() if want in v}
+        nf = nf[nf.node_id.isin(files)]
+        print(f"  {args.geometry}-only: {len(files)} nodes kept")
     nodes = [files[n] for n in nf.node_id if n in files]
     if args.reverse:
         nodes = nodes[::-1]
