@@ -14,12 +14,22 @@ drawn back to front, so occlusion is exactly the draw order.
 
     x' = (x - y) cos(30)          y' = (x + y) sin(30) + layer_gap * k
 
-EACH PLANE IS A SURFACE, not a row of bars. The measurement is continuous
-along a street -- every 20 m, on a frontage that does not stop between nodes --
-so drawing it as separate uprights says the wrong thing about the data and
-fights the continuous line beneath it. Each pair of neighbouring nodes becomes
-a quadrilateral between the street and the value above it, so the ribbon runs
-unbroken along the street and its top edge is the profile of the dimension.
+EACH STRATUM IS ONE CONTINUOUS SURFACE. The nodes are samples of a field that
+exists everywhere between them, so the honest drawing is a warped sheet, not a
+row of uprights and not a ribbon per street: values are interpolated onto a
+grid, smoothed, and the sheet is lifted by the value at each cell. The top of
+the sheet is the dimension's relief across the study area.
+
+INTERPOLATION IS BOUNDED BY DISTANCE, not by the hull. A cubic fit across the
+whole convex hull would invent values in the middle of blocks where no frontage
+was ever photographed, and those inventions would be the largest, smoothest
+features in the picture. Cells further than `--reach` from any node are
+dropped, so the sheet spreads from the streets and stops.
+
+PAINTER'S ALGORITHM, BY CELL. In this projection up-screen is further away, so
+each sheet's cells are drawn in order of decreasing screen height. Sorting
+whole layers is not enough once a sheet has relief: a tall cell at the front of
+a plane must cover a low cell behind it in the same plane.
 
 No accent colour. An overlaid mark for the top decile sat outside every ramp
 and pulled the eye off the surfaces it was meant to annotate; the ramps already
@@ -91,7 +101,7 @@ def main():
     ap.add_argument("--calc", type=Path, default=None)
     ap.add_argument("--nodes", type=Path, default=None)
     ap.add_argument("--out", type=Path, default=None)
-    ap.add_argument("--gap", type=float, default=0.46,
+    ap.add_argument("--gap", type=float, default=0.62,
                     help="layer separation, as a fraction of the frame's span")
     ap.add_argument("--dpi", type=int, default=260)
     ap.add_argument("--context-km", type=float, default=1.6,
@@ -99,8 +109,15 @@ def main():
                          "stack; 0 to omit")
     ap.add_argument("--bars", action="store_true", default=True,
                     help="extrude each node's value as a bar within its plane")
-    ap.add_argument("--bar-scale", type=float, default=0.17,
-                    help="tallest ribbon, as a fraction of the frame span")
+    ap.add_argument("--relief", type=float, default=0.20,
+                    help="height of the surface at full value, as a fraction "
+                         "of the frame span")
+    ap.add_argument("--grid", type=int, default=190,
+                    help="interpolation grid, cells across the frame")
+    ap.add_argument("--reach", type=float, default=55.0,
+                    help="metres from a node beyond which the surface stops")
+    ap.add_argument("--smooth", type=float, default=1.6,
+                    help="gaussian smoothing of the field, in grid cells")
     args = ap.parse_args()
     name = CFG.get("study_area_name", "study area")
     banner(f"exploded axonometric: {name}")
@@ -130,7 +147,7 @@ def main():
     span = max(np.ptp(g._x.values), np.ptp(g._y.values))
     gap = args.gap * span
 
-    fig, ax = plt.subplots(figsize=(9.2, 13.8), facecolor=BG)
+    fig, ax = plt.subplots(figsize=(9.0, 16.4), facecolor=BG)
     ax.set_facecolor(BG); ax.set_axis_off()
 
     # The wider plan, on the ground plane and behind everything. It is what
@@ -182,57 +199,76 @@ def main():
             xs.append(X); ys.append(Y)
         ax.plot(xs, ys, color="#d7d7d7", lw=.35, zorder=0, solid_capstyle="butt")
 
+    # the field, once: grid, interpolate, smooth, mask by distance
+    from scipy.interpolate import griddata
+    from scipy.ndimage import gaussian_filter, distance_transform_edt
+    x0, x1 = g._x.min(), g._x.max()
+    y0, y1 = g._y.min(), g._y.max()
+    pad = span * 0.03
+    gx = np.linspace(x0 - pad, x1 + pad, args.grid)
+    gy = np.linspace(y0 - pad, y1 + pad, args.grid)
+    GX, GY = np.meshgrid(gx, gy)
+    cell = (gx[1] - gx[0])
+    occupied = np.zeros_like(GX, bool)
+    ix = np.clip(((g._x - gx[0]) / cell).astype(int), 0, args.grid - 1)
+    iy = np.clip(((g._y - gy[0]) / cell).astype(int), 0, args.grid - 1)
+    occupied[iy, ix] = True
+    near = distance_transform_edt(~occupied) * cell <= args.reach
+    print(f"surface grid {args.grid}x{args.grid}, "
+          f"{near.mean()*100:.0f}% of cells within {args.reach:g} m of a node")
+
+    pts = np.c_[g._x.to_numpy(), g._y.to_numpy()]
     for k, (col, label, cmap, short) in enumerate(LAYERS):
-        X, Y = iso(g._x.to_numpy(), g._y.to_numpy(), k, gap)
-        P = np.c_[X, Y]
-        segs = P[pairs] if len(pairs) else np.zeros((0, 2, 2))
         if col == "fabric":
+            X, Y = iso(g._x.to_numpy(), g._y.to_numpy(), k, gap)
+            P = np.c_[X, Y]
+            segs = P[pairs] if len(pairs) else np.zeros((0, 2, 2))
             ax.add_collection(LineCollection(segs, colors="#c4c4c4", lw=.9,
                                              zorder=k * 10 + 1))
-        else:
-            v = g[col].to_numpy()
-            vals = np.nanmean(v[pairs], axis=1)
-            lo, hi = np.nanpercentile(v, [3, 97])
-            ax.add_collection(LineCollection(
-                segs, cmap=cmap, array=vals, lw=2.3,
-                norm=plt.Normalize(lo, hi), zorder=k * 10 + 1))
-            # A continuous ribbon: one quad per street segment, between the
-            # line and the value above it. Neighbouring quads share an edge, so
-            # the surface runs unbroken and its top edge is the profile.
-            if args.bars and len(pairs):
-                t = np.clip((v - lo) / max(hi - lo, 1e-9), 0, 1)
-                t = t * args.bar_scale * span
-                a, b = pairs[:, 0], pairs[:, 1]
-                quads = np.stack([
-                    np.c_[X[a], Y[a]], np.c_[X[b], Y[b]],
-                    np.c_[X[b], Y[b] + t[b]], np.c_[X[a], Y[a] + t[a]]], axis=1)
-                ax.add_collection(PolyCollection(
-                    quads, cmap=cmap, array=vals, norm=plt.Normalize(lo, hi),
-                    linewidths=0, zorder=k * 10 + 2))
-                # the profile itself, so the top edge stays legible where the
-                # surface is pale
-                top = np.stack([np.c_[X[a], Y[a] + t[a]],
-                                np.c_[X[b], Y[b] + t[b]]], axis=1)
-                ax.add_collection(LineCollection(
-                    top, cmap=cmap, array=vals, lw=.8,
-                    norm=plt.Normalize(lo, hi), zorder=k * 10 + 3))
-        # label to the left, in the reference's manner
-        lx = X.min() - span * 0.20
-        ly = Y[np.argmin(X)]
-        ax.text(lx, ly, label, color=INK if col != "fabric" else MUT,
-                fontsize=8.2, ha="right", va="center", family="DejaVu Sans")
-        if short:
-            q = g[col]
-            ax.text(lx, ly - span * 0.045,
-                    f"median {q.median():.3f}", color=MUT, fontsize=6.4,
+            lx, ly = X.min() - span * 0.20, Y[np.argmin(X)]
+            ax.text(lx, ly, label, color=MUT, fontsize=8.2,
                     ha="right", va="center")
+            continue
+
+        v = g[col].to_numpy()
+        lo, hi = np.nanpercentile(v, [3, 97])
+        F = griddata(pts, v, (GX, GY), method="cubic")
+        Fl = griddata(pts, v, (GX, GY), method="linear")
+        F = np.where(np.isfinite(F), F, Fl)
+        F = np.where(np.isfinite(F), F,
+                     griddata(pts, v, (GX, GY), method="nearest"))
+        F = gaussian_filter(F, args.smooth)
+        F = np.where(near, F, np.nan)
+
+        t = np.clip((F - lo) / max(hi - lo, 1e-9), 0, 1) * args.relief * span
+        SX, SY = iso(GX, GY, k, gap)
+        SY = SY + t
+
+        # quads over the grid, drawn far to near within this stratum
+        a = (slice(0, -1), slice(0, -1)); b = (slice(0, -1), slice(1, None))
+        c_ = (slice(1, None), slice(1, None)); d_ = (slice(1, None), slice(0, -1))
+        val = np.nanmean(np.stack([F[a], F[b], F[c_], F[d_]]), axis=0)
+        ok = np.isfinite(val)
+        quads = np.stack([np.stack([SX[q], SY[q]], -1) for q in (a, b, c_, d_)], -2)
+        quads = quads[ok]; val = val[ok]
+        depth = quads[:, :, 1].mean(axis=1)
+        o = np.argsort(-depth)
+        ax.add_collection(PolyCollection(
+            quads[o], cmap=cmap, array=val[o], norm=plt.Normalize(lo, hi),
+            linewidths=0.28, edgecolors="none", zorder=k * 10 + 1))
+
+        X, Y = iso(g._x.to_numpy(), g._y.to_numpy(), k, gap)
+        lx, ly = X.min() - span * 0.20, Y[np.argmin(X)]
+        ax.text(lx, ly, label, color=INK, fontsize=8.2, ha="right", va="center")
+        ax.text(lx, ly - span * 0.05, f"median {g[col].median():.3f}",
+                color=MUT, fontsize=6.4, ha="right", va="center")
 
     ax.autoscale_view()
     ax.set_aspect("equal")
     fig.text(.06, .965, name, color=INK, fontsize=17)
     fig.text(.06, .945,
              f"M = I^a · Y^b · D^c, drawn as strata.  {len(g)} nodes.  "
-             f"Ribbon height and colour both carry the value.",
+             f"Each stratum is one interpolated surface; height and colour both carry the value.",
              color=MUT, fontsize=8.6)
     out = args.out or RES / "figures" / f"sim_exploded_{CFG.get('study_area_slug','area')}.png"
     out.parent.mkdir(parents=True, exist_ok=True)
