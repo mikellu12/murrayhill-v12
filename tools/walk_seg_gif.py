@@ -16,7 +16,8 @@ from PIL import Image, ImageDraw
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src")); sys.path.insert(0, str(HERE))
-from common import RAW, RES, banner
+import pandas as pd
+from common import PROC, RAW, RES, banner
 from mast import mast_mask
 
 NAME = re.compile(r"^(\d+)_(n\d+)_([NESW])_([LRF])\.jpg$")
@@ -42,22 +43,53 @@ def main():
     ap.add_argument("--ms", type=int, default=280)
     ap.add_argument("--alpha", type=float, default=0.5)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--segment", default=None,
+                    help="source corridor to walk; default is the longest")
     args = ap.parse_args()
     banner(f"walk gifs: {args.street}")
 
+    # WALK ORDER COMES FROM THE FRAME, NOT THE FILENAME. The export folder
+    # groups by street NAME, and the London frame splits a street into
+    # corridors -- London Wall is five, each with seq_fwd restarting at 1 --
+    # so the filename sequence interleaves them and the walk teleports between
+    # segments. Sorted here on the source corridor, then position within it;
+    # consecutive nodes then really are consecutive, median step 18 m rather
+    # than 351.
     base = RAW / "svi_90" / args.street
     walks = [base / args.walk] if args.walk else sorted(
         p for p in base.iterdir() if p.is_dir())
     w = walks[0]
-    got = {}
+
+    files = {}
     for p in sorted(w.glob("*.jpg")):
         m = NAME.match(p.name)
         if m:
-            got.setdefault((int(m.group(1)), m.group(2)), {})[m.group(4)] = p
-    nodes = [got[k] for k in sorted(got)]
+            files.setdefault(m.group(2), {})[m.group(4)] = p
+
+    # nodes.csv, not the gpkg: the GPU environment has torch but no geopandas,
+    # and the walk order needs only columns, never geometry
+    ncsv = PROC / "nodes.csv"
+    if not ncsv.exists():
+        sys.exit(f"{ncsv} is missing. It is the geometry-free copy of "
+                 f"nodes.gpkg; write it from the analysis env with "
+                 f"gpd.read_file(...).drop(columns='geometry').to_csv(...)")
+    nf = pd.read_csv(ncsv)
+    nf = nf[nf.node_id.isin(files)].copy()
+    if "source_id" in nf.columns and nf.source_id.notna().any():
+        nf["_seg"] = nf.source_id.astype(str).str.rsplit("_", n=1).str[0]
+    else:
+        nf["_seg"] = nf.get("chain", pd.Series("all", index=nf.index))
+    order = ("seq_fwd" if "seq_fwd" in nf.columns and nf.seq_fwd.notna().any()
+             else "chain_pos_m")
+    seg = args.segment or nf._seg.value_counts().idxmax()
+    nf = nf[nf._seg == seg].sort_values(order)
+    print(f"{w.name}: corridor {seg}, {len(nf)} of {len(files)} nodes, "
+          f"ordered by {order}")
+    if len(nf) < 3:
+        sys.exit("too few nodes in that corridor")
+    nodes = [files[n] for n in nf.node_id if n in files]
     if args.limit:
         nodes = nodes[:args.limit]
-    print(f"{w.name}: {len(nodes)} nodes")
 
     import torch
     from transformers import AutoImageProcessor, Mask2FormerForUniversalSegmentation
