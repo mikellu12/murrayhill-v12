@@ -73,14 +73,26 @@ def main():
         p for p in base.iterdir() if p.is_dir())
     w = walks[0]
 
-    files = {}
+    # ORDER BY THE FILENAME SEQUENCE, WITHIN EACH CORRIDOR.
+    #
+    # The exporter numbers seq along the walk, so within one corridor the
+    # filename order always matches the folder name -- verified on both walks
+    # of three streets. What it cannot do is order ACROSS corridors: the London
+    # frame splits a street into several, each with seq_fwd restarting at 1, so
+    # the global numbering interleaves them and the walk teleports.
+    #
+    # Ordering by chain_pos_m instead was the earlier fix and was worse, because
+    # its direction is arbitrary per chain: against the filename order it
+    # correlates -1.000 on East 35th and East 38th and +1.000 on East 36th. The
+    # walk therefore ran backwards on some streets and forwards on others, which
+    # is why reversing it corrected one street and broke the next.
+    files, seqs = {}, {}
     for p in sorted(w.glob("*.jpg")):
         m = NAME.match(p.name)
         if m:
             files.setdefault(m.group(2), {})[m.group(4)] = p
+            seqs[m.group(2)] = int(m.group(1))
 
-    # nodes.csv, not the gpkg: the GPU environment has torch but no geopandas,
-    # and the walk order needs only columns, never geometry
     ncsv = PROC / "nodes.csv"
     if not ncsv.exists():
         sys.exit(f"{ncsv} is missing. It is the geometry-free copy of "
@@ -91,20 +103,21 @@ def main():
     if "source_id" in nf.columns and nf.source_id.notna().any():
         nf["_seg"] = nf.source_id.astype(str).str.rsplit("_", n=1).str[0]
     else:
-        nf["_seg"] = nf.get("chain", pd.Series("all", index=nf.index))
-    order = ("seq_fwd" if "seq_fwd" in nf.columns and nf.seq_fwd.notna().any()
-             else "chain_pos_m")
-    seg = args.segment or nf._seg.value_counts().idxmax()
-    nf = nf[nf._seg == seg].sort_values(order)
-    print(f"{w.name}: corridor {seg}, {len(nf)} of {len(files)} nodes, "
-          f"ordered by {order}" + (", reversed" if args.reverse else ""))
-    if len(nf) < 3:
-        sys.exit("too few nodes in that corridor")
+        nf["_seg"] = nf["chain"] if "chain" in nf.columns else "all"
+    nf["_seq"] = nf.node_id.map(seqs)
+
     want = {"180": "F", "90": "L"}.get(args.geometry)
     if want:
-        files = {k: v for k, v in files.items() if want in v}
-        nf = nf[nf.node_id.isin(files)]
-        print(f"  {args.geometry}-only: {len(files)} nodes kept")
+        keep = {k for k, v in files.items() if want in v}
+        nf = nf[nf.node_id.isin(keep)]
+        print(f"  {args.geometry}-only: {len(keep)} nodes kept")
+
+    seg = args.segment or nf._seg.value_counts().idxmax()
+    nf = nf[nf._seg == seg].sort_values("_seq")
+    print(f"{w.name}: corridor {seg}, {len(nf)} nodes, ordered by filename seq"
+          + (", reversed" if args.reverse else ""))
+    if len(nf) < 3:
+        sys.exit("too few nodes in that corridor")
     nodes = [files[n] for n in nf.node_id if n in files]
     if args.reverse:
         nodes = nodes[::-1]
