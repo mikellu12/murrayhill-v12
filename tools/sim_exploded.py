@@ -91,6 +91,13 @@ def main():
     ap.add_argument("--tail", type=float, default=0.90,
                     help="quantile marked red on every plane")
     ap.add_argument("--dpi", type=int, default=260)
+    ap.add_argument("--context-km", type=float, default=1.6,
+                    help="radius of the wider city plan drawn behind the "
+                         "stack; 0 to omit")
+    ap.add_argument("--bars", action="store_true", default=True,
+                    help="extrude each node's value as a bar within its plane")
+    ap.add_argument("--bar-scale", type=float, default=0.13,
+                    help="tallest bar, as a fraction of the frame span")
     args = ap.parse_args()
     name = CFG.get("study_area_name", "study area")
     banner(f"exploded axonometric: {name}")
@@ -107,7 +114,10 @@ def main():
     g = gpd.read_file(nodes).to_crs(PROJ_CRS)
     g = g.merge(per, on="node_id", how="inner")
     g["_x"], g["_y"] = g.geometry.x.values, g.geometry.y.values
-    g["_x"] -= g._x.mean(); g["_y"] -= g._y.mean()
+    # keep the origin: the context plan and the boundary must be shifted by the
+    # same amount, and recomputing the mean after centring gives zero
+    OX, OY = float(g._x.mean()), float(g._y.mean())
+    g["_x"] -= OX; g["_y"] -= OY
     g = g.reset_index(drop=True)
     g["_i"] = np.arange(len(g))
     print(f"{len(g)} nodes with a score, M column {mcol}")
@@ -117,8 +127,48 @@ def main():
     span = max(np.ptp(g._x.values), np.ptp(g._y.values))
     gap = args.gap * span
 
-    fig, ax = plt.subplots(figsize=(9.2, 13.4), facecolor=BG)
+    fig, ax = plt.subplots(figsize=(9.2, 13.8), facecolor=BG)
     ax.set_facecolor(BG); ax.set_axis_off()
+
+    # The wider plan, on the ground plane and behind everything. It is what
+    # gives the stack a place to stand: without it the study area floats and
+    # the reader cannot tell whether it is a whole city or six streets of one.
+    # Cached, because the fetch is slow and the answer never changes.
+    if args.context_km > 0:
+        cache = PROC / f"context_{int(args.context_km*1000)}m.gpkg"
+        if cache.exists():
+            ctx = gpd.read_file(cache).to_crs(PROJ_CRS)
+        else:
+            import osmnx as ox
+            gg = gpd.read_file(nodes).to_crs(4326)
+            cx, cy = gg.geometry.x.mean(), gg.geometry.y.mean()
+            print(f"fetching {args.context_km:g} km of context network ...")
+            G = ox.graph_from_point((cy, cx), dist=args.context_km * 1000,
+                                    network_type="all", simplify=True)
+            ctx = ox.graph_to_gdfs(G, nodes=False)[["geometry"]]
+            ctx.to_crs(4326).to_file(cache, driver="GPKG")
+            ctx = ctx.to_crs(PROJ_CRS)
+        segs = []
+        for geom in ctx.geometry:
+            if geom is None or geom.is_empty:
+                continue
+            parts = geom.geoms if geom.geom_type.startswith("Multi") else [geom]
+            for q in parts:
+                a = np.asarray(q.coords, float)
+                X, Y = iso(a[:, 0] - OX, a[:, 1] - OY, 0, gap)
+                segs.extend(np.stack([np.c_[X, Y][:-1], np.c_[X, Y][1:]], axis=1))
+        if segs:
+            ax.add_collection(LineCollection(np.array(segs), colors="#ededed",
+                                             lw=.45, zorder=-5))
+            print(f"context network: {len(segs)} segments")
+
+    # The study boundary, on the ground. The context plan says where; this says
+    # how much of it was measured.
+    hull = gpd.GeoSeries(g.geometry.values, crs=g.crs).union_all().convex_hull
+    hb = np.asarray(hull.exterior.coords, float)
+    HX, HY = iso(hb[:, 0] - OX, hb[:, 1] - OY, 0, gap)
+    ax.plot(HX, HY, color="#b9b9b9", lw=1.0, ls=(0, (5, 3)), zorder=-3)
+    ax.fill(HX, HY, color="#f4f4f4", zorder=-4)
 
     # threads first, behind everything: one per node, tying the strata together
     thin = g.sample(min(len(g), 260), random_state=3)
@@ -143,9 +193,19 @@ def main():
             ax.add_collection(LineCollection(
                 segs, cmap=cmap, array=vals, lw=2.3,
                 norm=plt.Normalize(lo, hi), zorder=k * 10 + 1))
+            # Bars, so a plane reads as a quantity and not only as a hue.
+            # Height and colour carry the same number on purpose: the colour
+            # survives at thumbnail size, the height survives in print.
+            if args.bars:
+                t = (v - lo) / max(hi - lo, 1e-9)
+                t = np.clip(t, 0, 1) * args.bar_scale * span
+                bar = np.stack([np.c_[X, Y], np.c_[X, Y + t]], axis=1)
+                ax.add_collection(LineCollection(
+                    bar, cmap=cmap, array=v, lw=.75,
+                    norm=plt.Normalize(lo, hi), zorder=k * 10 + 2))
             tail = v >= np.nanquantile(v, args.tail)
             ax.scatter(X[tail], Y[tail], s=5.5, c=RED, linewidths=0,
-                       zorder=k * 10 + 2)
+                       zorder=k * 10 + 3)
         # label to the left, in the reference's manner
         lx = X.min() - span * 0.20
         ly = Y[np.argmin(X)]
