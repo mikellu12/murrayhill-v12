@@ -104,15 +104,23 @@ def anchors(im, sets=DEFAULT):
     lo = int(H * (1 - c["band"]))
     sub = a[lo:]
     lab, n = ndimage.label(sub < np.median(sub) * DARK)
+    # Bounding boxes and pixel counts for every blob in one pass each. The
+    # obvious loop -- `for k in range(1, n+1): np.where(lab == k)` -- rescans
+    # the whole band per blob, and a low-contrast band has hundreds, so it cost
+    # 1.2 s per 1440-wide frame and 2.9 s per 2880-wide one. That is CPU time
+    # with the GPU idle: about two hours across a full rating pass.
+    boxes = ndimage.find_objects(lab)
+    counts = np.bincount(lab.ravel(), minlength=n + 1)
     found = []
-    for k in range(1, n + 1):
-        ys, xs = np.where(lab == k)
-        if len(ys) < MIN_PX * sub.size:
+    for k, box in enumerate(boxes, start=1):
+        if box is None or counts[k] < MIN_PX * sub.size:
             continue
-        tall = (ys.max() - ys.min() + 1) / sub.shape[0] > MIN_H
-        narrow = (xs.max() - xs.min() + 1) / W < c["max_w"]
-        if ys.max() >= sub.shape[0] - 2 and tall and narrow:
-            found.append((int(xs.min()), lo + int(ys.min())))
+        ys, xs = box
+        h = ys.stop - ys.start
+        if (ys.stop - 1 >= sub.shape[0] - 2
+                and h / sub.shape[0] > MIN_H
+                and (xs.stop - xs.start) / W < c["max_w"]):
+            found.append((int(xs.start), lo + int(ys.start)))
     found.sort()
     merged = []
     for x, y in found:
