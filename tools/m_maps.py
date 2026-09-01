@@ -56,6 +56,9 @@ def main():
     ap.add_argument("--out", type=Path,
                     default=Path("results/figures/m_two_cities.png"))
     ap.add_argument("--dpi", type=int, default=200)
+    ap.add_argument("--title", action="store_true",
+                    help="draw the figure heading; off by default so the "
+                         "figure can carry a caption of its own")
     args = ap.parse_args()
     banner("M for both cities, one colour scale")
 
@@ -81,8 +84,8 @@ def main():
     # at fixed fractions while the panel titles are placed in points below the
     # axes puts the two on different measures, and they collide as soon as the
     # figure changes size.
-    fig = plt.figure(figsize=(15.5, 8.9), facecolor=BG)
-    head = 0.86 / 8.9
+    fig = plt.figure(figsize=(15.5, 8.2), facecolor=BG)
+    head = 0.16 / 8.2      # panel titles only; no figure heading
     gs = fig.add_gridspec(1, 2, width_ratios=[s / max(spans) for s in spans],
                           wspace=0.06, left=.03, right=.88,
                           top=1 - head - 0.045, bottom=.08)
@@ -121,21 +124,17 @@ def main():
         ax.text(ax_, ay + arrow + h * 0.035, "N", color=FG, ha="center",
                 va="bottom", fontsize=10.5)
 
+    if args.title:
+        fig.text(.03, 1 - head * 0.36, "M across two study areas, "
+                 "one shared colour scale", color=FG, fontsize=16.5, va="center")
+
     cax = fig.add_axes([0.90, 0.14, 0.016, 0.66])
     cb = fig.colorbar(sc, cax=cax)
-    cb.set_label("M   (Street Interface Matrix, canyon penalty off in both)",
-                 color=FG, fontsize=10.5)
+    cb.set_label("M", color=FG, fontsize=11)
     cb.ax.yaxis.set_tick_params(color=FG)
     plt.setp(plt.getp(cb.ax, "yticklabels"), color=FG)
     cb.outline.set_edgecolor("#2a2d33")
 
-    fig.text(.03, 1 - head * 0.36, "M across two study areas, "
-             "one shared colour scale", color=FG, fontsize=16.5, va="center")
-    fig.text(.03, 1 - head * 0.74,
-             "Node-mean M. Both panels drawn at the same metres-per-inch and "
-             "the same colour normalisation, so a colour means the same "
-             "value in each.",
-             color="#9a9aa2", fontsize=10, va="center")
     args.out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(args.out, dpi=args.dpi, facecolor=BG)
     print(f"\nwrote {args.out}")
