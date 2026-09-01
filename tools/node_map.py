@@ -47,6 +47,8 @@ def main():
                     help="context around the frame, as a fraction of its span")
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--dpi", type=int, default=300)
+    ap.add_argument("--title", action="store_true",
+                    help="draw the place name and node count in the image")
     ap.add_argument("--no-cache", dest="cache", action="store_false",
                     default=True, help="re-query OSM rather than reading the "
                                        "cached basemap")
@@ -143,11 +145,16 @@ def main():
         step = float(np.median(d[:, 1]))
         print(f"nearest-neighbour spacing: median {step:.1f} m")
 
-    ax.text(.03, .965, name, transform=ax.transAxes, color=fg, fontsize=19,
-            va="top")
-    ax.text(.03, .925, f"{len(nodes)} sampling nodes, {step:.0f} m apart "
-            f"along each street",
-            transform=ax.transAxes, color=fg, fontsize=11, va="top", alpha=.78)
+    # No title or count in the image: a locator goes on a slide or beside a
+    # caption that names the place already, and burned-in text cannot be
+    # edited or translated without regenerating the figure. --title puts both
+    # lines back. The attribution stays, because the licence requires it.
+    if args.title:
+        ax.text(.03, .965, name, transform=ax.transAxes, color=fg,
+                fontsize=19, va="top")
+        ax.text(.03, .925, f"{len(nodes)} sampling nodes, {step:.0f} m apart "
+                f"along each street", transform=ax.transAxes, color=fg,
+                fontsize=11, va="top", alpha=.78)
     ax.text(.985, .012, "basemap drawn from OpenStreetMap (ODbL)",
             transform=ax.transAxes, color=fg, fontsize=7, ha="right", alpha=.55)
 
