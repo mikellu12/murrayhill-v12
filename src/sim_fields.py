@@ -37,6 +37,8 @@ wall does not have, and a single 90-degree view cannot see a canyon. Sky share
 is visible in the frame and is what (1 - SVF) needs.
 """
 
+from common import CFG
+
 # field -> (low anchor, high anchor, manuscript term, measured counterpart)
 FIELDS = {
     "vertical_greenery": (
@@ -102,10 +104,17 @@ SYSTEM = ("You are an expert urban morphologist evaluating streetscape "
           "quality at eye-level (1.5m).")
 
 
+# Named to the model in every prompt; see config.yaml: prompt_place.
+# "Rate this street view." with no place name unless config supplies one; see
+# config.yaml: prompt_place for why none is the right default.
+_place = CFG.get("prompt_place") or ""
+PLACE = f"{_place} " if _place else ""
+
+
 def prompt(field):
     """One field, both poles named, an explicit instruction to use the range."""
     lo, hi = FIELDS[field][0], FIELDS[field][1]
-    return (f"Rate this Manhattan street view. Reply with ONE JSON object and "
+    return (f"Rate this {PLACE}street view. Reply with ONE JSON object and "
             f"nothing else: {{\"{field}\": <1-7>}} where 1 is {lo} and 7 is "
             f"{hi}. Use the whole 1-7 range.")
 

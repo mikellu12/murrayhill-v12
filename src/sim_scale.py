@@ -19,6 +19,8 @@ field's scale rather than in eleven competing fields, which may or may not
 behave the same way. tools/scale_probe.py measures it.
 """
 
+from common import CFG
+
 SCALE = {
  "vertical_greenery": [
    "no canopy, green facade or hedge wall anywhere in view",
@@ -175,6 +177,13 @@ DEFINITION = {
 }
 
 
+# Named to the model in every prompt; see config.yaml: prompt_place.
+# "Rate this street view." with no place name unless config supplies one; see
+# config.yaml: prompt_place for why none is the right default.
+_place = CFG.get("prompt_place") or ""
+PLACE = f"{_place} " if _place else ""
+
+
 def prompt7(field):
     """One field, every rung named."""
     # Instruction first, scale second -- the same order as the two-anchor
@@ -184,6 +193,6 @@ def prompt7(field):
     steps = "\n".join(f"{i + 1} = {s}" for i, s in enumerate(SCALE[field]))
     d = DEFINITION.get(field)
     d = f"{d} " if d else ""
-    return (f"Rate this Manhattan street view. {d}Reply with ONE JSON object "
+    return (f"Rate this {PLACE}street view. {d}Reply with ONE JSON object "
             f"and nothing else: {{\"{field}\": <1-7>}}, using this scale:\n\n"
             f"{steps}")

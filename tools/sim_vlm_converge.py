@@ -41,13 +41,21 @@ import pandas as pd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import RES, banner
+from common import CFG, RES, banner
+from mast import erase_mast
 from sim_fields import SYSTEM, FIELDS
 from sim_scale import SCALE, DEFINITION
 
 MODEL = "Qwen/Qwen2-VL-7B-Instruct"
 MAX_PIXELS = 768 * 768
 ORDER = list(FIELDS)
+
+
+# Named to the model in every prompt; see config.yaml: prompt_place.
+# "Rate this street view." with no place name unless config supplies one; see
+# config.yaml: prompt_place for why none is the right default.
+_place = CFG.get("prompt_place") or ""
+PLACE = f"{_place} " if _place else ""
 
 
 def prompt_for(field, rungs):
@@ -59,7 +67,7 @@ def prompt_for(field, rungs):
         which = "<1-7>"
     else:
         which = "<one of " + ", ".join(str(k) for k in rungs) + ">"
-    return (f"Rate this Manhattan street view. {d}Reply with ONE JSON object "
+    return (f"Rate this {PLACE}street view. {d}Reply with ONE JSON object "
             f"and nothing else: {{\"{field}\": {which}}}, using this "
             f"scale:\n\n{steps}")
 
@@ -70,6 +78,9 @@ def main():
     ap.add_argument("--table", type=Path,
                     default=RES / "tables" / "sim_vlm_converged.csv")
     ap.add_argument("--checkpoint", type=int, default=25)
+    ap.add_argument("--mast-set", default=None,
+                    help="mast calibration; defaults to the --src folder "
+                         "name. 'none' disables the erase")
     ap.add_argument("--limit", type=int, default=None)
     args = ap.parse_args()
     banner("rate by elimination -- prune to above chance, re-ask, repeat")
@@ -121,10 +132,27 @@ def main():
         p = torch.softmax(lg[0, [dig[k - 1] for k in rungs]], -1).cpu().numpy()
         return p / p.sum()
 
+    # Same erase as the single-pass runner. The mast is a camera part, not
+    # street, and the model reads it as a pole and its wordmark as signage;
+    # leaving it in would make this ladder answer a different question than
+    # the pass it is meant to be compared against. Chosen per image because
+    # the street-type split puts 90-degree halves and 180-degree strips in one
+    # tree and the mast covers a different share of each.
+    WIDE_SET = "svi_90_wide"
+    mast_set = args.mast_set or args.src.name
+    if str(mast_set).lower() == "none":
+        mast_set = None
+        print("mast erase: DISABLED")
+    else:
+        print(f"mast erase: calibration set {mast_set!r}")
+
     out = []
     t0 = time.time()
     for img, r in tqdm(keep, desc="images", mininterval=30.0):
         im = Image.open(img).convert("RGB")
+        if mast_set:
+            im, _ = erase_mast(im, WIDE_SET if img.stem.endswith("_F")
+                               else mast_set)
         rec = {"file": r}
         for f in ORDER:
             cur = list(range(1, 8))

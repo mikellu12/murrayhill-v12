@@ -24,6 +24,22 @@ paths:
 excluded_nodes:
   viaduct: ["n00144", "n00145", "n00146", "n00147"]
 
+# A place name to put in every rating prompt, or null for none.
+#
+# NULL IS THE DEFAULT AND SHOULD STAY THAT WAY. The prompts used to say
+# "Rate this Manhattan street view" in every study area, which was simply wrong
+# in London. Correcting it per city would have been worse: the study compares
+# two cities, so the instrument has to be identical in both, and a name in the
+# prompt hands the model a different prior for each. A Murray Hill against
+# London difference would then be partly a difference between what the model
+# expects of the two words.
+#
+# The ratings are meant to be a reading of the image. Anything the model is
+# told about the image that is not in it is a confound, and this was the only
+# one. Murray Hill's sim_vlm_v3.csv predates this and was rated with
+# "Manhattan"; it needs re-rating before the two cities go in one table.
+prompt_place: null
+
 projected_crs: 32618
 
 study_area:

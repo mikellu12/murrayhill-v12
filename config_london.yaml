@@ -704,3 +704,7 @@ projected_crs: 27700
 # them dropped four nodes on a main street.
 excluded_nodes:
   viaduct: []
+
+# No place name, matching config.yaml. The instrument has to be the same in
+# both cities for a comparison between them to mean anything.
+prompt_place: null
