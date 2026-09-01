@@ -95,19 +95,20 @@ LAYERS = [
 ]
 
 
-# Ground tilt, in degrees. NOT 30, and the reason matters: in any axonometric
+# Ground tilt, in degrees. In any axonometric
 # the screen height of a mark is its depth plus its elevation, because both map
-# to the same axis -- y' = (x + y) sin(tilt) + value. At 30 degrees the ground
-# contributes so much vertical that a node in the far corner of the frame sits
-# higher on screen than a tall mark in the near corner, and the reader sees a
-# peak that is only distance. Murray Hill's imageability reads as highest in
-# the north-east on a 30-degree ground, when the north-east is in fact its
-# LOWEST quadrant, 0.351 against the south-west's 0.413.
+# to one axis -- y' = (x + y) sin(tilt) + value -- so a node in the far corner
+# sits high because it is far. Flattening the ground shrinks the depth term but
+# cannot remove it, and no practical relief fixes the ordering: Park Avenue
+# leads Tudor City Place by 0.089 in imageability and trails it by 591 m in
+# depth, and under any monotone value-to-height mapping -- percentile, min-max
+# or rank -- that value gap compresses to a few per cent of the height scale
+# while the depth gap is fixed by the plan. Measured: no relief up to three
+# times the frame span puts the highest node on top, at any tilt.
 #
-# Flattening the ground shrinks the depth term without touching the value term.
-# At 16 degrees the ground spans about a third of the vertical it did, so
-# relief carries the height and the colour and the profile agree.
-TILT = 16.0
+# So the tilt stays at 30, where the plan reads as a plan, and --mark-top names
+# the peaks outright. A figure that cannot encode a fact should state it.
+TILT = 30.0
 
 
 def iso(x, y, k, gap):
@@ -145,6 +146,10 @@ def main():
                          "the line beneath it. bars: one upright per node. "
                          "surface: an interpolated sheet -- smooth, but it "
                          "reads as terrain rather than as streets")
+    ap.add_argument("--mark-top", type=int, default=3,
+                    help="name the N highest nodes on each stratum; 0 to omit. "
+                         "The projection cannot put them on top, so the figure "
+                         "says where they are instead")
     ap.add_argument("--verify", action="store_true",
                     help="check each surface's peak against the highest node")
     ap.add_argument("--context-km", type=float, default=1.6,
@@ -311,6 +316,23 @@ def main():
                 ax.add_collection(LineCollection(
                     top[o], cmap=cmap, array=val[o], lw=.85,
                     norm=plt.Normalize(lo, hi), zorder=k * 10 + 3))
+            if args.mark_top:
+                # the peaks, named. Deduplicated by street, because three
+                # consecutive Park Avenue nodes are one finding, not three.
+                seen, marked = set(), 0
+                for i in np.argsort(-v):
+                    nm = str(g[namecol].iloc[i])
+                    if nm in seen:
+                        continue
+                    seen.add(nm); marked += 1
+                    ax.plot([X[i], X[i]], [Y[i], Y[i] + t[i]], color=INK,
+                            lw=.9, zorder=k * 10 + 4)
+                    ax.scatter([X[i]], [Y[i] + t[i]], s=9, c=INK, zorder=k * 10 + 5)
+                    ax.text(X[i] + span * .012, Y[i] + t[i], f"{nm}  {v[i]:.2f}",
+                            color=INK, fontsize=5.6, va="center",
+                            zorder=k * 10 + 5)
+                    if marked >= args.mark_top:
+                        break
             if args.verify:
                 i = int(np.argmax(v))
                 VERIFY[col] = (g[namecol].iloc[i], g[namecol].iloc[i])
