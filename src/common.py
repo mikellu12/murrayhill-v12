@@ -28,6 +28,21 @@ for _d in (RAW, PROC, IMG, RES / "figures", RES / "tables"):
     _d.mkdir(parents=True, exist_ok=True)
 
 TYPOLOGY_ORDER = ["avenue_canyon", "avenue_secondary", "mid_block"]
+# The SIM ramp, picked by eye against real maps rather than taken off a
+# library shelf: pale rose through sand and sage to a dark green. Every figure
+# that shows M or its dimensions uses it, so a colour means the same thing
+# across the whole figure set. It lived in tools/sim_section_map.py, where two
+# later map tools could not reach it without copying the five values.
+SIM_CMAP_STOPS = ["#F0DED6", "#E2D9B8", "#A9C4A0", "#4E8A72", "#1C5A49"]
+
+
+def sim_cmap():
+    """The SIM ramp as a matplotlib colormap; imported lazily so the analysis
+    environment does not need matplotlib to import common."""
+    from matplotlib.colors import LinearSegmentedColormap
+    return LinearSegmentedColormap.from_list("sim", SIM_CMAP_STOPS)
+
+
 PALETTE = {"avenue_canyon": "#c0392b", "avenue_secondary": "#e08214",
            "mid_block": "#2c7a4b"}
 

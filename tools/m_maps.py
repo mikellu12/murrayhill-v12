@@ -31,11 +31,11 @@ import geopandas as gpd
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from common import banner
+from common import sim_cmap, banner
 
 BG = "#0e0f12"
 FG = "#e8e6e1"
-CMAP = "magma"
+CMAP = sim_cmap()
 
 
 def load(nodes_gpkg, calc_csv, crs, m_col):
