@@ -16,6 +16,7 @@ H/W band and it is otherwise unreachable.
 
     .venv/Scripts/python tools/sim_compute.py
 """
+import argparse
 import sys
 from pathlib import Path
 
@@ -26,6 +27,7 @@ HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 from common import CFG, PROC, RES, banner, weights
 import sim_core as S
+from sim_readout import prune_once, interpolated_median, K
 
 # manuscript term -> the VLM field that supplies it
 TERMS = {
@@ -41,6 +43,13 @@ TERMS = {
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--table", type=Path, default=None,
+                    help="ratings table; default is this frame's own")
+    ap.add_argument("--rounded-ev", action="store_true",
+                    help="use the stored round(EV) column instead of the "
+                         "pruned interpolated median, for comparison")
+    args = ap.parse_args()
     banner("SIM per half-view, Cobb-Douglas, VLM inputs")
     C = CFG["sim_vlm"]["cobb_douglas"]
     W = CFG["sim_vlm"]["weights"]
@@ -49,28 +58,66 @@ def main():
     kI, tI = C["imageability_sigmoid"]["kappa"], C["imageability_sigmoid"]["tau"]
     kD, tD = C["dependence_sigmoid"]["kappa"], C["dependence_sigmoid"]["tau"]
 
-    # sim_vlm.csv is the original 2-anchor run and is kept for comparison.
-    # The current ratings live in sim_vlm_v3.csv: same nine fields, corrected
-    # rung sets, and all 766 nodes rather than the 681 that had imagery then.
-    tbl = RES / "tables" / "sim_vlm_v3.csv"
-    if not tbl.exists():
-        tbl = RES / "tables" / "sim_vlm.csv"
-    print(f"ratings: {tbl.name}")
+    tbl = args.table
+    if tbl is None:
+        # sim_vlm.csv is the original 2-anchor run, kept for comparison. The
+        # current Murray Hill ratings live in sim_vlm_v3.csv.
+        tbl = RES / "tables" / "sim_vlm_v3.csv"
+        if not tbl.exists():
+            tbl = RES / "tables" / "sim_vlm.csv"
+    print(f"ratings: {tbl}")
     d = pd.read_csv(tbl)
-    hw = pd.read_csv(PROC / "metrics.csv")[["node_id", "HW_facade",
-                                            "HW_effective", "HW_source", "face_id"]]
-    d = d.merge(hw, on="node_id", how="left")
 
-    # 1-7 -> [0,1]
-    n = lambda c: (d[c].clip(1, 7) - 1) / 6.0
+    # A study area without building footprints has no H/W, and therefore no
+    # metrics.csv. Those columns are filled with NaN rather than skipped, so
+    # the code below is one path: regime_exponents already falls back to the
+    # global elasticities wherever H/W is NaN, and A_i is handled at the
+    # calibration loop.
+    mpath = PROC / "metrics.csv"
+    if mpath.exists():
+        hw = pd.read_csv(mpath)[["node_id", "HW_facade", "HW_effective",
+                                 "HW_source", "face_id"]]
+        d = d.merge(hw, on="node_id", how="left")
+    else:
+        print(f"no {mpath.name}: no H/W in this frame, so A_i = 1 for every "
+              f"node and the global elasticities apply throughout")
+        for c, v in (("HW_facade", np.nan), ("HW_effective", np.nan),
+                     ("HW_source", None), ("face_id", None)):
+            d[c] = v
+
+    # READOUT. The bare field column in the ratings table is round(EV), and
+    # expected value is not a defensible summary of an ordinal scale: it
+    # asserts that the step from rung 2 to 3 equals the step from 6 to 7, and
+    # it turns a frame split between 2 and 6 into a 4, a rung the model
+    # positively rejected. The seven-rung distribution is saved for exactly
+    # this reason, so M is built from the pruned interpolated median instead --
+    # a quantile, which needs the order of the rungs and never their spacing.
+    #
+    # It changes the ranking very little (Spearman 0.966 against round(EV) on
+    # Murray Hill) and does not buy separability at M, where per-field gains
+    # cancel through the Cobb-Douglas. The reason to prefer it is that it is
+    # the right statistic for the scale, not that it scores better.
+    have_p = all(f"{f}_p1" in d.columns for f in TERMS.values())
+    if have_p and not args.rounded_ev:
+        print("readout: prune one rung, then the interpolated median")
+        def rung(f):
+            P = d[[f"{f}_p{k}" for k in K]].to_numpy(float)
+            P = P / P.sum(axis=1, keepdims=True)
+            return pd.Series(interpolated_median(prune_once(P)), index=d.index)
+    else:
+        print("readout: round(EV) as stored" if have_p else
+              "readout: round(EV) as stored (no per-rung columns in this table)")
+        def rung(f):
+            return d[f].astype(float)
+
     for term, field in TERMS.items():
-        d[term] = n(field)
+        d[term] = (rung(field).clip(1, 7) - 1) / 6.0
 
     # V_nat / V_built is a ratio of two ratings, so it is built from the raw
     # values rather than the normalised ones -- r/(1+r) form, bounded, and it
     # cannot reach 0 or 1 because neither rating can be 0.
-    vg = d.vertical_greenery.clip(1, 7)
-    vh = d.vertical_hardscape.clip(1, 7)
+    vg = rung("vertical_greenery").clip(1, 7)
+    vh = rung("vertical_hardscape").clip(1, 7)
     d["nat_built"] = vg / (vg + vh)
 
     d["I_raw"] = (a_w["nat_built"] * d.nat_built + a_w["gvi_eye"] * d.GVI_eye
@@ -99,15 +146,29 @@ def main():
     # For this frame they agree on D (median D_raw 0.500 against the stated
     # 0.50) and differ on I (0.395 against 0.20). Ranking is barely affected:
     # rho +0.930 between the two Ms.
+    # A frame with no H/W anywhere has no median to centre A_i on. nanmedian
+    # of an all-NaN column is NaN and would propagate into every M, so it falls
+    # back to the stated threshold; A_i is 1 throughout in that case anyway.
+    hw_local = (float(np.nanmedian(d.HW_effective))
+                if d.HW_effective.notna().any() else C["omega"]["hw_threshold"])
     CAL = {"local": dict(tI=float(d.I_raw.median()), tD=float(d.D_raw.median()),
-                         hw=float(np.nanmedian(d.HW_effective))),
+                         hw=hw_local),
            "global": dict(tI=tI, tD=tD, hw=C["omega"]["hw_threshold"])}
     for tag, c in CAL.items():
         suf = "" if tag == "global" else "_local"
         I = S.sigmoid(d.I_raw, kI, c["tI"])
         D = S.sigmoid(d.D_raw, kD, c["tD"])
-        om = S.omega(d.HW_effective, C["omega"]["psi"], c["hw"],
-                     open_one_side=porous)
+        # A_i discounts on H/W, a plan geometry. Where the frame has no
+        # heights at all there is nothing to discount on, so A_i is 1 for every
+        # node -- not NaN, which would void every M, and not a guess at the
+        # ratio. It makes M an un-penalised I^a Y^b D^c, which is the same
+        # quantity the M_noA column reports for the frames that do have
+        # heights, so the two remain comparable.
+        if d.HW_effective.notna().any():
+            om = S.omega(d.HW_effective, C["omega"]["psi"], c["hw"],
+                         open_one_side=porous)
+        else:
+            om = pd.Series(1.0, index=d.index)
         e = S.regime_exponents(d.HW_effective.to_numpy(), C, porous=porous)
         d["I" + suf], d["D" + suf], d["Omega" + suf] = I, D, om
         d["a" + suf], d["b" + suf], d["c" + suf] = (
@@ -149,11 +210,27 @@ def main():
         print("    tau_I and tau_D were calibrated against pixel shares; the")
         print("    normalised 1-7 ratings do not sit on that scale.")
 
-    print(f"\n  M by typology:")
-    tp = pd.read_csv(PROC / "metrics.csv")[["node_id", "typology"]]
-    j = d.merge(tp, on="node_id", how="left")
-    print(j.groupby("typology")["M"].agg(["count", "mean", "std"]).round(3).to_string())
-    print("\n  paper reports: mid-block 0.78, avenue canyon 0.22, POPS 0.65")
+    mpath = PROC / "metrics.csv"
+    j = d
+    if mpath.exists():
+        print(f"\n  M by typology:")
+        tp = pd.read_csv(mpath)[["node_id", "typology"]]
+        j = d.merge(tp, on="node_id", how="left")
+        print(j.groupby("typology")["M"].agg(["count", "mean", "std"]).round(3).to_string())
+        print("\n  paper reports: mid-block 0.78, avenue canyon 0.22, POPS 0.65")
+    elif (PROC / "street_type.csv").exists():
+        # No typology in this frame. Street type is the split that exists, and
+        # it is the one that governs how the numbers may be read: a 180-degree
+        # pedestrian strip and a 90-degree vehicular half are different fields
+        # of view, so their Ms are not strictly on one scale and belong in
+        # separate rows rather than a pooled mean.
+        t = pd.read_csv(PROC / "street_type.csv")[["node_id", "is_pedestrian"]]
+        j = d.merge(t, on="node_id", how="left")
+        j["view"] = np.where(j.is_pedestrian.fillna(False),
+                             "pedestrian 180", "vehicular 90")
+        print(f"\n  M by street type, reported separately because the field "
+              f"of view differs:")
+        print(j.groupby("view")["M"].agg(["count", "mean", "std"]).round(3).to_string())
 
     print(f"\n  left against right, same node:")
     print(j.groupby("side")[["I", "Y", "D", "M"]].mean().round(3).to_string())

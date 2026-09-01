@@ -47,10 +47,38 @@ def write_split(sc):
     """Split a computed frame into the two study tables and write them."""
     banner("split the run into observed and derived")
     sc = sc.copy()
-    met = pd.read_csv(PROC / "metrics.csv")
+
+    # Both of the joins below are Murray Hill artefacts: metrics.csv comes from
+    # s05's footprint geometry and azimuth_profiles.npz from s03's
+    # segmentation. A frame without footprints has neither, and the ratings and
+    # the computed M are still the deliverable, so the geometry columns are
+    # filled with NaN rather than the split being skipped. The two files then
+    # have the same shape in every study area, which is what makes them
+    # stackable for a cross-city table.
+    mpath, zpath = PROC / "metrics.csv", PROC / "azimuth_profiles.npz"
+    geo = mpath.exists() and zpath.exists()
+    if not geo:
+        missing = [q.name for q in (mpath, zpath) if not q.exists()]
+        print(f"no {', '.join(missing)}: writing ratings and M without the "
+              f"footprint geometry and arc shares")
+
+    GEO_COLS = ["typology", "osm_name", "face_id", "H_m", "W_facade",
+                "GVI", "VEI", "SVF_band"]
+    ARC = ["arc_vegetation", "arc_sky", "arc_building"]
+    if not geo:
+        for c in GEO_COLS:
+            if c not in sc.columns:
+                sc[c] = np.nan
+        for c in ARC:
+            sc[c] = np.nan
+        if "osm_name" in sc.columns and sc.osm_name.isna().all():
+            sc["osm_name"] = sc.street
+        return _write(sc)
+
+    met = pd.read_csv(mpath)
 
     # ---- arc shares, measured over each half-view's own 90 degrees ---------
-    z = np.load(PROC / "azimuth_profiles.npz")
+    z = np.load(zpath)
     prof = {k: z[k] for k in z.files}
     bear = walk_bearings()
     parts = sc.file.str.split("/", expand=True)
@@ -75,7 +103,11 @@ def write_split(sc):
     extra = met[["node_id", "typology", "osm_name", "face_id", "H_m",
                  "W_facade", "GVI", "VEI", "SVF_band"]]
     sc = sc.merge(extra, on="node_id", how="left", suffixes=("", "_node"))
+    return _write(sc)
 
+
+def _write(sc):
+    """The split itself, once the optional geometry columns are present."""
     # ---- observed ---------------------------------------------------------
     obs = sc[ID + ["osm_name", "typology", "face_id"] + RATINGS
              + ["arc_vegetation", "arc_sky", "arc_building",
