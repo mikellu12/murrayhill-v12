@@ -100,7 +100,7 @@ def main():
         # per image, not per folder: the street-type split puts 90-degree
         # halves and 180-degree strips in one tree, and the mast covers half
         # the fractional width in the wider render
-        drop = mast_mask(im, "svi_90_wide" if str(f).endswith("_F.jpg")
+        drop = mast_mask(im, "svi_180" if str(f).endswith("_F.jpg")
                          else (args.mast_set or args.src.name))
         axes[r, 0].imshow(im)
         axes[r, 0].set_title(f, color=FG, fontsize=9, loc="left", pad=6)

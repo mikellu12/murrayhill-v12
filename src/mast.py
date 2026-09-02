@@ -70,10 +70,16 @@ from scipy import ndimage
 # is whether the capture rig is the same object, not whether the arithmetic
 # is right.
 SETS = {
-    "svi_90":       dict(w=0.140, h=0.170, band=0.22, max_w=0.12, masts=1),
-    "svi_90_wide":  dict(w=0.070, h=0.170, band=0.22, max_w=0.06, masts=2),
-    "svi_180":      dict(w=0.070, h=0.180, band=0.30, max_w=0.06, masts=2),
+    # 1440x1833, 90 degrees, 16 px/deg -- one mast
+    "svi_90":  dict(w=0.140, h=0.170, band=0.22, max_w=0.12, masts=1),
+    # 2880x1833, 180 degrees, 16 px/deg -- two, at half the fractional width
+    "svi_180": dict(w=0.070, h=0.170, band=0.22, max_w=0.06, masts=2),
 }
+# svi_90_wide was this entry's name while the 180 tree still held the older
+# 1440x916 render and the name svi_180 was taken by it. That render no longer
+# exists -- data/raw/svi_180 is 2880x1833 throughout -- so the set is named for
+# the geometry it describes. The alias keeps older commands working.
+SETS["svi_90_wide"] = SETS["svi_180"]
 DEFAULT = "svi_90"
 
 DARK = 0.55        # fraction of the band's median luminance

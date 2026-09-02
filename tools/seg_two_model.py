@@ -69,7 +69,7 @@ def main():
     # calibration is per imagery set and the source folder names it. Guessing
     # would silently apply svi_90's single 14%-wide mast to an svi_180 frame
     # that has two at 7%.
-    WIDE_SET = "svi_90_wide"
+    WIDE_SET = "svi_180"   # the 2880x1833 strip
     mset = args.mast_set or args.src.name
     if not args.no_mast_mask:
         print(f"mast calibration: {mset}")

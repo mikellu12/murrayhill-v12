@@ -200,7 +200,7 @@ def main():
     ids = [tok.encode(str(k), add_special_tokens=False)[0] for k in range(1, 8)]
     ks = np.arange(1, 8)
 
-    WIDE_SET = "svi_90_wide"
+    WIDE_SET = "svi_180"   # the 2880x1833 strip
     mast_set = args.mast_set or args.src.name
     if str(mast_set).lower() == "none":
         mast_set = None

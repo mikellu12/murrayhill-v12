@@ -69,6 +69,9 @@ def main():
                     help="vlm_calculations.csv, to stratify the sample by M")
     ap.add_argument("--table", type=Path, default=None)
     ap.add_argument("--n", type=int, default=90)
+    ap.add_argument("--all", action="store_true",
+                    help="describe every frame rather than a sample, which is "
+                         "what a walk-through interface needs")
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--mast-set", default=None)
     ap.add_argument("--max-new", type=int, default=110)
@@ -95,21 +98,33 @@ def main():
         mcol = "M_noA" if "M_noA" in c.columns else "M"
         per = c.groupby("node_id")[mcol].mean().rename("M").reset_index()
         fl = fl.merge(per, on="node_id", how="left")
+    else:
+        fl["M"] = np.nan
+        print(f"no {calc.name}: M will be blank")
+
+    if args.all:
+        # Every frame. A walk-through interface shows a verdict at each step,
+        # so a sample leaves the sidebar empty most of the way down a street.
+        print(f"describing all {len(fl)} frames")
+    else:
+        # Stratified by M, so the sample spans the range instead of clustering
+        # at the median where a random draw would put nearly all of it.
         ok = fl.M.notna()
         if ok.any():
-            fl["band"] = pd.qcut(fl.loc[ok, "M"], 5, labels=False,
-                                 duplicates="drop")
-            per_band = max(1, args.n // int(fl.band.nunique()))
-            fl = (fl[ok].groupby("band", group_keys=False)
-                  .apply(lambda g: g.sample(min(per_band, len(g)),
-                                            random_state=args.seed)))
-            print(f"sampled {len(fl)} frames, stratified into "
-                  f"{int(fl.band.nunique())} bands of M "
-                  f"({fl.M.min():.3f} to {fl.M.max():.3f})")
-    if len(fl) > args.n:
-        fl = fl.sample(args.n, random_state=args.seed)
-    if "M" not in fl.columns:
-        print(f"no {calc.name}: sampling at random instead of by M")
+            band = pd.qcut(fl.loc[ok, "M"], 5, labels=False, duplicates="drop")
+            per_band = max(1, args.n // max(int(band.nunique()), 1))
+            # index-based rather than groupby.apply: pandas 2 drops the
+            # grouping column from the result, which then cannot be reported
+            take = []
+            for b in sorted(band.dropna().unique()):
+                idx = band.index[band == b]
+                k = min(per_band, len(idx))
+                take.extend(pd.Series(idx).sample(k, random_state=args.seed))
+            fl = fl.loc[take]
+            print(f"sampled {len(fl)} frames across {int(band.nunique())} "
+                  f"bands of M ({fl.M.min():.3f} to {fl.M.max():.3f})")
+        elif len(fl) > args.n:
+            fl = fl.sample(args.n, random_state=args.seed)
 
     import torch
     from PIL import Image

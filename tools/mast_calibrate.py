@@ -23,7 +23,7 @@ would get wrong.
 
     .venv/Scripts/python tools/mast_calibrate.py --src data/london/raw/svi_90
     .venv/Scripts/python tools/mast_calibrate.py --src data/london/raw/svi_90 \
-        --pattern "*_F.jpg" --name svi_90_wide
+        --pattern "*_F.jpg" --name svi_180
 """
 import argparse
 import sys

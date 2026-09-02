@@ -138,7 +138,7 @@ def main():
     # the pass it is meant to be compared against. Chosen per image because
     # the street-type split puts 90-degree halves and 180-degree strips in one
     # tree and the mast covers a different share of each.
-    WIDE_SET = "svi_90_wide"
+    WIDE_SET = "svi_180"   # the 2880x1833 strip
     mast_set = args.mast_set or args.src.name
     if str(mast_set).lower() == "none":
         mast_set = None

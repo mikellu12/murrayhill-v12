@@ -98,17 +98,19 @@ def main():
         print(f"  {tag}: {len(lab)} classes")
 
     n = len(files)
-    fig, axes = plt.subplots(n, 2, figsize=(11.6, 4.9 * n), facecolor=BG,
-                             gridspec_kw=dict(hspace=.06, wspace=.012,
-                                              left=.005, right=.72,
-                                              top=.965, bottom=.01))
+    # The legend needs real width -- its class lists run long and were being
+    # clipped mid-word -- so the panels stop at .62 and the key gets the rest.
+    fig, axes = plt.subplots(n, 2, figsize=(13.4, 5.1 * n), facecolor=BG,
+                             gridspec_kw=dict(hspace=.05, wspace=.010,
+                                              left=.004, right=.615,
+                                              top=.972, bottom=.008))
     if n == 1:
         axes = axes[None, :]
 
     for r, f in enumerate(files):
         im = Image.open(args.src / f).convert("RGB")
         W, H = im.size
-        drop = mast_mask(im, "svi_90_wide" if str(f).endswith("_F.jpg")
+        drop = mast_mask(im, "svi_180" if str(f).endswith("_F.jpg")
                          else (args.mast_set or args.src.name))
         segs = {}
         for tag, (proc, net, name2id) in nets.items():
@@ -150,9 +152,10 @@ def main():
     fig.legend(handles=handles, loc="center left", bbox_to_anchor=(.725, .5),
                facecolor="#15171b", edgecolor="#23262b", labelcolor=FG,
                fontsize=8.5, borderpad=1.1, labelspacing=1.25)
-    fig.text(.005, .986, "One overlay, each class drawn from the model the "
-             "study scores it with. Mast dimmed, not painted.",
-             color=FG, fontsize=10.5)
+    fig.text(.004, .988, "photograph  |  what the segmenters call it. Each "
+             "class is drawn from the model the study scores that field with; "
+             "the Google mast is dimmed, not classified.",
+             color=FG, fontsize=10.5, va="top")
     args.out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(args.out, dpi=155, facecolor=BG)
     print(f"\nwrote {args.out}")

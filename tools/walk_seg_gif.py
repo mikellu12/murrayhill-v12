@@ -136,7 +136,7 @@ def main():
     def overlay(path):
         im = Image.open(path).convert("RGB")
         W, H = im.size
-        drop = mast_mask(im, "svi_90_wide" if path.name.endswith("_F.jpg") else "svi_90")
+        drop = mast_mask(im, "svi_180" if path.name.endswith("_F.jpg") else "svi_90")
         segs = {}
         for tag, (pr, nt, _) in nets.items():
             inp = pr(images=im, return_tensors="pt").to("cuda")
