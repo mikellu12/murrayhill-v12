@@ -60,8 +60,16 @@ SYSTEM = ("You are describing a street for an urban design study. Answer in at "
 # gets a description that can be checked against the photograph.
 QUESTIONS = {
     "scene": "What is it like to walk down this street?",
-    "greenery": "What vegetation is visible and where -- street trees, "
-                "planting at ground level, greenery on the buildings, or none?",
+    # NOT ENUMERATED, and the change is measured. The earlier wording listed
+    # the options -- "street trees, planting at ground level, greenery on the
+    # buildings, or none" -- and the model answered the LIST instead of the
+    # image: on 15 vegetation-free frames it claimed greenery on the buildings
+    # 5 times with none present, and on 4 frames with real planters it replied
+    # "no visible greenery", because a potted plant fits none of the offered
+    # categories and "none" does. The open wording made no error on the same
+    # 30 frames. tools/describe_prompt_ab.py is the test; the crops are in
+    # results/tables/describe_prompt_ab.csv.
+    "greenery": "What vegetation is visible in this view, and where?",
     "ground": "Describe the footway only: how wide it is, its surface, whether "
               "there is a kerb, and what stands on it. Ignore the roadway and "
               "ignore vehicles.",
@@ -70,6 +78,17 @@ QUESTIONS = {
                 "and anything in the road.",
     "standout": "What is the single most noticeable thing in this view?",
 }
+
+
+def _write(rows, prior, table):
+    """The new rows plus whatever the table already held, never just the new."""
+    d = pd.DataFrame(rows)
+    if prior is not None and len(prior):
+        d = pd.concat([prior, d], ignore_index=True)
+        d = d.drop_duplicates(subset="file", keep="last")
+    table.parent.mkdir(parents=True, exist_ok=True)
+    d.to_csv(table, index=False)
+    return d
 
 
 def main():
@@ -86,6 +105,9 @@ def main():
     ap.add_argument("--mast-set", default=None)
     ap.add_argument("--max-new", type=int, default=110)
     ap.add_argument("--fields", nargs="+", default=list(QUESTIONS))
+    ap.add_argument("--resume", action="store_true",
+                    help="keep what the table already holds and describe only "
+                         "the frames missing from it")
     ap.add_argument("--checkpoint", type=int, default=10)
     args = ap.parse_args()
     banner("what the model says it sees")
@@ -136,6 +158,27 @@ def main():
         elif len(fl) > args.n:
             fl = fl.sample(args.n, random_state=args.seed)
 
+    # RESUME RATHER THAN REWRITE. Without this the pass starts from an empty
+    # table every time, so anything that restarts the script destroys a
+    # finished run: a completed 1,514-frame table was lost exactly that way,
+    # rewritten from row one while a later stage was being resumed. Generation
+    # is deterministic here, so a frame already described does not need doing
+    # twice, and the cost of being wrong about that is only a repeated frame.
+    table = args.table or (RES / "tables" / "vlm_descriptions.csv")
+    prior = None
+    if args.resume and table.exists():
+        prior = pd.read_csv(table)
+        need = [c for c in args.fields if c in QUESTIONS]
+        have = prior.dropna(subset=[c for c in need if c in prior.columns])             if all(c in prior.columns for c in need) else prior.iloc[0:0]
+        done = set(have.file.astype(str))
+        before = len(fl)
+        fl = fl[~fl.file.isin(done)]
+        print(f"resuming: {len(done)} frames already described, "
+              f"{len(fl)} of {before} left")
+        if not len(fl):
+            print("nothing to do")
+            return
+
     import torch
     from PIL import Image
     from tqdm.auto import tqdm
@@ -180,9 +223,8 @@ def main():
             rec[key] = reply
         out.append(rec)
         if i % args.checkpoint == 0:
-            t = args.table or (RES / "tables" / "vlm_descriptions.csv")
-            t.parent.mkdir(parents=True, exist_ok=True)
-            pd.DataFrame(out).to_csv(t, index=False)
+            table.parent.mkdir(parents=True, exist_ok=True)
+            _write(out, prior, table)
 
     t = args.table or (RES / "tables" / "vlm_descriptions.csv")
     d = pd.DataFrame(out)

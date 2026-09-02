@@ -1,0 +1,1807 @@
+node_id,osm_name,hw,snap_m,is_pedestrian,fov
+n00000,Abchurch Lane,tertiary,0.4154284349353693,False,90
+n00001,Abchurch Lane,unclassified,0.6259993592535545,False,90
+n00002,Abchurch Lane,unclassified,0.03455719409689192,False,90
+n00003,Abchurch Lane,unclassified,0.09006002748572849,False,90
+n00004,Abchurch Lane,unclassified,0.6240518257209452,False,90
+n00005,Abchurch Lane,tertiary,1.403828500775924,False,90
+n00006,Abchurch Lane,unclassified,1.199100158668455,False,90
+n00007,Abchurch Lane,unclassified,0.9728100515951477,False,90
+n00008,Abchurch Lane,unclassified,0.28727129322687994,False,90
+n00009,Abchurch Yard,unclassified,0.03455719409689192,False,90
+n00010,Abchurch Yard,footway,2.242502815681,True,180
+n00011,Abchurch Yard,footway,2.9565808616588787,True,180
+n00012,Adams Court,steps,2.7447247468256384,True,180
+n00013,Adams Court,unclassified,1.9724320533095339,False,90
+n00014,Adams Court,footway,1.0584854388842284,True,180
+n00015,Adams Court,footway,3.7321336836295136,True,180
+n00016,Adams Court,footway,0.5158561087991125,True,180
+n00017,Alderman's Walk,primary,0.8470854762260516,False,90
+n00018,Alderman's Walk,footway,0.5855048013342624,True,180
+n00019,Alderman's Walk,footway,0.17622383797783647,True,180
+n00020,Alderman's Walk,footway,0.8492552217985588,True,180
+n00021,Aldermanbury,unclassified,0.14506734922067713,False,90
+n00022,Aldermanbury,unclassified,0.32934804138027807,False,90
+n00023,Aldermanbury,unclassified,1.7944875376938993,False,90
+n00024,Aldermanbury,unclassified,1.47241549503383,False,90
+n00025,Aldermanbury,unclassified,0.8946077370658894,False,90
+n00026,Aldermanbury,unclassified,1.1077872040671777,False,90
+n00027,Aldermanbury,unclassified,0.18272065547176986,False,90
+n00028,Aldermanbury,unclassified,0.7620529428367018,False,90
+n00029,Aldermanbury,unclassified,0.5530963450146398,False,90
+n00030,Aldermanbury,unclassified,0.7689639431943339,False,90
+n00031,Aldermanbury,unclassified,1.228028143244197,False,90
+n00032,Aldermanbury,unclassified,0.14506734922067713,False,90
+n00033,Aldermanbury Square,unclassified,1.3350041437220683,False,90
+n00034,Aldermanbury Square,unclassified,1.6603637376987075,False,90
+n00035,Aldermanbury Square,unclassified,1.6603637376987075,False,90
+n00036,Aldermanbury Square,unclassified,0.4308964623174673,False,90
+n00037,Aldermanbury Square,unclassified,1.420230779582205,False,90
+n00038,Aldersgate Rotunda,primary,0.16425529427656096,False,90
+n00039,Aldersgate Rotunda,primary,0.33455606503666446,False,90
+n00040,Aldersgate Rotunda,primary,1.6339904507861995,False,90
+n00041,Aldersgate Rotunda,primary,1.9587474868042374,False,90
+n00042,Aldersgate Rotunda,primary,2.115700322064526,False,90
+n00043,Aldersgate Rotunda,primary,0.5094708472638438,False,90
+n00044,Aldersgate Rotunda,primary,0.11544212919070602,False,90
+n00045,Aldersgate Rotunda,primary,2.1978993598495316,False,90
+n00046,Aldersgate Street,primary,0.4621721601037668,False,90
+n00047,Aldersgate Street,primary,0.20069688969090296,False,90
+n00048,Aldersgate Street,primary,1.564813960170756,False,90
+n00049,Aldersgate Street,primary,0.04579942457739291,False,90
+n00050,Aldersgate Street,primary,0.38448816385996176,False,90
+n00051,Aldersgate Street,primary,1.6680579812848246,False,90
+n00052,Aldersgate Street,primary,0.0147115502208964,False,90
+n00053,Aldersgate Street,primary,0.41070251058234064,False,90
+n00054,Aldersgate Street,primary,1.514779639222564,False,90
+n00055,Aldersgate Street,primary,0.5073350170246553,False,90
+n00056,All Hallows Lane,footway,0.4787032642243218,True,180
+n00057,All Hallows Lane,unclassified,0.11756946929285883,False,90
+n00058,All Hallows Lane,unclassified,0.2751311930173824,False,90
+n00059,All Hallows Lane,unclassified,0.06438489137636909,False,90
+n00060,All Hallows Lane,unclassified,0.5735792213997271,False,90
+n00061,All Hallows Lane,unclassified,0.8466548830872915,False,90
+n00062,All Hallows Lane,unclassified,1.5007221110726618,False,90
+n00063,Angel Court,footway,0.44609692751942953,True,180
+n00064,Angel Court,footway,0.23474582934482927,True,180
+n00065,Angel Court,footway,0.6406680432550111,True,180
+n00066,Angel Court,footway,3.844369502710613,True,180
+n00067,Angel Court,footway,1.0683555241185303,True,180
+n00068,Angel Lane,footway,2.9146436556862008,True,180
+n00069,Angel Lane,unclassified,2.6867495760151803,False,90
+n00070,Angel Street,tertiary,1.8086413023078842,False,90
+n00071,Angel Street,tertiary,0.2879643849647761,False,90
+n00072,Angel Street,tertiary,0.5655029767698776,False,90
+n00073,Angel Street,tertiary,0.5270299768802372,False,90
+n00074,Angel Street,tertiary,0.10411616591095751,False,90
+n00075,Arthur Street,unclassified,2.269922767133183,False,90
+n00076,Arthur Street,unclassified,0.43882326922528153,False,90
+n00077,Arthur Street,unclassified,0.9056757474033077,False,90
+n00078,Austin Friars,unclassified,1.3217420256169554,False,90
+n00079,Austin Friars,unclassified,1.340841726889141,False,90
+n00080,Austin Friars,unclassified,0.3716165381011797,False,90
+n00081,Austin Friars,footway,4.208199280241638,True,180
+n00082,Austin Friars,unclassified,0.4852921993774492,False,90
+n00083,Austin Friars,footway,3.117280629211715,True,180
+n00084,Austin Friars,unclassified,1.2662151259647958,False,90
+n00085,Austin Friars,unclassified,0.5104823865499263,False,90
+n00086,Austin Friars,unclassified,1.340841726889141,False,90
+n00087,Austin Friars,footway,1.7432679033274785,True,180
+n00088,Austin Friars,unclassified,6.427316997504476,False,90
+n00089,Bakers Hall Court,service,0.840195536938007,False,90
+n00090,Bakers Hall Court,service,1.117868526589714,False,90
+n00091,Bakers Hall Court,service,1.131619216814331,False,90
+n00092,Bakers Hall Court,service,0.840195536938007,False,90
+n00093,Bankside,footway,0.8681543111312742,True,180
+n00094,Bankside,footway,0.7417410031896898,True,180
+n00095,Bankside,footway,1.0491984069485716,True,180
+n00096,Bankside,footway,0.14793925361844978,True,180
+n00097,Bankside,footway,0.15184970794757824,True,180
+n00098,Bankside,footway,0.2718019586038204,True,180
+n00099,Bartholomew Lane,unclassified,0.9114791808796855,False,90
+n00100,Bartholomew Lane,unclassified,1.1710470599711242,False,90
+n00101,Bartholomew Lane,unclassified,1.3164545657914435,False,90
+n00102,Bartholomew Lane,unclassified,1.9828549799813897,False,90
+n00103,Bartholomew Lane,pedestrian,2.649251872497529,True,180
+n00104,Basinghall Avenue,unclassified,0.31947303704396873,False,90
+n00105,Basinghall Avenue,unclassified,0.1757733137079153,False,90
+n00106,Basinghall Avenue,unclassified,0.3104851391298327,False,90
+n00107,Basinghall Avenue,unclassified,0.697784574820962,False,90
+n00108,Basinghall Avenue,unclassified,0.3654094328892884,False,90
+n00109,Basinghall Avenue,unclassified,0.9737634564145535,False,90
+n00110,Basinghall Avenue,unclassified,0.32107895187136526,False,90
+n00111,Basinghall Street,unclassified,0.15873926571441782,False,90
+n00112,Basinghall Street,unclassified,1.6827266250469013,False,90
+n00113,Basinghall Street,unclassified,2.3459383872914317,False,90
+n00114,Basinghall Street,unclassified,0.13416957463455592,False,90
+n00115,Basinghall Street,unclassified,0.8540222388613771,False,90
+n00116,Basinghall Street,unclassified,0.10778203786475134,False,90
+n00117,Basinghall Street,unclassified,0.0075856435935532165,False,90
+n00118,Basinghall Street,unclassified,0.23563212280361087,False,90
+n00119,Basinghall Street,unclassified,0.1564037314117989,False,90
+n00120,Basinghall Street,unclassified,0.4848408498736247,False,90
+n00121,Basinghall Street,unclassified,0.49624425946433687,False,90
+n00122,Basinghall Street,unclassified,0.31947303704396873,False,90
+n00123,Basinghall Street,unclassified,0.11174729614333252,False,90
+n00124,Basinghall Street,unclassified,1.1588768939383647,False,90
+n00125,Basinghall Street,unclassified,1.228028143244197,False,90
+n00126,Beehive Passage,unclassified,1.106306028783297,False,90
+n00127,Beehive Passage,footway,0.678993278642267,True,180
+n00128,Billingsgate Walk,footway,0.22991234973639874,True,180
+n00129,Billingsgate Walk,unmatched,14.408690347607784,False,90
+n00130,Billiter Street,tertiary,1.920096984764698,False,90
+n00131,Billiter Street,pedestrian,0.9724337263892987,True,180
+n00132,Billiter Street,unclassified,1.5350317331645673,False,90
+n00133,Billiter Street,unclassified,0.0375303563626509,False,90
+n00134,Billiter Street,unclassified,1.4844795559863486,False,90
+n00135,Billiter Street,unclassified,0.31089152231272543,False,90
+n00136,Billiter Street,unclassified,0.013704646630880314,False,90
+n00137,Billiter Street,unclassified,0.3728413177286502,False,90
+n00138,Bishopsgate,tertiary,0.17082040731799789,False,90
+n00139,Bishopsgate,primary,0.7579454756183925,False,90
+n00140,Bishopsgate,primary,1.7257128286599666,False,90
+n00141,Bishopsgate,primary,1.7257128286599666,False,90
+n00142,Bishopsgate,primary,0.7212331703216754,False,90
+n00143,Bishopsgate,primary,1.1492398414995135,False,90
+n00144,Bishopsgate,primary,2.096770893193373,False,90
+n00145,Bishopsgate,primary,2.096770893193373,False,90
+n00146,Bishopsgate,primary,1.3741064658716127,False,90
+n00147,Bishopsgate,primary,1.1697996076699464,False,90
+n00148,Bishopsgate,primary,1.1224231176073445,False,90
+n00149,Bishopsgate,primary,2.028265664233156,False,90
+n00150,Bishopsgate,primary,0.6504018481034243,False,90
+n00151,Bishopsgate,primary,3.4281427609430835,False,90
+n00152,Bishopsgate,primary,3.4281427609430835,False,90
+n00153,Bishopsgate,primary,2.4443623174779523,False,90
+n00154,Bishopsgate,primary,1.670736370635451,False,90
+n00155,Bishopsgate,primary,1.670736370635451,False,90
+n00156,Bishopsgate,primary,2.6952731454697103,False,90
+n00157,Bishopsgate,primary,2.6071012929774557,False,90
+n00158,Bishopsgate,primary,2.4931668173412325,False,90
+n00159,Bishopsgate,primary,0.20782007897126528,False,90
+n00160,Bishopsgate,primary,0.8725030843275807,False,90
+n00161,Bishopsgate,primary,0.726065878308825,False,90
+n00162,Bishopsgate,primary,0.8029606422419352,False,90
+n00163,Bishopsgate,primary,0.6392085917058478,False,90
+n00164,Bishopsgate,primary,0.8104411146685601,False,90
+n00165,Bishopsgate,primary,0.18923047467678145,False,90
+n00166,Bishopsgate,primary,0.7572048613771475,False,90
+n00167,Bishopsgate,primary,0.35968842391480293,False,90
+n00168,Bishopsgate,primary,0.7267333535933573,False,90
+n00169,Bishopsgate,primary,1.1687892318727948,False,90
+n00170,Bishopsgate,primary,0.7645181108880438,False,90
+n00171,Bishopsgate,primary,2.0855001186821296,False,90
+n00172,Bishopsgate,primary,0.2982274531848989,False,90
+n00173,Bishopsgate,primary,1.1081202045962506,False,90
+n00174,Bishopsgate Arcade,steps,2.6200138322532336,True,180
+n00175,Bishopsgate Arcade,footway,0.45300381280798374,True,180
+n00176,Bishopsgate Arcade,footway,0.8728003049572918,True,180
+n00177,Bishopsgate Arcade,footway,0.3956465507620494,True,180
+n00178,Bishopsgate Churchyard,primary,3.0988050705132815,False,90
+n00179,Bishopsgate Churchyard,footway,1.8743485256892465,True,180
+n00180,Bishopsgate Churchyard,footway,2.241686095858249,True,180
+n00181,Bishopsgate Churchyard,footway,2.813092095595358,True,180
+n00182,Bishopsgate Churchyard,footway,3.2637347619816848,True,180
+n00183,Bishopsgate Churchyard,pedestrian,4.674884376114327,True,180
+n00184,Bishopsgate Churchyard,pedestrian,4.578617303051214,True,180
+n00185,Blomfield Street,primary,1.053310383528196,False,90
+n00186,Blomfield Street,tertiary,2.9866145947576723,False,90
+n00187,Blomfield Street,tertiary,0.12971491801657759,False,90
+n00188,Blomfield Street,tertiary,0.20702810004381744,False,90
+n00189,Blomfield Street,tertiary,0.4135050742195342,False,90
+n00190,Blomfield Street,tertiary,0.7248117016971731,False,90
+n00191,Blomfield Street,tertiary,1.1708250268454032,False,90
+n00192,Blomfield Street,tertiary,2.415430412744963,False,90
+n00193,Blomfield Street,tertiary,0.8608423026296446,False,90
+n00194,Bloomberg Arcade,pedestrian,0.21652414284363278,True,180
+n00195,Bloomberg Arcade,pedestrian,2.3072105551351907,True,180
+n00196,Bloomberg Arcade,pedestrian,2.083147589000982,True,180
+n00197,Bloomberg Arcade,pedestrian,2.7713331156411067,True,180
+n00198,Bloomberg Arcade,pedestrian,1.353100890151318,True,180
+n00199,Bond Court,unclassified,2.166748702811447,False,90
+n00200,Bond Court,footway,11.019077087344144,True,180
+n00201,Bond Court,unclassified,2.7487607716507285,False,90
+n00202,Bond Court,footway,11.019077087344144,True,180
+n00203,Botolph Alley,footway,0.04503870548694131,True,180
+n00204,Botolph Alley,footway,0.2418590789538181,True,180
+n00205,Botolph Lane,unclassified,0.2798595875749985,False,90
+n00206,Botolph Lane,unclassified,0.3809396920131457,False,90
+n00207,Botolph Lane,unclassified,0.3462359310448313,False,90
+n00208,Botolph Lane,unclassified,0.2731234240621024,False,90
+n00209,Botolph Lane,unclassified,0.3368512360181829,False,90
+n00210,Botolph Lane,unclassified,0.07042844011337715,False,90
+n00211,Bow Churchyard,pedestrian,0.7686649493142504,True,180
+n00212,Bow Churchyard,footway,0.22421814149934022,True,180
+n00213,Bow Churchyard,footway,0.43483497007023825,True,180
+n00214,Bow Churchyard,footway,2.908570142781562,True,180
+n00215,Bow Lane,tertiary,1.298657781781143,False,90
+n00216,Bow Lane,footway,1.531295329667677,True,180
+n00217,Bow Lane,pedestrian,0.2807824588429189,True,180
+n00218,Bow Lane,pedestrian,1.993372280208405,True,180
+n00219,Bow Lane,pedestrian,4.73241148672898,True,180
+n00220,Bow Lane,pedestrian,0.8654197728693932,True,180
+n00221,Bow Lane,pedestrian,0.7686649493142504,True,180
+n00222,Bow Lane,pedestrian,0.3882573345725866,True,180
+n00223,Bow Lane,pedestrian,0.25770748179035363,True,180
+n00224,Bread Street,tertiary,0.5690331848597902,False,90
+n00225,Bread Street,tertiary,0.0925238101787031,False,90
+n00226,Bread Street,unclassified,0.252802362489956,False,90
+n00227,Bread Street,unclassified,0.5357280772225914,False,90
+n00228,Bread Street,unclassified,0.20081823377929411,False,90
+n00229,Bread Street,unclassified,0.673339885398586,False,90
+n00230,Bread Street,unclassified,0.17452037093871672,False,90
+n00231,Bread Street,residential,0.8773561264770522,False,90
+n00232,Bread Street,residential,0.5760217112964294,False,90
+n00233,Bread Street,residential,0.44622424147459244,False,90
+n00234,Bread Street,residential,0.11802068265019464,False,90
+n00235,Bread Street,residential,0.46297909848270336,False,90
+n00236,Brewers' Hall Garden,service,2.5677959463662257,False,90
+n00237,Brewers' Hall Garden,footway,0.4263767344903603,True,180
+n00238,Broad Street Avenue,tertiary,0.1888472877074768,False,90
+n00239,Broad Street Avenue,service,5.776590069418077,False,90
+n00240,Broad Street Avenue,unmatched,16.91141480742708,False,90
+n00241,Broken Wharf,footway,0.538260008718594,True,180
+n00242,Broken Wharf,unclassified,0.2051851146685082,False,90
+n00243,Broken Wharf,unclassified,0.16183717286645002,False,90
+n00244,Brown's Buildings,service,0.45865508957545675,False,90
+n00245,Brown's Buildings,footway,0.5957816650549951,True,180
+n00246,Brown's Buildings,footway,1.927452312353788,True,180
+n00247,Brown's Buildings,footway,2.091534151494368,True,180
+n00248,Bucklersbury,unclassified,3.8589321282362357,False,90
+n00249,Bucklersbury,unclassified,1.6321403713099367,False,90
+n00250,Bucklersbury,footway,2.6958265356185334,True,180
+n00251,Bull's Head Passage,pedestrian,2.429385310835327,True,180
+n00252,Bull's Head Passage,footway,1.5481701242090864,True,180
+n00253,Bull's Head Passage,footway,1.9961306097594513,True,180
+n00254,Bury Court,service,1.5608120168800867,False,90
+n00255,Bury Court,service,0.08123991345730791,False,90
+n00256,Bury Court,service,0.6646975531858842,False,90
+n00257,Bush Lane,unclassified,1.8467348614537338,False,90
+n00258,Bush Lane,unclassified,0.8664688583984876,False,90
+n00259,Bush Lane,residential,0.21552222818533537,False,90
+n00260,Bush Lane,residential,0.7042426520168906,False,90
+n00261,Bush Lane,residential,0.7557904686957926,False,90
+n00262,Bush Lane,residential,0.688267398883097,False,90
+n00263,Byward Street,primary,0.39810861053621344,False,90
+n00264,Byward Street,primary,0.2943805381521112,False,90
+n00265,Byward Street,primary,0.23521795269341744,False,90
+n00266,Byward Street,primary,2.799936807212855,False,90
+n00267,Byward Street,primary,0.3887703144951971,False,90
+n00268,Byward Street,primary,2.408351530901115,False,90
+n00269,Byward Street,primary,0.5428207613411618,False,90
+n00270,Byward Street,primary,2.329624780871567,False,90
+n00271,Byward Street,primary,0.8536255150481283,False,90
+n00272,Byward Street,primary,0.4624707792894843,False,90
+n00273,Byward Street,primary,0.5430369320068081,False,90
+n00274,Byward Street,primary,1.6197328972026355,False,90
+n00275,Byward Street,primary,1.168096287874343,False,90
+n00276,Byward Street,primary,0.09890905767787952,False,90
+n00277,Byward Street,primary,3.5959116536887197,False,90
+n00278,Byward Street,primary,0.04887935198837299,False,90
+n00279,Camomile Street,primary,1.1379914871023686,False,90
+n00280,Camomile Street,primary,0.42093393931712286,False,90
+n00281,Camomile Street,primary,0.6035467728524367,False,90
+n00282,Camomile Street,primary,0.03460474178794425,False,90
+n00283,Camomile Street,primary,0.9643210987041051,False,90
+n00284,Camomile Street,primary,0.24275231518253107,False,90
+n00285,Camomile Street,primary,0.6542140008786498,False,90
+n00286,Camomile Street,primary,0.5545798385565982,False,90
+n00287,Camomile Street,primary,0.12208282286775755,False,90
+n00288,Camomile Street,primary,0.20430182031732586,False,90
+n00289,Camomile Street,primary,1.1339425636649687,False,90
+n00290,Cannon Street,footway,0.521318073186533,True,180
+n00291,Cannon Street,tertiary,0.06402150191900208,False,90
+n00292,Cannon Street,tertiary,3.5399324006764292,False,90
+n00293,Cannon Street,tertiary,0.9083595823699326,False,90
+n00294,Cannon Street,tertiary,1.683656566680558,False,90
+n00295,Cannon Street,tertiary,1.683656566680558,False,90
+n00296,Cannon Street,tertiary,0.9823232333571046,False,90
+n00297,Cannon Street,tertiary,0.07011119625038337,False,90
+n00298,Cannon Street,tertiary,0.7899549875398351,False,90
+n00299,Cannon Street,tertiary,1.298657781781143,False,90
+n00300,Cannon Street,tertiary,1.6650499126069198,False,90
+n00301,Cannon Street,tertiary,0.00438431001842216,False,90
+n00302,Cannon Street,tertiary,0.6221115361552905,False,90
+n00303,Cannon Street,tertiary,0.1465474458667423,False,90
+n00304,Cannon Street,tertiary,0.21898247147372105,False,90
+n00305,Cannon Street,tertiary,0.2159289091065982,False,90
+n00306,Cannon Street,tertiary,0.4154284349353693,False,90
+n00307,Cannon Street,tertiary,1.188673771556929,False,90
+n00308,Cannon Street,tertiary,1.348495579325745,False,90
+n00309,Cannon Street,tertiary,0.4412642790774651,False,90
+n00310,Cannon Street,tertiary,1.0893664297819505,False,90
+n00311,Cannon Street,tertiary,1.1318729040284954,False,90
+n00312,Cannon Street,tertiary,0.3901027135850909,False,90
+n00313,Cannon Street,tertiary,2.213242181805415,False,90
+n00314,Cannon Street,tertiary,1.6396772483745699,False,90
+n00315,Cannon Street,tertiary,0.6048280294898833,False,90
+n00316,Cannon Street,tertiary,0.7133864710106771,False,90
+n00317,Cannon Street,tertiary,0.5783473757419395,False,90
+n00318,Cannon Street,tertiary,1.452377312680193,False,90
+n00319,Cannon Street,tertiary,1.56005370561906,False,90
+n00320,Cannon Street,tertiary,0.8540302363577686,False,90
+n00321,Cannon Street,tertiary,0.10681164446430806,False,90
+n00322,Cannon Street,tertiary,0.4521050250493713,False,90
+n00323,Cannon Street,tertiary,1.590924401219122,False,90
+n00324,Cannon Street,tertiary,0.07953696850170869,False,90
+n00325,Cannon Street,tertiary,0.6773508149305908,False,90
+n00326,Cannon Street,tertiary,2.634628954924869,False,90
+n00327,Cannon Street,tertiary,1.2495970312869054,False,90
+n00328,Cannon Street,tertiary,0.1363078668553038,False,90
+n00329,Cannon Street,tertiary,4.002590981995363,False,90
+n00330,Cannon Street,tertiary,3.0868382072447935,False,90
+n00331,Cannon Street,tertiary,0.9083595823699326,False,90
+n00332,Cannon Street,tertiary,1.1887398947162047,False,90
+n00333,Cannon Street,tertiary,0.023865184495786278,False,90
+n00334,Cannon Street,tertiary,2.9417487594826235,False,90
+n00335,Cannon Street,tertiary,6.580586060431896,False,90
+n00336,Cannon Street,tertiary,1.6297512769191442,False,90
+n00337,Cannon Street,tertiary,6.3400842324007805,False,90
+n00338,Cannon Street,tertiary,5.945714306118425,False,90
+n00339,Carey Lane,unclassified,1.7627307514960038,False,90
+n00340,Carey Lane,unclassified,0.201825005878393,False,90
+n00341,Carey Lane,unclassified,0.11783664456397754,False,90
+n00342,Carey Lane,unclassified,0.39523045791245415,False,90
+n00343,Carter Lane,pedestrian,0.6947317503070082,True,180
+n00344,Carter Lane,pedestrian,1.4241583080291618,True,180
+n00345,Carter Lane,pedestrian,3.174443784797617,True,180
+n00346,Carter Lane,pedestrian,2.459307466759682,True,180
+n00347,Castle Baynard Street,service,0.1732003306531157,False,90
+n00348,Castle Baynard Street,service,0.06032339650781771,False,90
+n00349,Castle Baynard Street,unclassified,0.4449252689100983,False,90
+n00350,Castle Baynard Street,unclassified,0.2324911594482551,False,90
+n00351,Castle Baynard Street,unclassified,0.40884495020872147,False,90
+n00352,Castle Baynard Street,unclassified,0.8340682509349938,False,90
+n00353,Cavendish Court,primary,0.12524559711528016,False,90
+n00354,Cavendish Court,footway,0.11136458019003913,True,180
+n00355,Cavendish Court,footway,0.20810451714012362,True,180
+n00356,Change Alley,footway,0.7599244152520379,True,180
+n00357,Change Alley,footway,0.6859378155882976,True,180
+n00358,Cheapside,tertiary,0.11055431240472671,False,90
+n00359,Cheapside,unclassified,0.716639012291601,False,90
+n00360,Cheapside,tertiary,0.157829965647851,False,90
+n00361,Cheapside,tertiary,1.0511854828234626,False,90
+n00362,Cheapside,tertiary,0.030800777066634793,False,90
+n00363,Cheapside,cycleway,1.4037902343346536,True,180
+n00364,Cheapside,tertiary,0.30348308797197965,False,90
+n00365,Cheapside,tertiary,1.3074538571664733,False,90
+n00366,Cheapside,tertiary,0.2439062067907843,False,90
+n00367,Cheapside,proposed,0.9936700957414115,False,90
+n00368,Cheapside,unclassified,0.9742300659584062,False,90
+n00369,Cheapside,unclassified,0.554103555476863,False,90
+n00370,Cheapside,unclassified,0.10688174545817014,False,90
+n00371,Cheapside,unclassified,0.5586489788572842,False,90
+n00372,Cheapside,unclassified,0.5426203836163326,False,90
+n00373,Cheapside,unclassified,0.6798610917642429,False,90
+n00374,Cheapside,unclassified,0.05771952088233453,False,90
+n00375,Cheapside,unclassified,0.8292914386469716,False,90
+n00376,Cheapside,unclassified,0.9529597883472651,False,90
+n00377,Cheapside,unclassified,1.6042296695794838,False,90
+n00378,Cheapside,unclassified,1.4124360551509632,False,90
+n00379,Cheapside,unclassified,0.7254405108609198,False,90
+n00380,Cheapside,unclassified,1.1003349782497747,False,90
+n00381,Cheapside,unclassified,0.3477760861319157,False,90
+n00382,Cheapside,unclassified,0.2758363824900352,False,90
+n00383,Cheapside,unclassified,5.061497271954964,False,90
+n00384,Cheapside,cycleway,1.6957068318729183,True,180
+n00385,Cheapside,tertiary,0.3722625548886959,False,90
+n00386,Cheapside,tertiary,0.5298236604705859,False,90
+n00387,Cheapside,footway,0.6540488400722752,True,180
+n00388,Circus Place,unclassified,1.9907564454093567,False,90
+n00389,Circus Place,unclassified,0.06360480103641558,False,90
+n00390,Circus Place,unclassified,1.0320679003269222,False,90
+n00391,Circus Place,unclassified,0.7976439475659863,False,90
+n00392,Circus Place,unclassified,0.7933296763285052,False,90
+n00393,Clements Lane,unclassified,1.5634113894933819,False,90
+n00394,Clements Lane,unclassified,0.27344558654558615,False,90
+n00395,Clements Lane,unclassified,0.7854158203824417,False,90
+n00396,Clements Lane,unclassified,1.4614251072181343,False,90
+n00397,Clements Lane,unclassified,1.2906172435876726,False,90
+n00398,Clements Lane,unclassified,0.906920456443101,False,90
+n00399,Clements Lane,unclassified,0.09262635777871252,False,90
+n00400,Clerks' Place,residential,2.7728904574297752,False,90
+n00401,Clerks' Place,footway,4.454613140158338,True,180
+n00402,Clerks' Place,footway,7.067820800446523,True,180
+n00403,Clerks' Place,footway,1.3917307821569074,True,180
+n00404,Clerks' Place,footway,1.635711520150636,True,180
+n00405,Clerks' Place,footway,0.4550363194475189,True,180
+n00406,Clerks' Place,footway,0.3029084470513876,True,180
+n00407,Cloak Lane,unclassified,0.11686702480983836,False,90
+n00408,Cloak Lane,unclassified,0.7508097561555903,False,90
+n00409,Cloak Lane,unclassified,0.8538690861053243,False,90
+n00410,Cloak Lane,unclassified,0.6652044165448945,False,90
+n00411,Cloak Lane,unclassified,0.46058722825513565,False,90
+n00412,Cloak Lane,unclassified,0.1068573121418988,False,90
+n00413,Cloak Lane,unclassified,0.580280130571884,False,90
+n00414,Cloak Lane,unclassified,1.4060397526637565,False,90
+n00415,Coleman Street,tertiary,0.9347548049203956,False,90
+n00416,Coleman Street,unclassified,0.32969770179379926,False,90
+n00417,Coleman Street,unclassified,0.13510159780894437,False,90
+n00418,Coleman Street,unclassified,3.059630156120554,False,90
+n00419,Coleman Street,unclassified,0.9155700977899024,False,90
+n00420,Coleman Street,unclassified,0.6010067868180141,False,90
+n00421,Coleman Street,unclassified,0.10559925825746781,False,90
+n00422,Coleman Street,unclassified,1.2716000203198945,False,90
+n00423,Coleman Street,service,1.4604236925105054,False,90
+n00424,Coleman Street,unclassified,1.074337942256864,False,90
+n00425,Coleman Street,unclassified,0.11816842203456386,False,90
+n00426,Coleman Street,unclassified,0.32107895187136526,False,90
+n00427,Coleman Street,unclassified,0.6194457059414901,False,90
+n00428,Coleman Street,unclassified,1.2865329778419132,False,90
+n00429,College Hill,unclassified,1.8453510155793909,False,90
+n00430,College Hill,residential,1.0594044260976794,False,90
+n00431,College Hill,residential,1.017463823574743,False,90
+n00432,College Hill,residential,2.5621090992898887,False,90
+n00433,College Hill,unclassified,0.427018409935837,False,90
+n00434,College Hill,residential,1.0046875005594351,False,90
+n00435,College Street,unclassified,0.670841857324617,False,90
+n00436,College Street,unclassified,0.26864472837275316,False,90
+n00437,College Street,unclassified,0.3013306480699702,False,90
+n00438,College Street,unclassified,1.1732984226050995,False,90
+n00439,College Street,unclassified,1.8453510155793909,False,90
+n00440,College Street,unclassified,0.32542590508182284,False,90
+n00441,College Street,unclassified,0.10114536376687727,False,90
+n00442,Copthall Avenue,pedestrian,1.3745077322790062,True,180
+n00443,Copthall Avenue,pedestrian,0.9993841999337136,True,180
+n00444,Copthall Avenue,pedestrian,0.9093884945290375,True,180
+n00445,Copthall Avenue,pedestrian,1.2412284063702481,True,180
+n00446,Copthall Avenue,pedestrian,1.419120042366452,True,180
+n00447,Copthall Avenue,pedestrian,0.9202332715252743,True,180
+n00448,Copthall Avenue,pedestrian,1.2668877889360972,True,180
+n00449,Copthall Avenue,pedestrian,0.5359090739443894,True,180
+n00450,Copthall Avenue,unclassified,0.05993443641210253,False,90
+n00451,Copthall Avenue,service,0.07960532033571098,False,90
+n00452,Copthall Avenue,unclassified,0.9101843393532427,False,90
+n00453,Copthall Avenue,unclassified,1.1689532782426648,False,90
+n00454,Copthall Avenue,unclassified,1.1775525438592862,False,90
+n00455,Cornhill,steps,0.11537672072337092,True,180
+n00456,Cornhill,tertiary,0.16273435250761556,False,90
+n00457,Cornhill,tertiary,0.8694181812116466,False,90
+n00458,Cornhill,tertiary,0.7470913783843831,False,90
+n00459,Cornhill,tertiary,0.21823127875211545,False,90
+n00460,Cornhill,tertiary,0.9669820578316476,False,90
+n00461,Cornhill,tertiary,1.6892179256848798,False,90
+n00462,Cornhill,tertiary,1.808848096259463,False,90
+n00463,Cornhill,tertiary,1.6248658147395871,False,90
+n00464,Cornhill,tertiary,1.0073774540825853,False,90
+n00465,Cornhill,tertiary,0.9618069137674766,False,90
+n00466,Cornhill,tertiary,0.42654756596300303,False,90
+n00467,Cornhill,tertiary,0.450614535674052,False,90
+n00468,Cornhill,tertiary,1.4546812323187714,False,90
+n00469,Cornhill,tertiary,2.604591946733164,False,90
+n00470,Cornhill,tertiary,1.9864954439192457,False,90
+n00471,Cousin Lane,footway,0.11496084782027786,True,180
+n00472,Cousin Lane,pedestrian,1.4748162503949154,True,180
+n00473,Cousin Lane,pedestrian,0.6823282093150255,True,180
+n00474,Cousin Lane,pedestrian,0.061306384500917216,True,180
+n00475,Cousin Lane,pedestrian,0.37340643777786153,True,180
+n00476,Cousin Lane,pedestrian,0.7597137218397633,True,180
+n00477,Cross Lane,residential,1.5049900315786362,False,90
+n00478,Cross Lane,residential,1.3794786927338927,False,90
+n00479,Cullum Street,tertiary,0.7645496913753443,False,90
+n00480,Cullum Street,unclassified,0.3037169902169992,False,90
+n00481,Cullum Street,unclassified,0.9288525903076801,False,90
+n00482,Cullum Street,pedestrian,0.8852964326365377,True,180
+n00483,Cullum Street,pedestrian,1.425413447653766,True,180
+n00484,Cullum Street,pedestrian,0.39021381958127604,True,180
+n00485,Custom House Walkway,footway,0.9149483645932902,True,180
+n00486,Custom House Walkway,footway,1.2381265305623672,True,180
+n00487,Custom House Walkway,footway,4.42724448807008,True,180
+n00488,Custom House Walkway,footway,1.914909906278633,True,180
+n00489,Custom House Walkway,service,4.622936858350932,False,90
+n00490,Custom House Walkway,footway,3.104159034641306,True,180
+n00491,Custom House Walkway,footway,1.406954346210346,True,180
+n00492,Dark House Walk,footway,1.0130091725169197,True,180
+n00493,Dark House Walk,footway,3.00022726252061,True,180
+n00494,Dark House Walk,footway,2.0126216367082983,True,180
+n00495,Devonshire Row,pedestrian,0.5084753795500871,True,180
+n00496,Devonshire Row,pedestrian,1.3151753058009463,True,180
+n00497,Devonshire Row,pedestrian,1.368170209932244,True,180
+n00498,Devonshire Row,pedestrian,1.728834640370268,True,180
+n00499,Distaff Lane,footway,1.2108758077018207,True,180
+n00500,Distaff Lane,unclassified,1.230232609726301,False,90
+n00501,Distaff Lane,unclassified,0.1062179666172262,False,90
+n00502,Distaff Lane,unclassified,0.06134653455751255,False,90
+n00503,Distaff Lane,unclassified,0.13179750581035177,False,90
+n00504,Distaff Lane,unclassified,0.31928625269845057,False,90
+n00505,Distaff Lane,unclassified,0.5591572598710595,False,90
+n00506,Distaff Lane,unclassified,0.4523549753362201,False,90
+n00507,Distaff Lane,unclassified,0.6327973447919645,False,90
+n00508,Dowgate Hill,cycleway,0.550357737094958,True,180
+n00509,Dowgate Hill,unclassified,0.670841857324617,False,90
+n00510,Dowgate Hill,unclassified,0.20442337530789245,False,90
+n00511,Dowgate Hill,unclassified,0.13584055449087626,False,90
+n00512,Dowgate Hill,unclassified,0.0035191970887932253,False,90
+n00513,Dowgate Hill,unclassified,0.14503201305381896,False,90
+n00514,Dowgate Hill,unclassified,0.6698246977985631,False,90
+n00515,Dunster Court,unclassified,1.9764781761710417,False,90
+n00516,Dunster Court,service,3.9756473361611784,False,90
+n00517,Dunster Court,unclassified,1.9764781761710417,False,90
+n00518,Dunster Court,service,1.414563263219526,False,90
+n00519,Dunster Court,service,9.863529211247581,False,90
+n00520,Eastcheap,tertiary,2.4610054154144185,False,90
+n00521,Eastcheap,tertiary,4.7873265236410685,False,90
+n00522,Eastcheap,tertiary,0.3382089290580065,False,90
+n00523,Eastcheap,tertiary,0.7161639417938024,False,90
+n00524,Eastcheap,tertiary,0.09059779870697028,False,90
+n00525,Eastcheap,tertiary,0.27195161872302764,False,90
+n00526,Eastcheap,tertiary,0.2881183670628097,False,90
+n00527,Eastcheap,tertiary,0.2060310326235509,False,90
+n00528,Eastcheap,tertiary,0.9697155680506075,False,90
+n00529,Eastcheap,tertiary,0.47162017121982475,False,90
+n00530,Eastcheap,tertiary,0.09024211983085938,False,90
+n00531,Eastcheap,tertiary,0.7707528868614838,False,90
+n00532,Eastcheap,tertiary,0.5578057068776177,False,90
+n00533,Eastcheap,tertiary,0.08589956766656641,False,90
+n00534,Eastcheap,tertiary,3.278983611641256,False,90
+n00535,Eastcheap,tertiary,0.159453227041569,False,90
+n00536,Eastcheap,tertiary,0.29955528781495233,False,90
+n00537,Eldon Street,tertiary,1.5448918255565554,False,90
+n00538,Eldon Street,tertiary,0.9559042128200399,False,90
+n00539,Eldon Street,tertiary,0.4344552497811842,False,90
+n00540,Eldon Street,tertiary,0.37418934723967057,False,90
+n00541,Fen Court,tertiary,0.477584321540356,False,90
+n00542,Fen Court,pedestrian,1.2767531937203094,True,180
+n00543,Fen Court,pedestrian,3.0500764600520482,True,180
+n00544,Fen Court,pedestrian,0.6192733200191225,True,180
+n00545,Fen Court,pedestrian,0.17855152028916865,True,180
+n00546,Fenchurch Avenue,unclassified,0.4554692100601669,False,90
+n00547,Fenchurch Avenue,unclassified,2.142707306248603,False,90
+n00548,Fenchurch Avenue,unclassified,0.794702010125688,False,90
+n00549,Fenchurch Avenue,unclassified,0.4854880352730571,False,90
+n00550,Fenchurch Avenue,unclassified,0.159029262958976,False,90
+n00551,Fenchurch Avenue,unclassified,0.10512729144983629,False,90
+n00552,Fenchurch Avenue,unclassified,0.44404177554140817,False,90
+n00553,Fenchurch Street,primary,2.2714073771552434,False,90
+n00554,Fenchurch Street,tertiary,0.009579764735785035,False,90
+n00555,Fenchurch Street,tertiary,2.9613375831857076,False,90
+n00556,Fenchurch Street,tertiary,0.8043972673435671,False,90
+n00557,Fenchurch Street,tertiary,0.8537353199186977,False,90
+n00558,Fenchurch Street,tertiary,0.583637724959508,False,90
+n00559,Fenchurch Street,tertiary,0.2995786814840534,False,90
+n00560,Fenchurch Street,tertiary,0.35970658823668816,False,90
+n00561,Fenchurch Street,tertiary,0.4789299435764477,False,90
+n00562,Fenchurch Street,tertiary,0.5859659285457485,False,90
+n00563,Fenchurch Street,tertiary,0.6732539854068992,False,90
+n00564,Fenchurch Street,tertiary,0.5122086896951316,False,90
+n00565,Fenchurch Street,tertiary,0.48518906497989983,False,90
+n00566,Fenchurch Street,tertiary,0.1955379657366624,False,90
+n00567,Fenchurch Street,tertiary,0.477584321540356,False,90
+n00568,Fenchurch Street,tertiary,1.5440753071376894,False,90
+n00569,Fenchurch Street,tertiary,1.200268916594353,False,90
+n00570,Fenchurch Street,tertiary,0.9498521058993182,False,90
+n00571,Fenchurch Street,tertiary,1.920096984764698,False,90
+n00572,Finch Lane,unclassified,0.5562459141159893,False,90
+n00573,Finch Lane,unclassified,0.466880021453155,False,90
+n00574,Finch Lane,unclassified,3.1250934108362394,False,90
+n00575,Finch Lane,unclassified,1.608363967357721,False,90
+n00576,Finch Lane,unclassified,0.5970246041452058,False,90
+n00577,Finsbury Circus,tertiary,0.940087460375237,False,90
+n00578,Finsbury Circus,unclassified,0.7933296763285052,False,90
+n00579,Finsbury Circus,unclassified,2.0830987920455697,False,90
+n00580,Finsbury Circus,unclassified,0.7697907478940228,False,90
+n00581,Finsbury Circus,unclassified,1.6706960797321742,False,90
+n00582,Finsbury Circus,unclassified,2.0194497235732416,False,90
+n00583,Finsbury Circus,unclassified,1.6673872591991241,False,90
+n00584,Finsbury Circus,unclassified,1.3618791784741207,False,90
+n00585,Finsbury Circus,unclassified,0.9487528413662192,False,90
+n00586,Finsbury Circus,unclassified,0.9690779411402447,False,90
+n00587,Finsbury Circus,unclassified,3.8500044134483855,False,90
+n00588,Finsbury Circus,unclassified,3.744528493135709,False,90
+n00589,Finsbury Circus,unclassified,2.7396594829238166,False,90
+n00590,Finsbury Circus,unclassified,1.7417793145337712,False,90
+n00591,Finsbury Circus,unclassified,0.7418293949657412,False,90
+n00592,Finsbury Circus,unclassified,1.1289554606510785,False,90
+n00593,Finsbury Circus,unclassified,1.0293165709577419,False,90
+n00594,Finsbury Circus,unclassified,0.7080522364844173,False,90
+n00595,Finsbury Circus,unclassified,1.0408841319598467,False,90
+n00596,Finsbury Circus,unclassified,1.9841154860461336,False,90
+n00597,Finsbury Circus,unclassified,2.233870203919206,False,90
+n00598,Finsbury Circus,unclassified,2.5161708212264946,False,90
+n00599,Fish Street Hill,pedestrian,1.3697448059525241,True,180
+n00600,Fish Street Hill,pedestrian,1.661292925007295,True,180
+n00601,Fish Street Hill,pedestrian,0.7252103833295181,True,180
+n00602,Fish Street Hill,pedestrian,0.1658062725040978,True,180
+n00603,Fisherman's Hall Wharf,footway,0.45399612312103943,True,180
+n00604,Fisherman's Hall Wharf,primary,0.9388567874614797,False,90
+n00605,Fisherman's Hall Wharf,footway,1.0447956900846547,True,180
+n00606,Fisherman's Hall Wharf,footway,0.215738442584322,True,180
+n00607,Fisherman's Hall Wharf,footway,0.18667233777548448,True,180
+n00608,Fisherman's Hall Wharf,footway,1.4454350933701419,True,180
+n00609,Fisherman's Hall Wharf,footway,0.746385670611783,True,180
+n00610,Fore Street,unclassified,0.5349436451396565,False,90
+n00611,Fore Street,residential,1.2446776703889364,False,90
+n00612,Fore Street,residential,0.3419062911858887,False,90
+n00613,Fore Street,residential,0.384118725780564,False,90
+n00614,Fore Street,residential,0.7762009471243774,False,90
+n00615,Fore Street,residential,2.038694048822907,False,90
+n00616,Fore Street,residential,1.9436861241677492,False,90
+n00617,Fore Street,residential,1.3912266275694969,False,90
+n00618,Fore Street,residential,0.8091676715712472,False,90
+n00619,Fore Street Avenue,unclassified,0.5349436451396565,False,90
+n00620,Fore Street Avenue,unclassified,0.846043820172092,False,90
+n00621,Fore Street Avenue,unclassified,0.2520644708521396,False,90
+n00622,Fore Street Avenue,unclassified,2.5882893882682447,False,90
+n00623,Fore Street Avenue,cycleway,3.33135580953649,True,180
+n00624,Foster Lane,unclassified,0.2758363824900352,False,90
+n00625,Foster Lane,unclassified,0.3581174981311305,False,90
+n00626,Foster Lane,unclassified,0.9044208517190129,False,90
+n00627,Foster Lane,unclassified,1.0713028098403434,False,90
+n00628,Foster Lane,unclassified,1.2739195271939345,False,90
+n00629,Foster Lane,unclassified,0.6377726425180352,False,90
+n00630,Foster Lane,unclassified,0.13667843932722085,False,90
+n00631,Foster Lane,unclassified,1.737560432470723,False,90
+n00632,Foster Lane,unclassified,1.974509675218348,False,90
+n00633,Frederick's Place,residential,0.7976543948891789,False,90
+n00634,Frederick's Place,residential,0.7111289822557039,False,90
+n00635,Frederick's Place,residential,0.6902531966276114,False,90
+n00636,Friday Street,tertiary,0.96352214867133,False,90
+n00637,Friday Street,tertiary,1.8058585127543128,False,90
+n00638,Friday Street,tertiary,1.1504386302782175,False,90
+n00639,Friday Street,tertiary,1.0795367088330403,False,90
+n00640,Friday Street,tertiary,1.113087635489446,False,90
+n00641,Fyefoot Lane,footway,1.1391176659048299,True,180
+n00642,Fyefoot Lane,footway,0.9038264079028627,True,180
+n00643,Fyefoot Lane,footway,0.7198482007807931,True,180
+n00644,Gardner's Lane,residential,1.7694574154403981,False,90
+n00645,Gardner's Lane,service,0.2113796019724877,False,90
+n00646,Gardner's Lane,residential,7.957012580519436,False,90
+n00647,Garlick Hill,unclassified,0.619182145195913,False,90
+n00648,Garlick Hill,unclassified,0.5361397831402799,False,90
+n00649,Garlick Hill,unclassified,0.39510777804608316,False,90
+n00650,Garlick Hill,unclassified,0.20949472090065796,False,90
+n00651,Garlick Hill,residential,0.45222915213640785,False,90
+n00652,Garlick Hill,residential,0.03577156389033768,False,90
+n00653,Garlick Hill,tertiary,0.16670564914887986,False,90
+n00654,George Yard,unclassified,0.21735199568007116,False,90
+n00655,George Yard,unclassified,0.06287186761045956,False,90
+n00656,George Yard,unclassified,0.6624338933918855,False,90
+n00657,Globe View Walkway,footway,6.3103578200074955,True,180
+n00658,Globe View Walkway,footway,2.0078660560455037,True,180
+n00659,Globe View Walkway,footway,2.018255701263779,True,180
+n00660,Globe View Walkway,footway,2.478389873280916,True,180
+n00661,Globe View Walkway,footway,2.784487346706154,True,180
+n00662,Globe View Walkway,footway,4.795610192073911,True,180
+n00663,Globe View Walkway,footway,2.6033587785281442,True,180
+n00664,Goldsmith Street,unclassified,1.2855007858006855,False,90
+n00665,Goldsmith Street,unclassified,0.20165011144413325,False,90
+n00666,Goldsmith Street,unclassified,0.7327194515099913,False,90
+n00667,Gophir Lane,residential,1.4822528307300904,False,90
+n00668,Gophir Lane,residential,1.1973891373383763,False,90
+n00669,Gracechurch Street,primary,1.6145186910536096,False,90
+n00670,Gracechurch Street,primary,1.2822824142201708,False,90
+n00671,Gracechurch Street,primary,1.2948548058827538,False,90
+n00672,Gracechurch Street,footway,0.18446053449992758,True,180
+n00673,Gracechurch Street,primary,1.6733425006969909,False,90
+n00674,Gracechurch Street,primary,1.0492411797318655,False,90
+n00675,Gracechurch Street,primary,0.7791717381665972,False,90
+n00676,Gracechurch Street,primary,0.0837555671892614,False,90
+n00677,Gracechurch Street,tertiary,0.4326667111578794,False,90
+n00678,Gracechurch Street,tertiary,2.179541268957798,False,90
+n00679,Gracechurch Street,primary,0.5473293269307793,False,90
+n00680,Gracechurch Street,primary,0.7763887881519952,False,90
+n00681,Gracechurch Street,primary,1.4106573125604065,False,90
+n00682,Gracechurch Street,primary,1.8830828594613866,False,90
+n00683,Gracechurch Street,primary,4.294861192868296,False,90
+n00684,Gracechurch Street,primary,3.432388329699519,False,90
+n00685,Gracechurch Street,primary,0.49811371256514775,False,90
+n00686,Gracechurch Street,primary,0.1681398636142705,False,90
+n00687,Gracechurch Street,primary,0.8363182245297546,False,90
+n00688,Gracechurch Street,primary,0.48325191133105566,False,90
+n00689,Gracechurch Street,primary,0.4768314493438803,False,90
+n00690,Gracechurch Street,primary,0.26374465866076224,False,90
+n00691,Gracechurch Street,primary,0.24135470708393625,False,90
+n00692,Gracechurch Street,primary,0.1482419373259937,False,90
+n00693,Great Bell Alley,footway,1.9590702388849108,True,180
+n00694,Great Bell Alley,footway,1.6769988643709162,True,180
+n00695,Great St. Helens,service,0.9394461294022783,False,90
+n00696,Great St. Helens,unclassified,0.021023403582627824,False,90
+n00697,Great St. Helens,unclassified,0.3257462120877615,False,90
+n00698,Great St. Helens,unclassified,0.7414605981962094,False,90
+n00699,Great St. Thomas Apostle,unclassified,1.4060397526637565,False,90
+n00700,Great St. Thomas Apostle,unclassified,0.5331364938579964,False,90
+n00701,Great St. Thomas Apostle,unclassified,0.6808907500749175,False,90
+n00702,Great St. Thomas Apostle,unclassified,0.6305263445656245,False,90
+n00703,Great Swan Alley,pedestrian,0.5359090739443894,True,180
+n00704,Great Swan Alley,unclassified,1.096534327252609,False,90
+n00705,Great Swan Alley,unclassified,0.9987921902066376,False,90
+n00706,Great Swan Alley,unclassified,1.014874852851636,False,90
+n00707,Great Swan Alley,unclassified,0.5142785115944593,False,90
+n00708,Great Swan Alley,tertiary,0.4233807060816401,False,90
+n00709,Great Swan Alley,footway,1.8472877283180102,True,180
+n00710,Great Swan Alley,service,2.14951188029338,False,90
+n00711,Great Tower Street,primary,2.88296789098893,False,90
+n00712,Great Tower Street,tertiary,1.8296127192272456,False,90
+n00713,Great Tower Street,tertiary,1.5057692518120775,False,90
+n00714,Great Tower Street,tertiary,1.5920843333566173,False,90
+n00715,Great Tower Street,tertiary,0.43976979462296784,False,90
+n00716,Great Tower Street,tertiary,0.26769147497267004,False,90
+n00717,Great Tower Street,tertiary,1.7163734687446213,False,90
+n00718,Great Tower Street,tertiary,2.9844745669701895,False,90
+n00719,Great Tower Street,tertiary,0.5855802890781776,False,90
+n00720,Great Tower Street,tertiary,1.3217890799347023,False,90
+n00721,Great Trinity Lane,residential,0.45222915213640785,False,90
+n00722,Great Trinity Lane,residential,0.15023260801396043,False,90
+n00723,Great Trinity Lane,residential,0.0625633606214326,False,90
+n00724,Great Winchester Street,unclassified,0.09839068667990208,False,90
+n00725,Great Winchester Street,unclassified,0.41767078621529186,False,90
+n00726,Great Winchester Street,unclassified,0.7947657418559189,False,90
+n00727,Great Winchester Street,unclassified,0.424741176608253,False,90
+n00728,Great Winchester Street,unclassified,1.1628055665381327,False,90
+n00729,Great Winchester Street,unclassified,0.29575336027147864,False,90
+n00730,Great Winchester Street,unclassified,2.6855560831001375,False,90
+n00731,Great Winchester Street,unclassified,2.017667905394111,False,90
+n00732,Great Winchester Street,unclassified,2.2281930610303995,False,90
+n00733,Gresham Street,tertiary,0.9347548049203956,False,90
+n00734,Gresham Street,tertiary,0.5673660179558068,False,90
+n00735,Gresham Street,tertiary,0.23899429639321013,False,90
+n00736,Gresham Street,tertiary,0.8464141271351938,False,90
+n00737,Gresham Street,tertiary,0.926350581839409,False,90
+n00738,Gresham Street,tertiary,0.7599050066001126,False,90
+n00739,Gresham Street,pedestrian,2.221050909247621,True,180
+n00740,Gresham Street,tertiary,1.959943949217176,False,90
+n00741,Gresham Street,tertiary,1.0477330392874997,False,90
+n00742,Gresham Street,tertiary,1.0042472377095557,False,90
+n00743,Gresham Street,unclassified,0.32934804138027807,False,90
+n00744,Gresham Street,tertiary,1.5721658655361355,False,90
+n00745,Gresham Street,tertiary,0.2184509859641629,False,90
+n00746,Gresham Street,tertiary,0.508332983928121,False,90
+n00747,Gresham Street,tertiary,1.0076388316330558,False,90
+n00748,Gresham Street,tertiary,0.9574108457249534,False,90
+n00749,Gresham Street,tertiary,1.727995060331295,False,90
+n00750,Gresham Street,tertiary,1.6558603018068583,False,90
+n00751,Gresham Street,tertiary,1.4373224407672418,False,90
+n00752,Gresham Street,tertiary,1.3215832196982096,False,90
+n00753,Gresham Street,tertiary,1.7157468903090227,False,90
+n00754,Gresham Street,unclassified,1.924065261725004,False,90
+n00755,Gresham Street,tertiary,0.85143339679183,False,90
+n00756,Gresham Street,tertiary,0.4997103362802813,False,90
+n00757,Gresham Street,tertiary,1.567471043206501,False,90
+n00758,Grocers' Hall Court,tertiary,1.5937415574214362,False,90
+n00759,Grocers' Hall Court,residential,0.6368320333947693,False,90
+n00760,Grocers' Hall Court,residential,1.850248869773871,False,90
+n00761,Guildhall Buildings,unclassified,0.2144030565272881,False,90
+n00762,Guildhall Buildings,pedestrian,0.041440586128165535,True,180
+n00763,Guildhall Buildings,pedestrian,1.9492718592158373,True,180
+n00764,Guildhall Yard,tertiary,0.4012780073484305,False,90
+n00765,Guildhall Yard,pedestrian,1.8682942694695557,True,180
+n00766,Gutter Lane,unclassified,0.3229605159858481,False,90
+n00767,Gutter Lane,unclassified,0.5503101257743123,False,90
+n00768,Gutter Lane,service,0.5995177261335858,False,90
+n00769,Gutter Lane,unclassified,0.33611032255749435,False,90
+n00770,Gutter Lane,unclassified,0.2270016490370091,False,90
+n00771,Gutter Lane,unclassified,0.05306737552847065,False,90
+n00772,Gutter Lane,unclassified,0.09696321182329559,False,90
+n00773,Gutter Lane,unclassified,0.09303826530544569,False,90
+n00774,Gutter Lane,unclassified,1.0770310793502365,False,90
+n00775,Hanseatic Walk,footway,0.7083536179225217,True,180
+n00776,Hanseatic Walk,footway,0.10681636596533124,True,180
+n00777,Hanseatic Walk,footway,1.4476424520901428,True,180
+n00778,Hanseatic Walk,footway,1.099994026118217,True,180
+n00779,Hanseatic Walk,footway,0.32172214080414774,True,180
+n00780,Harp Lane,residential,1.5049900315786362,False,90
+n00781,Harp Lane,service,0.15266994031844114,False,90
+n00782,High Timber Street,residential,0.2590458303728932,False,90
+n00783,High Timber Street,unclassified,0.7464500298792072,False,90
+n00784,High Timber Street,unclassified,2.277806701798814,False,90
+n00785,High Timber Street,unclassified,0.17682456711602726,False,90
+n00786,High Timber Street,unclassified,0.6792185966684338,False,90
+n00787,High Timber Street,unclassified,0.5554166465437895,False,90
+n00788,High Timber Street,unclassified,0.010715258301292798,False,90
+n00789,Houndsditch,primary,0.7758092146578602,False,90
+n00790,Houndsditch,unclassified,2.1226262125923476,False,90
+n00791,Houndsditch,unclassified,0.30561882280103786,False,90
+n00792,Houndsditch,unclassified,0.13848741182387492,False,90
+n00793,Houndsditch,unclassified,0.06977803086991635,False,90
+n00794,Huggin Hill,footway,1.8277115233921069,True,180
+n00795,Huggin Hill,footway,1.3806902750307253,True,180
+n00796,Huggin Hill,footway,1.2394839751510736,True,180
+n00797,Huggin Hill,footway,1.9518792645392262,True,180
+n00798,Huggin Hill,footway,2.234294615478467,True,180
+n00799,Idol Lane,unclassified,0.6306772193137701,False,90
+n00800,Idol Lane,unclassified,0.9329191415236212,False,90
+n00801,Idol Lane,unclassified,0.05055928182108433,False,90
+n00802,Idol Lane,unclassified,0.4389294456703117,False,90
+n00803,Idol Lane,unclassified,0.294889646636213,False,90
+n00804,Ironmonger Lane,tertiary,0.30348308797197965,False,90
+n00805,Ironmonger Lane,residential,0.5897037492976078,False,90
+n00806,Ironmonger Lane,residential,1.3288745792032122,False,90
+n00807,Ironmonger Lane,residential,1.40596570758659,False,90
+n00808,Ironmonger Lane,residential,1.0887589111856786,False,90
+n00809,Ironmonger Lane,residential,0.4150929304597438,False,90
+n00810,Ironmonger Lane,residential,0.02124992617199395,False,90
+n00811,Ironmonger Lane,residential,0.33084551452447925,False,90
+n00812,Kennett Wharf Lane,footway,1.029447991673445,True,180
+n00813,Kennett Wharf Lane,residential,1.217614063109526,False,90
+n00814,Kennett Wharf Lane,footway,0.6885872631603873,True,180
+n00815,Kennett Wharf Lane,residential,1.063609166294201,False,90
+n00816,Kennett Wharf Lane,footway,3.6277961491309885,True,180
+n00817,King Street,unclassified,0.1345360673221241,False,90
+n00818,King Street,tertiary,1.253081964143562,False,90
+n00819,King Street,tertiary,0.2913293308759682,False,90
+n00820,King Street,tertiary,0.5309228843100283,False,90
+n00821,King Street,tertiary,0.10832881031163583,False,90
+n00822,King Street,tertiary,0.09674200160742168,False,90
+n00823,King Street,footway,3.0621633885185764,True,180
+n00824,King Street,tertiary,0.4012780073484305,False,90
+n00825,King William Street,primary,1.1948258378597365,False,90
+n00826,King William Street,primary,1.3757271813019392,False,90
+n00827,King William Street,primary,0.27834644938947434,False,90
+n00828,King William Street,primary,0.6608479951352336,False,90
+n00829,King William Street,primary,0.4427023493977056,False,90
+n00830,King William Street,primary,0.12178357086975383,False,90
+n00831,King William Street,primary,0.689581649468988,False,90
+n00832,King William Street,primary,0.08133244872008871,False,90
+n00833,King William Street,primary,0.8882515476729832,False,90
+n00834,King William Street,primary,0.11160917775367012,False,90
+n00835,King William Street,primary,0.004219446626944279,False,90
+n00836,King William Street,primary,0.8572877674155162,False,90
+n00837,King William Street,footway,0.03844164152149509,True,180
+n00838,King William Street,footway,0.1742691356179488,True,180
+n00839,King William Street,footway,0.521318073186533,True,180
+n00840,King William Street,tertiary,1.4412703723947098,False,90
+n00841,King William Street,footway,0.9285424419651928,True,180
+n00842,King William Street,tertiary,1.6766954197689317,False,90
+n00843,King William Street,steps,1.3105716540116978,True,180
+n00844,King William Street,tertiary,1.0884827940818835,False,90
+n00845,King William Street,steps,0.11642447051916241,True,180
+n00846,King William Street,unclassified,0.5394757053878252,False,90
+n00847,King William Street,tertiary,2.9350397555428707,False,90
+n00848,King William Street,tertiary,1.3809209914960892,False,90
+n00849,King William Street,tertiary,0.03636651341614521,False,90
+n00850,King William Street,footway,0.07036056373000722,True,180
+n00851,King William Street,footway,2.739969118755039,True,180
+n00852,King's Arms Yard,unclassified,0.7842680396541885,False,90
+n00853,King's Arms Yard,unclassified,2.1724035813978038,False,90
+n00854,King's Arms Yard,unclassified,1.310207877365063,False,90
+n00855,King's Arms Yard,unclassified,3.8265168239200626,False,90
+n00856,King's Arms Yard,unclassified,2.624349217165817,False,90
+n00857,King's Arms Yard,unclassified,2.892264097464831,False,90
+n00858,Lambeth Hill,unclassified,0.2324911594482551,False,90
+n00859,Lambeth Hill,unclassified,0.49896570933144646,False,90
+n00860,Lambeth Hill,unclassified,0.2098134740297153,False,90
+n00861,Lambeth Hill,unclassified,0.1478332440133792,False,90
+n00862,Lambeth Hill,unclassified,1.2152185775730515,False,90
+n00863,Lambeth Hill,cycleway,0.2683611777324966,True,180
+n00864,Langthorn Court,service,0.07960532033571098,False,90
+n00865,Langthorn Court,service,0.07960532033571098,False,90
+n00866,Laurence Pountney Hill,residential,0.007265133284899955,False,90
+n00867,Laurence Pountney Hill,footway,3.1213200754114503,True,180
+n00868,Laurence Pountney Hill,unclassified,0.5598881503671606,False,90
+n00869,Laurence Pountney Hill,unclassified,0.5340395429712753,False,90
+n00870,Laurence Pountney Hill,unclassified,0.5598881503671606,False,90
+n00871,Laurence Pountney Hill,residential,1.287536917485407,False,90
+n00872,Laurence Pountney Hill,unclassified,0.2503319483876282,False,90
+n00873,Laurence Pountney Hill,pedestrian,0.21606551244182204,True,180
+n00874,Laurence Pountney Lane,primary,0.2255178924660307,False,90
+n00875,Laurence Pountney Lane,residential,0.38683876583077764,False,90
+n00876,Laurence Pountney Lane,residential,0.19046287768089154,False,90
+n00877,Laurence Pountney Lane,residential,0.28137166010397174,False,90
+n00878,Laurence Pountney Lane,residential,0.06368903295522617,False,90
+n00879,Laurence Pountney Lane,residential,0.07132091997924858,False,90
+n00880,Laurence Pountney Lane,residential,1.0556728293102906,False,90
+n00881,Lawrence Lane,unmatched,13.360082137822012,False,90
+n00882,Lawrence Lane,unclassified,0.3422242530920765,False,90
+n00883,Lawrence Lane,unclassified,0.555061164167769,False,90
+n00884,Lawrence Lane,unclassified,1.9695643280113355,False,90
+n00885,Lawrence Lane,unclassified,1.6380895541150493,False,90
+n00886,Leadenhall Market,pedestrian,1.493089753156246,True,180
+n00887,Leadenhall Market,pedestrian,0.7947129140245655,True,180
+n00888,Leadenhall Market,pedestrian,0.4536685099951851,True,180
+n00889,Leadenhall Market,pedestrian,0.5964602143207998,True,180
+n00890,Leadenhall Market,pedestrian,0.7925450387332842,True,180
+n00891,Leadenhall Place,unclassified,0.8089285294480416,False,90
+n00892,Leadenhall Place,service,1.266460899931166,False,90
+n00893,Leadenhall Place,service,0.9655127278101385,False,90
+n00894,Leadenhall Street,tertiary,1.1105726460553567,False,90
+n00895,Leadenhall Street,tertiary,2.0451836353556843,False,90
+n00896,Leadenhall Street,tertiary,0.46537309377255787,False,90
+n00897,Leadenhall Street,tertiary,0.9926028891262525,False,90
+n00898,Leadenhall Street,tertiary,0.8243816161946408,False,90
+n00899,Leadenhall Street,tertiary,0.9406982065419266,False,90
+n00900,Leadenhall Street,tertiary,1.6565772497013274,False,90
+n00901,Leadenhall Street,tertiary,2.242533641542145,False,90
+n00902,Leadenhall Street,tertiary,2.4479025374138654,False,90
+n00903,Leadenhall Street,tertiary,2.9521862316926835,False,90
+n00904,Leadenhall Street,tertiary,0.7926149767929459,False,90
+n00905,Leadenhall Street,tertiary,2.3413848551871013,False,90
+n00906,Leadenhall Street,tertiary,2.1495601068990497,False,90
+n00907,Leadenhall Street,tertiary,5.587436261561,False,90
+n00908,Leadenhall Street,tertiary,1.5792089757457932,False,90
+n00909,Lime Street,tertiary,0.583637724959508,False,90
+n00910,Lime Street,unclassified,0.613637649269437,False,90
+n00911,Lime Street,unclassified,0.22405404590870298,False,90
+n00912,Lime Street,unclassified,1.5429757007763834,False,90
+n00913,Lime Street,unclassified,0.6038613792954356,False,90
+n00914,Lime Street,unclassified,3.0699333127670667,False,90
+n00915,Lime Street,unclassified,0.623122406684335,False,90
+n00916,Lime Street,unclassified,0.8089285294480416,False,90
+n00917,Lime Street,unclassified,0.9609032088120515,False,90
+n00918,Lime Street,unclassified,1.038888167510429,False,90
+n00919,Lime Street,living_street,0.055690536705261966,True,180
+n00920,Lime Street,living_street,0.46730142970039384,True,180
+n00921,Lime Street,unclassified,0.2575191042286743,False,90
+n00922,Lime Street,unclassified,0.22872156084259598,False,90
+n00923,Lime Street,tertiary,1.6565772497013274,False,90
+n00924,Lime Street Passage,unclassified,0.9419645081112799,False,90
+n00925,Lime Street Passage,pedestrian,1.2664804629899855,True,180
+n00926,Lime Street Passage,pedestrian,2.9947185921312016,True,180
+n00927,Lime Street Passage,pedestrian,0.044120382535751755,True,180
+n00928,Lime Street Passage,pedestrian,0.823743481880662,True,180
+n00929,Little Britain,residential,0.1847689735628524,False,90
+n00930,Little Britain,residential,0.20962395206804285,False,90
+n00931,Little Britain,residential,0.23502673203513347,False,90
+n00932,Little Britain,residential,0.23716402808747009,False,90
+n00933,Little Britain,residential,0.07150381460972202,False,90
+n00934,Little College Lane,pedestrian,1.4599318160335273,True,180
+n00935,Little College Lane,pedestrian,0.05274083204397224,True,180
+n00936,Little Trinity Lane,unclassified,0.619182145195913,False,90
+n00937,Little Trinity Lane,unclassified,0.07125871836161071,False,90
+n00938,Little Trinity Lane,unclassified,0.46297797662405105,False,90
+n00939,Little Trinity Lane,unclassified,0.18318413999251287,False,90
+n00940,Little Trinity Lane,unclassified,0.28980520185433684,False,90
+n00941,Little Trinity Lane,unclassified,0.0853111463906257,False,90
+n00942,Little Trinity Lane,unclassified,0.18628041313494992,False,90
+n00943,Liverpool Street,primary,1.0349339658591437,False,90
+n00944,Liverpool Street,residential,0.8054500081602917,False,90
+n00945,Liverpool Street,residential,0.07006425681373857,False,90
+n00946,Liverpool Street,residential,1.7292554685295358,False,90
+n00947,Liverpool Street,residential,0.5721072804487045,False,90
+n00948,Liverpool Street,residential,0.7051133426617748,False,90
+n00949,Liverpool Street,pedestrian,0.7941728251565099,True,180
+n00950,Liverpool Street,pedestrian,1.8673321639303702,True,180
+n00951,Liverpool Street,tertiary,0.3313430673354182,False,90
+n00952,Liverpool Street,pedestrian,1.814593849190615,True,180
+n00953,Liverpool Street,pedestrian,0.9431366892767411,True,180
+n00954,Liverpool Street,elevator,0.4111351444335499,False,90
+n00955,Liverpool Street,corridor,2.135546326594996,True,180
+n00956,Lombard Court,primary,1.4844842373170264,False,90
+n00957,Lombard Court,pedestrian,1.7304248945934417,True,180
+n00958,Lombard Court,pedestrian,1.083983315556655,True,180
+n00959,Lombard Street,primary,2.2714073771552434,False,90
+n00960,Lombard Street,tertiary,1.6384502217065644,False,90
+n00961,Lombard Street,tertiary,1.1641609974218616,False,90
+n00962,Lombard Street,tertiary,1.3358432347634988,False,90
+n00963,Lombard Street,tertiary,1.3926353497217305,False,90
+n00964,Lombard Street,tertiary,1.9300800097864845,False,90
+n00965,Lombard Street,pedestrian,0.9421857501599876,True,180
+n00966,Lombard Street,tertiary,1.0278122870312167,False,90
+n00967,Lombard Street,tertiary,0.42007433699340957,False,90
+n00968,Lombard Street,tertiary,0.9692271764457623,False,90
+n00969,Lombard Street,tertiary,1.1982806522208023,False,90
+n00970,Lombard Street,tertiary,1.252478728617434,False,90
+n00971,Lombard Street,footway,0.14543933306807752,True,180
+n00972,Lombard Street,tertiary,2.4022833351885673,False,90
+n00973,Lombard Street,footway,0.562160418633369,True,180
+n00974,Lombard Street,footway,0.20957568538327181,True,180
+n00975,Lombard Street,footway,0.02434463089000801,True,180
+n00976,London Wall,primary,0.9652288649910207,False,90
+n00977,London Wall,primary,0.3553113899939052,False,90
+n00978,London Wall,primary,0.389786239258657,False,90
+n00979,London Wall,primary,0.7256848903732679,False,90
+n00980,London Wall,primary,1.3032778738003143,False,90
+n00981,London Wall,primary,1.045294945666518,False,90
+n00982,London Wall,primary,0.04185924995977777,False,90
+n00983,London Wall,primary,0.8007428427277821,False,90
+n00984,London Wall,primary,0.9031059233598785,False,90
+n00985,London Wall,primary,1.1155034439344673,False,90
+n00986,London Wall,primary,0.9415705858300263,False,90
+n00987,London Wall,primary,0.11294119930817219,False,90
+n00988,London Wall,primary,0.8830347241045884,False,90
+n00989,London Wall,primary,0.96513438710961,False,90
+n00990,London Wall,primary,0.927577174968514,False,90
+n00991,London Wall,primary,1.5096786495613133,False,90
+n00992,London Wall,primary,0.12658750896491278,False,90
+n00993,London Wall,cycleway,1.539741761725789,True,180
+n00994,London Wall,primary,1.376914519418421,False,90
+n00995,London Wall,primary,1.1628609389669267,False,90
+n00996,London Wall,primary,1.2086942211147935,False,90
+n00997,London Wall,primary,1.1796012684369206,False,90
+n00998,London Wall,primary,1.499827514962208,False,90
+n00999,London Wall,primary,1.6443060160071952,False,90
+n01000,London Wall,primary,1.203746094898131,False,90
+n01001,London Wall,primary,0.9195416177205608,False,90
+n01002,London Wall,primary,0.3059064496674615,False,90
+n01003,London Wall,primary,0.5277287681233482,False,90
+n01004,London Wall,footway,0.7343821691687789,True,180
+n01005,London Wall,primary,1.4120110937732981,False,90
+n01006,London Wall,primary,1.8904874190263954,False,90
+n01007,London Wall,primary,0.7325939644411826,False,90
+n01008,London Wall,primary,0.7964650759237443,False,90
+n01009,London Wall,primary,1.6661158137578416,False,90
+n01010,London Wall,primary,1.5228816677775823,False,90
+n01011,London Wall,primary,1.8337248125766372,False,90
+n01012,London Wall,primary,1.374343649463202,False,90
+n01013,London Wall,primary,0.14190666113413314,False,90
+n01014,London Wall,primary,0.9540794478893145,False,90
+n01015,London Wall,primary,0.06090163209159129,False,90
+n01016,London Wall,primary,1.053310383528196,False,90
+n01017,London Wall,primary,0.1598132837684328,False,90
+n01018,London Wall,primary,5.114271497218887,False,90
+n01019,London Wall,primary,0.4335645878522564,False,90
+n01020,London Wall,primary,2.601786658617102,False,90
+n01021,London Wall,primary,0.28923205646070593,False,90
+n01022,London Wall,primary,1.759491723394125,False,90
+n01023,London Wall,primary,0.2500302961558241,False,90
+n01024,London Wall,unclassified,1.9907564454093567,False,90
+n01025,London Wall,primary,0.4725068222078076,False,90
+n01026,London Wall,primary,0.8807694090183439,False,90
+n01027,London Wall,primary,0.10088533968435691,False,90
+n01028,London Wall,primary,1.7915213755876422,False,90
+n01029,London Wall,primary,0.04900982960608145,False,90
+n01030,London Wall,primary,4.616954985816881,False,90
+n01031,London Wall,primary,0.09549818119022924,False,90
+n01032,London Wall,primary,2.0555498842937667,False,90
+n01033,London Wall,service,0.6133504919352262,False,90
+n01034,London Wall,primary,1.7488538004618857,False,90
+n01035,London Wall,primary,2.3950087021307187,False,90
+n01036,London Wall,primary,1.2544956751737182,False,90
+n01037,London Wall,primary,1.1374293230941168,False,90
+n01038,London Wall,primary,0.5295124479660236,False,90
+n01039,London Wall,primary,1.0893061306166893,False,90
+n01040,London Wall,primary,2.112753206845765,False,90
+n01041,London Wall,primary,1.0257647036477755,False,90
+n01042,London Wall,primary,0.6160025442297328,False,90
+n01043,London Wall,primary,0.5363200918348148,False,90
+n01044,London Wall,primary,0.4456883045813204,False,90
+n01045,London Wall,primary,0.21706784120438433,False,90
+n01046,London Wall,primary,0.051443476075170524,False,90
+n01047,London Wall,primary,0.05717591538303766,False,90
+n01048,London Wall,primary,0.020991872422598208,False,90
+n01049,London Wall,primary,0.30417053627324003,False,90
+n01050,London Wall,primary,0.9293581784671393,False,90
+n01051,London Wall Place,primary,0.05717591538303766,False,90
+n01052,London Wall Place,path,0.02739325619240646,True,180
+n01053,Lothbury,pedestrian,2.649251872497529,True,180
+n01054,Lothbury,unclassified,1.0301662539576621,False,90
+n01055,Lothbury,unclassified,0.29722680247235594,False,90
+n01056,Lothbury,unclassified,3.7053585686854382,False,90
+n01057,Lothbury,unclassified,0.27365580168546594,False,90
+n01058,Lothbury,unclassified,1.8254821209328975,False,90
+n01059,Lothbury,unclassified,0.3370493672838172,False,90
+n01060,Lothbury,unclassified,1.0530720898328314,False,90
+n01061,Lothbury,unclassified,2.564706910461462,False,90
+n01062,Lothbury,footway,1.6845960940156208,True,180
+n01063,Lothbury,tertiary,0.23761234284494687,False,90
+n01064,Lothbury,tertiary,0.2982624021902795,False,90
+n01065,Lothbury,tertiary,0.9347548049203956,False,90
+n01066,Lovat Lane,footway,0.018991381339200145,True,180
+n01067,Lovat Lane,footway,1.0449179722246522,True,180
+n01068,Lovat Lane,footway,1.085474044205936,True,180
+n01069,Lovat Lane,footway,0.9356732228854323,True,180
+n01070,Lovat Lane,footway,0.04503870548694131,True,180
+n01071,Lovat Lane,footway,3.111494190227375,True,180
+n01072,Lovat Lane,unclassified,0.06808302173560699,False,90
+n01073,Love Lane,unclassified,0.14506734922067713,False,90
+n01074,Love Lane,unclassified,0.673646577794309,False,90
+n01075,Love Lane,unclassified,0.84550481270708,False,90
+n01076,Love Lane,unclassified,0.8868767103769424,False,90
+n01077,Lower Thames Street,residential,1.9431558885256615,False,90
+n01078,Lower Thames Street,residential,1.3136407033933175,False,90
+n01079,Lower Thames Street,primary,0.39810861053621344,False,90
+n01080,Lower Thames Street,residential,0.7938209088237459,False,90
+n01081,Lower Thames Street,residential,1.7181822015329569,False,90
+n01082,Lower Thames Street,primary,0.3195884368216663,False,90
+n01083,Lower Thames Street,residential,1.3136407033933175,False,90
+n01084,Lower Thames Street,residential,1.40512189247194,False,90
+n01085,Lower Thames Street,primary,0.2712833859880718,False,90
+n01086,Lower Thames Street,residential,0.4084177098167819,False,90
+n01087,Lower Thames Street,residential,2.6329195030599513,False,90
+n01088,Lower Thames Street,primary,0.4445666186242178,False,90
+n01089,Lower Thames Street,residential,0.4706938722248424,False,90
+n01090,Lower Thames Street,primary,0.07171304316099027,False,90
+n01091,Lower Thames Street,residential,0.8532353221120627,False,90
+n01092,Lower Thames Street,primary,0.5301271803591452,False,90
+n01093,Lower Thames Street,residential,0.13966143414824161,False,90
+n01094,Lower Thames Street,primary,0.5565309986986042,False,90
+n01095,Lower Thames Street,residential,0.3843899351429915,False,90
+n01096,Lower Thames Street,primary,0.6812546455333344,False,90
+n01097,Lower Thames Street,primary,0.2943805381521112,False,90
+n01098,Lower Thames Street,primary,0.8710197233381082,False,90
+n01099,Lower Thames Street,primary,0.963857326512168,False,90
+n01100,Lower Thames Street,primary,1.1035600186645516,False,90
+n01101,Lower Thames Street,primary,0.49014330372615655,False,90
+n01102,Lower Thames Street,primary,1.2402047524693547,False,90
+n01103,Lower Thames Street,primary,0.14884408611026126,False,90
+n01104,Lower Thames Street,primary,1.271292265860725,False,90
+n01105,Lower Thames Street,primary,0.3502691110335338,False,90
+n01106,Lower Thames Street,primary,1.437583130645729,False,90
+n01107,Lower Thames Street,primary,0.4734047148934906,False,90
+n01108,Lower Thames Street,primary,1.576528185416068,False,90
+n01109,Lower Thames Street,primary,0.48228156757813906,False,90
+n01110,Lower Thames Street,primary,1.8589869622177135,False,90
+n01111,Lower Thames Street,primary,1.7183011908171604,False,90
+n01112,Lower Thames Street,primary,2.133062910921398,False,90
+n01113,Lower Thames Street,primary,0.5295883701538573,False,90
+n01114,Lower Thames Street,primary_link,1.6229835381888273,False,90
+n01115,Lower Thames Street,primary,0.4982039269130656,False,90
+n01116,Lower Thames Street,primary,3.0738557097935804,False,90
+n01117,Lower Thames Street,primary,0.5495175695119017,False,90
+n01118,Lower Thames Street,primary,1.5983041068981654,False,90
+n01119,Lower Thames Street,primary,0.44870154723338135,False,90
+n01120,Lower Thames Street,primary,0.5628479665127589,False,90
+n01121,Lower Thames Street,primary,0.47267967693552265,False,90
+n01122,Lower Thames Street,primary,0.5142742124967139,False,90
+n01123,Lower Thames Street,primary,0.4795727186072565,False,90
+n01124,Lower Thames Street,primary,0.7385028946953686,False,90
+n01125,Lower Thames Street,primary,0.9874213014133885,False,90
+n01126,Mansion House Place,unclassified,1.663119614385552,False,90
+n01127,Mansion House Place,service,1.5787343607846471,False,90
+n01128,Mansion House Place,service,0.0887065436563714,False,90
+n01129,Mansion House Place,service,0.3650613351148167,False,90
+n01130,Mansion House Place,service,0.5360109816009943,False,90
+n01131,Mansion House Place,footway,0.107574226341092,True,180
+n01132,Mansion House Place,footway,0.04431235057071383,True,180
+n01133,Mansion House Street,residential,0.7539441245167723,False,90
+n01134,Mansion House Street,footway,0.08473493998712045,True,180
+n01135,Mansion House Street,tertiary,1.0757849948522609,False,90
+n01136,Mark Lane,tertiary,1.4817542750906523,False,90
+n01137,Mark Lane,residential,0.04663815001490304,False,90
+n01138,Mark Lane,residential,0.5943801193412797,False,90
+n01139,Mark Lane,residential,1.0289111682011272,False,90
+n01140,Mark Lane,residential,1.1683195425166235,False,90
+n01141,Mark Lane,residential,0.9902003691534194,False,90
+n01142,Mark Lane,residential,0.2795160975106479,False,90
+n01143,Mark Lane,residential,0.17705655174732216,False,90
+n01144,Mark Lane,residential,1.659243469346029,False,90
+n01145,Mark Lane,cycleway,0.8567647742433512,True,180
+n01146,Mark Lane,residential,0.058571130323281886,False,90
+n01147,Mark Lane,residential,1.7679690358643387,False,90
+n01148,Mark Lane,residential,1.2544960302410657,False,90
+n01149,Martin Lane,residential,1.4868854433737848,False,90
+n01150,Martin Lane,residential,1.4811494443810918,False,90
+n01151,Martin Lane,residential,0.8730638692105773,False,90
+n01152,Martin Lane,residential,1.1567533870802675,False,90
+n01153,Martin Lane,residential,1.0789703395891703,False,90
+n01154,Masons Avenue,footway,2.6932166829549278,True,180
+n01155,Masons Avenue,footway,1.6476345428169854,True,180
+n01156,Masons Avenue,footway,1.5954640415699102,True,180
+n01157,Milk Street,pedestrian,0.6634563725319735,True,180
+n01158,Milk Street,pedestrian,0.9562376228879065,True,180
+n01159,Milk Street,pedestrian,2.1516666022124364,True,180
+n01160,Milk Street,unclassified,1.2781356034834561,False,90
+n01161,Milk Street,unclassified,0.4999996843367036,False,90
+n01162,Milk Street,unclassified,1.5891196283714921,False,90
+n01163,Milk Street,unclassified,1.0428040964799268,False,90
+n01164,Milk Street,unclassified,0.07121546750522138,False,90
+n01165,Mincing Lane,tertiary,0.15657542916459102,False,90
+n01166,Mincing Lane,unclassified,1.0860864717874226,False,90
+n01167,Mincing Lane,unclassified,1.0046172359489371,False,90
+n01168,Mincing Lane,unclassified,0.7123558041608399,False,90
+n01169,Mincing Lane,unclassified,0.10068731134655651,False,90
+n01170,Mincing Lane,unclassified,1.228964949796499,False,90
+n01171,Mincing Lane,unclassified,3.3864316180576504,False,90
+n01172,Mincing Lane,unclassified,2.0816023740476752,False,90
+n01173,Mincing Lane,unclassified,1.9830351481318305,False,90
+n01174,Mincing Lane,tertiary,0.126917791062887,False,90
+n01175,Monkwell Square,residential,0.9653175358855812,False,90
+n01176,Monkwell Square,residential,11.96683175408176,False,90
+n01177,Monkwell Square,residential,0.9293762391436592,False,90
+n01178,Monkwell Square,residential,0.9653175358855812,False,90
+n01179,Monkwell Square,residential,5.9368412991764075,False,90
+n01180,Monkwell Square,residential,0.8675959678854998,False,90
+n01181,Monkwell Square,residential,5.9368412991764075,False,90
+n01182,Monkwell Square,residential,0.9653175358855812,False,90
+n01183,Monkwell Square,residential,0.7039884171111408,False,90
+n01184,Monkwell Square,residential,0.7039884171111408,False,90
+n01185,Monument Street,primary,1.1035600186645516,False,90
+n01186,Monument Street,pedestrian,2.2099080663780044,True,180
+n01187,Monument Street,unclassified,0.6101971518740686,False,90
+n01188,Monument Street,unclassified,0.14262556448503608,False,90
+n01189,Monument Street,unclassified,0.3874294084542311,False,90
+n01190,Monument Street,unclassified,1.0334378810599973,False,90
+n01191,Monument Street,pedestrian,3.218961786889719,True,180
+n01192,Monument Street,pedestrian,1.7531859288343583,True,180
+n01193,Moor Lane,residential,1.7933877331975994,False,90
+n01194,Moor Lane,cycleway,0.8593347263094399,True,180
+n01195,Moorfields,cycleway,2.005665357807985,True,180
+n01196,Moorfields,corridor,0.3611856824974124,True,180
+n01197,Moorfields,corridor,0.18924061599406733,True,180
+n01198,Moorgate,tertiary,2.3577713534315454,False,90
+n01199,Moorgate,tertiary,0.45367295769716204,False,90
+n01200,Moorgate,tertiary,0.4641016089975802,False,90
+n01201,Moorgate,tertiary,0.708913979045255,False,90
+n01202,Moorgate,tertiary,1.024663843872703,False,90
+n01203,Moorgate,pedestrian,0.9024671274013448,True,180
+n01204,Moorgate,tertiary,0.5292422728259618,False,90
+n01205,Moorgate,tertiary,0.41230173595941266,False,90
+n01206,Moorgate,tertiary,0.4233807060816401,False,90
+n01207,Moorgate,tertiary,0.5447040325518279,False,90
+n01208,Moorgate,tertiary,0.9536117069880375,False,90
+n01209,Moorgate,tertiary,1.0030687704083354,False,90
+n01210,Moorgate,tertiary,0.8118267571924679,False,90
+n01211,Moorgate,tertiary,0.8312178151302346,False,90
+n01212,Moorgate,tertiary,2.838460982253459,False,90
+n01213,Moorgate,primary,3.7950129907346883,False,90
+n01214,Moorgate,primary,3.185085944261867,False,90
+n01215,Moorgate,primary,3.8634309812369025,False,90
+n01216,Moorgate,corridor,3.7315830427471783,True,180
+n01217,Moorgate,primary,4.055368790526664,False,90
+n01218,Moorgate,unclassified,2.940796935260594,False,90
+n01219,New Broad Street,tertiary,3.634021889096907,False,90
+n01220,New Broad Street,pedestrian,1.7659392469516602,True,180
+n01221,New Broad Street,pedestrian,1.897794578747475,True,180
+n01222,New Broad Street,pedestrian,2.1033816105529155,True,180
+n01223,New Broad Street,pedestrian,2.1265586128389398,True,180
+n01224,New Broad Street,pedestrian,2.2192116866359517,True,180
+n01225,New Broad Street,footway,2.443704947951311,True,180
+n01226,New Broad Street,tertiary,0.3561945309529706,False,90
+n01227,New Broad Street,corridor,0.21057448684506308,True,180
+n01228,New Broad Street,tertiary,0.7248117016971731,False,90
+n01229,New Broad Street,footway,0.6696754820121187,True,180
+n01230,New Broad Street,footway,1.0806182498548447,True,180
+n01231,New Change,unclassified,4.541735650815409,False,90
+n01232,New Change,tertiary,0.5382107002206731,False,90
+n01233,New Change,tertiary,0.7903215395858496,False,90
+n01234,New Change,tertiary,0.060069447826328816,False,90
+n01235,New Change,tertiary,0.5067354769366657,False,90
+n01236,New Change,tertiary,0.3784033851082644,False,90
+n01237,New Change,tertiary,0.43356563602093845,False,90
+n01238,New Change,tertiary,0.2654973938300349,False,90
+n01239,New Change,tertiary,0.25563906671249254,False,90
+n01240,New Change,tertiary,0.6540058626814592,False,90
+n01241,New Change Passage,footway,1.137236436405117,True,180
+n01242,New Change Passage,footway,0.4611805536940261,True,180
+n01243,New Change Passage,footway,5.141514352450357,True,180
+n01244,New Change Passage,footway,0.027280223434441177,True,180
+n01245,New Street,residential,0.6208947091998539,False,90
+n01246,New Street,residential,0.35662055420041483,False,90
+n01247,New Street,primary,0.8171051603185944,False,90
+n01248,Newgate Street,steps,0.9816611502058287,True,180
+n01249,Newgate Street,primary,0.770301565255614,False,90
+n01250,Nicholas Lane,pedestrian,0.8621718785048373,True,180
+n01251,Nicholas Lane,unclassified,0.9009636912199755,False,90
+n01252,Nicholas Lane,unclassified,1.7470624537972461,False,90
+n01253,Nicholas Lane,tertiary,0.38236695207490107,False,90
+n01254,Nicholas Lane,unclassified,0.03356865099161048,False,90
+n01255,Nicholas Lane,unclassified,0.5271354784547978,False,90
+n01256,Nicholas Lane,unclassified,0.03657896417818693,False,90
+n01257,Nicholas Lane,unclassified,0.13507517946192835,False,90
+n01258,Nicholas Lane,tertiary,1.5793533103512516,False,90
+n01259,Nicholas Passage,unclassified,0.2906221743528606,False,90
+n01260,Nicholas Passage,footway,1.660536806294295,True,180
+n01261,Nicholas Passage,footway,3.475571839080509,True,180
+n01262,Noble Street,unclassified,1.924065261725004,False,90
+n01263,Noble Street,unclassified,0.1420827743386136,False,90
+n01264,Noble Street,unclassified,0.42691134982166334,False,90
+n01265,Noble Street,unclassified,0.8563842246729142,False,90
+n01266,Noble Street,unclassified,1.1199980960289209,False,90
+n01267,Noble Street,unclassified,0.6103408570418176,False,90
+n01268,Noble Street,unclassified,0.5117835863917035,False,90
+n01269,Noble Street,pedestrian,0.7601962589999426,True,180
+n01270,Noble Street,primary,1.6443060160071952,False,90
+n01271,Oat Lane,unclassified,2.882403199632734,False,90
+n01272,Oat Lane,unclassified,2.6802497159790177,False,90
+n01273,Oat Lane,unclassified,0.14315593695121534,False,90
+n01274,Oat Lane,unclassified,1.1199980960289209,False,90
+n01275,Old Billingsgate Walk,footway,3.018935545313301,True,180
+n01276,Old Billingsgate Walk,footway,0.9793966744271048,True,180
+n01277,Old Billingsgate Walk,footway,0.9610167020598316,True,180
+n01278,Old Billingsgate Walk,footway,1.3930121112530696,True,180
+n01279,Old Broad Street,unclassified,0.6013478625528479,False,90
+n01280,Old Broad Street,unclassified,1.5448704434170202,False,90
+n01281,Old Broad Street,unclassified,0.459221001595301,False,90
+n01282,Old Broad Street,unclassified,0.3949676180539411,False,90
+n01283,Old Broad Street,unclassified,4.284364948849451,False,90
+n01284,Old Broad Street,unclassified,0.18557525876020237,False,90
+n01285,Old Broad Street,unclassified,4.91766681872614,False,90
+n01286,Old Broad Street,unclassified,0.281546225123297,False,90
+n01287,Old Broad Street,unclassified,0.9913661163365535,False,90
+n01288,Old Broad Street,footway,0.025665620251397576,True,180
+n01289,Old Broad Street,unclassified,0.03803135030473547,False,90
+n01290,Old Broad Street,unclassified,0.09760164891135988,False,90
+n01291,Old Broad Street,unclassified,0.08948367628432805,False,90
+n01292,Old Broad Street,unclassified,0.1242170687017435,False,90
+n01293,Old Broad Street,unclassified,0.2204178170820236,False,90
+n01294,Old Broad Street,unclassified,0.9335606222944837,False,90
+n01295,Old Broad Street,primary,0.7408855887704046,False,90
+n01296,Old Broad Street,tertiary,2.1224422922555686,False,90
+n01297,Old Broad Street,service,1.0005513928558971,False,90
+n01298,Old Broad Street,tertiary,1.1611141162245815,False,90
+n01299,Old Broad Street,tertiary,0.9141661681797645,False,90
+n01300,Old Broad Street,tertiary,1.9111593633657882,False,90
+n01301,Old Broad Street,tertiary,0.7193124636225324,False,90
+n01302,Old Change Court,unclassified,0.05145820882482886,False,90
+n01303,Old Change Court,pedestrian,1.018580533922706,True,180
+n01304,Old Change Court,steps,0.07353643202109521,True,180
+n01305,Old Change Court,pedestrian,5.892907295606157,True,180
+n01306,Old Jewry,tertiary,0.11055431240472671,False,90
+n01307,Old Jewry,residential,0.5390896929309708,False,90
+n01308,Old Jewry,residential,0.4952118113696895,False,90
+n01309,Old Jewry,residential,0.7976543948891789,False,90
+n01310,Old Jewry,residential,0.15313745223513267,False,90
+n01311,Old Jewry,residential,0.8292390659645441,False,90
+n01312,Old Jewry,residential,0.1734393729118804,False,90
+n01313,Old Jewry,residential,0.14401713954859585,False,90
+n01314,Old Watermen's Walk,footway,0.5839557149233111,True,180
+n01315,Old Watermen's Walk,footway,1.028269024471305,True,180
+n01316,Old Watermen's Walk,footway,1.0307519912138763,True,180
+n01317,Old Watermen's Walk,footway,1.1013350387832164,True,180
+n01318,Outwich Street,primary,0.42093393931712286,False,90
+n01319,Outwich Street,primary,1.120007359312215,False,90
+n01320,Outwich Street,primary,0.826495127303206,False,90
+n01321,Oystergate Walk,unclassified,0.4173053999117345,False,90
+n01322,Oystergate Walk,footway,0.9499216303640838,True,180
+n01323,Oystergate Walk,footway,2.1087487707249797,True,180
+n01324,Oystergate Walk,footway,1.4361810883400234,True,180
+n01325,Pancras Lane,service,1.6674108078653567,False,90
+n01326,Pancras Lane,unclassified,0.7735786978170843,False,90
+n01327,Pancras Lane,unclassified,0.02028011671463743,False,90
+n01328,Pancras Lane,tertiary,0.9896565708337935,False,90
+n01329,Panyer Alley,pedestrian,0.42237755876789357,True,180
+n01330,Panyer Alley,footway,1.5471833144899514,True,180
+n01331,Panyer Alley,footway,1.082029778700364,True,180
+n01332,Panyer Alley,pedestrian,1.0068573249130137,True,180
+n01333,Paternoster Row,pedestrian,1.597598869148098,True,180
+n01334,Paternoster Row,pedestrian,1.5644896729451587,True,180
+n01335,Paternoster Row,pedestrian,0.025897695017307917,True,180
+n01336,Paternoster Row,pedestrian,1.6541935676412052,True,180
+n01337,Paul's Walk,footway,0.538260008718594,True,180
+n01338,Paul's Walk,footway,1.3464177764710503,True,180
+n01339,Paul's Walk,footway,0.536218516330802,True,180
+n01340,Paul's Walk,footway,0.20796292047849363,True,180
+n01341,Paul's Walk,footway,0.6601291475911925,True,180
+n01342,Philpot Lane,tertiary,0.09024211983085938,False,90
+n01343,Philpot Lane,unclassified,0.37498007134919126,False,90
+n01344,Philpot Lane,unclassified,0.8178291970526446,False,90
+n01345,Philpot Lane,unclassified,0.49225819322380665,False,90
+n01346,Philpot Lane,unclassified,0.7056907281578305,False,90
+n01347,Philpot Lane,unclassified,0.17951071194342183,False,90
+n01348,Plantation Lane,unclassified,0.10068731134655651,False,90
+n01349,Plantation Lane,pedestrian,4.91313222916537,True,180
+n01350,Plantation Lane,pedestrian,5.960529387128897,True,180
+n01351,Plantation Lane,pedestrian,1.5222164457177385,True,180
+n01352,Plantation Lane,pedestrian,6.422388179438512,True,180
+n01353,Plantation Lane,pedestrian,4.140512945406836,True,180
+n01354,Plough Court,footway,1.3734786304118363,True,180
+n01355,Plough Court,footway,1.7630027242955078,True,180
+n01356,Post Office Court,footway,0.5011580024111415,True,180
+n01357,Post Office Court,footway,2.508753794836187,True,180
+n01358,Poultry,residential,0.7539441245167723,False,90
+n01359,Poultry,tertiary,1.2789678481493387,False,90
+n01360,Poultry,tertiary,2.152183822322048,False,90
+n01361,Poultry,tertiary,0.3673815088034475,False,90
+n01362,Poultry,tertiary,0.910848711624102,False,90
+n01363,Poultry,tertiary,0.11055431240472671,False,90
+n01364,Princes Street,tertiary,0.45768962226043614,False,90
+n01365,Princes Street,steps,2.087048603507874,True,180
+n01366,Princes Street,tertiary,1.7738807990201721,False,90
+n01367,Princes Street,tertiary,2.640249963803363,False,90
+n01368,Princes Street,tertiary,0.07541881590531611,False,90
+n01369,Princes Street,tertiary,0.126630367562063,False,90
+n01370,Princes Street,tertiary,1.577066374121277,False,90
+n01371,Princes Street,tertiary,0.9272007313643104,False,90
+n01372,Princes Street,tertiary,1.4498394737241387,False,90
+n01373,Pudding Lane,primary,1.6186027650208044,False,90
+n01374,Pudding Lane,unclassified,1.4436846127450098,False,90
+n01375,Pudding Lane,unclassified,0.9447803599614465,False,90
+n01376,Pudding Lane,unclassified,0.6321167811467635,False,90
+n01377,Pudding Lane,unclassified,0.35218810607615236,False,90
+n01378,Pudding Lane,unclassified,0.31077540219256977,False,90
+n01379,Pudding Lane,unclassified,1.137539504456419,False,90
+n01380,Queen Street,cycleway,1.3080362175997056,True,180
+n01381,Queen Street,unclassified,0.4424438094112422,False,90
+n01382,Queen Street,unclassified,0.8730412652328058,False,90
+n01383,Queen Street,tertiary,0.23747662426119634,False,90
+n01384,Queen Street,unclassified,0.6138568997875242,False,90
+n01385,Queen Street,tertiary,0.2187497462841119,False,90
+n01386,Queen Street,unclassified,0.4374921456463467,False,90
+n01387,Queen Street,tertiary,0.9896565708337935,False,90
+n01388,Queen Street,tertiary,0.8701667104458926,False,90
+n01389,Queen Street,tertiary,0.7114459462766656,False,90
+n01390,Queen Street,tertiary,0.5743260981005736,False,90
+n01391,Queen Street Place,primary,0.12145873642289591,False,90
+n01392,Queen Street Place,primary,1.0856540788339146,False,90
+n01393,Queen Street Place,primary,0.45412982885537595,False,90
+n01394,Queen Street Place,primary,0.0012223287795770873,False,90
+n01395,Queen Street Place,primary,0.8412407639528161,False,90
+n01396,Queen Street Place,primary,0.638380874026681,False,90
+n01397,Queen Street Place,primary,0.13686427253012223,False,90
+n01398,Queen Street Place,primary,0.4485311589366847,False,90
+n01399,Queen Street Place,primary,0.5648759253443701,False,90
+n01400,Queen Victoria Street,tertiary,1.4048846237514492,False,90
+n01401,Queen Victoria Street,tertiary,2.817449413035201,False,90
+n01402,Queen Victoria Street,tertiary,1.5044578562196256,False,90
+n01403,Queen Victoria Street,tertiary,3.2555186473826456,False,90
+n01404,Queen Victoria Street,tertiary,0.34820481632063266,False,90
+n01405,Queen Victoria Street,footway,0.47820819336071224,True,180
+n01406,Queen Victoria Street,tertiary,0.7049730606079285,False,90
+n01407,Queen Victoria Street,tertiary,0.7721645606050879,False,90
+n01408,Queen Victoria Street,tertiary,0.16670564914887986,False,90
+n01409,Queen Victoria Street,tertiary,0.09797000160115384,False,90
+n01410,Queen Victoria Street,tertiary,0.9753349447930278,False,90
+n01411,Queen Victoria Street,tertiary,0.7109497554641435,False,90
+n01412,Queen Victoria Street,tertiary,0.5153403855418259,False,90
+n01413,Queen Victoria Street,tertiary,1.1578308031798938,False,90
+n01414,Queen Victoria Street,tertiary,0.9053236497306284,False,90
+n01415,Queen Victoria Street,tertiary,1.0639329955347767,False,90
+n01416,Queen Victoria Street,tertiary,1.2789833103429615,False,90
+n01417,Queen Victoria Street,tertiary,0.4105962194832062,False,90
+n01418,Queen Victoria Street,tertiary,0.43394433586263786,False,90
+n01419,Queen Victoria Street,tertiary,0.7495541312807223,False,90
+n01420,Queen Victoria Street,tertiary,0.2351608673927951,False,90
+n01421,Queen Victoria Street,tertiary,0.04023477869440475,False,90
+n01422,Queen Victoria Street,tertiary,0.96352214867133,False,90
+n01423,Queen Victoria Street,unclassified,0.4424438094112422,False,90
+n01424,Queen Victoria Street,tertiary,0.8694522781256556,False,90
+n01425,Queen Victoria Street,tertiary,2.882510786634531,False,90
+n01426,Queen Victoria Street,unclassified,0.8173582463203131,False,90
+n01427,Queen Victoria Street,tertiary,0.5690331848597902,False,90
+n01428,Queen Victoria Street,unclassified,1.0944439212193893,False,90
+n01429,Queen Victoria Street,tertiary,4.7206545451612625,False,90
+n01430,Queen Victoria Street,unclassified,0.9577927781067727,False,90
+n01431,Queen Victoria Street,tertiary,4.777506600206819,False,90
+n01432,Queen Victoria Street,unclassified,0.2485121819208996,False,90
+n01433,Queen Victoria Street,tertiary,3.6248493120348715,False,90
+n01434,Queen Victoria Street,unclassified,0.7477126299889232,False,90
+n01435,Queen Victoria Street,tertiary,1.5044578562196256,False,90
+n01436,Queen Victoria Street,footway,0.1507628702086976,True,180
+n01437,Queen Victoria Street,tertiary,1.2481436460805713,False,90
+n01438,Queen Victoria Street,footway,0.6913357358198013,True,180
+n01439,Queen Victoria Street,tertiary,2.291056412709752,False,90
+n01440,Queen Victoria Street,footway,0.8375274098538462,True,180
+n01441,Queen Victoria Street,tertiary,0.5037030974413556,False,90
+n01442,Queen Victoria Street,footway,0.9695865706768416,True,180
+n01443,Queen Victoria Street,tertiary,0.4141180292111894,False,90
+n01444,Queen Victoria Street,tertiary,0.11826101304837346,False,90
+n01445,Queen Victoria Street,tertiary,0.18325495687396998,False,90
+n01446,Queen Victoria Street,tertiary,0.010921534239764835,False,90
+n01447,Queenhithe,footway,1.9691712442719636,True,180
+n01448,Queenhithe,residential,0.10473484361039576,False,90
+n01449,Queenhithe,residential,1.041809865690759,False,90
+n01450,Queenhithe,footway,2.3525907087197315,True,180
+n01451,Queenhithe,residential,0.1454454705877669,False,90
+n01452,Rood Lane,tertiary,0.07933297286190344,False,90
+n01453,Rood Lane,unclassified,0.20880961518690022,False,90
+n01454,Rood Lane,unclassified,0.13570568093087232,False,90
+n01455,Rood Lane,unclassified,2.442530445098641,False,90
+n01456,Rood Lane,unclassified,2.4630447349485793,False,90
+n01457,Rood Lane,unclassified,0.07109772983508333,False,90
+n01458,Royal Exchange Avenue,footway,2.954633962764799,True,180
+n01459,Royal Exchange Avenue,footway,3.639409761213198,True,180
+n01460,Royal Exchange Avenue,footway,1.5040225691514595,True,180
+n01461,Royal Exchange Buildings,tertiary,1.3663165773430337,False,90
+n01462,Royal Exchange Buildings,footway,2.835332572662479,True,180
+n01463,Royal Exchange Buildings,footway,2.0243853529099205,True,180
+n01464,Royal Exchange Buildings,footway,0.021101372746919245,True,180
+n01465,Russia Row,unclassified,0.10862325135614373,False,90
+n01466,Russia Row,unclassified,1.1088803878421902,False,90
+n01467,Russia Row,unclassified,0.5319226092646764,False,90
+n01468,Saint George's Lane,unclassified,0.2731234240621024,False,90
+n01469,Saint George's Lane,footway,0.8026940836774278,True,180
+n01470,Saint George's Lane,unclassified,0.05186176667325001,False,90
+n01471,Saint Mary Axe,tertiary,8.12076187780457,False,90
+n01472,Saint Mary Axe,residential,1.351485048423758,False,90
+n01473,Saint Mary Axe,residential,2.976922668907903,False,90
+n01474,Saint Mary Axe,residential,1.694084422866152,False,90
+n01475,Saint Mary Axe,residential,1.9340603623894614,False,90
+n01476,Saint Mary Axe,residential,2.848780881671781,False,90
+n01477,Saint Mary Axe,residential,0.5070757589284822,False,90
+n01478,Saint Mary Axe,residential,1.654032392859935,False,90
+n01479,Saint Mary Axe,residential,2.4943629921173374,False,90
+n01480,Saint Mary Axe,residential,1.3717105515132313,False,90
+n01481,Saint Mary Axe,residential,0.3185466042255715,False,90
+n01482,Saint Mary Axe,residential,0.2743268740071892,False,90
+n01483,Salters' Hall Court,service,0.4641168674614578,False,90
+n01484,Salters' Hall Court,service,1.361194219078957,False,90
+n01485,Salters' Hall Court,service,2.165158999605717,False,90
+n01486,Sherborne Lane,footway,2.9565808616588787,True,180
+n01487,Sherborne Lane,unclassified,1.8329869741481326,False,90
+n01488,Sherborne Lane,unclassified,1.5450700148756922,False,90
+n01489,Sherborne Lane,unclassified,0.8723013247369752,False,90
+n01490,Sherborne Lane,unclassified,0.8238466321824337,False,90
+n01491,Ship Tavern Passage,footway,1.3981000462937083,True,180
+n01492,Ship Tavern Passage,footway,2.4353680412198213,True,180
+n01493,Ship Tavern Passage,footway,0.715693668256231,True,180
+n01494,Skinners Lane,cycleway,1.3080362175997056,True,180
+n01495,Skinners Lane,unclassified,0.8903461877594537,False,90
+n01496,Skinners Lane,unclassified,1.0294392190929063,False,90
+n01497,Skinners Lane,unclassified,0.009602497248928858,False,90
+n01498,St Alphage Garden,path,1.742993907895847,True,180
+n01499,St Alphage Garden,footway,0.6974997033276658,True,180
+n01500,St Alphage Garden,service,0.8918079726554893,False,90
+n01501,St Alphage Garden,service,0.2849659717698008,False,90
+n01502,St Helen's Place,unclassified,8.734548714355837,False,90
+n01503,St Helen's Place,unclassified,8.734548714355837,False,90
+n01504,St Paul's Churchyard,tertiary,5.90071329134031,False,90
+n01505,St Paul's Churchyard,pedestrian,1.2951848192265503,True,180
+n01506,St Paul's Churchyard,tertiary,1.3121157378705142,False,90
+n01507,St Paul's Churchyard,pedestrian,1.597598869148098,True,180
+n01508,St Paul's Churchyard,footway,4.29269753184271,True,180
+n01509,St Paul's Churchyard,pedestrian,0.42237755876789357,True,180
+n01510,St Paul's Churchyard,tertiary,4.6814373964900975,False,90
+n01511,St Paul's Churchyard,pedestrian,1.627356530698988,True,180
+n01512,St Paul's Churchyard,tertiary,0.12412524158923657,False,90
+n01513,St Paul's Churchyard,pedestrian,1.769299221714494,True,180
+n01514,St Stephen's Row,unclassified,1.378086308319806,False,90
+n01515,St Stephen's Row,footway,0.5413942781405112,True,180
+n01516,St Stephen's Row,footway,0.312219397320416,True,180
+n01517,St Stephen's Row,footway,0.9302654551010813,True,180
+n01518,St Swithin's Lane,tertiary,1.3872965062239284,False,90
+n01519,St Swithin's Lane,unclassified,1.7044243447375809,False,90
+n01520,St Swithin's Lane,unclassified,2.208206319200082,False,90
+n01521,St Swithin's Lane,unclassified,3.276443734591742,False,90
+n01522,St Swithin's Lane,unclassified,2.7487607716507285,False,90
+n01523,St Swithin's Lane,unclassified,1.426793353756538,False,90
+n01524,St Swithin's Lane,unclassified,1.4826671372311684,False,90
+n01525,St Swithin's Lane,unclassified,1.663119614385552,False,90
+n01526,St Swithin's Lane,footway,1.0255853171260434,True,180
+n01527,St. Clement's Court,footway,1.6661071873347448,True,180
+n01528,St. Clement's Court,footway,5.767599136722413,True,180
+n01529,St. Dunstan's Alley,residential,0.373258954727401,False,90
+n01530,St. Dunstan's Alley,footway,1.1918854403187296,True,180
+n01531,St. Dunstan's Alley,footway,0.30252430136139496,True,180
+n01532,St. Dunstan's Hill,footway,1.2538198595948855,True,180
+n01533,St. Dunstan's Hill,residential,0.5403468284379139,False,90
+n01534,St. Dunstan's Hill,footway,2.062176764357239,True,180
+n01535,St. Dunstan's Hill,residential,0.7765459143475868,False,90
+n01536,St. Dunstan's Hill,footway,0.3469790648708125,True,180
+n01537,St. Dunstan's Hill,residential,0.34763797654247985,False,90
+n01538,St. Dunstan's Hill,residential,0.24876483641590524,False,90
+n01539,St. Dunstan's Hill,residential,0.373258954727401,False,90
+n01540,St. Dunstan's Hill,residential,0.22493869630378174,False,90
+n01541,St. Dunstan's Lane,unclassified,0.6306772193137701,False,90
+n01542,St. Dunstan's Lane,unclassified,0.5813022345465754,False,90
+n01543,St. Dunstan's Lane,unclassified,0.6332604874713628,False,90
+n01544,St. Martin's Le Grand,steps,0.9816611502058287,True,180
+n01545,St. Martin's Le Grand,primary,0.30649942847768874,False,90
+n01546,St. Martin's Le Grand,primary,0.20787755125292373,False,90
+n01547,St. Martin's Le Grand,primary,3.011774247404773,False,90
+n01548,St. Martin's Le Grand,platform,2.0648428679846442,False,90
+n01549,St. Martin's Le Grand,primary,2.8289449130830624,False,90
+n01550,St. Martin's Le Grand,tertiary,1.8086413023078842,False,90
+n01551,St. Martin's Le Grand,primary,1.394430544411117,False,90
+n01552,St. Martin's Le Grand,primary,0.24032781174343482,False,90
+n01553,St. Martin's Le Grand,primary,1.2648284475307794,False,90
+n01554,St. Martin's Le Grand,primary,0.8032927263919294,False,90
+n01555,St. Martin's Le Grand,primary,0.2064714714929264,False,90
+n01556,St. Mary at Hill,residential,1.3254913649866127,False,90
+n01557,St. Mary at Hill,residential,1.5003104338374564,False,90
+n01558,St. Mary at Hill,residential,1.3661786147143105,False,90
+n01559,St. Mary at Hill,residential,1.7584605957572277,False,90
+n01560,St. Mary at Hill,residential,1.297101542536066,False,90
+n01561,St. Mary at Hill,residential,1.1568208427496787,False,90
+n01562,St. Mary at Hill,residential,0.4569507627716108,False,90
+n01563,St. Mary at Hill,tertiary,0.07933297286190344,False,90
+n01564,St. Michaels Alley,footway,0.8169752030870563,True,180
+n01565,St. Michaels Alley,footway,0.1937789034522915,True,180
+n01566,St. Michaels Alley,footway,0.1937789034522915,True,180
+n01567,St. Michaels Alley,footway,0.6869042565061367,True,180
+n01568,St. Michaels Alley,footway,0.04483256301478656,True,180
+n01569,St. Michaels Alley,footway,6.427657645336435,True,180
+n01570,St. Michaels Alley,footway,0.6469756971760923,True,180
+n01571,Staining Lane,tertiary,0.9667537800578864,False,90
+n01572,Staining Lane,unclassified,0.1317881944713392,False,90
+n01573,Staining Lane,unclassified,1.4613525472661448,False,90
+n01574,Star Alley,residential,1.7679690358643387,False,90
+n01575,Star Alley,pedestrian,6.435314699753736,True,180
+n01576,Stew Lane,footway,6.3103578200074955,True,180
+n01577,Stew Lane,footway,1.8064074657659195,True,180
+n01578,Stew Lane,footway,1.8216382857897695,True,180
+n01579,Stew Lane,footway,1.2629860422251458,True,180
+n01580,Stone House Court,unclassified,0.05323730592882121,False,90
+n01581,Stone House Court,unclassified,0.2371210068900794,False,90
+n01582,Suffolk Lane,cycleway,2.273263363342801,True,180
+n01583,Suffolk Lane,unclassified,0.12357713527474386,False,90
+n01584,Suffolk Lane,unclassified,0.5791205431481459,False,90
+n01585,Suffolk Lane,residential,1.4822528307300904,False,90
+n01586,Suffolk Lane,unclassified,1.8806800653894535,False,90
+n01587,Suffolk Lane,unclassified,0.2503319483876282,False,90
+n01588,Sun Street Passage,tertiary,0.3313430673354182,False,90
+n01589,Sun Street Passage,service,0.1268626016715038,False,90
+n01590,Sun Street Passage,service,0.6292993546673425,False,90
+n01591,Sun Street Passage,footway,0.5747884563799505,True,180
+n01592,Sun Street Passage,service,0.9796176228560403,False,90
+n01593,Sun Street Passage,footway,1.0282273749671804,True,180
+n01594,Swan Lane,unclassified,0.4173053999117345,False,90
+n01595,Swan Lane,unclassified,0.2382704275393666,False,90
+n01596,Swan Lane,unclassified,0.16590630223713182,False,90
+n01597,Swan Lane,unclassified,0.09755598720615552,False,90
+n01598,Swan Lane,primary,1.5921484128274983,False,90
+n01599,Talbot Court,service,0.5551906079286296,False,90
+n01600,Talbot Court,service,3.3688834348339345,False,90
+n01601,Telegraph Street,pedestrian,1.419120042366452,True,180
+n01602,Telegraph Street,unclassified,3.954840379303317,False,90
+n01603,Telegraph Street,pedestrian,1.364452650259473,True,180
+n01604,Telegraph Street,pedestrian,0.942468203287005,True,180
+n01605,Telegraph Street,pedestrian,2.021491192564466,True,180
+n01606,Telegraph Street,pedestrian,2.061356754162192,True,180
+n01607,Threadneedle Street,unclassified,0.9114791808796855,False,90
+n01608,Threadneedle Street,unclassified,1.8396752939853174,False,90
+n01609,Threadneedle Street,unclassified,0.08055657247991765,False,90
+n01610,Threadneedle Street,unclassified,0.6158819939548923,False,90
+n01611,Threadneedle Street,unclassified,0.6013478625528479,False,90
+n01612,Threadneedle Street,unclassified,0.7812677004633076,False,90
+n01613,Threadneedle Street,unclassified,2.351489425495442,False,90
+n01614,Threadneedle Street,unclassified,1.3298656236952755,False,90
+n01615,Threadneedle Street,unclassified,1.873134283044376,False,90
+n01616,Threadneedle Street,unclassified,2.1285969959823787,False,90
+n01617,Threadneedle Street,unclassified,1.6638274020963648,False,90
+n01618,Threadneedle Street,unclassified,1.8851020264302965,False,90
+n01619,Threadneedle Street,unclassified,0.5495322341331527,False,90
+n01620,Threadneedle Street,unclassified,0.5098773845084653,False,90
+n01621,Three Barrels Walk,footway,0.5951559153215903,True,180
+n01622,Three Barrels Walk,footway,6.953675595224331,True,180
+n01623,Three Barrels Walk,footway,7.097459192611904,True,180
+n01624,Three Barrels Walk,footway,1.2565487678812792,True,180
+n01625,Three Barrels Walk,footway,3.723032823570464,True,180
+n01626,Three Barrels Walk,footway,4.063674693013999,True,180
+n01627,Three Cranes Walk,footway,2.4474006693735078,True,180
+n01628,Three Cranes Walk,footway,0.7851227840983641,True,180
+n01629,Three Cranes Walk,footway,1.5235985723159982,True,180
+n01630,Three Cranes Walk,footway,1.8430997735653316,True,180
+n01631,Throgmorton Avenue,pedestrian,1.3745077322790062,True,180
+n01632,Throgmorton Avenue,pedestrian,1.7922358783573906,True,180
+n01633,Throgmorton Avenue,pedestrian,4.984057911357894,True,180
+n01634,Throgmorton Avenue,pedestrian,1.3745077322790062,True,180
+n01635,Throgmorton Avenue,pedestrian,1.7922358783573906,True,180
+n01636,Throgmorton Avenue,unclassified,4.1787734799633816,False,90
+n01637,Throgmorton Avenue,pedestrian,1.540945153048526,True,180
+n01638,Throgmorton Street,pedestrian,2.649251872497529,True,180
+n01639,Throgmorton Street,pedestrian,0.3806972423890537,True,180
+n01640,Throgmorton Street,pedestrian,0.3696315197630178,True,180
+n01641,Throgmorton Street,pedestrian,1.6393155685013991,True,180
+n01642,Throgmorton Street,pedestrian,0.3014710513875334,True,180
+n01643,Throgmorton Street,pedestrian,2.1996890071266235,True,180
+n01644,Throgmorton Street,pedestrian,1.1459276248728532,True,180
+n01645,Throgmorton Street,pedestrian,1.916477945462141,True,180
+n01646,Throgmorton Street,unclassified,0.02113544601020047,False,90
+n01647,Tokenhouse Yard,unclassified,0.32497131605252233,False,90
+n01648,Tokenhouse Yard,unclassified,0.17992254337568866,False,90
+n01649,Tokenhouse Yard,unclassified,0.5534930189689448,False,90
+n01650,Tokenhouse Yard,unclassified,0.7842680396541885,False,90
+n01651,Tokenhouse Yard,unclassified,1.3569724241580532,False,90
+n01652,Tokenhouse Yard,unclassified,1.929844920522214,False,90
+n01653,Trig Lane,unclassified,0.2051851146685082,False,90
+n01654,Trig Lane,unclassified,0.2051851146685082,False,90
+n01655,Trump Street,tertiary,0.5309228843100283,False,90
+n01656,Trump Street,unclassified,0.2249082261296914,False,90
+n01657,Trump Street,unclassified,0.2700701514196461,False,90
+n01658,Trump Street,unclassified,0.360866251602245,False,90
+n01659,Undershaft,unclassified,3.1203431016912884,False,90
+n01660,Undershaft,unclassified,2.4844891275037138,False,90
+n01661,Undershaft,unclassified,0.8223741039333446,False,90
+n01662,Undershaft,unclassified,0.8987020537907867,False,90
+n01663,Undershaft,unclassified,1.1813817587933688,False,90
+n01664,Undershaft,unclassified,0.7468080938421331,False,90
+n01665,Undershaft,unclassified,0.7680937307903399,False,90
+n01666,Undershaft,unclassified,0.7279175571522405,False,90
+n01667,Upper Thames Street,primary,1.0024870681172866,False,90
+n01668,Upper Thames Street,primary,0.39001092744187765,False,90
+n01669,Upper Thames Street,unclassified,2.269922767133183,False,90
+n01670,Upper Thames Street,primary,1.212034640918041,False,90
+n01671,Upper Thames Street,primary,0.10990144928032972,False,90
+n01672,Upper Thames Street,primary,0.5868623902081339,False,90
+n01673,Upper Thames Street,primary,0.12631820352814996,False,90
+n01674,Upper Thames Street,primary,0.3499423421350716,False,90
+n01675,Upper Thames Street,primary,0.2626270220696914,False,90
+n01676,Upper Thames Street,primary,0.8846029686638598,False,90
+n01677,Upper Thames Street,primary,1.8702670268178887,False,90
+n01678,Upper Thames Street,primary,1.8702670268178887,False,90
+n01679,Upper Thames Street,primary,0.2255178924660307,False,90
+n01680,Upper Thames Street,primary,0.134153786580243,False,90
+n01681,Upper Thames Street,primary,0.8023629274736541,False,90
+n01682,Upper Thames Street,primary,2.954984872719381,False,90
+n01683,Upper Thames Street,primary,0.8643685823380366,False,90
+n01684,Upper Thames Street,primary,0.4667731959247509,False,90
+n01685,Upper Thames Street,primary,0.571619519953743,False,90
+n01686,Upper Thames Street,unclassified,2.269922767133183,False,90
+n01687,Upper Thames Street,primary,1.641475603388004,False,90
+n01688,Upper Thames Street,primary,0.8501074270906718,False,90
+n01689,Upper Thames Street,primary,0.01882927246169039,False,90
+n01690,Upper Thames Street,primary,0.20122179084609051,False,90
+n01691,Upper Thames Street,cycleway,3.0131950014266056,True,180
+n01692,Upper Thames Street,primary,0.4796231701396494,False,90
+n01693,Upper Thames Street,primary,0.45295477858091837,False,90
+n01694,Upper Thames Street,primary,0.4169119013558125,False,90
+n01695,Upper Thames Street,primary,0.7597861883833767,False,90
+n01696,Upper Thames Street,primary,0.8878910940706292,False,90
+n01697,Upper Thames Street,primary,0.33263239999849914,False,90
+n01698,Upper Thames Street,primary,0.330463463624986,False,90
+n01699,Upper Thames Street,primary,0.1415247906062148,False,90
+n01700,Upper Thames Street,primary,0.33766343141738236,False,90
+n01701,Upper Thames Street,primary,0.5930251846136566,False,90
+n01702,Upper Thames Street,primary,0.04280192736447194,False,90
+n01703,Upper Thames Street,primary,0.27979450356081836,False,90
+n01704,Upper Thames Street,primary,0.3708933469187441,False,90
+n01705,Upper Thames Street,primary,0.19116753202894501,False,90
+n01706,Upper Thames Street,service,0.5182888626439779,False,90
+n01707,Upper Thames Street,primary,0.9882455869838109,False,90
+n01708,Upper Thames Street,primary,0.1383238930846355,False,90
+n01709,Upper Thames Street,primary,3.1596793565163246,False,90
+n01710,Upper Thames Street,cycleway,1.7307370766068204,True,180
+n01711,Upper Thames Street,primary,0.015109556170799846,False,90
+n01712,Upper Thames Street,cycleway,1.5016239886828355,True,180
+n01713,Upper Thames Street,primary,0.04317308041544762,False,90
+n01714,Upper Thames Street,cycleway,1.591065000787981,True,180
+n01715,Upper Thames Street,primary,0.07180517481947228,False,90
+n01716,Upper Thames Street,primary,2.4442338175401805,False,90
+n01717,Upper Thames Street,primary,0.2856430567365788,False,90
+n01718,Upper Thames Street,primary,0.9819962377531231,False,90
+n01719,Upper Thames Street,primary,1.9036920891504066,False,90
+n01720,Upper Thames Street,primary,0.272848317630547,False,90
+n01721,Upper Thames Street,primary,0.2889068543985012,False,90
+n01722,Upper Thames Street,primary,0.0403914258583658,False,90
+n01723,Upper Thames Street,primary,0.17272804035185818,False,90
+n01724,Upper Thames Street,primary,0.06850697241466729,False,90
+n01725,Upper Thames Street,primary,0.16060752875177486,False,90
+n01726,Upper Thames Street,primary,3.2366717186103378,False,90
+n01727,Upper Thames Street,primary,3.2366717186103378,False,90
+n01728,Upper Thames Street,primary,0.09836084716183605,False,90
+n01729,Upper Thames Street,primary,0.23923061763535639,False,90
+n01730,Walbrook,tertiary,0.5395328080440924,False,90
+n01731,Walbrook,pedestrian,0.21652414284363278,True,180
+n01732,Walbrook,pedestrian,0.9277155222947697,True,180
+n01733,Walbrook,pedestrian,1.0340940834639945,True,180
+n01734,Walbrook,pedestrian,0.8304380996045068,True,180
+n01735,Walbrook,pedestrian,1.234017314222245,True,180
+n01736,Walbrook,unclassified,1.3368740572767848,False,90
+n01737,Walbrook,unclassified,3.8589321282362357,False,90
+n01738,Walbrook,unclassified,1.040396467337367,False,90
+n01739,Walbrook,unclassified,0.027020916876635954,False,90
+n01740,Walbrook Wharf,steps,0.8383451640616119,True,180
+n01741,Walbrook Wharf,footway,0.34187288698137747,True,180
+n01742,Walbrook Wharf,footway,2.3197735582479346,True,180
+n01743,Water Lane,footway,3.4648464872099662,True,180
+n01744,Water Lane,residential,1.8042522797936542,False,90
+n01745,Water Lane,residential,0.7488962916260442,False,90
+n01746,Watling Court,unclassified,2.3917274436485125,False,90
+n01747,Watling Court,unclassified,0.7108655976673662,False,90
+n01748,Watling Court,unclassified,0.6003212910958905,False,90
+n01749,Watling Street,tertiary,0.010921534239764835,False,90
+n01750,Watling Street,pedestrian,0.6604528678508887,True,180
+n01751,Watling Street,pedestrian,0.5076141211669264,True,180
+n01752,Watling Street,pedestrian,0.40290165069752343,True,180
+n01753,Watling Street,pedestrian,0.6538979353107777,True,180
+n01754,Watling Street,pedestrian,0.21921474892778275,True,180
+n01755,Watling Street,pedestrian,1.1867778762846852,True,180
+n01756,Watling Street,pedestrian,1.2873270012430924,True,180
+n01757,Watling Street,unclassified,1.3596372843027542,False,90
+n01758,Watling Street,unclassified,0.17452037093871672,False,90
+n01759,Watling Street,unclassified,0.20147323310151494,False,90
+n01760,Watling Street,unclassified,0.2873626708873599,False,90
+n01761,Watling Street,pedestrian,0.5008270240961498,True,180
+n01762,Watling Street,pedestrian,0.1409173251510767,True,180
+n01763,Well Court,unclassified,0.2972302017240696,False,90
+n01764,Well Court,unclassified,0.13848204541682865,False,90
+n01765,Whalebone Court,footway,0.6010265286721088,True,180
+n01766,Whalebone Court,footway,0.5736026949265596,True,180
+n01767,Whittington Avenue,pedestrian,0.13584594937734604,True,180
+n01768,Whittington Avenue,pedestrian,3.2349090267595506,True,180
+n01769,Whittington Avenue,pedestrian,2.7540031950505504,True,180
+n01770,Whittington Avenue,tertiary,2.1495601068990497,False,90
+n01771,Wood Street,unclassified,0.7841318652489764,False,90
+n01772,Wood Street,unclassified,0.6937474746196288,False,90
+n01773,Wood Street,unclassified,0.9703834814761443,False,90
+n01774,Wood Street,residential,0.3348196663252818,False,90
+n01775,Wood Street,unclassified,1.3162326237005066,False,90
+n01776,Wood Street,unclassified,0.30472431573450515,False,90
+n01777,Wood Street,unclassified,0.010347085261436281,False,90
+n01778,Wood Street,residential,0.3571350036491955,False,90
+n01779,Wood Street,unclassified,1.306849601494566,False,90
+n01780,Wood Street,unclassified,0.08910912927742097,False,90
+n01781,Wood Street,unclassified,0.24826159465076464,False,90
+n01782,Wood Street,residential,1.0790105638527328,False,90
+n01783,Wood Street,unclassified,1.3369552505961866,False,90
+n01784,Wood Street,unclassified,0.13432972916902142,False,90
+n01785,Wood Street,residential,0.8571114594300707,False,90
+n01786,Wood Street,unclassified,1.665744387646067,False,90
+n01787,Wood Street,unclassified,0.19951279773307853,False,90
+n01788,Wood Street,unclassified,0.6098326329397923,False,90
+n01789,Wood Street,unclassified,0.547639222749406,False,90
+n01790,Wood Street,unclassified,0.450945033227968,False,90
+n01791,Wood Street,unclassified,0.3902954679895265,False,90
+n01792,Wormwood Street,primary,2.028265664233156,False,90
+n01793,Wormwood Street,primary,1.8983204301907297,False,90
+n01794,Wormwood Street,primary,1.2842598944094201,False,90
+n01795,Wormwood Street,primary,0.5463536935631755,False,90
+n01796,Wormwood Street,primary,1.5550971078979228,False,90
+n01797,Wormwood Street,primary,0.6135074878490068,False,90
+n01798,Wormwood Street,primary,1.5649191339596338,False,90
+n01799,Wormwood Street,primary,0.5596946935343237,False,90
+n01800,Wormwood Street,primary,1.2853135566232596,False,90
+n01801,Wormwood Street,primary,0.5903788780129174,False,90
+n01802,Wormwood Street,primary,0.6360398204389278,False,90
+n01803,Wormwood Street,primary,0.4231311828432645,False,90
+n01804,Wormwood Street,primary,0.3854831566695393,False,90
+n01805,Wormwood Street,primary,0.25012388324649226,False,90

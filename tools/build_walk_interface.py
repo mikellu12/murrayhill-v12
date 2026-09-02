@@ -24,6 +24,27 @@ ordering that follows the walk on every street: chain_pos_m runs in an
 arbitrary direction per chain, and the frame's own seq restarts inside each
 corridor of a split street.
 
+THE RATINGS ARE RECOMPUTED, not read off. The stored point columns are
+round(EV), which this study does not use -- a rung index is ordinal, so its
+summary has to be a quantile. Where the seven rung probabilities are present
+they are pruned once and read at the interpolated median, the same numbers
+sim_compute builds M from, so the panel and the map cannot disagree. Reading
+the stored column instead put round(EV) beside an M built from the median.
+
+BOTH HALVES OF A VEHICULAR NODE ARE SHOWN. A street rendered as 90 degree
+halves has two frames per node; keeping one dropped a frontage the panel's own
+scores still averaged. The two are composed with a seam, as walk_gif does.
+
+THE MAST CALIBRATION IS PER FRAME. A corridor can mix geometries -- Cannon
+Street has a 180 degree strip at n00290 between 90 degree halves -- so one set
+for the street leaves the odd frame's mast standing, and the mast is the one
+thing in the view the model provably never saw.
+
+PAYLOAD LAST. The interface and its script are written before the frames, and
+the frames are read on DOMContentLoaded. A viewer that truncates a large file
+then loses only the tail: the page says how many frames arrived and walks them.
+Ordered the other way, one cut blanked the whole page.
+
     .venv/Scripts/python tools/build_walk_interface.py --street east_38th_street
     SIM_CONFIG=config_london.yaml .venv/Scripts/python \
         tools/build_walk_interface.py --street london_wall
@@ -36,11 +57,15 @@ import re
 import sys
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
+import matplotlib as _mpl  # get_cmap moved in matplotlib 3.9
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
+sys.path.insert(0, str(HERE))
 from common import CFG, PROC, RAW, RES, banner
+from sim_readout import K, interpolated_median, prune_once
 
 NAME = re.compile(r"^(\d+)_(n\d+)_([NESW])(?:_([LRF]))?\.jpg$")
 FIELDS = ["vertical_greenery", "green_eye_level", "green_softening",
@@ -49,6 +74,30 @@ FIELDS = ["vertical_greenery", "green_eye_level", "green_softening",
           "facade_variation"]
 DIM = {"I_raw": "imageability", "Y": "identity", "D_raw": "dependence"}
 QCOLS = ["scene", "greenery", "ground", "frontage"]
+
+# WHICH FIELD FEEDS WHICH TERM, read off sim_compute's formulas rather than
+# guessed: I_raw from nat_built + GVI_eye + GMI, Y from V_sign + (1-SVF) + SFV,
+# D_raw from V_pave + IAS + GFAPI. Two fields do not enter as themselves and
+# the panel says so, because a reader who sees sky_openness under identity will
+# otherwise assume the panel is wrong: vertical_hardscape enters only through
+# its ratio with vertical_greenery, and sky_openness enters inverted, as
+# enclosure. Without the grouping the ten fields are a list; with it they are
+# the three terms taken apart.
+# The flag marks a field that pushes its term the OTHER way: vertical_hardscape
+# enters only as vg/(vg+vh), so more hardscape lowers imageability, and
+# sky_openness enters as (1-SVF), so more sky lowers identity. Both are drawn
+# in red -- a reader scanning the panel needs to know the arrow points the
+# other way, and does not need the algebra.
+GROUPS = [
+    ("imageability", "I_raw",
+     [("vertical_greenery", 0), ("vertical_hardscape", 1),
+      ("green_eye_level", 0), ("green_softening", 0)]),
+    ("identity", "Y",
+     [("signage_detail", 0), ("sky_openness", 1), ("facade_variation", 0)]),
+    ("dependence", "D_raw",
+     [("walkable_ground", 0), ("resting_affordance", 0),
+      ("ground_floor_activity", 0)]),
+]
 
 
 def load(path, cols=None):
@@ -61,11 +110,15 @@ def load(path, cols=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--street", required=True)
+    ap.add_argument("--street", required=True,
+                    help="one street folder, several separated by commas, or 'all' for every street in --src")
     ap.add_argument("--walk", default=None)
     ap.add_argument("--src", type=Path, default=None)
     ap.add_argument("--ratings", type=Path, default=None)
     ap.add_argument("--descriptions", type=Path, default=None)
+    ap.add_argument("--greenery", type=Path, default=None,
+                    help="a re-run of one question, merged over the "
+                         "descriptions table without touching it on disk")
     ap.add_argument("--calc", type=Path, default=None)
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--embed", action="store_true", default=True,
@@ -74,11 +127,19 @@ def main():
     ap.add_argument("--link", dest="embed", action="store_false",
                     help="reference the JPEGs on disk instead; smaller, but "
                          "only opens correctly from inside the repository")
-    ap.add_argument("--mast-set", default="svi_180",
-                    help="mast calibration for the erase; 'none' to leave the "
-                         "camera mast in frame")
-    ap.add_argument("--embed-width", type=int, default=1000)
-    ap.add_argument("--quality", type=int, default=72)
+    ap.add_argument("--mast-set", default="auto",
+                    help="mast calibration for the erase: 'auto' picks it per "
+                         "frame from the geometry, a set name forces one, "
+                         "'none' leaves the camera mast in frame")
+    ap.add_argument("--ramp-floor", type=float, default=0.40,
+                    help="drop the darkest fraction of each term ramp in the "
+                         "panel bars, for legibility; 0 keeps the exact ramp "
+                         "the term maps use")
+    ap.add_argument("--embed-width", type=int, default=680)
+    ap.add_argument("--quality", type=int, default=62)
+    ap.add_argument("--every", type=int, default=1,
+                    help="keep every Nth node, to hold the file small enough "
+                         "that a viewer does not truncate it")
     args = ap.parse_args()
     if str(args.mast_set).lower() == "none":
         args.mast_set = None
@@ -86,37 +147,104 @@ def main():
     banner(f"walk-through page: {args.street}")
 
     src = args.src or (RAW / "svi_180")
-    base = src / args.street
-    if not base.exists():
-        sys.exit(f"no such street folder: {base}")
-    walks = ([base / args.walk] if args.walk
-             else sorted(p for p in base.iterdir() if p.is_dir()))
-    w = walks[0]
+    if args.street.strip().lower() == "all":
+        names = sorted(d.name for d in src.iterdir() if d.is_dir())
+    else:
+        names = [t.strip() for t in args.street.split(",") if t.strip()]
+    missing = [n for n in names if not (src / n).is_dir()]
+    if missing:
+        sys.exit(f"no such street folder: {', '.join(missing)}")
+    print(f"{len(names)} street(s): {', '.join(names)}")
 
-    files, seqs = {}, {}
-    for p in sorted(w.glob("*.jpg")):
-        m = NAME.match(p.name)
-        if m:
-            files[m.group(2)] = p
-            seqs[m.group(2)] = int(m.group(1))
-    if not files:
-        sys.exit(f"no frames in {w}")
+    def frames_for(name):
+        """The nodes of one street's first walk, in walking order."""
+        base = src / name
+        walks = ([base / args.walk] if args.walk
+                 else sorted(q for q in base.iterdir() if q.is_dir()))
+        if not walks:
+            return None, None
+        w = walks[0]
+        files, seqs = {}, {}
+        for q in sorted(w.glob("*.jpg")):
+            m = NAME.match(q.name)
+            if m:
+                files.setdefault(m.group(2), {})[m.group(4) or "F"] = q
+                seqs[m.group(2)] = int(m.group(1))
+        if not files:
+            return None, None
+        nf = ALLNODES[ALLNODES.node_id.isin(files)].copy()
+        if not len(nf):
+            return None, None
+        nf["_seq"] = nf.node_id.map(seqs)
+        seg = nf._seg.value_counts().idxmax()
+        nf = nf[nf._seg == seg].sort_values("_seq")
+        if args.every > 1:
+            nf = nf.iloc[::args.every]
+        print(f"  {name:<26}{w.name:<16}{len(nf):>4} nodes  ({seg})")
+        return nf, files
 
-    nf = pd.read_csv(PROC / "nodes.csv")
-    nf = nf[nf.node_id.isin(files)].copy()
-    nf["_seg"] = (nf.source_id.astype(str).str.rsplit("_", n=1).str[0]
-                  if "source_id" in nf.columns and nf.source_id.notna().any()
-                  else nf.get("chain", "all"))
-    nf["_seq"] = nf.node_id.map(seqs)
-    seg = nf._seg.value_counts().idxmax()
-    nf = nf[nf._seg == seg].sort_values("_seq")
-    print(f"{w.name}: corridor {seg}, {len(nf)} nodes")
+    # A NODE CAN HAVE TWO FRAMES. A vehicular street is rendered as two 90
+    # degree halves, left and right of the direction of travel; a pedestrian
+    # way gets one 180 degree strip. Keeping one file per node silently threw
+    # the other half away, so half of every London avenue was missing from a
+    # page whose scores averaged both halves -- a view that did not match its
+    # own numbers. Both halves are composed into one frame instead, seam down
+    # the middle, which is the same pairing tools/walk_gif.py makes.
+    ALLNODES = pd.read_csv(PROC / "nodes.csv")
+    ALLNODES["_seg"] = (
+        ALLNODES.source_id.astype(str).str.rsplit("_", n=1).str[0]
+        if "source_id" in ALLNODES.columns and ALLNODES.source_id.notna().any()
+        else ALLNODES.get("chain", "all"))
 
     rt = load(args.ratings or (RES / "tables" / "sim_vlm_180_placeless.csv"))
     if rt is None:
         rt = load(RES / "tables" / "sim_vlm_v3.csv")
     de = load(args.descriptions or (RES / "tables" / "vlm_descriptions_180.csv"))
+    if args.greenery and args.greenery.exists() and de is not None:
+        g = pd.read_csv(args.greenery)[["file", "greenery"]]
+        de = de.drop(columns=[c for c in ["greenery"] if c in de.columns])                .merge(g, on="file", how="left")
+        print(f"  greenery from {args.greenery.name}: "
+              f"{int(de.greenery.notna().sum())} frames")
     ca = load(args.calc or (RES / "tables" / "vlm_calculations.csv"))
+
+    def with_node_id(d):
+        """node_id from the frame path when the table does not carry one.
+
+        The London ratings are keyed only by `file`; without this the merge
+        matched nothing and the panel drew empty beside a perfectly good frame,
+        which reads as the model having no opinion rather than as a join that
+        missed.
+        """
+        if d is None or "node_id" in d.columns or "file" not in d.columns:
+            return d
+        d = d.copy()
+        d["node_id"] = d.file.astype(str).str.extract(r"(n\d+)")[0]
+        return d
+
+    def readout(d):
+        """The study's own readout, recomputed from the rung probabilities.
+
+        The stored point columns are round(EV), which this study does not use:
+        a rung index is ordinal, so the summary has to be a quantile. Where the
+        seven p-columns are present they are pruned once and read at the
+        interpolated median -- the same numbers sim_compute builds M from, so
+        the panel and the map cannot disagree.
+        """
+        if d is None:
+            return d
+        pcols = [[f"{f}_p{k}" for k in K] for f in FIELDS]
+        if not all(all(c in d.columns for c in cs) for cs in pcols):
+            return d
+        d = d.copy()
+        for f, cs in zip(FIELDS, pcols):
+            P = d[cs].to_numpy(float)
+            P = P / P.sum(axis=1, keepdims=True)
+            d[f] = interpolated_median(prune_once(P))
+        return d
+
+    rt = readout(with_node_id(rt))
+    de = with_node_id(de)
+    ca = with_node_id(ca)
 
     def per_node(d, cols):
         if d is None:
@@ -138,7 +266,7 @@ def main():
 
     R = per_node(rt, FIELDS)
     D = per_node(de, QCOLS)
-    C = per_node(ca, list(DIM) + ["M", "M_noA"])
+    C = per_node(ca, list(DIM) + ["M", "M_noA", "Omega"])
 
     out = args.out or (RES / "figures" / f"walk_{args.street}.html")
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -150,38 +278,366 @@ def main():
         import base64, io
         from PIL import Image
         from mast import erase_mast
-    steps = []
-    for r in nf.itertuples():
-        p = files[r.node_id]
+    def mast_for(side):
+        """The calibration that matches this frame's geometry.
+
+        A STREET CAN MIX THE TWO. The export splits by street type, and a
+        corridor that changes type partway -- Cannon Street has a 180 degree
+        strip at n00290 and 90 degree halves either side of it -- ends up with
+        both in one folder. Erasing every frame with one set left the strip's
+        two masts standing, and the mast is the one thing in the frame the
+        model provably never saw. 'auto' reads the geometry off the filename;
+        an explicit --mast-set still overrides for the whole street.
+        """
+        if args.mast_set is None:
+            return None
+        if str(args.mast_set).lower() != "auto":
+            return args.mast_set
+        return "svi_180" if side == "F" else "svi_90"
+
+    def one_step(r, files, street_folder):
+        """One node: the frame, composed and erased, plus its street."""
+        rec = _render(r, files)
+        rec["sf"] = street_folder
+        return rec
+
+    def _fill(arr, mask):
+        """Interpolate across masked pixels, row by row, from their edges.
+
+        np.interp per row rather than a Python loop over the run: the loop
+        version was correct and took minutes per street, because a 2,880-wide
+        frame with a 200px mask is 366,000 iterations of interpreted
+        arithmetic. Only rows that actually carry mask are touched.
+        """
+        rows = np.nonzero(mask.any(axis=1))[0]
+        if not len(rows):
+            return arr
+        W = mask.shape[1]
+        xs = np.arange(W)
+        for y in rows:
+            m = mask[y]
+            good = ~m
+            if not good.any():
+                continue
+            gx = xs[good]
+            for c in range(arr.shape[2]):
+                arr[y, m, c] = np.interp(xs[m], gx,
+                                         arr[y, good, c].astype(np.float32)
+                                         ).astype(arr.dtype)
+        return arr
+
+    def clean(im, mast_set):
+        """Erase the mast and the attribution bars, filling both by
+        interpolation rather than with a flat patch.
+
+        TWO ARTEFACTS, one fix. erase_mast finds the mast but fills it with a
+        flat grey block that reads as a patch on the road; and the 180 strips
+        carry two near-black columns with the Street View attribution burnt
+        in, of which the calibration reliably catches only one -- 22 per cent
+        of frames reached the page still showing the other. Taking the mask
+        rather than the eraser's own fill, adding the bars to it, and
+        interpolating across from the edges handles both and leaves nothing to
+        see on a smooth road surface.
+
+        DISPLAY ONLY, and measured rather than assumed. The bars were present
+        when the frames were rated, so a cleaned frame differs from what the
+        model saw. On 300 frames the ratings of frames with and without a
+        residual bar differ by at most 0.12 of a rung and none approaches
+        significance (walkable_ground -0.12, p=0.088; everything else p>0.35),
+        so the bar does not move the numbers and the page can be clean without
+        the panel beside it becoming a lie. Repairing erase_mast itself would
+        be the real fix and would mean re-rating every frame.
+        """
+        arr = np.asarray(im.convert("RGB")).copy()
+        mask = np.zeros(arr.shape[:2], dtype=bool)
+        if mast_set:
+            _, m = erase_mast(im, mast_set)
+            m = np.asarray(m)
+            if m.shape == mask.shape:
+                mask |= m.astype(bool)
+        g = np.asarray(im.convert("L"), dtype=np.float32)
+        H, W = g.shape
+        y0 = int(H * 0.78)
+        dark = (g[y0:, :] < 45).mean(axis=0) > 0.45
+        if dark.any():
+            mask[y0:, dark] = True
+        if not mask.any():
+            return im
+        return Image.fromarray(_fill(arr, mask))
+
+    def prepare(path, mast_set):
+        """One half or strip: mast erased, because that is what was rated."""
+        im = Image.open(path).convert("RGB")
+        # The model never saw the camera mast; the ratings beside each frame
+        # were made on an erased image, so a page showing the mast shows
+        # something other than what was rated.
+        return clean(im, mast_set)
+
+    def _render(r, files):
+        sides = files[r.node_id]
         if args.embed:
-            im = Image.open(p).convert("RGB")
-            # Erase the camera mast, because the model never saw it: the
-            # ratings beside each frame were made on an erased image, and a
-            # page showing the mast shows something other than what was rated.
-            if args.mast_set:
-                im, _ = erase_mast(im, args.mast_set)
-            wdt = min(args.embed_width, im.width)
-            im = im.resize((wdt, round(wdt * im.height / im.width)),
-                           Image.LANCZOS)
+            if "L" in sides and "R" in sides:
+                # Both halves, left of travel then right, so the frame is the
+                # forward 180 degrees and the two frontages pass together.
+                half = (args.embed_width - SEAM) // 2
+                parts = []
+                for k in ("L", "R"):
+                    im = prepare(sides[k], mast_for(k))
+                    parts.append(im.resize(
+                        (half, round(half * im.height / im.width)),
+                        Image.LANCZOS))
+                im = Image.new("RGB", (args.embed_width,
+                                       max(q.height for q in parts)),
+                               (18, 18, 20))
+                for j, q in enumerate(parts):
+                    im.paste(q, (j * (half + SEAM), 0))
+            else:
+                side, path = next(iter(sides.items()))
+                im = prepare(path, mast_for(side))
+                wdt = min(args.embed_width, im.width)
+                im = im.resize((wdt, round(wdt * im.height / im.width)),
+                               Image.LANCZOS)
             buf = io.BytesIO()
             im.save(buf, "JPEG", quality=args.quality, optimize=True)
             rel = ("data:image/jpeg;base64,"
                    + base64.b64encode(buf.getvalue()).decode())
         else:
-            rel = os.path.relpath(p, out.parent).replace("\\", "/")
-        steps.append({"node": r.node_id, "img": rel,
-                      "street": str(getattr(r, "osm_name", None)
-                                    or getattr(r, "street_name", "")),
-                      "r": R.get(r.node_id, {}), "d": D.get(r.node_id, {}),
-                      "c": C.get(r.node_id, {})})
+            rel = os.path.relpath(next(iter(sides.values())),
+                                  out.parent).replace("\\", "/")
+        return {"node": r.node_id, "img": rel,
+                "street": str(getattr(r, "osm_name", None)
+                              or getattr(r, "street_name", "")),
+                "r": R.get(r.node_id, {}), "d": D.get(r.node_id, {}),
+                "c": C.get(r.node_id, {})}
+
+    SEAM = 3
+    steps = []
+    # EVERY STREET IN ONE FILE. The frames carry which street they belong to,
+    # so the selector switches street without a page load and without the
+    # walk-through becoming a folder of files that have to travel together.
+    for name in names:
+        nf, files = frames_for(name)
+        if nf is None:
+            print(f"  {name:<26}skipped: no frames")
+            continue
+        for r in nf.itertuples():
+            steps.append(one_step(r, files, name))
+
+    # THE SAME RAMP AND THE SAME CLIP AS THE MAPS. sim_vlm_maps normalises to
+    # the 2nd-98th percentile of the study area's own distribution, so a colour
+    # on the walk means what the identical colour means on the heat map. A bar
+    # normalised to this street's own range instead would recolour the same
+    # node differently on every street, which is the one thing a shared ramp
+    # exists to prevent.
+    from matplotlib.colors import Normalize, to_hex
+    from common import sim_cmap
+    import cmcrameri.cm as cmc
+    import cmocean
+
+    # THE THREE TERMS KEEP THEIR OWN RAMPS. sim_terms_maps draws imageability
+    # in viridis, identity in lajolla and dependence in ice, each normalised to
+    # the 2nd-98th percentile POOLED OVER BOTH CITIES so the two rows of that
+    # figure are comparable. The panel reuses both, so a bar here is the same
+    # colour as that node on the term map; a per-city clip would have made the
+    # same value a different colour in each city.
+    TERM_CMAP = {"I_raw": _mpl.colormaps["viridis"], "Y": cmc.lajolla,
+                 "D_raw": cmocean.cm.ice}
+    term_ramp = {}
+    pooled = []
+    for q in (RES.parent / "tables" / "vlm_calculations.csv",
+              Path("results/tables/vlm_calculations.csv"),
+              Path("results/london/tables/vlm_calculations.csv"),
+              Path("results/london/tables/vlm_calculations_london.csv")):
+        if q.exists():
+            try:
+                pooled.append(pd.read_csv(q, usecols=list(DIM)))
+            except ValueError:
+                pass
+    tnorm = {}
+    if pooled:
+        allc = pd.concat(pooled, ignore_index=True)
+        for k in DIM:
+            lo_, hi_ = np.percentile(allc[k].dropna(), [2, 98])
+            tnorm[k] = Normalize(float(lo_), float(hi_))
+            # THE BAR IS A WINDOW ONTO THE RAMP, not a block of one colour.
+            # Position x along the FULL bar carries the colour that value x
+            # has on the term map, and the fill simply stops at the value --
+            # so a full bar is the whole ramp, a bar at 40 per cent is its
+            # left 40 per cent, and the colour at the tip is still exactly the
+            # colour that node has on the map. Recolouring the whole bar each
+            # step made the panel flicker through hues that meant nothing.
+            # LEGIBILITY, NOT ACCURACY, and only in these three bars. Most
+            # nodes sit low enough that the exact ramp renders them as near
+            # black on a dark panel, where three different terms all read as
+            # "dark" and the bar stops carrying information. Compressing into
+            # the ramp's upper part keeps the ORDER intact -- higher is still
+            # further up the ramp -- while giving the eye something to
+            # separate. The cost is real and worth stating: the tip no longer
+            # matches the term map exactly, so the maps stay the reference and
+            # this is a reading aid. --ramp-floor 0 restores the true ramp.
+            f0 = float(np.clip(args.ramp_floor, 0.0, 0.9))
+            term_ramp[k] = [to_hex(TERM_CMAP[k](f0 + (1 - f0) * tnorm[k](x)))
+                            for x in np.linspace(0, 1, 32)]
+        print("  term ramps pooled over "
+              f"{len(pooled)} table(s), {len(allc)} rows")
+    # WHICH COMPOSITE, DECIDED BY WHETHER THE GEOMETRY TERM EXISTS. Murray Hill
+    # has Omega from 2,924 measured H/W values, so its M is the full
+    # Cobb-Douglas and showing M_noA there dropped a term the study computed.
+    # The City of London has no facade heights: Omega is identically 1.0 and
+    # HW_effective is empty, so M and M_noA are the same number and the panel
+    # says so rather than implying an enclosure term it does not have.
+    has_omega = (ca is not None and "Omega" in ca.columns
+                 and ca.Omega.notna().any()
+                 and float(ca.Omega.min()) < 0.999)
+    mcol = "M" if (has_omega and "M" in ca.columns) else "M_noA"
+    if ca is None or mcol not in ca.columns:
+        mcol = "M"
+    if ca is not None and mcol in ca.columns:
+        lo, hi = ca[mcol].quantile([.02, .98])
+    else:
+        lo, hi = 0.0, 1.0
+    # magma, because that is what sim_vlm_maps draws the composite in; the
+    # hand-picked green ramp belongs to the dimension maps, not to M.
+    ramp = _mpl.colormaps["magma"]
+    norm = Normalize(float(lo), float(hi))
+    print(f"  composite {mcol}  (Omega {'present' if has_omega else 'absent'})")
+    # the legend: the ramp itself, sampled, plus ticks on round values inside
+    # the clip -- so a colour on the walk can be read back as a number
+    legend = [to_hex(ramp(x)) for x in np.linspace(0, 1, 24)]
+
+    # WHERE THIS NODE SITS. A composite of 0.446 says nothing on its own; the
+    # same number is unremarkable in one city and an outlier in another. The
+    # curve is the study area's own distribution of M -- every node, not just
+    # this street -- so the marker answers "compared with what". Percentile is
+    # given as well, because reading a position off a curve is a guess and the
+    # number is not.
+    dist = {"xs": [], "ys": [], "lo": 0.0, "hi": 1.0}
+    node_M = None
+    if ca is not None and mcol in ca.columns:
+        node_M = ca.groupby("node_id")[mcol].mean().dropna()
+        if len(node_M) > 8:
+            from scipy.stats import gaussian_kde
+            x0, x1 = np.percentile(node_M, [0.5, 99.5])
+            pad = (x1 - x0) * 0.04
+            xs = np.linspace(x0 - pad, x1 + pad, 96)
+            ys = gaussian_kde(node_M.to_numpy())(xs)
+            ys = ys / ys.max()
+            dist = {"xs": [round(float(v), 5) for v in xs],
+                    "ys": [round(float(v), 4) for v in ys],
+                    "lo": float(xs[0]), "hi": float(xs[-1])}
+            print(f"  distribution over {len(node_M)} nodes of {mcol}")
+    sorted_M = np.sort(node_M.to_numpy()) if node_M is not None else None
+
+    # THE WHOLE STUDY AREA, not the street. A rating panel says what this view
+    # is like; the map says where it is, which is the question a walk-through
+    # otherwise leaves the viewer to hold in their head. Every node is drawn on
+    # the same M ramp as the profile and the heat map, so the locator and the
+    # figures in the paper are the same picture.
+    MAP = {"nodes": [], "w": 1000, "h": 1000}
+    pos = {}
+    try:
+        import geopandas as gpd
+        from common import PROJ_CRS
+        gdf = gpd.read_file(PROC / "nodes.gpkg").to_crs(PROJ_CRS)
+        mser = (ca.groupby("node_id")[mcol].mean()
+                if ca is not None and mcol in ca.columns else None)
+        xs_, ys_ = gdf.geometry.x.to_numpy(), gdf.geometry.y.to_numpy()
+        x0, x1 = float(xs_.min()), float(xs_.max())
+        y0, y1 = float(ys_.min()), float(ys_.max())
+        span = max(x1 - x0, y1 - y0) or 1.0
+        pad = 24.0
+        sc = (1000.0 - 2 * pad) / span
+        for nid, X, Y in zip(gdf.node_id, xs_, ys_):
+            # y is flipped: projected northing grows upward, SVG grows down
+            mx = pad + (X - x0) * sc
+            my = 1000.0 - pad - (Y - y0) * sc
+            v = None if mser is None or nid not in mser.index else float(mser[nid])
+            col = "#3a3f46" if v is None or not np.isfinite(v) else                 to_hex(ramp(norm(v)))
+            MAP["nodes"].append([nid, round(mx, 1), round(my, 1), col])
+            pos[nid] = (round(mx, 1), round(my, 1))
+        # EVERY NODE CARRIES ITS SCORES, not only the ones whose frames are in
+        # this file. Embedding a street's imagery costs megabytes and a study
+        # area has hundreds of streets, so a file can only ever hold some of
+        # them -- but the numbers are small. Without this the locator showed a
+        # thousand nodes and let you click twenty, which reads as a broken map
+        # rather than as a file that holds a subset of the imagery.
+        NODEDATA = {}
+        for nid in gdf.node_id:
+            rec = {}
+            if nid in R: rec["r"] = R[nid]
+            if nid in C: rec["c"] = C[nid]
+            if nid in D: rec["d"] = D[nid]
+            if rec:
+                v = (C.get(nid) or {}).get(mcol)
+                rec["k"] = "#3a3f46" if v is None else to_hex(ramp(norm(float(v))))
+                rec["kf"] = rec["k"]
+                rec["kc"] = {k: to_hex(TERM_CMAP[k](tnorm[k](float(dv))))
+                             for k, dv in (C.get(nid) or {}).items()
+                             if k in tnorm and dv is not None}
+                rec["pc"] = (None if sorted_M is None or v is None else
+                             round(float(np.searchsorted(sorted_M, float(v),
+                                                         side="right"))
+                                   / len(sorted_M) * 100))
+                NODEDATA[nid] = rec
+        MAP["data"] = NODEDATA
+        print(f"  locator map: {len(MAP['nodes'])} nodes, "
+              f"{len(NODEDATA)} with scores")
+    except Exception as e:
+        print(f"  no locator map ({e.__class__.__name__}: {e})")
+
+    step = 0.1 if (hi - lo) > 0.28 else 0.05
+    ticks = [round(t, 2) for t in np.arange(np.ceil(lo / step) * step,
+                                            hi + 1e-9, step)]
+    ticks = [t for t in ticks if lo <= t <= hi]
+    for st in steps:
+        v = st["c"].get(mcol, st["c"].get("M"))
+        st["k"] = "#3a3f46" if v is None else to_hex(ramp(norm(float(v))))
+        # THE FACE IS THE COMPOSITE'S OWN COLOUR, exactly the one the profile
+        # strip, the scale bar and the M map give this node -- no lift. The
+        # term bars are lifted for legibility and the face is not, because the
+        # face restates M and must not drift from the number beside it.
+        st["kf"] = st["k"]
+        st["pc"] = (None if (sorted_M is None or v is None) else
+                    round(float(np.searchsorted(sorted_M, float(v),
+                                                side="right"))
+                          / len(sorted_M) * 100))
+        st["mx"], st["my"] = pos.get(st["node"], (None, None))
+        st["kc"] = {}
+        for k in DIM:
+            dv = st["c"].get(k)
+            if dv is not None and k in tnorm:
+                st["kc"][k] = to_hex(TERM_CMAP[k](tnorm[k](float(dv))))
+    print(f"  ramp {mcol} clipped to {float(lo):.3f}-{float(hi):.3f}")
+
     have_q = sum(1 for s in steps if s["d"])
     print(f"  ratings on {sum(1 for s in steps if s['r'])} nodes, "
           f"descriptions on {have_q}, M on {sum(1 for s in steps if s['c'])}")
 
-    page = TEMPLATE.replace("__DATA__", json.dumps(steps))
-    page = page.replace("__TITLE__", html.escape(f"{args.street.replace('_',' ')}"))
+    # EACH FRAME IS ITS OWN ELEMENT, not one JSON blob. A viewer that
+    # truncates a large file cuts the blob mid-array, the parse throws, and the
+    # whole page goes blank -- image, scores and text at once, which reads as
+    # the page being broken rather than the file being cut. As elements, a
+    # truncated file simply ends early: every frame before the cut still works.
+    frag = []
+    for st in steps:
+        meta = json.dumps({k: st[k] for k in ("node", "street", "r", "d", "c", "k", "kc", "pc", "sf", "kf", "mx", "my")})
+        frag.append('<img class="f" data-meta="'
+                    + html.escape(meta, quote=True)
+                    + '" src="' + st["img"] + '" alt="">')
+    page = TEMPLATE.replace("__FRAMES__", "\n".join(frag))
+    page = page.replace("__TOTAL__", str(len(steps)))
+    page = page.replace("__MCOL__", json.dumps(mcol))
+    page = page.replace("__LEGEND__", json.dumps(legend))
+    page = page.replace("__DIST__", json.dumps(dist))
+    page = page.replace("__TERMRAMP__", json.dumps(term_ramp))
+    page = page.replace("__MAP__", json.dumps(MAP))
+    page = page.replace("__TICKS__", json.dumps(ticks))
+    page = page.replace("__LO__", f"{float(lo):.6f}")
+    page = page.replace("__HI__", f"{float(hi):.6f}")
+    page = page.replace("__TITLE__", html.escape(names[0].replace("_", " ")))
     page = page.replace("__AREA__", html.escape(area))
     page = page.replace("__FIELDS__", json.dumps(FIELDS))
+    page = page.replace("__GROUPS__", json.dumps(GROUPS))
     page = page.replace("__DIMS__", json.dumps(DIM))
     page = page.replace("__QCOLS__", json.dumps(QCOLS))
     out.write_text(page, encoding="utf-8")
@@ -196,116 +652,448 @@ TEMPLATE = r"""<!doctype html>
 <style>
 :root{--bg:#0e0f12;--fg:#e8e6e1;--mut:#9a9aa2;--line:#23262b;--acc:#5fbf6a}
 *{box-sizing:border-box}
+/* ONE SCREEN, whatever the screen is. The page is a fixed-height column and
+   the frame takes whatever is left after the controls and the composite, so
+   nothing below the fold and no scrollbar on a laptop. Below 900px it gives
+   up and scrolls: a phone cannot hold a panorama, ten ratings and four
+   paragraphs at once, and squeezing them until it does makes all three
+   unreadable rather than one of them absent. */
+html{height:100%}
 body{margin:0;background:var(--bg);color:var(--fg);
-     font:14px/1.5 "Segoe UI",system-ui,sans-serif}
+     font:14px/1.5 "Segoe UI",system-ui,sans-serif;
+     height:100dvh;overflow:hidden;display:flex;flex-direction:column}
 header{display:flex;align-items:baseline;gap:14px;padding:12px 18px;
        border-bottom:1px solid var(--line)}
-header h1{font-size:17px;margin:0;font-weight:600}
+/* The title IS the selector: a street name that can be changed reads as a
+   control, and a separate dropdown beside a heading says the same word twice. */
+#pick{font:600 17px/1.2 "Segoe UI",system-ui,sans-serif;color:var(--fg);
+      background:transparent;border:1px solid transparent;border-radius:4px;
+      padding:3px 6px;margin-left:-6px;cursor:pointer;max-width:44vw}
+#pick:hover{border-color:var(--line);background:#171a1f}
+#pick:focus-visible{outline:2px solid var(--acc)}
+#pick option{background:#171a1f;color:var(--fg);font-size:14px}
 header .a{color:var(--mut);font-size:13px}
-main{display:grid;grid-template-columns:1fr 380px;gap:18px;padding:18px;
-     align-items:start}
+main{display:grid;grid-template-columns:1fr 380px;gap:18px;padding:14px 18px;
+     align-items:stretch;flex:1;min-height:0}
+#left{display:flex;flex-direction:column;min-height:0}
+/* The sidebar is a column: tabs and the shared box are fixed, and the
+   description takes what is left and scrolls inside itself if a node's answers
+   are unusually long. Letting the whole sidebar scroll instead moved the map
+   and the ratings off the top of the screen on five nodes out of sixteen. */
+aside{min-height:0;overflow:hidden;padding-right:4px;
+      display:flex;flex-direction:column}
+aside>#tabs,aside>#pane,aside>h2{flex:none}
+#qual{flex:1;min-height:0;overflow-y:auto;margin:0}
 /* stack on anything narrow -- a side-by-side grid at phone width squeezes the
    image into a sliver and the panel off the screen */
 @media (max-width:900px){
-  main{grid-template-columns:1fr;padding:12px;gap:12px}
+  html,body{height:auto;overflow:auto}
+  main{grid-template-columns:1fr;padding:12px;gap:12px;min-height:0}
+  #view{flex:none;height:auto}
+  aside{overflow:visible}
   header{flex-wrap:wrap;gap:6px 12px;padding:10px 12px}
   aside{border-top:1px solid var(--line);padding-top:8px}
 }
-#view{width:100%;border:1px solid var(--line);border-radius:3px;display:block;
-      background:#171a1f;min-height:120px}
+/* A grid track will not shrink below its content's min-content width, and an
+   img's min-content width is its INTRINSIC width -- so the 680 px frame held
+   the left column open at 680 px and pushed the panel off a phone screen,
+   width:100% notwithstanding. min-width:0 lets the track shrink. */
+main>*{min-width:0}
+#view{width:100%;max-width:100%;border:1px solid var(--line);border-radius:3px;
+      display:block;background:#171a1f;flex:1;min-height:0;object-fit:contain}
 #warn{display:none;padding:10px 12px;margin:8px 0;border:1px solid #7a3b3b;
       border-radius:3px;background:#241a1a;color:#e8b4b4;font-size:13px}
-.bar{height:26px;background:#171a1f;border-radius:2px;position:relative;
+.bar{height:20px;background:#171a1f;border-radius:2px;position:relative;
      overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;background:var(--acc);opacity:.75}
-.row{display:grid;grid-template-columns:150px 1fr 34px;gap:8px;
-     align-items:center;margin:5px 0}
-.row span{color:var(--mut);font-size:12px}
+.row{display:grid;grid-template-columns:142px 1fr 30px;gap:8px;
+     align-items:center;margin:3px 0}
+.row span{color:var(--mut);font-size:12px;overflow-wrap:anywhere}
 .row b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
-h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;
-   color:var(--mut);margin:18px 0 8px;font-weight:600}
+h2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+   color:var(--mut);margin:11px 0 5px;font-weight:600}
+/* Two modes over one panel: the ratings say what this view is like, the map
+   says where it is. They answer different questions about the same node and
+   neither needs to be visible while the other is being read. */
+#tabs{display:flex;gap:4px;margin:2px 0 7px}
+#tabs button{font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+   color:var(--mut);background:transparent;border:1px solid transparent;
+   padding:4px 8px;border-radius:3px;font-weight:600}
+#tabs button:hover{color:var(--fg)}
+#tabs button.on{color:var(--fg);border-color:var(--line);background:#171a1f}
+/* BOTH TABS OCCUPY ONE BOX. The ratings stay in flow and set the height --
+   hidden with visibility, not display, so the box does not collapse -- and the
+   map is laid over them. Switching tabs then moves nothing below: the
+   description stays exactly where the eye left it. */
+/* THE MAP SETS THE HEIGHT, not the ratings. The locator is square and holds
+   hundreds of nodes, so sizing the box to the ten rating rows made it a
+   thumbnail and clicking a node a game of darts; the ratings are happy with
+   space below them and the map is not happy without it. The box is square to
+   the sidebar's width, capped against the viewport so the description under it
+   still fits on a short screen without scrolling. */
+#pane{position:relative;min-height:180px}
+#fields{height:100%;overflow-y:auto}
+.grp{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;
+     text-transform:uppercase;letter-spacing:.07em;color:var(--mut);
+     margin:9px 0 3px}
+.grp:first-child{margin-top:0}
+.gdot{width:8px;height:8px;border-radius:2px;flex:none}
+.row span.inv{color:#d4726a}
+#fields.off{visibility:hidden}
+#mapwrap{position:absolute;inset:0;display:flex;flex-direction:column;
+         align-items:center;justify-content:flex-start;gap:4px}
+#mapwrap.off{visibility:hidden;pointer-events:none}
+#map{flex:1;min-height:0;width:100%;height:100%;display:block}
+#maphint{flex:none;text-align:center}
+#map circle.n{cursor:pointer}
+#map circle.n:hover{stroke:var(--fg);stroke-width:14}
+#maphint{margin-top:6px}
 .q{margin:0 0 12px}
-.q dt{color:var(--mut);font-size:11px;text-transform:uppercase;
-      letter-spacing:.07em;margin-bottom:2px}
-.q dd{margin:0 0 10px;font-size:13px}
-#ctl{display:flex;gap:8px;align-items:center;margin-top:10px}
+.q dt{color:var(--mut);font-size:9.5px;text-transform:uppercase;
+      letter-spacing:.07em;margin-bottom:1px}
+.q dd{margin:0 0 6px;font-size:11.5px;line-height:1.36}
+/* two rows, three columns: the legend sits in the middle column so its scale
+   lines up with the profile it explains rather than with the page. */
+#ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;
+     align-items:center;margin-top:10px}
+#btns{display:flex;gap:8px}
+/* A SCALE BAR, not a full-width colourbar. It does the job the 200 m ruler
+   does on the maps: small, in the corner, there when you look for it and out
+   of the way when you are not. Spanning the profile made the legend louder
+   than the data it explains. */
+#legend{display:flex;align-items:center;gap:7px;padding-top:5px;
+        font-size:10px;color:var(--mut)}
+#lgrad{width:128px;height:6px;border-radius:1px;border:1px solid var(--line);
+       flex:none}
+#legend b{font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+#legend .lv{font-variant-numeric:tabular-nums}
+/* The profile carries the street's own M on the map's ramp: the walk and the
+   heat map become the same picture read two ways. */
+/* THE PROFILE IS THE CONTROL. A native range under it drew the same position
+   twice in two different visual languages; the strip already shows where you
+   are, so it takes the clicks and the second bar goes. */
+#sl{flex:1;position:relative;height:18px;cursor:pointer;outline:none}
+#strip{position:absolute;top:3px;left:0;right:0;height:12px;border-radius:2px;
+       border:1px solid var(--line)}
+#sl:focus-visible{box-shadow:0 0 0 2px var(--acc);border-radius:3px}
+#mark{position:absolute;top:0;width:3px;height:18px;background:var(--fg);
+      border-radius:1px;box-shadow:0 0 0 1px rgba(0,0,0,.7);
+      transform:translateX(-1.5px);pointer-events:none}
 button{background:#171a1f;color:var(--fg);border:1px solid var(--line);
        border-radius:3px;padding:6px 12px;font-size:13px;cursor:pointer}
 button:hover{border-color:#3a3f46}
 #pos{color:var(--mut);font-variant-numeric:tabular-nums}
-input[type=range]{flex:1}
-.M{font-size:30px;font-weight:600;font-variant-numeric:tabular-nums}
+input[type=range]{display:block}
+.M{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+/* The composite sits under the view, not in the sidebar: three numbers and a
+   distribution take a strip of width far better than a column, and the space
+   they were using is what the descriptions needed. */
+#foot{display:grid;grid-template-columns:auto minmax(230px,1fr) 260px;
+      gap:20px;align-items:start;margin-top:10px;padding-top:10px;
+      border-top:1px solid var(--line);flex:none}
+#mbox{min-width:150px}
+/* The composite as a face: the same number the panel already gives, in the
+   one encoding nobody has to be taught to read. It is a restatement, not a
+   new measurement -- the curve of the mouth is M and nothing else. */
+/* The face sits beside the number, not in a column of its own: it restates M,
+   so it belongs to M rather than standing as a third thing to read. */
+#mrow{display:flex;align-items:center;gap:14px}
+#face{display:flex;align-items:center}
+#smiley{width:52px;height:52px;display:block}
+#foot h2{margin:0 0 4px}
+#dims{padding-top:2px}
+#dist svg{width:100%;height:46px;display:block;margin-top:3px}
+#dist .note{min-height:15px}
+@media (max-width:900px){#foot{grid-template-columns:1fr;gap:12px}}
 .none{color:#6b7078;font-style:italic}
+.note{color:var(--mut);font-size:11px;line-height:1.45;margin:-2px 0 4px}
 </style>
 <header>
-  <h1>__TITLE__</h1><span class="a">__AREA__</span>
+  <select id="pick" aria-label="street"></select><span class="a">__AREA__</span>
   <span class="a" id="node"></span>
 </header>
 <main>
-  <div>
+  <div id="left">
     <div id="warn">The frames did not load. This build references the JPEGs on
       disk, so it only works from inside the repository -- rebuild with
       --embed for a file that opens anywhere.</div>
     <img id="view" alt="street view">
     <div id="ctl">
-      <button id="prev">&larr;</button>
-      <button id="play">play</button>
-      <button id="next">&rarr;</button>
-      <input type="range" id="slider" min="0" value="0">
+      <div id="btns">
+        <button id="prev">&larr;</button>
+        <button id="play">play</button>
+        <button id="next">&rarr;</button>
+      </div>
+      <div id="sl" tabindex="0" role="slider" aria-label="position along the walk">
+        <div id="strip"></div>
+        <i id="mark"></i>
+      </div>
       <span id="pos"></span>
+      <div></div>
+      <div id="legend"><b id="lname"></b><span class="lv" id="llo"></span>
+        <div id="lgrad"></div><span class="lv" id="lhi"></span></div>
+      <div></div>
+    </div>
+    <div id="foot">
+      <div id="mbox">
+        <h2 id="Mh">composite</h2>
+        <div id="mrow">
+          <div class="M" id="M">--</div>
+          <div id="face">
+        <svg id="smiley" viewBox="0 0 64 64" aria-label="composite as a face">
+          <circle cx="32" cy="32" r="27" fill="none" stroke-width="4"/>
+          <circle id="eyeL" cx="23" cy="25" r="3.4" stroke="none"/>
+          <circle id="eyeR" cx="41" cy="25" r="3.4" stroke="none"/>
+          <path id="mouth" fill="none" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          </div>
+        </div>
+        <div class="note" id="Mnote"></div>
+      </div>
+      <div id="dims"></div>
+      <div id="dist">
+        <h2>where this node sits</h2>
+        <div class="note" id="pct"></div>
+        <svg id="curve" viewBox="0 0 260 62" preserveAspectRatio="none"></svg>
+      </div>
     </div>
   </div>
   <aside>
-    <h2>composite</h2>
-    <div class="M" id="M">--</div>
-    <div id="dims"></div>
-    <h2>ratings, 1 to 7</h2>
-    <div id="fields"></div>
+    <div id="tabs">
+      <button id="tabR" class="on">ratings, 1 to 7</button>
+      <button id="tabM">where</button>
+    </div>
+    <div id="pane">
+      <div id="fields"></div>
+      <div id="mapwrap" class="off">
+        <svg id="map" viewBox="0 0 1000 1000"></svg>
+        <div class="note" id="maphint">every node in the study area, on the M
+          ramp. click one to jump there.</div>
+      </div>
+    </div>
     <h2>what the model says</h2>
     <dl class="q" id="qual"></dl>
   </aside>
 </main>
 <script>
-const STEPS=__DATA__, FIELDS=__FIELDS__, DIMS=__DIMS__, QCOLS=__QCOLS__;
+const FIELDS=__FIELDS__, GROUPS=__GROUPS__, DIMS=__DIMS__, QCOLS=__QCOLS__, MCOL=__MCOL__;
+const LEGEND=__LEGEND__, TICKS=__TICKS__, LO=__LO__, HI=__HI__;
+const DIST=__DIST__, TERMRAMP=__TERMRAMP__, MAP=__MAP__;
+// THE FRAMES LIVE AFTER THIS SCRIPT, and are read once the document has
+// finished parsing. Order matters: interface and logic first, payload last, so
+// a viewer that truncates a large file cuts only frames off the end. Whatever
+// arrived still works; nothing above the cut depends on what is below it.
+let STEPS=[], ALL=[], CUR="";
 let i=0, timer=null;
 const $=id=>document.getElementById(id);
-$("slider").max=STEPS.length-1;
+const TOTAL=__TOTAL__;
 
 $("view").onerror=()=>{ $("warn").style.display="block"; };
-function draw(){
-  const s=STEPS[i];
-  $("view").src=s.img;
-  $("node").textContent=s.node+(s.street?"  ·  "+s.street:"");
-  $("pos").textContent=(i+1)+" / "+STEPS.length;
-  $("slider").value=i;
+function draw(){ paint(STEPS[i], false); }
 
-  const m = s.c.M_noA ?? s.c.M;
+function paint(s, scoresOnly){
+  if(scoresOnly){
+    $("view").removeAttribute("src");
+    $("view").alt="no view in this file for this node";
+  } else {
+    $("view").src=s.img;
+    $("view").alt="street view";
+  }
+  $("node").textContent=s.node+(s.street?"  ·  "+s.street:"")
+    +(scoresOnly?"   scores only -- this view is not in this file":"");
+  $("pos").textContent=scoresOnly?"--":((i+1)+" / "+STEPS.length);
+  if(!scoresOnly)
+    $("mark").style.left=(STEPS.length<2?0:i/(STEPS.length-1)*100)+"%";
+
+  // NAME THE NUMBER. Neither city's vlm_calculations carries A_i, so what is
+  // shown is M without the geometry term -- Cobb-Douglas over I, Y and D
+  // alone. Labelling it "composite" let a number that excludes enclosure read
+  // as M, which is the one misreading a slide cannot afford.
+  // MCOL is chosen at build time: M where the study area has a geometry term,
+  // M_noA where it has none. The caption names the formula actually used.
+  const m = s.c[MCOL];
+  const full = MCOL === "M";
+  $("Mh").textContent = full ? "composite M" : "composite M, no geometry term";
+  // the mouth IS the composite: corners fixed, the middle driven by where M
+  // falls between the ramp's ends, so the face and the colour say one thing
+  const t = (m==null||HI<=LO) ? 0.5
+            : Math.max(0, Math.min(1, (m - LO) / (HI - LO)));
+  $("mouth").setAttribute("d",
+    "M20,40 Q32," + (40 + (t - 0.5) * 26).toFixed(1) + " 44,40");
+  ["smiley"].forEach(id=>$(id).setAttribute("stroke", s.kf));
+  $("eyeL").setAttribute("fill", s.kf);
+  $("eyeR").setAttribute("fill", s.kf);
+  $("smiley").querySelector("circle").setAttribute("stroke", s.kf);
+  $("mouth").setAttribute("stroke", s.kf);
+  markCurve(m, s.pc);
+  if(scoresOnly){
+    const g=document.getElementById("here");
+    if(g && s.mx!=null){ g.setAttribute("opacity",".55");
+      g.setAttribute("transform",`translate(${s.mx},${s.my}) rotate(0)`); }
+  } else markMap();
+  $("Mnote").textContent = full
+    ? "I⁰·⁴ · Y⁰·² · D⁰·⁴ · Ω"
+    : "I⁰·⁴ · Y⁰·² · D⁰·⁴ — Ω = 1: no facade heights for this study area, so no H/W";
   $("M").textContent = m==null ? "--" : m.toFixed(3);
   $("dims").innerHTML = Object.entries(DIMS).map(([k,label])=>{
     const v=s.c[k];
-    return v==null ? "" :
-      `<div class="row"><span>${label}</span>
-        <div class="bar"><i style="width:${Math.max(0,Math.min(1,v))*100}%"></i></div>
+    // each term wears its own ramp -- viridis, lajolla, ice -- so the bar is
+    // the colour this node has on the three-term map
+    if(v==null) return "";
+    const pct=Math.max(0.6,Math.min(100,v*100));
+    const stops=TERMRAMP[k];
+    // the gradient is sized to the WHOLE bar, then cropped by the fill's own
+    // width, so the visible run is the ramp up to this value
+    const fill = stops
+      ? `background-image:linear-gradient(to right,${stops.join(",")});
+         background-size:${(100/pct*100).toFixed(1)}% 100%;
+         background-repeat:no-repeat;opacity:1`
+      : `background:${s.kc[k]||"var(--acc)"};opacity:1`;
+    return `<div class="row"><span>${label}</span>
+        <div class="bar"><i style="width:${pct}%;${fill}"></i></div>
         <b>${v.toFixed(2)}</b></div>`;
   }).join("");
 
-  $("fields").innerHTML = FIELDS.map(f=>{
-    const v=s.r[f];
-    if(v==null) return "";
-    const pct=Math.max(0,Math.min(1,(v-1)/6))*100;
-    return `<div class="row"><span>${f.replace(/_/g," ")}</span>
-      <div class="bar"><i style="width:${pct}%"></i></div>
-      <b>${v.toFixed(1)}</b></div>`;
+  $("fields").innerHTML = GROUPS.map(([label, term, members])=>{
+    const rows = members.map(([f, inv])=>{
+      const v=s.r[f];
+      if(v==null) return "";
+      // SHOWN AS A RUNG, NOT AS A MEASUREMENT. The seven rungs exist so a
+      // rating reads the way somebody on the pavement would say it; printing
+      // 4.9 turns a judgement back into an instrument reading. The
+      // interpolated median still drives M -- the display rounds, the
+      // calculation does not.
+      const r=Math.max(1,Math.min(7,Math.round(v)));
+      return `<div class="row"><span class="${inv?"inv":""}"
+        title="${inv?"enters its term inverted: a higher rung lowers it":""}"
+        >${f.replace(/_/g," ")}</span>
+        <div class="bar"><i style="width:${(r-1)/6*100}%"></i></div>
+        <b>${r}</b></div>`;
+    }).join("");
+    if(!rows) return "";
+    return `<div class="grp"><span class="gdot"
+      style="background:${s.kc[term]||"var(--acc)"}"></span>${label}</div>${rows}`;
   }).join("") || '<div class="none">no ratings for this node</div>';
 
   const q=QCOLS.filter(c=>s.d[c]).map(c=>
     `<dt>${c}</dt><dd>${s.d[c]}</dd>`).join("");
   $("qual").innerHTML = q || '<div class="none">not described yet</div>';
+  if(PANE_H) $("pane").style.height = PANE_H + "px";
 }
 function go(n){ i=(n+STEPS.length)%STEPS.length; draw(); }
 $("prev").onclick=()=>go(i-1);
 $("next").onclick=()=>go(i+1);
-$("slider").oninput=e=>go(+e.target.value);
+// THE LOCATOR. Every node in the study area is drawn once; only the arrow
+// moves. Nodes that appear in this file are clickable and jump there --
+// switching street first if the node belongs to another one -- and nodes that
+// are not in the file are drawn anyway, because a map showing only the streets
+// that happen to be loaded misrepresents the study area.
+function drawMap(){
+  if(!MAP.nodes || !MAP.nodes.length){ $("tabM").style.display="none"; return; }
+  const inFile = new Set(ALL.map(s=>s.node));
+  // every node with scores is clickable; the ones whose frames are in this
+  // file are drawn larger, because those are the ones that also show a view
+  const dots = MAP.nodes.map(([id,x,y,c])=>{
+    const has = inFile.has(id), scored = MAP.data && MAP.data[id];
+    return `<circle class="${has||scored?"n":""}" data-id="${id}" cx="${x}"
+      cy="${y}" r="${has?7:5}" fill="${c}" opacity="${has?1:.5}"
+      ><title>${id}${has?"":" (scores only)"}</title></circle>`;
+  }).join("");
+  $("map").innerHTML = dots +
+    `<g id="here" style="pointer-events:none">
+       <circle r="30" fill="#3aa0ff" opacity=".16"/>
+       <circle r="30" fill="none" stroke="#0b1520" stroke-width="9"/>
+       <circle r="30" fill="none" stroke="#3aa0ff" stroke-width="5"/>
+       <path d="M0,-46 L20,17 L0,6 L-20,17 Z" fill="#0b1520"
+             transform="scale(1.18)"/>
+       <path d="M0,-46 L20,17 L0,6 L-20,17 Z" fill="#3aa0ff"/>
+     </g>`;
+  $("map").querySelectorAll("circle.n").forEach(el=>{
+    el.addEventListener("click", ()=>jumpTo(el.dataset.id));
+  });
+}
+function jumpTo(id){
+  let k = STEPS.findIndex(s=>s.node===id);
+  if(k >= 0){ go(k); return; }
+  const other = ALL.find(s=>s.node===id);          // another street in the file
+  if(other){ pickStreet(other.sf); go(STEPS.findIndex(s=>s.node===id)); return; }
+  showScoresOnly(id);
+}
+
+// A node whose imagery is not in this file still has numbers, and they are
+// worth showing: the panel fills, the view says why it is blank, and stepping
+// returns to the walk.
+function showScoresOnly(id){
+  const rec = MAP.data && MAP.data[id];
+  if(!rec) return;
+  const st = Object.assign({node:id, street:"", img:null, r:{}, d:{}, c:{},
+                            kc:{}, k:"#3a3f46", kf:"#6b7078"}, rec);
+  st.mx = (MAP.nodes.find(n=>n[0]===id)||[])[1];
+  st.my = (MAP.nodes.find(n=>n[0]===id)||[])[2];
+  paint(st, true);
+}
+// The arrow points the way the walk is going, taken from the next node along
+// -- at the last node from the previous one, so the heading never flips at the
+// end of a street.
+function markMap(){
+  const g = document.getElementById("here");
+  if(!g) return;
+  const s = STEPS[i];
+  if(!s || s.mx==null){ g.setAttribute("opacity","0"); return; }
+  const nb = STEPS[i+1] || STEPS[i-1];
+  let ang = 0;
+  if(nb && nb.mx!=null){
+    const dx = (STEPS[i+1] ? nb.mx - s.mx : s.mx - nb.mx);
+    const dy = (STEPS[i+1] ? nb.my - s.my : s.my - nb.my);
+    ang = Math.atan2(dx, -dy) * 180 / Math.PI;
+  }
+  g.setAttribute("opacity","1");
+  g.setAttribute("transform", `translate(${s.mx},${s.my}) rotate(${ang.toFixed(1)})`);
+}
+
+// The distribution is static -- it is the study area, not the street -- so it
+// is drawn once and only the marker moves.
+const W=260, H=62, PAD=6;
+function dx(v){ return (v-DIST.lo)/(DIST.hi-DIST.lo)*W; }
+function drawCurve(){
+  if(!DIST.xs.length) { $("dist").style.display="none"; return; }
+  const pts=DIST.xs.map((x,j)=>[dx(x), H-PAD-DIST.ys[j]*(H-PAD*2)]);
+  const path="M0,"+H+" L"+pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1))
+             .join(" L")+" L"+W+","+H+" Z";
+  const stops=LEGEND.map((c,j)=>
+    `<stop offset="${(j/(LEGEND.length-1)*100).toFixed(1)}%" stop-color="${c}"/>`
+  ).join("");
+  $("curve").innerHTML=
+    `<defs><linearGradient id="g" x1="0" x2="1">${stops}</linearGradient></defs>`
+    + `<path d="${path}" fill="url(#g)" opacity=".55"/>`
+    + `<path d="${"M"+pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" L")}"
+         fill="none" stroke="var(--fg)" stroke-width="1.1" opacity=".55"/>`
+    + `<line id="nowline" y1="0" y2="${H}" stroke="var(--fg)" stroke-width="2"/>`;
+}
+function markCurve(v, pc){
+  const ln=document.getElementById("nowline");
+  if(!ln) return;
+  if(v==null){ ln.setAttribute("opacity","0"); $("pct").textContent=""; return; }
+  const x=Math.max(0,Math.min(W,dx(v)));
+  ln.setAttribute("opacity","1");
+  ln.setAttribute("x1",x); ln.setAttribute("x2",x);
+  $("pct").textContent = pc==null ? ""
+    : pc+(pc%10===1&&pc%100!==11?"st":pc%10===2&&pc%100!==12?"nd":
+          pc%10===3&&pc%100!==13?"rd":"th")
+      +" percentile of every node in this study area";
+}
+
+// scrub on the profile: click or drag anywhere along it
+function seek(ev){
+  const r=$("sl").getBoundingClientRect();
+  if(r.width<=0||STEPS.length<2) return;
+  const f=Math.min(1,Math.max(0,(ev.clientX-r.left)/r.width));
+  go(Math.round(f*(STEPS.length-1)));
+}
+$("sl").addEventListener("pointerdown",e=>{
+  $("sl").setPointerCapture(e.pointerId); seek(e);
+});
+$("sl").addEventListener("pointermove",e=>{ if(e.buttons&1) seek(e); });
 $("play").onclick=function(){
   if(timer){clearInterval(timer);timer=null;this.textContent="play";}
   else{timer=setInterval(()=>go(i+1),900);this.textContent="pause";}
@@ -314,8 +1102,138 @@ addEventListener("keydown",e=>{
   if(e.key==="ArrowLeft")go(i-1);
   if(e.key==="ArrowRight")go(i+1);
 });
-draw();
+function start(){
+  ALL=[...document.querySelectorAll("#frames img.f")].map(el=>{
+    let m={}; try{ m=JSON.parse(el.dataset.meta||"{}"); }catch(e){}
+    return {img:el.getAttribute("src"), node:m.node||"", street:m.street||"",
+            r:m.r||{}, d:m.d||{}, c:m.c||{}, k:m.k||"#3a3f46", kc:m.kc||{}, pc:m.pc, sf:m.sf||"", kf:m.kf||"#6b7078",
+          mx:m.mx, my:m.my};
+  });
+  // one <option> per street, in the order the build wrote them
+  const seen=[];
+  ALL.forEach(s=>{ if(!seen.includes(s.sf)) seen.push(s.sf); });
+  $("pick").innerHTML=seen.map(n=>
+    `<option value="${n}">${n.replace(/_/g," ")}</option>`).join("");
+  $("pick").onchange=e=>pickStreet(e.target.value);
+  if(seen.length<2) $("pick").style.pointerEvents="none";
+  CUR=seen[0]||"";
+  drawCurve();
+  drawMap();
+  $("tabR").onclick=()=>setTab(false);
+  $("tabM").onclick=()=>setTab(true);
+
+  $("lgrad").style.background="linear-gradient(to right,"+LEGEND.map(
+    (c,j)=>c+" "+(j/(LEGEND.length-1)*100).toFixed(2)+"%").join(",")+")";
+  $("lname").textContent = MCOL === "M" ? "M" : "M (no Ω)";
+  $("llo").textContent = LO.toFixed(2);
+  $("lhi").textContent = HI.toFixed(2);
+  if(!ALL.length){
+    $("warn").style.display="block";
+    $("warn").textContent="No frames in this file -- it was cut short in transit.";
+    return;
+  }
+  if(ALL.length<TOTAL){
+    $("warn").style.display="block";
+    $("warn").textContent="Showing "+ALL.length+" of "+TOTAL+
+      " frames; the file was cut short in transit.";
+  }
+  pickStreet(CUR);
+  measurePane();
+}
+
+// Switching street rebuilds the walk and its profile, but not the
+// distribution: that is the study area, and it does not change.
+// AS BIG AS IT CAN BE WITHOUT PUSHING ANYTHING OFF. CSS can express "square"
+// or "42vh", but not "whatever is left after the description", and the
+// description's length changes with the node -- so a fixed cap either wasted
+// space on a tall screen or scrolled the panel on a short one. Measure what
+// the sidebar has spare and give the map that, never more than square.
+let PANE_H = 0;
+
+// ONE SIZE, SET ONCE. sizePane ran on every draw, and the description's length
+// changes from node to node, so the map grew and shrank as you walked -- the
+// thing you are trying to read position off was never the same size twice.
+// Measure the WORST case instead: the longest description in the file. The map
+// is then fixed, and no node can overflow the sidebar.
+function measurePane(){
+  const qual = $("qual");
+  let worst = null, n = -1;
+  ALL.forEach(st=>{
+    const L = QCOLS.reduce((a,c)=>a + (((st.d||{})[c])||"").length, 0);
+    if(L > n){ n = L; worst = st; }
+  });
+  const saved = qual.innerHTML;
+  if(worst && n > 0){
+    qual.innerHTML = QCOLS.filter(c=>worst.d[c])
+      .map(c=>`<dt>${c}</dt><dd>${worst.d[c]}</dd>`).join("");
+  }
+  // The box must never be shorter than the ratings need, or the last group is
+  // clipped and the list scrolls -- which is what happened when the worst-case
+  // description alone decided the height.
+  const pane = $("pane"), fields = $("fields");
+  const prevH = pane.style.height;
+  pane.style.height = "auto";
+  const natural = fields.scrollHeight + 2;
+  pane.style.height = prevH;
+  PANE_H = Math.max(sizePane(true), natural);
+  qual.innerHTML = saved;
+  pane.style.height = PANE_H + "px";
+}
+addEventListener("resize", measurePane);
+
+function sizePane(measuring){
+  const aside = document.querySelector("aside"), pane = $("pane");
+  if(!aside || !pane) return;
+  // Collapse the pane AND clip it, so nothing inside contributes to the
+  // measurement, then read where the description actually ends. scrollHeight
+  // is useless here: it never reports less than clientHeight, so with the pane
+  // hidden it returned the full sidebar height and the space always looked
+  // spent -- which pinned the map at its floor and let the ratings overflow
+  // into the text beneath.
+  // min-height must go too, or the collapse does not collapse: the pane kept
+  // its 180px floor and measured itself as part of what the sidebar needs.
+  const prevH = pane.style.height, prevO = pane.style.overflow,
+        prevM = pane.style.minHeight;
+  pane.style.height = "0px"; pane.style.overflow = "hidden";
+  pane.style.minHeight = "0px";
+  const top = aside.getBoundingClientRect().top;
+  const end = $("qual").getBoundingClientRect().bottom;
+  const used = end - top;
+  pane.style.height = prevH; pane.style.overflow = prevO;
+  pane.style.minHeight = prevM;
+  const avail = aside.clientHeight - used - 8;
+  const w = pane.getBoundingClientRect().width;
+  const h = Math.max(180, Math.min(w, avail));
+  pane.style.height = h + "px";
+  return h;
+}
+
+function setTab(mapOn){
+  $("fields").classList.toggle("off", mapOn);
+  $("mapwrap").classList.toggle("off", !mapOn);
+  $("tabR").classList.toggle("on", !mapOn);
+  $("tabM").classList.toggle("on", mapOn);
+  if(mapOn) markMap();
+}
+
+function pickStreet(name){
+  CUR=name; $("pick").value=name;
+  STEPS=ALL.filter(s=>s.sf===name);
+  i=0;
+  if(STEPS.length>1){
+    const n=STEPS.length;
+    $("strip").style.background="linear-gradient(to right,"+STEPS.map(
+      (s,j)=>s.k+" "+(j/(n-1)*100).toFixed(2)+"%").join(",")+")";
+  } else {
+    $("strip").style.background=STEPS.length?STEPS[0].k:"#171a1f";
+  }
+  draw();
+}
+if(document.readyState==="loading")
+  document.addEventListener("DOMContentLoaded",start);
+else start();
 </script>
+<div id="frames" hidden>__FRAMES__</div>
 """
 
 if __name__ == "__main__":

@@ -37,20 +37,43 @@ run() { powershell.exe -NoProfile -Command \
    -RedirectStandardOutput '$2' -RedirectStandardError '$2.err'"; }
 rows() { echo $(( $(wc -l < "$1" 2>/dev/null || echo 1) - 1 )); }
 
+# SKIP A STAGE THAT IS ALREADY DONE. This script runs top to bottom, so
+# relaunching it to resume a LATER stage re-entered an earlier one and rewrote
+# its table from scratch -- which is how a finished 1,514-row description table
+# was destroyed while resuming the London re-ask. A resume has to be able to
+# start in the middle, and the only thing that can say a stage finished is its
+# own output. FORCE=1 runs everything regardless.
+done_already() {   # done_already <table> <expected rows>
+  [ "${FORCE:-0}" = "1" ] && return 1
+  [ -f "$1" ] || return 1
+  [ "$(rows "$1")" -ge "$2" ]
+}
+skipping() { echo "[$(date '+%F %T')]      already complete: $(rows "$1") rows in $(basename "$1") -- skipping"; }
+
 if [ "${WAIT_FOR_0200:-0}" = "1" ]; then
   while :; do [ "$((10#$(date +%H)))" -eq 2 ] && break; sleep 240; done
 fi
 
 echo "[$(date '+%F %T')] 1/4  scores, 180 strips, placeless"
-run "'tools/sim_vlm_run.py','--src','data/raw/svi_180','--table','results/tables/sim_vlm_180_placeless.csv','--anchors','7','--mast-set','svi_180'" logs/mh_180_rate.log
-R=$(rows results/tables/sim_vlm_180_placeless.csv)
-echo "[$(date '+%F %T')]      $R of 1514"
+if done_already results/tables/sim_vlm_180_placeless.csv 1514; then
+  skipping results/tables/sim_vlm_180_placeless.csv
+else
+  run "'tools/sim_vlm_run.py','--src','data/raw/svi_180','--table','results/tables/sim_vlm_180_placeless.csv','--anchors','7','--mast-set','svi_180'" logs/mh_180_rate.log
+  echo "[$(date '+%F %T')]      $(rows results/tables/sim_vlm_180_placeless.csv) of 1514"
+fi
 
 echo "[$(date '+%F %T')] 2/4  qualitative, every 180 strip, four questions"
-run "'tools/sim_vlm_describe.py','--src','data/raw/svi_180','--mast-set','svi_180','--all','--fields','scene','greenery','ground','frontage','--table','results/tables/vlm_descriptions_180.csv'" logs/mh_180_describe.log
-echo "[$(date '+%F %T')]      $(rows results/tables/vlm_descriptions_180.csv) described"
+if done_already results/tables/vlm_descriptions_180.csv 1514; then
+  skipping results/tables/vlm_descriptions_180.csv
+else
+  run "'tools/sim_vlm_describe.py','--src','data/raw/svi_180','--mast-set','svi_180','--all','--resume','--fields','scene','greenery','ground','frontage','--table','results/tables/vlm_descriptions_180.csv'" logs/mh_180_describe.log
+  echo "[$(date '+%F %T')]      $(rows results/tables/vlm_descriptions_180.csv) described"
+fi
 
 echo "[$(date '+%F %T')] 3/4  London re-ask"
+if done_already results/london/tables/sim_vlm_london_converged.csv 6422; then
+  skipping results/london/tables/sim_vlm_london_converged.csv
+else
 powershell.exe -NoProfile -Command \
   "\$e=[System.Environment]; \$e::SetEnvironmentVariable('SIM_CONFIG','config_london.yaml');
    Start-Process -FilePath (Resolve-Path '$GPU') -ArgumentList \
@@ -59,10 +82,15 @@ powershell.exe -NoProfile -Command \
    '--mast-set','svi_90' -NoNewWindow -Wait \
    -RedirectStandardOutput 'logs/london_converge.log' -RedirectStandardError 'logs/london_converge.err'"
 echo "[$(date '+%F %T')]      re-ask at $(rows results/london/tables/sim_vlm_london_converged.csv) of 6422"
+fi
 
 # Only if the machine is otherwise done. The 90 re-rate is what would put the
 # two cities on one instrument, but the study is moving to the 180 render, so
 # it waits behind everything that the interface and the re-ask need.
 echo "[$(date '+%F %T')] 4/4  idle work: re-rating the 90 halves"
-run "'tools/sim_vlm_run.py','--src','data/raw/svi_90','--table','results/tables/sim_vlm_v4_placeless.csv','--anchors','7','--mast-set','svi_90'" logs/mh_rerate.log
+if done_already results/tables/sim_vlm_v4_placeless.csv 3064; then
+  skipping results/tables/sim_vlm_v4_placeless.csv
+else
+  run "'tools/sim_vlm_run.py','--src','data/raw/svi_90','--table','results/tables/sim_vlm_v4_placeless.csv','--anchors','7','--mast-set','svi_90'" logs/mh_rerate.log
+fi
 echo "[$(date '+%F %T')] all done"

@@ -133,3 +133,57 @@ data/raw/svi_180_hi/
 # quarters of the London frame. Removed from every branch in 449ed00 and
 # adeb9ad. README.md and the module docstrings are the committed documentation.
 CLAUDE.md
+
+# ---- London imagery, same licence as Murray Hill's -------------------------
+# data/raw/svi_*/ above covers the Manhattan frame only; London renders live
+# under its own study-area root and were NOT matched, so a git add -A would
+# have published 13,646 Street View JPEGs. The derived metrics are ours to
+# publish and the photographs are not.
+data/london/raw/
+
+# ---- the walk-through pages ------------------------------------------------
+# Self-contained by design: every frame is inlined as base64, so these are the
+# imagery, 40 MB of it, wearing an .html extension. They are built locally and
+# handed to the author's own machine; they must not be uploaded.
+results/figures/walk_*.html
+
+# GIFs and contact sheets of the walks: Street View pixels, unmodified
+results/figures/walks/
+
+# ---- figures that draw the photographs rather than the numbers -------------
+# Plots of metrics are kept. These paste the imagery beside the mask or the
+# label, which is the same redistribution by another route.
+#
+# PATH-AGNOSTIC ON PURPOSE. The first version of these rules said
+# results/figures/..., which is the Manhattan frame's output root -- London
+# writes to results/london/figures/ and matched none of them, leaving 129 MB
+# of walk GIFs and segmentation panels staged to publish. A second study area
+# must not be able to reintroduce the problem by having a different path.
+**/figures/walks/
+**/seg_examples_*.png
+**/seg_london.png
+**/seg_combined_*.png
+**/seg_masks_*.png
+**/mast_*_halves.png
+**/label_batch_*.jpg
+**/user_kept_*.jpg
+**/london_covered_*.jpg
+**/london_covered_*.png
+**/london_indoor_flagged.png
+**/walk_*.html
+
+# run logs: machine paths and timings, no value to a reader
+logs/
+
+# ---- figures, and what exists only to draw them ----------------------------
+# Every figure regenerates from the tables and the tools, so the repository
+# carries the method and the numbers rather than the renders. That also
+# removes a standing hazard: the panels that paste Street View pixels beside a
+# mask lived in the same folders as the plots, and each new study area added
+# its own copy under a path the previous rules did not match.
+**/figures/
+
+# Basemap and context extracts: inputs to the drawings only, tens of MB, and
+# rebuildable from OSM with the tools already here.
+**/processed/basemap_16.gpkg
+**/processed/context_1600m.gpkg

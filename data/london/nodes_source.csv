@@ -1,0 +1,1807 @@
+﻿node_id,street_name,lat,lng,heading_fwd_deg,heading_rev_deg,seq_fwd,seq_rev,is_tunnel,is_bridge
+abchurch_lane_001,Abchurch Lane,51.511252,-0.088343,9.0,189.0,1,9,0,0
+abchurch_lane_002,Abchurch Lane,51.511398,-0.088306,24.4,204.4,2,8,0,0
+abchurch_lane_003,Abchurch Lane,51.51157,-0.088181,26.2,206.2,3,7,0,0
+abchurch_lane_004,Abchurch Lane,51.511735,-0.088052,28.3,208.3,4,6,0,0
+abchurch_lane_005,Abchurch Lane,51.511911,-0.087901,7.0,187.0,5,5,0,0
+abchurch_lane_006,Abchurch Lane,51.512144,-0.087855,54.2,234.2,6,4,0,0
+abchurch_lane_007,Abchurch Lane,51.512236,-0.087651,28.4,208.4,7,3,0,0
+abchurch_lane_008,Abchurch Lane,51.512392,-0.087516,29.8,209.8,8,2,0,0
+abchurch_lane_009,Abchurch Lane,51.512551,-0.087371,29.8,209.8,9,1,0,0
+abchurch_yard_001,Abchurch Yard,51.51157,-0.088181,286.5,106.5,1,3,0,0
+abchurch_yard_002,Abchurch Yard,51.511633,-0.088518,9.9,189.9,2,2,0,0
+abchurch_yard_003,Abchurch Yard,51.511796,-0.088473,9.9,189.9,3,1,0,0
+adams_court_south_001,Adams Court,51.514666,-0.084573,252.9,72.9,1,3,0,0
+adams_court_south_002,Adams Court,51.514612,-0.084852,293.9,113.9,2,2,0,0
+adams_court_south_003,Adams Court,51.514682,-0.085105,293.9,113.9,3,1,0,0
+adams_court_north_001,Adams Court,51.514383,-0.084304,320.2,140.2,1,2,0,0
+adams_court_north_002,Adams Court,51.514499,-0.084457,320.2,140.2,2,1,0,0
+alderman_s_walk_001,Alderman's Walk,51.516738,-0.081128,285.6,105.6,1,4,0,0
+alderman_s_walk_002,Alderman's Walk,51.516785,-0.081399,287.1,107.1,2,3,0,0
+alderman_s_walk_003,Alderman's Walk,51.516836,-0.081664,287.2,107.2,3,2,0,0
+alderman_s_walk_004,Alderman's Walk,51.516878,-0.081884,287.2,107.2,4,1,0,0
+aldermanbury_west_001,Aldermanbury,51.516259,-0.093126,71.2,251.2,1,6,0,0
+aldermanbury_west_002,Aldermanbury,51.516307,-0.092901,33.5,213.5,2,5,0,0
+aldermanbury_west_003,Aldermanbury,51.516473,-0.092726,31.9,211.9,3,4,0,0
+aldermanbury_west_004,Aldermanbury,51.51662,-0.092579,27.8,207.8,4,3,0,0
+aldermanbury_west_005,Aldermanbury,51.516779,-0.092445,32.6,212.6,5,2,0,0
+aldermanbury_west_006,Aldermanbury,51.516942,-0.092279,32.6,212.6,6,1,0,0
+aldermanbury_east_001,Aldermanbury,51.515347,-0.093152,4.1,184.1,1,6,0,0
+aldermanbury_east_002,Aldermanbury,51.515537,-0.09313,0.1,180.1,2,5,0,0
+aldermanbury_east_003,Aldermanbury,51.51573,-0.09313,0.0,180.0,3,4,0,0
+aldermanbury_east_004,Aldermanbury,51.515913,-0.09313,358.9,178.9,4,3,0,0
+aldermanbury_east_005,Aldermanbury,51.516093,-0.093135,2.0,182.0,5,2,0,0
+aldermanbury_east_006,Aldermanbury,51.516259,-0.093126,2.0,182.0,6,1,0,0
+aldermanbury_square_001,Aldermanbury Square,51.517009,-0.093045,18.2,198.2,1,5,0,0
+aldermanbury_square_002,Aldermanbury Square,51.51708,-0.093007,0.0,180.0,2,4,0,0
+aldermanbury_square_003,Aldermanbury Square,51.51708,-0.093007,100.4,280.4,3,3,0,0
+aldermanbury_square_004,Aldermanbury Square,51.517046,-0.092713,114.1,294.1,4,2,0,0
+aldermanbury_square_005,Aldermanbury Square,51.516973,-0.09245,114.1,294.1,5,1,0,0
+aldersgate_rotunda_001,Aldersgate Rotunda,51.517583,-0.096442,204.1,24.1,1,8,0,0
+aldersgate_rotunda_002,Aldersgate Rotunda,51.517417,-0.09656,245.1,65.1,2,7,0,0
+aldersgate_rotunda_003,Aldersgate Rotunda,51.517335,-0.09684,273.5,93.5,3,6,0,0
+aldersgate_rotunda_004,Aldersgate Rotunda,51.517341,-0.096988,303.3,123.3,4,5,0,0
+aldersgate_rotunda_005,Aldersgate Rotunda,51.517439,-0.097226,342.6,162.6,5,4,0,0
+aldersgate_rotunda_006,Aldersgate Rotunda,51.517608,-0.09731,19.6,199.6,6,3,0,0
+aldersgate_rotunda_007,Aldersgate Rotunda,51.517771,-0.097217,45.5,225.5,7,2,0,0
+aldersgate_rotunda_008,Aldersgate Rotunda,51.517897,-0.097011,45.5,225.5,8,1,0,0
+aldersgate_street_west_seg1_001,Aldersgate Street,51.516912,-0.096869,5.7,185.7,1,3,0,0
+aldersgate_street_west_seg1_002,Aldersgate Street,51.517097,-0.096839,4.3,184.3,2,2,0,0
+aldersgate_street_west_seg1_003,Aldersgate Street,51.517258,-0.09682,4.3,184.3,3,1,0,0
+aldersgate_street_west_seg2_001,Aldersgate Street,51.517835,-0.097116,19.4,199.4,1,4,0,0
+aldersgate_street_west_seg2_002,Aldersgate Street,51.518068,-0.096985,353.5,173.5,2,3,0,0
+aldersgate_street_west_seg2_003,Aldersgate Street,51.518246,-0.097018,352.4,172.4,3,2,0,0
+aldersgate_street_west_seg2_004,Aldersgate Street,51.518421,-0.097055,352.4,172.4,4,1,0,0
+aldersgate_street_east_001,Aldersgate Street,51.517941,-0.096769,340.9,160.9,1,3,0,0
+aldersgate_street_east_002,Aldersgate Street,51.518091,-0.096851,352.2,172.2,2,2,0,0
+aldersgate_street_east_003,Aldersgate Street,51.518272,-0.096891,352.2,172.2,3,1,0,0
+all_hallows_lane_001,All Hallows Lane,51.509251,-0.090771,15.6,195.6,1,7,0,0
+all_hallows_lane_002,All Hallows Lane,51.509425,-0.090693,16.9,196.9,2,6,0,0
+all_hallows_lane_003,All Hallows Lane,51.509598,-0.09061,18.1,198.1,3,5,0,0
+all_hallows_lane_004,All Hallows Lane,51.50977,-0.09052,18.6,198.6,4,4,0,0
+all_hallows_lane_005,All Hallows Lane,51.509951,-0.090423,17.8,197.8,5,3,0,0
+all_hallows_lane_006,All Hallows Lane,51.510123,-0.090334,19.5,199.5,6,2,0,0
+all_hallows_lane_007,All Hallows Lane,51.510304,-0.090231,19.5,199.5,7,1,0,0
+angel_court_001,Angel Court,51.514844,-0.087408,343.0,163.0,1,5,0,0
+angel_court_002,Angel Court,51.515052,-0.087509,342.9,162.9,2,4,0,0
+angel_court_003,Angel Court,51.515141,-0.087553,351.5,171.5,3,3,0,0
+angel_court_004,Angel Court,51.515333,-0.087598,353.4,173.4,4,2,0,0
+angel_court_005,Angel Court,51.515515,-0.087632,353.4,173.4,5,1,0,0
+angel_lane_001,Angel Lane,51.509663,-0.089265,17.2,197.2,1,2,0,0
+angel_lane_002,Angel Lane,51.509841,-0.089177,17.2,197.2,2,1,0,0
+angel_street_001,Angel Street,51.515892,-0.097091,324.6,144.6,1,5,0,0
+angel_street_002,Angel Street,51.515982,-0.097194,304.7,124.7,2,4,0,0
+angel_street_003,Angel Street,51.516092,-0.097447,276.9,96.9,3,3,0,0
+angel_street_004,Angel Street,51.516114,-0.097737,274.7,94.7,4,2,0,0
+angel_street_005,Angel Street,51.516128,-0.098022,274.7,94.7,5,1,0,0
+arthur_street_001,Arthur Street,51.509807,-0.088247,5.0,185.0,1,3,0,0
+arthur_street_002,Arthur Street,51.50999,-0.088221,26.5,206.5,2,2,0,0
+arthur_street_003,Arthur Street,51.510147,-0.088096,26.5,206.5,3,1,0,0
+austin_friars_west_001,Austin Friars,51.514996,-0.08547,314.6,134.6,1,8,0,0
+austin_friars_west_002,Austin Friars,51.515112,-0.085658,301.4,121.4,2,7,0,0
+austin_friars_west_003,Austin Friars,51.515207,-0.085907,2.6,182.6,3,6,0,0
+austin_friars_west_004,Austin Friars,51.515382,-0.085895,15.3,195.3,4,5,0,0
+austin_friars_west_005,Austin Friars,51.51556,-0.085817,16.1,196.1,5,4,0,0
+austin_friars_west_006,Austin Friars,51.51565,-0.085776,84.0,264.0,6,3,0,0
+austin_friars_west_007,Austin Friars,51.515669,-0.085488,94.6,274.6,7,2,0,0
+austin_friars_west_008,Austin Friars,51.515658,-0.085283,94.6,274.6,8,1,0,0
+austin_friars_east_001,Austin Friars,51.51565,-0.085776,295.5,115.5,1,3,0,0
+austin_friars_east_002,Austin Friars,51.515728,-0.086039,288.3,108.3,2,2,0,0
+austin_friars_east_003,Austin Friars,51.515787,-0.086322,288.3,108.3,3,1,0,0
+bakers_hall_court_001,Bakers Hall Court,51.509549,-0.081507,122.0,302.0,1,4,0,0
+bakers_hall_court_002,Bakers Hall Court,51.509454,-0.081266,352.6,172.6,2,3,0,0
+bakers_hall_court_003,Bakers Hall Court,51.509614,-0.081299,243.4,63.4,3,2,0,0
+bakers_hall_court_004,Bakers Hall Court,51.509549,-0.081507,243.4,63.4,4,1,0,0
+bankside_001,Bankside,51.508409,-0.096717,271.7,91.7,1,6,0,0
+bankside_002,Bankside,51.508414,-0.096983,268.7,88.7,2,5,0,0
+bankside_003,Bankside,51.508409,-0.097303,269.6,89.6,3,4,0,0
+bankside_004,Bankside,51.508408,-0.097595,271.4,91.4,4,3,0,0
+bankside_005,Bankside,51.508412,-0.097885,272.2,92.2,5,2,0,0
+bankside_006,Bankside,51.508419,-0.098172,272.2,92.2,6,1,0,0
+bartholomew_lane_001,Bartholomew Lane,51.513959,-0.087305,337.1,157.1,1,5,0,0
+bartholomew_lane_002,Bartholomew Lane,51.514128,-0.08742,336.5,156.5,2,4,0,0
+bartholomew_lane_003,Bartholomew Lane,51.514298,-0.087537,338.1,158.1,3,3,0,0
+bartholomew_lane_004,Bartholomew Lane,51.514464,-0.087643,340.5,160.5,4,2,0,0
+bartholomew_lane_005,Bartholomew Lane,51.514615,-0.087729,340.5,160.5,5,1,0,0
+basinghall_avenue_001,Basinghall Avenue,51.516827,-0.091423,56.1,236.1,1,7,0,0
+basinghall_avenue_002,Basinghall Avenue,51.516918,-0.091209,94.9,274.9,2,6,0,0
+basinghall_avenue_003,Basinghall Avenue,51.516902,-0.090916,95.0,275.0,3,5,0,0
+basinghall_avenue_004,Basinghall Avenue,51.516886,-0.090624,89.8,269.8,4,4,0,0
+basinghall_avenue_005,Basinghall Avenue,51.516887,-0.090328,89.0,269.0,5,3,0,0
+basinghall_avenue_006,Basinghall Avenue,51.51689,-0.090031,98.5,278.5,6,2,0,0
+basinghall_avenue_007,Basinghall Avenue,51.51686,-0.089709,98.5,278.5,7,1,0,0
+basinghall_street_001,Basinghall Street,51.515008,-0.091084,0.7,180.7,1,15,0,0
+basinghall_street_002,Basinghall Street,51.515192,-0.09108,4.1,184.1,2,14,0,0
+basinghall_street_003,Basinghall Street,51.515358,-0.091061,12.7,192.7,3,13,0,0
+basinghall_street_004,Basinghall Street,51.515512,-0.091006,6.1,186.1,4,12,0,0
+basinghall_street_005,Basinghall Street,51.515696,-0.090975,355.1,175.1,5,11,0,0
+basinghall_street_006,Basinghall Street,51.51588,-0.091,335.2,155.2,6,10,0,0
+basinghall_street_007,Basinghall Street,51.516044,-0.091121,332.3,152.3,7,9,0,0
+basinghall_street_008,Basinghall Street,51.516209,-0.091258,333.4,153.4,8,8,0,0
+basinghall_street_009,Basinghall Street,51.516371,-0.091388,348.4,168.4,9,7,0,0
+basinghall_street_010,Basinghall Street,51.516547,-0.091446,3.4,183.4,10,6,0,0
+basinghall_street_011,Basinghall Street,51.516731,-0.091429,2.0,182.0,11,5,0,0
+basinghall_street_012,Basinghall Street,51.516827,-0.091423,283.1,103.1,12,4,0,0
+basinghall_street_013,Basinghall Street,51.516869,-0.09171,288.8,108.8,13,3,0,0
+basinghall_street_014,Basinghall Street,51.516926,-0.091976,274.8,94.8,14,2,0,0
+basinghall_street_015,Basinghall Street,51.516942,-0.092279,274.8,94.8,15,1,0,0
+beehive_passage_001,Beehive Passage,51.512185,-0.083001,348.8,168.8,1,2,0,0
+beehive_passage_002,Beehive Passage,51.51237,-0.08306,348.8,168.8,2,1,0,0
+billingsgate_walk_001,Billingsgate Walk,51.50861,-0.083663,319.4,139.4,1,2,0,0
+billingsgate_walk_002,Billingsgate Walk,51.508735,-0.083834,319.4,139.4,2,1,0,0
+billiter_street_001,Billiter Street,51.512123,-0.080164,344.4,164.4,1,8,0,0
+billiter_street_002,Billiter Street,51.51231,-0.080248,353.4,173.4,2,7,0,0
+billiter_street_003,Billiter Street,51.512492,-0.080281,347.5,167.5,3,6,0,0
+billiter_street_004,Billiter Street,51.512664,-0.080342,355.2,175.2,4,5,0,0
+billiter_street_005,Billiter Street,51.51285,-0.080367,351.1,171.1,5,4,0,0
+billiter_street_006,Billiter Street,51.513027,-0.080411,3.5,183.5,6,3,0,0
+billiter_street_007,Billiter Street,51.513211,-0.080394,8.3,188.3,7,2,0,0
+billiter_street_008,Billiter Street,51.513298,-0.080374,8.3,188.3,8,1,0,0
+bishopsgate_west_seg1_001,Bishopsgate,51.513418,-0.084135,15.5,195.5,1,13,0,0
+bishopsgate_west_seg1_002,Bishopsgate,51.513551,-0.084076,15.3,195.3,2,12,0,0
+bishopsgate_west_seg1_003,Bishopsgate,51.513732,-0.083997,12.7,192.7,3,11,0,0
+bishopsgate_west_seg1_004,Bishopsgate,51.513954,-0.083917,22.5,202.5,4,10,0,0
+bishopsgate_west_seg1_005,Bishopsgate,51.514132,-0.0838,24.0,204.0,5,9,0,0
+bishopsgate_west_seg1_006,Bishopsgate,51.514317,-0.083669,9.7,189.7,6,8,0,0
+bishopsgate_west_seg1_007,Bishopsgate,51.514468,-0.083627,45.4,225.4,7,7,0,0
+bishopsgate_west_seg1_008,Bishopsgate,51.514584,-0.08344,46.8,226.8,8,6,0,0
+bishopsgate_west_seg1_009,Bishopsgate,51.514697,-0.083248,41.7,221.7,9,5,0,0
+bishopsgate_west_seg1_010,Bishopsgate,51.514827,-0.083064,37.2,217.2,10,4,0,0
+bishopsgate_west_seg1_011,Bishopsgate,51.515,-0.082854,32.6,212.6,11,3,0,0
+bishopsgate_west_seg1_012,Bishopsgate,51.515182,-0.082668,31.7,211.7,12,2,0,0
+bishopsgate_west_seg1_013,Bishopsgate,51.51528,-0.082571,31.7,211.7,13,1,0,0
+bishopsgate_west_seg2_001,Bishopsgate,51.515563,-0.082293,32.8,212.8,1,3,0,0
+bishopsgate_west_seg2_002,Bishopsgate,51.515637,-0.082217,32.9,212.9,2,2,0,0
+bishopsgate_west_seg2_003,Bishopsgate,51.515784,-0.082065,32.9,212.9,3,1,0,0
+bishopsgate_east_seg1_001,Bishopsgate,51.515939,-0.081906,33.0,213.0,1,15,0,0
+bishopsgate_east_seg1_002,Bishopsgate,51.516017,-0.081825,55.9,235.9,2,14,0,0
+bishopsgate_east_seg1_003,Bishopsgate,51.516155,-0.081499,7.0,187.0,3,13,0,0
+bishopsgate_east_seg1_004,Bishopsgate,51.516343,-0.081462,27.0,207.0,4,12,0,0
+bishopsgate_east_seg1_005,Bishopsgate,51.516498,-0.081336,23.8,203.8,5,11,0,0
+bishopsgate_east_seg1_006,Bishopsgate,51.516664,-0.081219,32.6,212.6,6,10,0,0
+bishopsgate_east_seg1_007,Bishopsgate,51.516817,-0.081063,28.3,208.3,7,9,0,0
+bishopsgate_east_seg1_008,Bishopsgate,51.516995,-0.080911,30.3,210.3,8,8,0,0
+bishopsgate_east_seg1_009,Bishopsgate,51.517156,-0.08076,28.7,208.7,9,7,0,0
+bishopsgate_east_seg1_010,Bishopsgate,51.517312,-0.080623,29.4,209.4,10,6,0,0
+bishopsgate_east_seg1_011,Bishopsgate,51.51746,-0.080491,30.9,210.9,11,5,0,0
+bishopsgate_east_seg1_012,Bishopsgate,51.5176,-0.080357,29.7,209.7,12,4,0,0
+bishopsgate_east_seg1_013,Bishopsgate,51.517763,-0.080209,37.5,217.5,13,3,0,0
+bishopsgate_east_seg1_014,Bishopsgate,51.51788,-0.080065,25.6,205.6,14,2,0,0
+bishopsgate_east_seg1_015,Bishopsgate,51.518063,-0.079925,25.6,205.6,15,1,0,0
+bishopsgate_east_seg2_001,Bishopsgate,51.515939,-0.081906,33.0,213.0,1,5,0,0
+bishopsgate_east_seg2_002,Bishopsgate,51.516017,-0.081825,33.8,213.8,2,4,0,0
+bishopsgate_east_seg2_003,Bishopsgate,51.516191,-0.08164,36.1,216.1,3,3,0,0
+bishopsgate_east_seg2_004,Bishopsgate,51.516343,-0.081462,27.0,207.0,4,2,0,0
+bishopsgate_east_seg2_005,Bishopsgate,51.516498,-0.081336,27.0,207.0,5,1,0,0
+bishopsgate_arcade_001,Bishopsgate Arcade,51.517716,-0.080478,273.7,93.7,1,4,0,0
+bishopsgate_arcade_002,Bishopsgate Arcade,51.517727,-0.080736,286.2,106.2,2,3,0,0
+bishopsgate_arcade_003,Bishopsgate Arcade,51.517772,-0.080985,329.3,149.3,3,2,0,0
+bishopsgate_arcade_004,Bishopsgate Arcade,51.517909,-0.081115,329.3,149.3,4,1,0,0
+bishopsgate_churchyard_001,Bishopsgate Churchyard,51.516418,-0.081397,301.1,121.1,1,7,0,0
+bishopsgate_churchyard_002,Bishopsgate Churchyard,51.516544,-0.08173,285.3,105.3,2,6,0,0
+bishopsgate_churchyard_003,Bishopsgate Churchyard,51.516592,-0.082009,286.7,106.7,3,5,0,0
+bishopsgate_churchyard_004,Bishopsgate Churchyard,51.516639,-0.082259,286.9,106.9,4,4,0,0
+bishopsgate_churchyard_005,Bishopsgate Churchyard,51.516694,-0.08255,264.2,84.2,5,3,0,0
+bishopsgate_churchyard_006,Bishopsgate Churchyard,51.516673,-0.082879,324.9,144.9,6,2,0,0
+bishopsgate_churchyard_007,Bishopsgate Churchyard,51.516778,-0.082997,324.9,144.9,7,1,0,0
+blomfield_street_001,Blomfield Street,51.516814,-0.085771,55.5,235.5,1,9,0,0
+blomfield_street_002,Blomfield Street,51.516932,-0.085496,48.7,228.7,2,8,0,0
+blomfield_street_003,Blomfield Street,51.517072,-0.085242,35.4,215.4,3,7,0,0
+blomfield_street_004,Blomfield Street,51.517216,-0.085078,35.8,215.8,4,6,0,0
+blomfield_street_005,Blomfield Street,51.517362,-0.08491,35.8,215.8,5,5,0,0
+blomfield_street_006,Blomfield Street,51.51751,-0.084739,36.1,216.1,6,4,0,0
+blomfield_street_007,Blomfield Street,51.517658,-0.084567,23.7,203.7,7,3,0,0
+blomfield_street_008,Blomfield Street,51.517802,-0.084467,43.7,223.7,8,2,0,0
+blomfield_street_009,Blomfield Street,51.517957,-0.084229,43.7,223.7,9,1,0,0
+bloomberg_arcade_seg1_001,Bloomberg Arcade,51.511884,-0.090634,315.0,135.0,1,3,0,0
+bloomberg_arcade_seg1_002,Bloomberg Arcade,51.512019,-0.090849,307.9,127.9,2,2,0,0
+bloomberg_arcade_seg1_003,Bloomberg Arcade,51.512134,-0.091084,307.9,127.9,3,1,0,0
+bloomberg_arcade_seg2_001,Bloomberg Arcade,51.512502,-0.091789,309.8,129.8,1,2,0,0
+bloomberg_arcade_seg2_002,Bloomberg Arcade,51.51261,-0.091996,309.8,129.8,2,1,0,0
+bond_court_seg1_001,Bond Court,51.512211,-0.088879,208.9,28.9,1,2,0,0
+bond_court_seg1_002,Bond Court,51.512131,-0.088949,208.9,28.9,2,1,0,0
+bond_court_seg2_001,Bond Court,51.512554,-0.089786,0.0,180.0,1,2,0,0
+bond_court_seg2_002,Bond Court,51.512554,-0.089786,0.0,180.0,2,1,0,0
+botolph_alley_001,Botolph Alley,51.510107,-0.083975,299.2,119.2,1,2,0,0
+botolph_alley_002,Botolph Alley,51.510206,-0.084257,299.2,119.2,2,1,0,0
+botolph_lane_001,Botolph Lane,51.50969,-0.084778,8.5,188.5,1,6,0,0
+botolph_lane_002,Botolph Lane,51.509882,-0.084732,16.1,196.1,2,5,0,0
+botolph_lane_003,Botolph Lane,51.510051,-0.084654,16.1,196.1,3,4,0,0
+botolph_lane_004,Botolph Lane,51.510232,-0.084571,16.1,196.1,4,3,0,0
+botolph_lane_005,Botolph Lane,51.510405,-0.084491,15.2,195.2,5,2,0,0
+botolph_lane_006,Botolph Lane,51.510585,-0.084413,15.2,195.2,6,1,0,0
+bow_churchyard_001,Bow Churchyard,51.513515,-0.093438,287.2,107.2,1,4,0,0
+bow_churchyard_002,Bow Churchyard,51.513563,-0.093682,323.2,143.2,2,3,0,0
+bow_churchyard_003,Bow Churchyard,51.513694,-0.093838,4.9,184.9,3,2,0,0
+bow_churchyard_004,Bow Churchyard,51.513872,-0.093814,4.9,184.9,4,1,0,0
+bow_lane_001,Bow Lane,51.512451,-0.093754,17.9,197.9,1,9,0,0
+bow_lane_002,Bow Lane,51.512645,-0.093653,352.5,172.5,2,8,0,0
+bow_lane_003,Bow Lane,51.512749,-0.093675,13.8,193.8,3,7,0,0
+bow_lane_004,Bow Lane,51.512973,-0.093588,350.2,170.2,4,6,0,0
+bow_lane_005,Bow Lane,51.513162,-0.09364,22.5,202.5,5,5,0,0
+bow_lane_006,Bow Lane,51.513339,-0.093523,16.7,196.7,6,4,0,0
+bow_lane_007,Bow Lane,51.513515,-0.093438,20.8,200.8,7,3,0,0
+bow_lane_008,Bow Lane,51.51369,-0.093332,17.8,197.8,8,2,0,0
+bow_lane_009,Bow Lane,51.513886,-0.093232,17.8,197.8,9,1,0,0
+bread_street_seg1_001,Bread Street,51.512068,-0.095296,340.9,160.9,1,3,0,0
+bread_street_seg1_002,Bread Street,51.512207,-0.095373,17.6,197.6,2,2,0,0
+bread_street_seg1_003,Bread Street,51.512379,-0.095286,17.6,197.6,3,1,0,0
+bread_street_seg2_001,Bread Street,51.512684,-0.095056,2.3,182.3,1,9,0,0
+bread_street_seg2_002,Bread Street,51.51287,-0.095044,16.6,196.6,2,8,0,0
+bread_street_seg2_003,Bread Street,51.513047,-0.094959,15.8,195.8,3,7,0,0
+bread_street_seg2_004,Bread Street,51.513219,-0.094882,15.8,195.8,4,6,0,0
+bread_street_seg2_005,Bread Street,51.513381,-0.094809,15.6,195.6,5,5,0,0
+bread_street_seg2_006,Bread Street,51.513616,-0.094704,15.7,195.7,6,4,0,0
+bread_street_seg2_007,Bread Street,51.513705,-0.094664,15.8,195.8,7,3,0,0
+bread_street_seg2_008,Bread Street,51.513894,-0.094579,15.8,195.8,8,2,0,0
+bread_street_seg2_009,Bread Street,51.514076,-0.094497,15.8,195.8,9,1,0,0
+brewers_hall_garden_001,Brewers' Hall Garden,51.517067,-0.092483,17.8,197.8,1,2,0,0
+brewers_hall_garden_002,Brewers' Hall Garden,51.5173,-0.092363,17.8,197.8,2,1,0,0
+broad_street_avenue_001,Broad Street Avenue,51.517166,-0.083233,310.4,130.4,1,3,0,0
+broad_street_avenue_002,Broad Street Avenue,51.517281,-0.083449,225.8,45.8,2,2,0,0
+broad_street_avenue_003,Broad Street Avenue,51.5171,-0.083747,225.8,45.8,3,1,0,0
+broken_wharf_001,Broken Wharf,51.510558,-0.097007,15.7,195.7,1,3,0,0
+broken_wharf_002,Broken Wharf,51.510786,-0.096904,14.7,194.7,2,2,0,0
+broken_wharf_003,Broken Wharf,51.510886,-0.096862,14.7,194.7,3,1,0,0
+brown_s_buildings_001,Brown's Buildings,51.51406,-0.080026,304.3,124.3,1,4,0,0
+brown_s_buildings_002,Brown's Buildings,51.514136,-0.080205,288.2,108.2,2,3,0,0
+brown_s_buildings_003,Brown's Buildings,51.514193,-0.080479,288.2,108.2,3,2,0,0
+brown_s_buildings_004,Brown's Buildings,51.514251,-0.080764,288.2,108.2,4,1,0,0
+bucklersbury_001,Bucklersbury,51.512898,-0.090049,284.5,104.5,1,3,0,0
+bucklersbury_002,Bucklersbury,51.512926,-0.090224,303.2,123.2,2,2,0,0
+bucklersbury_003,Bucklersbury,51.513029,-0.090473,303.2,123.2,3,1,0,0
+bull_s_head_passage_001,Bull's Head Passage,51.512401,-0.083678,285.1,105.1,1,3,0,0
+bull_s_head_passage_002,Bull's Head Passage,51.512444,-0.083933,294.7,114.7,2,2,0,0
+bull_s_head_passage_003,Bull's Head Passage,51.51252,-0.084197,294.7,114.7,3,1,0,0
+bury_court_001,Bury Court,51.514741,-0.079866,302.1,122.1,1,3,0,0
+bury_court_002,Bury Court,51.514854,-0.080154,292.7,112.7,2,2,0,0
+bury_court_003,Bury Court,51.514911,-0.080372,292.7,112.7,3,1,0,0
+bush_lane_001,Bush Lane,51.510572,-0.089697,314.5,134.5,1,6,0,0
+bush_lane_002,Bush Lane,51.510694,-0.089894,32.7,212.7,2,5,0,0
+bush_lane_003,Bush Lane,51.510843,-0.089742,33.5,213.5,3,4,0,0
+bush_lane_004,Bush Lane,51.510999,-0.089577,27.8,207.8,4,3,0,0
+bush_lane_005,Bush Lane,51.511159,-0.089442,21.9,201.9,5,2,0,0
+bush_lane_006,Bush Lane,51.511344,-0.089324,21.9,201.9,6,1,0,0
+byward_street_south_001,Byward Street,51.509085,-0.08183,82.1,262.1,1,8,0,0
+byward_street_south_002,Byward Street,51.50911,-0.081538,75.3,255.3,2,7,0,0
+byward_street_south_003,Byward Street,51.509157,-0.081253,69.0,249.0,3,6,0,0
+byward_street_south_004,Byward Street,51.509223,-0.08098,60.6,240.6,4,5,0,0
+byward_street_south_005,Byward Street,51.509312,-0.080726,57.2,237.2,5,4,0,0
+byward_street_south_006,Byward Street,51.509411,-0.080482,53.9,233.9,6,3,0,0
+byward_street_south_007,Byward Street,51.509516,-0.080252,91.7,271.7,7,2,0,0
+byward_street_south_008,Byward Street,51.509511,-0.079999,91.7,271.7,8,1,0,0
+byward_street_north_001,Byward Street,51.509019,-0.082078,77.7,257.7,1,8,0,0
+byward_street_north_002,Byward Street,51.509052,-0.081833,91.3,271.3,2,7,0,0
+byward_street_north_003,Byward Street,51.509047,-0.081434,52.7,232.7,3,6,0,0
+byward_street_north_004,Byward Street,51.509131,-0.081257,89.9,269.9,4,5,0,0
+byward_street_north_005,Byward Street,51.509132,-0.081002,58.4,238.4,5,4,0,0
+byward_street_north_006,Byward Street,51.509262,-0.080664,61.4,241.4,6,3,0,0
+byward_street_north_007,Byward Street,51.509329,-0.080469,56.8,236.8,7,2,0,0
+byward_street_north_008,Byward Street,51.509432,-0.080218,56.8,236.8,8,1,0,0
+camomile_street_seg1_001,Camomile Street,51.515431,-0.079978,312.9,132.9,1,8,0,0
+camomile_street_seg1_002,Camomile Street,51.515559,-0.080197,310.7,130.7,2,7,0,0
+camomile_street_seg1_003,Camomile Street,51.51568,-0.080422,310.2,130.2,3,6,0,0
+camomile_street_seg1_004,Camomile Street,51.5158,-0.080648,303.1,123.1,4,5,0,0
+camomile_street_seg1_005,Camomile Street,51.515866,-0.080812,294.9,114.9,5,4,0,0
+camomile_street_seg1_006,Camomile Street,51.51596,-0.081133,293.2,113.2,6,3,0,0
+camomile_street_seg1_007,Camomile Street,51.516031,-0.081399,293.5,113.5,7,2,0,0
+camomile_street_seg1_008,Camomile Street,51.516084,-0.081592,293.5,113.5,8,1,0,0
+camomile_street_seg2_001,Camomile Street,51.515981,-0.080857,292.4,112.4,1,3,0,0
+camomile_street_seg2_002,Camomile Street,51.516044,-0.081102,293.8,113.8,2,2,0,0
+camomile_street_seg2_003,Camomile Street,51.516117,-0.081366,293.8,113.8,3,1,0,0
+cannon_street_south_001,Cannon Street,51.51092,-0.086842,293.5,113.5,1,39,0,0
+cannon_street_south_002,Cannon Street,51.510996,-0.087123,292.8,112.8,2,38,0,0
+cannon_street_south_003,Cannon Street,51.511032,-0.087259,289.5,109.5,3,37,0,0
+cannon_street_south_004,Cannon Street,51.511094,-0.087538,287.5,107.5,4,36,0,0
+cannon_street_south_005,Cannon Street,51.511149,-0.087815,287.3,107.3,5,35,0,0
+cannon_street_south_006,Cannon Street,51.511203,-0.088093,287.4,107.4,6,34,0,0
+cannon_street_south_007,Cannon Street,51.511252,-0.088343,281.4,101.4,7,33,0,0
+cannon_street_south_008,Cannon Street,51.511283,-0.088592,284.1,104.1,8,32,0,0
+cannon_street_south_009,Cannon Street,51.511327,-0.088871,288.4,108.4,9,31,0,0
+cannon_street_south_010,Cannon Street,51.511402,-0.089231,291.6,111.6,10,30,0,0
+cannon_street_south_011,Cannon Street,51.51147,-0.089506,286.8,106.8,11,29,0,0
+cannon_street_south_012,Cannon Street,51.511525,-0.089793,283.0,103.0,12,28,0,0
+cannon_street_south_013,Cannon Street,51.511568,-0.090095,295.6,115.6,13,27,0,0
+cannon_street_south_014,Cannon Street,51.511636,-0.090322,286.6,106.6,14,26,0,0
+cannon_street_south_015,Cannon Street,51.511686,-0.090589,286.8,106.8,15,25,0,0
+cannon_street_south_016,Cannon Street,51.511751,-0.090932,289.8,109.8,16,24,0,0
+cannon_street_south_017,Cannon Street,51.511811,-0.091197,289.1,109.1,17,23,0,0
+cannon_street_south_018,Cannon Street,51.511875,-0.091489,292.8,112.8,18,22,0,0
+cannon_street_south_019,Cannon Street,51.511935,-0.09172,289.8,109.8,19,21,0,0
+cannon_street_south_020,Cannon Street,51.511994,-0.091978,287.6,107.6,20,20,0,0
+cannon_street_south_021,Cannon Street,51.512049,-0.092254,287.4,107.4,21,19,0,0
+cannon_street_south_022,Cannon Street,51.512096,-0.092496,290.5,110.5,22,18,0,0
+cannon_street_south_023,Cannon Street,51.512159,-0.092767,284.7,104.7,23,17,0,0
+cannon_street_south_024,Cannon Street,51.512207,-0.093055,287.6,107.6,24,16,0,0
+cannon_street_south_025,Cannon Street,51.512262,-0.093334,288.4,108.4,25,15,0,0
+cannon_street_south_026,Cannon Street,51.512327,-0.093645,280.6,100.6,26,14,0,0
+cannon_street_south_027,Cannon Street,51.512358,-0.093912,299.0,119.0,27,13,0,0
+cannon_street_south_028,Cannon Street,51.51244,-0.094146,286.8,106.8,28,12,0,0
+cannon_street_south_029,Cannon Street,51.512492,-0.094425,307.6,127.6,29,11,0,0
+cannon_street_south_030,Cannon Street,51.512598,-0.094644,288.3,108.3,30,10,0,0
+cannon_street_south_031,Cannon Street,51.512656,-0.094923,284.3,104.3,31,9,0,0
+cannon_street_south_032,Cannon Street,51.512673,-0.095032,268.0,88.0,32,8,0,0
+cannon_street_south_033,Cannon Street,51.512667,-0.095326,289.8,109.8,33,7,0,0
+cannon_street_south_034,Cannon Street,51.512729,-0.095599,284.1,104.1,34,6,0,0
+cannon_street_south_035,Cannon Street,51.512771,-0.095871,273.6,93.6,35,5,0,0
+cannon_street_south_036,Cannon Street,51.512783,-0.096162,302.6,122.6,36,4,0,0
+cannon_street_south_037,Cannon Street,51.512863,-0.096362,273.5,93.5,37,3,0,0
+cannon_street_south_038,Cannon Street,51.512875,-0.096679,288.1,108.1,38,2,0,0
+cannon_street_south_039,Cannon Street,51.512931,-0.096951,288.1,108.1,39,1,0,0
+cannon_street_north_seg1_001,Cannon Street,51.51097,-0.086831,278.1,98.1,1,2,0,0
+cannon_street_north_seg1_002,Cannon Street,51.510996,-0.087123,278.1,98.1,2,1,0,0
+cannon_street_north_seg2_001,Cannon Street,51.512233,-0.09325,307.3,127.3,1,5,0,0
+cannon_street_north_seg2_002,Cannon Street,51.512354,-0.093504,301.9,121.9,2,4,0,0
+cannon_street_north_seg2_003,Cannon Street,51.512451,-0.093754,283.8,103.8,3,3,0,0
+cannon_street_north_seg2_004,Cannon Street,51.512498,-0.094057,280.2,100.2,4,2,0,0
+cannon_street_north_seg2_005,Cannon Street,51.512524,-0.094296,280.2,100.2,5,1,0,0
+cannon_street_north_seg3_001,Cannon Street,51.512673,-0.095032,292.7,112.7,1,3,0,0
+cannon_street_north_seg3_002,Cannon Street,51.51275,-0.095326,280.5,100.5,2,2,0,0
+cannon_street_north_seg3_003,Cannon Street,51.512772,-0.095516,280.5,100.5,3,1,0,0
+carey_lane_001,Carey Lane,51.515471,-0.095477,259.4,79.4,1,4,0,0
+carey_lane_002,Carey Lane,51.515446,-0.095685,281.1,101.1,2,3,0,0
+carey_lane_003,Carey Lane,51.515483,-0.095985,282.5,102.5,3,2,0,0
+carey_lane_004,Carey Lane,51.515526,-0.096292,282.5,102.5,4,1,0,0
+carter_lane_001,Carter Lane,51.512959,-0.097257,250.5,70.5,1,4,0,0
+carter_lane_002,Carter Lane,51.512899,-0.097529,264.1,84.1,2,3,0,0
+carter_lane_003,Carter Lane,51.512876,-0.097882,277.6,97.6,3,2,0,0
+carter_lane_004,Carter Lane,51.512894,-0.098101,277.6,97.6,4,1,0,0
+castle_baynard_street_001,Castle Baynard Street,51.511245,-0.095572,277.1,97.1,1,6,0,0
+castle_baynard_street_002,Castle Baynard Street,51.511266,-0.095844,277.7,97.7,2,5,0,0
+castle_baynard_street_003,Castle Baynard Street,51.511289,-0.096113,289.6,109.6,3,4,0,0
+castle_baynard_street_004,Castle Baynard Street,51.511347,-0.096371,261.8,81.8,4,3,0,0
+castle_baynard_street_005,Castle Baynard Street,51.51132,-0.096667,274.2,94.2,5,2,0,0
+castle_baynard_street_006,Castle Baynard Street,51.511332,-0.096937,274.2,94.2,6,1,0,0
+cavendish_court_001,Cavendish Court,51.516152,-0.080075,3.1,183.1,1,3,0,0
+cavendish_court_002,Cavendish Court,51.516321,-0.080061,28.0,208.0,2,2,0,0
+cavendish_court_003,Cavendish Court,51.516484,-0.079922,28.0,208.0,3,1,0,0
+change_alley_001,Change Alley,51.512862,-0.08641,288.4,108.4,1,2,0,0
+change_alley_002,Change Alley,51.51292,-0.086688,288.4,108.4,2,1,0,0
+cheapside_south_001,Cheapside,51.513658,-0.091189,283.4,103.4,1,25,0,0
+cheapside_south_002,Cheapside,51.513699,-0.091466,283.2,103.2,2,24,0,0
+cheapside_south_003,Cheapside,51.513742,-0.091757,283.1,103.1,3,23,0,0
+cheapside_south_004,Cheapside,51.513782,-0.092034,289.6,109.6,4,22,0,0
+cheapside_south_005,Cheapside,51.513847,-0.092327,278.6,98.6,5,21,0,0
+cheapside_south_006,Cheapside,51.51387,-0.09257,283.4,103.4,6,20,0,0
+cheapside_south_007,Cheapside,51.513917,-0.092883,283.0,103.0,7,19,0,0
+cheapside_south_008,Cheapside,51.513953,-0.093132,287.7,107.7,8,18,0,0
+cheapside_south_009,Cheapside,51.513996,-0.093346,284.8,104.8,9,17,0,0
+cheapside_south_010,Cheapside,51.514042,-0.093627,284.7,104.7,10,16,0,0
+cheapside_south_011,Cheapside,51.51409,-0.093913,283.0,103.0,11,15,0,0
+cheapside_south_012,Cheapside,51.514141,-0.094267,287.9,107.9,12,14,0,0
+cheapside_south_013,Cheapside,51.514184,-0.09448,284.6,104.6,13,13,0,0
+cheapside_south_014,Cheapside,51.514229,-0.094759,285.7,105.7,14,12,0,0
+cheapside_south_015,Cheapside,51.514278,-0.095039,285.1,105.1,15,11,0,0
+cheapside_south_016,Cheapside,51.514326,-0.095321,283.6,103.6,16,10,0,0
+cheapside_south_017,Cheapside,51.514375,-0.095642,287.1,107.1,17,9,0,0
+cheapside_south_018,Cheapside,51.514421,-0.095884,285.6,105.6,18,8,0,0
+cheapside_south_019,Cheapside,51.51447,-0.096162,290.2,110.2,19,7,0,0
+cheapside_south_020,Cheapside,51.514536,-0.09645,298.8,118.8,20,6,0,0
+cheapside_south_021,Cheapside,51.514634,-0.096733,316.7,136.7,21,5,0,0
+cheapside_south_022,Cheapside,51.514736,-0.096887,291.4,111.4,22,4,0,0
+cheapside_south_023,Cheapside,51.514797,-0.097135,316.5,136.5,23,3,0,0
+cheapside_south_024,Cheapside,51.514929,-0.097335,308.0,128.0,24,2,0,0
+cheapside_south_025,Cheapside,51.515068,-0.097619,308.0,128.0,25,1,0,0
+cheapside_north_001,Cheapside,51.514607,-0.096809,326.6,146.6,1,5,0,0
+cheapside_north_002,Cheapside,51.514784,-0.096995,330.1,150.1,2,4,0,0
+cheapside_north_003,Cheapside,51.514943,-0.097142,341.9,161.9,3,3,0,0
+cheapside_north_004,Cheapside,51.515114,-0.097231,359.4,179.4,4,2,0,0
+cheapside_north_005,Cheapside,51.515245,-0.097233,359.4,179.4,5,1,0,0
+circus_place_seg1_001,Circus Place,51.517025,-0.086817,17.1,197.1,1,3,0,0
+circus_place_seg1_002,Circus Place,51.517199,-0.086732,13.4,193.4,2,2,0,0
+circus_place_seg1_003,Circus Place,51.517373,-0.086666,13.4,193.4,3,1,0,0
+circus_place_seg2_001,Circus Place,51.517104,-0.086768,13.3,193.3,1,2,0,0
+circus_place_seg2_002,Circus Place,51.517289,-0.086698,13.3,193.3,2,1,0,0
+clements_lane_001,Clements Lane,51.511312,-0.087092,43.8,223.8,1,7,0,0
+clements_lane_002,Clements Lane,51.511408,-0.086945,24.1,204.1,2,6,0,0
+clements_lane_003,Clements Lane,51.51157,-0.08683,21.6,201.6,3,5,0,0
+clements_lane_004,Clements Lane,51.511733,-0.086727,23.3,203.3,4,4,0,0
+clements_lane_005,Clements Lane,51.511897,-0.086614,23.9,203.9,5,3,0,0
+clements_lane_006,Clements Lane,51.512062,-0.086497,25.7,205.7,6,2,0,0
+clements_lane_007,Clements Lane,51.512235,-0.086365,25.7,205.7,7,1,0,0
+clerks_place_001,Clerks' Place,51.515098,-0.080346,327.7,147.7,1,7,0,0
+clerks_place_002,Clerks' Place,51.515276,-0.080526,300.5,120.5,2,6,0,0
+clerks_place_003,Clerks' Place,51.515371,-0.080784,263.8,83.8,3,5,0,0
+clerks_place_004,Clerks' Place,51.515352,-0.081063,287.0,107.0,4,4,0,0
+clerks_place_005,Clerks' Place,51.515405,-0.081341,291.7,111.7,5,3,0,0
+clerks_place_006,Clerks' Place,51.515471,-0.081605,294.8,114.8,6,2,0,0
+clerks_place_007,Clerks' Place,51.515548,-0.081871,294.8,114.8,7,1,0,0
+cloak_lane_001,Cloak Lane,51.511479,-0.090816,288.4,108.4,1,8,0,0
+cloak_lane_002,Cloak Lane,51.511532,-0.091072,286.8,106.8,2,7,0,0
+cloak_lane_003,Cloak Lane,51.511585,-0.091352,286.7,106.7,3,6,0,0
+cloak_lane_004,Cloak Lane,51.511637,-0.091627,286.8,106.8,4,5,0,0
+cloak_lane_005,Cloak Lane,51.511691,-0.091913,285.8,105.8,5,4,0,0
+cloak_lane_006,Cloak Lane,51.511737,-0.092174,283.2,103.2,6,3,0,0
+cloak_lane_007,Cloak Lane,51.511775,-0.092431,283.1,103.1,7,2,0,0
+cloak_lane_008,Cloak Lane,51.511819,-0.09273,283.1,103.1,8,1,0,0
+coleman_street_001,Coleman Street,51.514895,-0.090348,16.5,196.5,1,14,0,0
+coleman_street_002,Coleman Street,51.515079,-0.090261,19.2,199.2,2,13,0,0
+coleman_street_003,Coleman Street,51.515257,-0.090162,31.4,211.4,3,12,0,0
+coleman_street_004,Coleman Street,51.515423,-0.09,4.9,184.9,4,11,0,0
+coleman_street_005,Coleman Street,51.515605,-0.089975,15.9,195.9,5,10,0,0
+coleman_street_006,Coleman Street,51.515776,-0.089898,13.1,193.1,6,9,0,0
+coleman_street_007,Coleman Street,51.515961,-0.089829,12.3,192.3,7,8,0,0
+coleman_street_008,Coleman Street,51.51614,-0.089767,5.3,185.3,8,7,0,0
+coleman_street_009,Coleman Street,51.516318,-0.08974,1.2,181.2,9,6,0,0
+coleman_street_010,Coleman Street,51.516499,-0.089734,0.5,180.5,10,5,0,0
+coleman_street_011,Coleman Street,51.516684,-0.089732,4.7,184.7,11,4,0,0
+coleman_street_012,Coleman Street,51.51686,-0.089709,10.7,190.7,12,3,0,0
+coleman_street_013,Coleman Street,51.517028,-0.089658,13.0,193.0,13,2,0,0
+coleman_street_014,Coleman Street,51.517205,-0.089593,13.0,193.0,14,1,0,0
+college_hill_001,College Hill,51.511055,-0.092196,314.6,134.6,1,6,0,0
+college_hill_002,College Hill,51.511162,-0.09237,16.1,196.1,2,5,0,0
+college_hill_003,College Hill,51.511344,-0.092286,24.9,204.9,3,4,0,0
+college_hill_004,College Hill,51.51153,-0.092148,14.7,194.7,4,3,0,0
+college_hill_005,College Hill,51.511721,-0.092068,11.5,191.5,5,2,0,0
+college_hill_006,College Hill,51.511911,-0.092006,11.5,191.5,6,1,0,0
+college_street_001,College Street,51.510791,-0.091117,306.2,126.2,1,7,0,0
+college_street_002,College Street,51.510914,-0.091385,295.0,115.0,2,6,0,0
+college_street_003,College Street,51.510991,-0.09165,290.9,110.9,3,5,0,0
+college_street_004,College Street,51.511051,-0.091902,271.0,91.0,4,4,0,0
+college_street_005,College Street,51.511055,-0.092196,266.3,86.3,5,3,0,0
+college_street_006,College Street,51.511045,-0.092428,286.7,106.7,6,2,0,0
+college_street_007,College Street,51.511101,-0.092724,286.7,106.7,7,1,0,0
+copthall_avenue_001,Copthall Avenue,51.515671,-0.08668,266.4,86.4,1,13,0,0
+copthall_avenue_002,Copthall Avenue,51.515665,-0.086829,268.7,88.7,2,12,0,0
+copthall_avenue_003,Copthall Avenue,51.515661,-0.087118,270.8,90.8,3,11,0,0
+copthall_avenue_004,Copthall Avenue,51.515664,-0.087408,272.6,92.6,4,10,0,0
+copthall_avenue_005,Copthall Avenue,51.515672,-0.087704,312.4,132.4,5,9,0,0
+copthall_avenue_006,Copthall Avenue,51.51579,-0.087909,1.5,181.5,6,8,0,0
+copthall_avenue_007,Copthall Avenue,51.515971,-0.087902,18.0,198.0,7,7,0,0
+copthall_avenue_008,Copthall Avenue,51.516152,-0.087808,13.9,193.9,8,6,0,0
+copthall_avenue_009,Copthall Avenue,51.516294,-0.087752,7.8,187.8,9,5,0,0
+copthall_avenue_010,Copthall Avenue,51.516474,-0.087713,4.3,184.3,10,4,0,0
+copthall_avenue_011,Copthall Avenue,51.516651,-0.087692,5.6,185.6,11,3,0,0
+copthall_avenue_012,Copthall Avenue,51.516836,-0.087663,6.2,186.2,12,2,0,0
+copthall_avenue_013,Copthall Avenue,51.517057,-0.087624,6.2,186.2,13,1,0,0
+cornhill_001,Cornhill,51.513394,-0.088735,94.4,274.4,1,16,0,0
+cornhill_002,Cornhill,51.51338,-0.08845,98.4,278.4,2,15,0,0
+cornhill_003,Cornhill,51.513354,-0.088159,95.1,275.1,3,14,0,0
+cornhill_004,Cornhill,51.513336,-0.087844,94.1,274.1,4,13,0,0
+cornhill_005,Cornhill,51.513327,-0.087649,87.8,267.8,5,12,0,0
+cornhill_006,Cornhill,51.513335,-0.087323,84.5,264.5,6,11,0,0
+cornhill_007,Cornhill,51.513351,-0.087058,85.5,265.5,7,10,0,0
+cornhill_008,Cornhill,51.513365,-0.086777,86.4,266.4,8,9,0,0
+cornhill_009,Cornhill,51.513376,-0.086489,90.5,270.5,9,8,0,0
+cornhill_010,Cornhill,51.513375,-0.0862,87.8,267.8,10,7,0,0
+cornhill_011,Cornhill,51.513383,-0.085862,88.2,268.2,11,6,0,0
+cornhill_012,Cornhill,51.513388,-0.085586,86.6,266.6,12,5,0,0
+cornhill_013,Cornhill,51.513398,-0.085311,83.9,263.9,13,4,0,0
+cornhill_014,Cornhill,51.513417,-0.085029,97.6,277.6,14,3,0,0
+cornhill_015,Cornhill,51.51339,-0.084708,74.8,254.8,15,2,0,0
+cornhill_016,Cornhill,51.513433,-0.084454,74.8,254.8,16,1,0,0
+cousin_lane_001,Cousin Lane,51.509449,-0.09167,358.7,178.7,1,6,0,0
+cousin_lane_002,Cousin Lane,51.509609,-0.091676,18.7,198.7,2,5,0,0
+cousin_lane_003,Cousin Lane,51.509784,-0.091581,18.4,198.4,3,4,0,0
+cousin_lane_004,Cousin Lane,51.509956,-0.09149,17.7,197.7,4,3,0,0
+cousin_lane_005,Cousin Lane,51.510136,-0.091398,17.7,197.7,5,2,0,0
+cousin_lane_006,Cousin Lane,51.510307,-0.091311,17.7,197.7,6,1,0,0
+cross_lane_001,Cross Lane,51.509347,-0.081795,309.3,129.3,1,2,0,0
+cross_lane_002,Cross Lane,51.50946,-0.082015,309.3,129.3,2,1,0,0
+cullum_street_south_001,Cullum Street,51.511612,-0.082161,8.1,188.1,1,2,0,0
+cullum_street_south_002,Cullum Street,51.511796,-0.082119,8.1,188.1,2,1,0,0
+cullum_street_north_001,Cullum Street,51.511972,-0.082157,286.6,106.6,1,4,0,0
+cullum_street_north_002,Cullum Street,51.512025,-0.082437,280.7,100.7,2,3,0,0
+cullum_street_north_003,Cullum Street,51.512061,-0.082747,327.7,147.7,3,2,0,0
+cullum_street_north_004,Cullum Street,51.512165,-0.082852,327.7,147.7,4,1,0,0
+custom_house_walkway_001,Custom House Walkway,51.508403,-0.081705,281.0,101.0,1,7,0,0
+custom_house_walkway_002,Custom House Walkway,51.508438,-0.081992,265.7,85.7,2,6,0,0
+custom_house_walkway_003,Custom House Walkway,51.508423,-0.082321,294.0,114.0,3,5,0,0
+custom_house_walkway_004,Custom House Walkway,51.50852,-0.082671,290.9,110.9,4,4,0,0
+custom_house_walkway_005,Custom House Walkway,51.508567,-0.082865,275.4,95.4,5,3,0,0
+custom_house_walkway_006,Custom House Walkway,51.508582,-0.083129,270.2,90.2,6,2,0,0
+custom_house_walkway_007,Custom House Walkway,51.508583,-0.083507,270.2,90.2,7,1,0,0
+dark_house_walk_001,Dark House Walk,51.508545,-0.084737,295.7,115.7,1,3,0,0
+dark_house_walk_002,Dark House Walk,51.508604,-0.084932,277.5,97.5,2,2,0,0
+dark_house_walk_003,Dark House Walk,51.50863,-0.085238,277.5,97.5,3,1,0,0
+devonshire_row_001,Devonshire Row,51.51678,-0.079957,297.3,117.3,1,4,0,0
+devonshire_row_002,Devonshire Row,51.516863,-0.080213,295.3,115.3,2,3,0,0
+devonshire_row_003,Devonshire Row,51.516906,-0.080358,296.0,116.0,3,2,0,0
+devonshire_row_004,Devonshire Row,51.517019,-0.080726,296.0,116.0,4,1,0,0
+distaff_lane_001,Distaff Lane,51.512305,-0.098222,96.6,276.6,1,9,0,0
+distaff_lane_002,Distaff Lane,51.512278,-0.097848,85.8,265.8,2,8,0,0
+distaff_lane_003,Distaff Lane,51.512285,-0.09769,92.8,272.8,3,7,0,0
+distaff_lane_004,Distaff Lane,51.512276,-0.097393,94.7,274.7,4,6,0,0
+distaff_lane_005,Distaff Lane,51.512261,-0.097105,97.8,277.8,5,5,0,0
+distaff_lane_006,Distaff Lane,51.512237,-0.096819,35.3,215.3,6,4,0,0
+distaff_lane_007,Distaff Lane,51.512379,-0.096658,9.0,189.0,7,3,0,0
+distaff_lane_008,Distaff Lane,51.512559,-0.096612,9.1,189.1,8,2,0,0
+distaff_lane_009,Distaff Lane,51.512753,-0.096563,9.1,189.1,9,1,0,0
+dowgate_hill_001,Dowgate Hill,51.510585,-0.091246,21.4,201.4,1,7,0,0
+dowgate_hill_002,Dowgate Hill,51.510791,-0.091117,16.1,196.1,2,6,0,0
+dowgate_hill_003,Dowgate Hill,51.510969,-0.091035,15.2,195.2,3,5,0,0
+dowgate_hill_004,Dowgate Hill,51.511148,-0.090958,15.2,195.2,4,4,0,0
+dowgate_hill_005,Dowgate Hill,51.511321,-0.090883,10.7,190.7,5,3,0,0
+dowgate_hill_006,Dowgate Hill,51.511479,-0.090835,21.2,201.2,6,2,0,0
+dowgate_hill_007,Dowgate Hill,51.511609,-0.090755,21.2,201.2,7,1,0,0
+dunster_court_seg1_001,Dunster Court,51.511305,-0.081469,0.0,180.0,1,2,0,0
+dunster_court_seg1_002,Dunster Court,51.511305,-0.081469,0.0,180.0,2,1,0,0
+dunster_court_seg2_001,Dunster Court,51.511298,-0.080685,20.0,200.0,1,3,0,0
+dunster_court_seg2_002,Dunster Court,51.511349,-0.080656,57.9,237.9,2,2,0,0
+dunster_court_seg2_003,Dunster Court,51.511442,-0.080419,57.9,237.9,3,1,0,0
+eastcheap_seg1_001,Eastcheap,51.510437,-0.082577,292.2,112.2,1,13,0,0
+eastcheap_seg1_002,Eastcheap,51.510498,-0.082811,294.9,114.9,2,12,0,0
+eastcheap_seg1_003,Eastcheap,51.510577,-0.083082,279.2,99.2,3,11,0,0
+eastcheap_seg1_004,Eastcheap,51.510607,-0.083377,274.9,94.9,4,10,0,0
+eastcheap_seg1_005,Eastcheap,51.510622,-0.083671,278.5,98.5,5,9,0,0
+eastcheap_seg1_006,Eastcheap,51.510649,-0.083961,281.5,101.5,6,8,0,0
+eastcheap_seg1_007,Eastcheap,51.510686,-0.084253,279.0,99.0,7,7,0,0
+eastcheap_seg1_008,Eastcheap,51.510717,-0.08456,273.6,93.6,8,6,0,0
+eastcheap_seg1_009,Eastcheap,51.510729,-0.084872,269.7,89.7,9,5,0,0
+eastcheap_seg1_010,Eastcheap,51.510728,-0.085055,282.8,102.8,10,4,0,0
+eastcheap_seg1_011,Eastcheap,51.510775,-0.08538,254.9,74.9,11,3,0,0
+eastcheap_seg1_012,Eastcheap,51.510733,-0.085626,285.6,105.6,12,2,0,0
+eastcheap_seg1_013,Eastcheap,51.510783,-0.085914,285.6,105.6,13,1,0,0
+eastcheap_seg2_001,Eastcheap,51.510766,-0.085295,275.3,95.3,1,4,0,0
+eastcheap_seg2_002,Eastcheap,51.51078,-0.085527,286.1,106.1,2,3,0,0
+eastcheap_seg2_003,Eastcheap,51.510836,-0.085841,287.0,107.0,3,2,0,0
+eastcheap_seg2_004,Eastcheap,51.510887,-0.086104,287.0,107.0,4,1,0,0
+eldon_street_001,Eldon Street,51.518035,-0.084146,342.1,162.1,1,4,0,0
+eldon_street_002,Eldon Street,51.518202,-0.084231,296.0,116.0,2,3,0,0
+eldon_street_003,Eldon Street,51.518279,-0.084484,294.6,114.6,3,2,0,0
+eldon_street_004,Eldon Street,51.518354,-0.084746,294.6,114.6,4,1,0,0
+fen_court_001,Fen Court,51.511801,-0.081221,331.3,151.3,1,5,0,0
+fen_court_002,Fen Court,51.511987,-0.081383,324.0,144.0,2,4,0,0
+fen_court_003,Fen Court,51.512114,-0.081531,12.0,192.0,3,3,0,0
+fen_court_004,Fen Court,51.512293,-0.08147,0.8,180.8,4,2,0,0
+fen_court_005,Fen Court,51.512454,-0.081466,0.8,180.8,5,1,0,0
+fenchurch_avenue_001,Fenchurch Avenue,51.512582,-0.080314,264.6,84.6,1,7,0,0
+fenchurch_avenue_002,Fenchurch Avenue,51.512566,-0.080594,261.7,81.7,2,6,0,0
+fenchurch_avenue_003,Fenchurch Avenue,51.512539,-0.080886,268.4,88.4,3,5,0,0
+fenchurch_avenue_004,Fenchurch Avenue,51.512534,-0.081181,272.8,92.8,4,4,0,0
+fenchurch_avenue_005,Fenchurch Avenue,51.512543,-0.08148,283.6,103.6,5,3,0,0
+fenchurch_avenue_006,Fenchurch Avenue,51.512586,-0.081767,284.2,104.2,6,2,0,0
+fenchurch_avenue_007,Fenchurch Avenue,51.512632,-0.082056,284.2,104.2,7,1,0,0
+fenchurch_street_001,Fenchurch Street,51.51192,-0.085155,110.0,290.0,1,19,0,0
+fenchurch_street_002,Fenchurch Street,51.511837,-0.08479,86.4,266.4,2,18,0,0
+fenchurch_street_003,Fenchurch Street,51.511842,-0.084651,112.5,292.5,3,17,0,0
+fenchurch_street_004,Fenchurch Street,51.511748,-0.084288,104.8,284.8,4,16,0,0
+fenchurch_street_005,Fenchurch Street,51.511716,-0.084094,104.1,284.1,5,15,0,0
+fenchurch_street_006,Fenchurch Street,51.511667,-0.083785,100.3,280.3,6,14,0,0
+fenchurch_street_007,Fenchurch Street,51.511633,-0.083489,99.9,279.9,7,13,0,0
+fenchurch_street_008,Fenchurch Street,51.511599,-0.083176,96.0,276.0,8,12,0,0
+fenchurch_street_009,Fenchurch Street,51.511578,-0.082853,90.2,270.2,9,11,0,0
+fenchurch_street_010,Fenchurch Street,51.511577,-0.082576,85.2,265.2,10,10,0,0
+fenchurch_street_011,Fenchurch Street,51.511587,-0.08238,78.8,258.8,11,9,0,0
+fenchurch_street_012,Fenchurch Street,51.511629,-0.082043,72.7,252.7,12,8,0,0
+fenchurch_street_013,Fenchurch Street,51.511681,-0.081778,71.7,251.7,13,7,0,0
+fenchurch_street_014,Fenchurch Street,51.511751,-0.08144,70.1,250.1,14,6,0,0
+fenchurch_street_015,Fenchurch Street,51.511801,-0.081221,62.4,242.4,15,5,0,0
+fenchurch_street_016,Fenchurch Street,51.511906,-0.0809,65.3,245.3,16,4,0,0
+fenchurch_street_017,Fenchurch Street,51.511973,-0.080668,63.6,243.6,17,3,0,0
+fenchurch_street_018,Fenchurch Street,51.512023,-0.080505,65.0,245.0,18,2,0,0
+fenchurch_street_019,Fenchurch Street,51.512123,-0.080164,65.0,245.0,19,1,0,0
+finch_lane_001,Finch Lane,51.513374,-0.086061,8.0,188.0,1,5,0,0
+finch_lane_002,Finch Lane,51.513535,-0.086025,26.1,206.1,2,4,0,0
+finch_lane_003,Finch Lane,51.513717,-0.085882,5.4,185.4,3,3,0,0
+finch_lane_004,Finch Lane,51.51387,-0.085859,19.1,199.1,4,2,0,0
+finch_lane_005,Finch Lane,51.514036,-0.085768,19.1,199.1,5,1,0,0
+finsbury_circus_south_001,Finsbury Circus,51.517586,-0.084652,284.2,104.2,1,4,0,0
+finsbury_circus_south_002,Finsbury Circus,51.51763,-0.084927,273.8,93.8,2,3,0,0
+finsbury_circus_south_003,Finsbury Circus,51.517643,-0.085241,293.7,113.7,3,2,0,0
+finsbury_circus_south_004,Finsbury Circus,51.517713,-0.085498,293.7,113.7,4,1,0,0
+finsbury_circus_north_001,Finsbury Circus,51.517373,-0.086666,81.1,261.1,1,18,0,0
+finsbury_circus_north_002,Finsbury Circus,51.517403,-0.086363,82.3,262.3,2,17,0,0
+finsbury_circus_north_003,Finsbury Circus,51.517427,-0.086084,67.1,247.1,3,16,0,0
+finsbury_circus_north_004,Finsbury Circus,51.517499,-0.08581,39.5,219.5,4,15,0,0
+finsbury_circus_north_005,Finsbury Circus,51.517657,-0.085602,17.1,197.1,5,14,0,0
+finsbury_circus_north_006,Finsbury Circus,51.517772,-0.085546,348.4,168.4,6,13,0,0
+finsbury_circus_north_007,Finsbury Circus,51.517997,-0.08562,319.3,139.3,7,12,0,0
+finsbury_circus_north_008,Finsbury Circus,51.518135,-0.08581,302.2,122.2,8,11,0,0
+finsbury_circus_north_009,Finsbury Circus,51.518232,-0.086055,288.1,108.1,9,10,0,0
+finsbury_circus_north_010,Finsbury Circus,51.518288,-0.086332,274.5,94.5,10,9,0,0
+finsbury_circus_north_011,Finsbury Circus,51.518303,-0.086624,260.3,80.3,11,8,0,0
+finsbury_circus_north_012,Finsbury Circus,51.518272,-0.086909,243.0,63.0,12,7,0,0
+finsbury_circus_north_013,Finsbury Circus,51.518192,-0.087161,213.4,33.4,13,6,0,0
+finsbury_circus_north_014,Finsbury Circus,51.518037,-0.087323,188.7,8.7,14,5,0,0
+finsbury_circus_north_015,Finsbury Circus,51.517859,-0.087367,158.3,338.3,15,4,0,0
+finsbury_circus_north_016,Finsbury Circus,51.517691,-0.08726,134.9,314.9,16,3,0,0
+finsbury_circus_north_017,Finsbury Circus,51.51756,-0.087051,119.9,299.9,17,2,0,0
+finsbury_circus_north_018,Finsbury Circus,51.51747,-0.086802,119.9,299.9,18,1,0,0
+fish_street_hill_001,Fish Street Hill,51.51015,-0.086115,31.8,211.8,1,4,0,0
+fish_street_hill_002,Fish Street Hill,51.510228,-0.086037,24.9,204.9,2,3,0,0
+fish_street_hill_003,Fish Street Hill,51.510408,-0.085904,15.7,195.7,3,2,0,0
+fish_street_hill_004,Fish Street Hill,51.510605,-0.085816,15.7,195.7,4,1,0,0
+fisherman_s_hall_wharf_001,Fisherman's Hall Wharf,51.508957,-0.087176,272.8,92.8,1,7,0,0
+fisherman_s_hall_wharf_002,Fisherman's Hall Wharf,51.508965,-0.087432,298.2,118.2,2,6,0,0
+fisherman_s_hall_wharf_003,Fisherman's Hall Wharf,51.509057,-0.087707,106.5,286.5,3,5,0,0
+fisherman_s_hall_wharf_004,Fisherman's Hall Wharf,51.50903,-0.087562,285.1,105.1,4,4,0,0
+fisherman_s_hall_wharf_005,Fisherman's Hall Wharf,51.509079,-0.087851,258.4,78.4,5,3,0,0
+fisherman_s_hall_wharf_006,Fisherman's Hall Wharf,51.509043,-0.088129,264.7,84.7,6,2,0,0
+fisherman_s_hall_wharf_007,Fisherman's Hall Wharf,51.509026,-0.088423,264.7,84.7,7,1,0,0
+fore_street_001,Fore Street,51.517818,-0.090043,290.1,110.1,1,9,0,0
+fore_street_002,Fore Street,51.517876,-0.090294,290.8,110.8,2,8,0,0
+fore_street_003,Fore Street,51.51794,-0.090564,291.2,111.2,3,7,0,0
+fore_street_004,Fore Street,51.518006,-0.090835,292.3,112.3,4,6,0,0
+fore_street_005,Fore Street,51.518075,-0.091105,289.7,109.7,5,5,0,0
+fore_street_006,Fore Street,51.518139,-0.09139,289.6,109.6,6,4,0,0
+fore_street_007,Fore Street,51.518199,-0.091661,291.4,111.4,7,3,0,0
+fore_street_008,Fore Street,51.518268,-0.09194,291.3,111.3,8,2,0,0
+fore_street_009,Fore Street,51.518335,-0.092214,291.3,111.3,9,1,0,0
+fore_street_avenue_001,Fore Street Avenue,51.517818,-0.090043,18.2,198.2,1,5,0,0
+fore_street_avenue_002,Fore Street Avenue,51.517987,-0.089954,25.0,205.0,2,4,0,0
+fore_street_avenue_003,Fore Street Avenue,51.518147,-0.089835,102.3,282.3,3,3,0,0
+fore_street_avenue_004,Fore Street Avenue,51.518107,-0.089539,109.5,289.5,4,2,0,0
+fore_street_avenue_005,Fore Street Avenue,51.518046,-0.089266,109.5,289.5,5,1,0,0
+foster_lane_001,Foster Lane,51.514536,-0.09645,12.7,192.7,1,9,0,0
+foster_lane_002,Foster Lane,51.514724,-0.096383,5.0,185.0,2,8,0,0
+foster_lane_003,Foster Lane,51.514898,-0.096358,1.7,181.7,3,7,0,0
+foster_lane_004,Foster Lane,51.51508,-0.09635,2.6,182.6,4,6,0,0
+foster_lane_005,Foster Lane,51.51526,-0.096337,2.4,182.4,5,5,0,0
+foster_lane_006,Foster Lane,51.515447,-0.096324,15.2,195.2,6,4,0,0
+foster_lane_007,Foster Lane,51.51562,-0.096248,15.8,195.8,7,3,0,0
+foster_lane_008,Foster Lane,51.515791,-0.096171,15.7,195.7,8,2,0,0
+foster_lane_009,Foster Lane,51.515961,-0.096095,15.7,195.7,9,1,0,0
+frederick_s_place_001,Frederick's Place,51.514119,-0.090963,283.2,103.2,1,3,0,0
+frederick_s_place_002,Frederick's Place,51.514161,-0.091248,282.1,102.1,2,2,0,0
+frederick_s_place_003,Frederick's Place,51.514196,-0.091509,282.1,102.1,3,1,0,0
+friday_street_001,Friday Street,51.511945,-0.095858,1.8,181.8,1,5,0,0
+friday_street_002,Friday Street,51.512149,-0.095848,9.4,189.4,2,4,0,0
+friday_street_003,Friday Street,51.51231,-0.095805,13.4,193.4,3,3,0,0
+friday_street_004,Friday Street,51.512516,-0.095727,8.2,188.2,4,2,0,0
+friday_street_005,Friday Street,51.51268,-0.095689,8.2,188.2,5,1,0,0
+fyefoot_lane_001,Fyefoot Lane,51.5115,-0.09626,3.2,183.2,1,3,0,0
+fyefoot_lane_002,Fyefoot Lane,51.511685,-0.096243,3.3,183.3,2,2,0,0
+fyefoot_lane_003,Fyefoot Lane,51.511827,-0.09623,3.3,183.3,3,1,0,0
+gardner_s_lane_001,Gardner's Lane,51.51055,-0.096457,16.1,196.1,1,3,0,0
+gardner_s_lane_002,Gardner's Lane,51.510638,-0.096416,36.5,216.5,2,2,0,0
+gardner_s_lane_003,Gardner's Lane,51.510765,-0.096266,36.5,216.5,3,1,0,0
+garlick_hill_001,Garlick Hill,51.511234,-0.09394,4.0,184.0,1,7,0,0
+garlick_hill_002,Garlick Hill,51.511416,-0.09392,3.8,183.8,2,6,0,0
+garlick_hill_003,Garlick Hill,51.511601,-0.0939,8.2,188.2,3,5,0,0
+garlick_hill_004,Garlick Hill,51.511779,-0.093859,359.2,179.2,4,4,0,0
+garlick_hill_005,Garlick Hill,51.511939,-0.093863,15.8,195.8,5,3,0,0
+garlick_hill_006,Garlick Hill,51.512128,-0.093778,2.3,182.3,6,2,0,0
+garlick_hill_007,Garlick Hill,51.512333,-0.093764,2.3,182.3,7,1,0,0
+george_yard_001,George Yard,51.512281,-0.08623,27.9,207.9,1,3,0,0
+george_yard_002,George Yard,51.512368,-0.086156,26.8,206.8,2,2,0,0
+george_yard_003,George Yard,51.512535,-0.086021,26.8,206.8,3,1,0,0
+globe_view_walkway_001,Globe View Walkway,51.510404,-0.096085,95.9,275.9,1,7,0,0
+globe_view_walkway_002,Globe View Walkway,51.510381,-0.095742,13.6,193.6,2,6,0,0
+globe_view_walkway_003,Globe View Walkway,51.51047,-0.095707,26.3,206.3,3,5,0,0
+globe_view_walkway_004,Globe View Walkway,51.510617,-0.095592,101.8,281.8,4,4,0,0
+globe_view_walkway_005,Globe View Walkway,51.510577,-0.095291,50.5,230.5,5,3,0,0
+globe_view_walkway_006,Globe View Walkway,51.510666,-0.095119,38.6,218.6,6,2,0,0
+globe_view_walkway_007,Globe View Walkway,51.51077,-0.094986,38.6,218.6,7,1,0,0
+goldsmith_street_001,Goldsmith Street,51.514882,-0.094606,286.1,106.1,1,3,0,0
+goldsmith_street_002,Goldsmith Street,51.51494,-0.094926,278.8,98.8,2,2,0,0
+goldsmith_street_003,Goldsmith Street,51.514968,-0.095207,278.8,98.8,3,1,0,0
+gophir_lane_001,Gophir Lane,51.510789,-0.089256,304.6,124.6,1,2,0,0
+gophir_lane_002,Gophir Lane,51.510894,-0.0895,304.6,124.6,2,1,0,0
+gracechurch_street_west_001,Gracechurch Street,51.510911,-0.086511,90.0,270.0,1,4,0,0
+gracechurch_street_west_002,Gracechurch Street,51.510911,-0.086253,61.3,241.3,2,3,0,0
+gracechurch_street_west_003,Gracechurch Street,51.510988,-0.086027,52.7,232.7,3,2,0,0
+gracechurch_street_west_004,Gracechurch Street,51.511099,-0.085794,52.7,232.7,4,1,0,0
+gracechurch_street_east_001,Gracechurch Street,51.510825,-0.086587,87.2,267.2,1,20,0,0
+gracechurch_street_east_002,Gracechurch Street,51.510834,-0.086303,70.3,250.3,2,19,0,0
+gracechurch_street_east_003,Gracechurch Street,51.510904,-0.08599,51.9,231.9,3,18,0,0
+gracechurch_street_east_004,Gracechurch Street,51.511016,-0.085761,168.7,348.7,4,17,0,0
+gracechurch_street_east_005,Gracechurch Street,51.510833,-0.085703,358.9,178.9,5,16,0,0
+gracechurch_street_east_006,Gracechurch Street,51.511005,-0.085708,14.9,194.9,6,15,0,0
+gracechurch_street_east_007,Gracechurch Street,51.511169,-0.085639,27.7,207.7,7,14,0,0
+gracechurch_street_east_008,Gracechurch Street,51.511387,-0.085455,13.5,193.5,8,13,0,0
+gracechurch_street_east_009,Gracechurch Street,51.511524,-0.085403,21.8,201.8,9,12,0,0
+gracechurch_street_east_010,Gracechurch Street,51.511679,-0.085304,15.1,195.1,10,11,0,0
+gracechurch_street_east_011,Gracechurch Street,51.511852,-0.085229,25.5,205.5,11,10,0,0
+gracechurch_street_east_012,Gracechurch Street,51.511992,-0.085123,32.1,212.1,12,9,0,0
+gracechurch_street_east_013,Gracechurch Street,51.512149,-0.084966,25.2,205.2,13,8,0,0
+gracechurch_street_east_014,Gracechurch Street,51.512317,-0.084839,24.7,204.7,14,7,0,0
+gracechurch_street_east_015,Gracechurch Street,51.512487,-0.084714,25.8,205.8,15,6,0,0
+gracechurch_street_east_016,Gracechurch Street,51.512653,-0.084586,23.7,203.7,16,5,0,0
+gracechurch_street_east_017,Gracechurch Street,51.512818,-0.084471,21.0,201.0,17,4,0,0
+gracechurch_street_east_018,Gracechurch Street,51.512987,-0.084367,20.7,200.7,18,3,0,0
+gracechurch_street_east_019,Gracechurch Street,51.513157,-0.084264,17.0,197.0,19,2,0,0
+gracechurch_street_east_020,Gracechurch Street,51.513333,-0.084179,17.0,197.0,20,1,0,0
+great_bell_alley_001,Great Bell Alley,51.51569,-0.089406,278.0,98.0,1,2,0,0
+great_bell_alley_002,Great Bell Alley,51.515712,-0.089652,278.0,98.0,2,1,0,0
+great_st_helens_001,Great St. Helens,51.514627,-0.082105,301.6,121.6,1,4,0,0
+great_st_helens_002,Great St. Helens,51.514712,-0.082326,296.5,116.5,2,3,0,0
+great_st_helens_003,Great St. Helens,51.514794,-0.082588,300.4,120.4,3,2,0,0
+great_st_helens_004,Great St. Helens,51.514883,-0.08283,300.4,120.4,4,1,0,0
+great_st_thomas_apostle_001,Great St. Thomas Apostle,51.511819,-0.09273,282.5,102.5,1,4,0,0
+great_st_thomas_apostle_002,Great St. Thomas Apostle,51.511862,-0.09304,282.6,102.6,2,3,0,0
+great_st_thomas_apostle_003,Great St. Thomas Apostle,51.511903,-0.093332,282.6,102.6,3,2,0,0
+great_st_thomas_apostle_004,Great St. Thomas Apostle,51.511941,-0.093608,282.6,102.6,4,1,0,0
+great_swan_alley_seg1_001,Great Swan Alley,51.516152,-0.087808,289.5,109.5,1,2,0,0
+great_swan_alley_seg1_002,Great Swan Alley,51.516197,-0.088007,289.5,109.5,2,1,0,0
+great_swan_alley_seg2_001,Great Swan Alley,51.516242,-0.088435,274.5,94.5,1,6,0,0
+great_swan_alley_seg2_002,Great Swan Alley,51.516254,-0.088677,278.8,98.8,2,5,0,0
+great_swan_alley_seg2_003,Great Swan Alley,51.516283,-0.088976,250.8,70.8,3,4,0,0
+great_swan_alley_seg2_004,Great Swan Alley,51.516256,-0.089099,287.8,107.8,4,3,0,0
+great_swan_alley_seg2_005,Great Swan Alley,51.516312,-0.089374,280.0,100.0,5,2,0,0
+great_swan_alley_seg2_006,Great Swan Alley,51.51634,-0.089629,280.0,100.0,6,1,0,0
+great_tower_street_001,Great Tower Street,51.509479,-0.080096,314.4,134.4,1,10,0,0
+great_tower_street_002,Great Tower Street,51.50965,-0.080374,289.9,109.9,2,9,0,0
+great_tower_street_003,Great Tower Street,51.509707,-0.080628,300.4,120.4,3,8,0,0
+great_tower_street_004,Great Tower Street,51.509785,-0.08084,295.8,115.8,4,7,0,0
+great_tower_street_005,Great Tower Street,51.509881,-0.081157,302.5,122.5,5,6,0,0
+great_tower_street_006,Great Tower Street,51.509978,-0.081401,305.7,125.7,6,5,0,0
+great_tower_street_007,Great Tower Street,51.510056,-0.081575,303.5,123.5,7,4,0,0
+great_tower_street_008,Great Tower Street,51.510169,-0.081846,290.5,110.5,8,3,0,0
+great_tower_street_009,Great Tower Street,51.510232,-0.082115,298.9,118.9,9,2,0,0
+great_tower_street_010,Great Tower Street,51.510319,-0.082366,298.9,118.9,10,1,0,0
+great_trinity_lane_001,Great Trinity Lane,51.511939,-0.093863,282.3,102.3,1,3,0,0
+great_trinity_lane_002,Great Trinity Lane,51.511979,-0.09416,283.9,103.9,2,2,0,0
+great_trinity_lane_003,Great Trinity Lane,51.512023,-0.094442,283.9,103.9,3,1,0,0
+great_winchester_street_001,Great Winchester Street,51.515841,-0.084017,296.8,116.8,1,9,0,0
+great_winchester_street_002,Great Winchester Street,51.515914,-0.084247,293.0,113.0,2,8,0,0
+great_winchester_street_003,Great Winchester Street,51.515988,-0.084526,290.7,110.7,3,7,0,0
+great_winchester_street_004,Great Winchester Street,51.516052,-0.084795,292.8,112.8,4,6,0,0
+great_winchester_street_005,Great Winchester Street,51.516124,-0.085069,285.5,105.5,5,5,0,0
+great_winchester_street_006,Great Winchester Street,51.516169,-0.085327,300.0,120.0,6,4,0,0
+great_winchester_street_007,Great Winchester Street,51.516259,-0.085577,2.1,182.1,7,3,0,0
+great_winchester_street_008,Great Winchester Street,51.516441,-0.085566,19.5,199.5,8,2,0,0
+great_winchester_street_009,Great Winchester Street,51.516623,-0.085463,19.5,199.5,9,1,0,0
+gresham_street_001,Gresham Street,51.514895,-0.090348,287.3,107.3,1,25,0,0
+gresham_street_002,Gresham Street,51.514951,-0.090633,277.6,97.6,2,24,0,0
+gresham_street_003,Gresham Street,51.514973,-0.090896,281.1,101.1,3,23,0,0
+gresham_street_004,Gresham Street,51.515016,-0.091247,279.0,99.0,4,22,0,0
+gresham_street_005,Gresham Street,51.515044,-0.091533,279.5,99.5,5,21,0,0
+gresham_street_006,Gresham Street,51.515074,-0.091823,284.2,104.2,6,20,0,0
+gresham_street_007,Gresham Street,51.515115,-0.092078,275.0,95.0,7,19,0,0
+gresham_street_008,Gresham Street,51.515127,-0.092302,284.3,104.3,8,18,0,0
+gresham_street_009,Gresham Street,51.515182,-0.092649,290.5,110.5,9,17,0,0
+gresham_street_010,Gresham Street,51.515245,-0.092915,304.4,124.4,10,16,0,0
+gresham_street_011,Gresham Street,51.515347,-0.093152,307.0,127.0,11,15,0,0
+gresham_street_012,Gresham Street,51.515425,-0.093317,290.4,110.4,12,14,0,0
+gresham_street_013,Gresham Street,51.51549,-0.093598,292.4,112.4,13,13,0,0
+gresham_street_014,Gresham Street,51.51556,-0.093871,292.1,112.1,14,12,0,0
+gresham_street_015,Gresham Street,51.515638,-0.094178,290.7,110.7,15,11,0,0
+gresham_street_016,Gresham Street,51.515703,-0.094454,292.6,112.6,16,10,0,0
+gresham_street_017,Gresham Street,51.515774,-0.094725,291.1,111.1,17,9,0,0
+gresham_street_018,Gresham Street,51.515841,-0.095,290.9,110.9,18,8,0,0
+gresham_street_019,Gresham Street,51.515912,-0.095297,289.1,109.1,19,7,0,0
+gresham_street_020,Gresham Street,51.515954,-0.09549,288.1,108.1,20,6,0,0
+gresham_street_021,Gresham Street,51.516011,-0.095772,277.8,97.8,21,5,0,0
+gresham_street_022,Gresham Street,51.516036,-0.096059,316.1,136.1,22,4,0,0
+gresham_street_023,Gresham Street,51.516178,-0.096277,303.3,123.3,23,3,0,0
+gresham_street_024,Gresham Street,51.51628,-0.096524,283.2,103.2,24,2,0,0
+gresham_street_025,Gresham Street,51.516322,-0.096812,283.2,103.2,25,1,0,0
+grocers_hall_court_001,Grocers' Hall Court,51.513552,-0.090678,21.1,201.1,1,3,0,0
+grocers_hall_court_002,Grocers' Hall Court,51.513742,-0.090561,24.0,204.0,2,2,0,0
+grocers_hall_court_003,Grocers' Hall Court,51.513938,-0.090423,24.0,204.0,3,1,0,0
+guildhall_buildings_001,Guildhall Buildings,51.515423,-0.091021,261.3,81.3,1,3,0,0
+guildhall_buildings_002,Guildhall Buildings,51.515395,-0.091311,278.0,98.0,2,2,0,0
+guildhall_buildings_003,Guildhall Buildings,51.51542,-0.091596,278.0,98.0,3,1,0,0
+guildhall_yard_001,Guildhall Yard,51.515074,-0.092124,4.0,184.0,1,2,0,0
+guildhall_yard_002,Guildhall Yard,51.515293,-0.0921,4.0,184.0,2,1,0,0
+gutter_lane_001,Gutter Lane,51.514353,-0.095532,13.7,193.7,1,9,0,0
+gutter_lane_002,Gutter Lane,51.514498,-0.095475,9.6,189.6,2,8,0,0
+gutter_lane_003,Gutter Lane,51.514694,-0.095422,3.4,183.4,3,7,0,0
+gutter_lane_004,Gutter Lane,51.514859,-0.095406,1.5,181.5,4,6,0,0
+gutter_lane_005,Gutter Lane,51.515039,-0.095399,358.4,178.4,5,5,0,0
+gutter_lane_006,Gutter Lane,51.515229,-0.095408,358.6,178.6,6,4,0,0
+gutter_lane_007,Gutter Lane,51.515399,-0.095415,344.8,164.8,7,3,0,0
+gutter_lane_008,Gutter Lane,51.515564,-0.095486,353.9,173.9,8,2,0,0
+gutter_lane_009,Gutter Lane,51.51577,-0.095521,353.9,173.9,9,1,0,0
+hanseatic_walk_001,Hanseatic Walk,51.509054,-0.089615,267.0,87.0,1,5,0,0
+hanseatic_walk_002,Hanseatic Walk,51.509045,-0.089913,292.0,112.0,2,4,0,0
+hanseatic_walk_003,Hanseatic Walk,51.509089,-0.090088,285.3,105.3,3,3,0,0
+hanseatic_walk_004,Hanseatic Walk,51.50914,-0.090386,287.2,107.2,4,2,0,0
+hanseatic_walk_005,Hanseatic Walk,51.509196,-0.090671,287.2,107.2,5,1,0,0
+harp_lane_001,Harp Lane,51.509347,-0.081795,35.3,215.3,1,2,0,0
+harp_lane_002,Harp Lane,51.509497,-0.081625,35.3,215.3,2,1,0,0
+high_timber_street_001,High Timber Street,51.510875,-0.09507,279.0,99.0,1,7,0,0
+high_timber_street_002,High Timber Street,51.510903,-0.095356,290.0,110.0,2,6,0,0
+high_timber_street_003,High Timber Street,51.510966,-0.09563,279.1,99.1,3,5,0,0
+high_timber_street_004,High Timber Street,51.510995,-0.09592,284.0,104.0,4,4,0,0
+high_timber_street_005,High Timber Street,51.511045,-0.096242,277.3,97.3,5,3,0,0
+high_timber_street_006,High Timber Street,51.511055,-0.09636,270.2,90.2,6,2,0,0
+high_timber_street_007,High Timber Street,51.511056,-0.096726,270.2,90.2,7,1,0,0
+houndsditch_001,Houndsditch,51.516165,-0.080239,328.7,148.7,1,5,0,0
+houndsditch_002,Houndsditch,51.516293,-0.080363,310.5,130.5,2,4,0,0
+houndsditch_003,Houndsditch,51.516408,-0.080579,304.1,124.1,3,3,0,0
+houndsditch_004,Houndsditch,51.516513,-0.080826,302.9,122.9,4,2,0,0
+houndsditch_005,Houndsditch,51.516613,-0.081073,302.9,122.9,5,1,0,0
+huggin_hill_001,Huggin Hill,51.511279,-0.095291,9.9,189.9,1,5,0,0
+huggin_hill_002,Huggin Hill,51.511458,-0.095242,10.1,190.1,2,4,0,0
+huggin_hill_003,Huggin Hill,51.511637,-0.095191,9.7,189.7,3,3,0,0
+huggin_hill_004,Huggin Hill,51.511815,-0.095142,355.6,175.6,4,2,0,0
+huggin_hill_005,Huggin Hill,51.511994,-0.095164,355.6,175.6,5,1,0,0
+idol_lane_001,Idol Lane,51.509712,-0.082827,3.3,183.3,1,5,0,0
+idol_lane_002,Idol Lane,51.509898,-0.08281,7.0,187.0,2,4,0,0
+idol_lane_003,Idol Lane,51.510076,-0.082775,13.2,193.2,3,3,0,0
+idol_lane_004,Idol Lane,51.51025,-0.082709,16.2,196.2,4,2,0,0
+idol_lane_005,Idol Lane,51.510335,-0.08267,16.2,196.2,5,1,0,0
+ironmonger_lane_001,Ironmonger Lane,51.513782,-0.092034,1.0,181.0,1,8,0,0
+ironmonger_lane_002,Ironmonger Lane,51.513986,-0.092028,15.8,195.8,2,7,0,0
+ironmonger_lane_003,Ironmonger Lane,51.514157,-0.09195,19.1,199.1,3,6,0,0
+ironmonger_lane_004,Ironmonger Lane,51.514325,-0.091857,23.1,203.1,4,5,0,0
+ironmonger_lane_005,Ironmonger Lane,51.514492,-0.091744,28.0,208.0,5,4,0,0
+ironmonger_lane_006,Ironmonger Lane,51.514649,-0.091611,22.2,202.2,6,3,0,0
+ironmonger_lane_007,Ironmonger Lane,51.514816,-0.091502,22.3,202.3,7,2,0,0
+ironmonger_lane_008,Ironmonger Lane,51.514969,-0.091402,22.3,202.3,8,1,0,0
+kennett_wharf_lane_seg1_001,Kennett Wharf Lane,51.510003,-0.09454,18.6,198.6,1,3,0,0
+kennett_wharf_lane_seg1_002,Kennett Wharf Lane,51.510133,-0.09447,6.5,186.5,2,2,0,0
+kennett_wharf_lane_seg1_003,Kennett Wharf Lane,51.510272,-0.094445,6.5,186.5,3,1,0,0
+kennett_wharf_lane_seg2_001,Kennett Wharf Lane,51.510545,-0.094241,15.2,195.2,1,2,0,0
+kennett_wharf_lane_seg2_002,Kennett Wharf Lane,51.510713,-0.094168,15.2,195.2,2,1,0,0
+king_street_001,King Street,51.513825,-0.09235,8.8,188.8,1,8,0,0
+king_street_002,King Street,51.51403,-0.092299,4.7,184.7,2,7,0,0
+king_street_003,King Street,51.514211,-0.092275,7.7,187.7,3,6,0,0
+king_street_004,King Street,51.514362,-0.092243,5.5,185.5,4,5,0,0
+king_street_005,King Street,51.514569,-0.092211,6.9,186.9,5,4,0,0
+king_street_006,King Street,51.514743,-0.092177,357.1,177.1,6,3,0,0
+king_street_007,King Street,51.514949,-0.092194,19.3,199.3,7,2,0,0
+king_street_008,King Street,51.515074,-0.092124,19.3,199.3,8,1,0,0
+king_william_street_seg1_001,King William Street,51.509805,-0.086994,14.9,194.9,1,7,0,0
+king_william_street_seg1_002,King William Street,51.509981,-0.086919,14.5,194.5,2,6,0,0
+king_william_street_seg1_003,King William Street,51.510167,-0.086842,14.2,194.2,3,5,0,0
+king_william_street_seg1_004,King William Street,51.510321,-0.08678,16.4,196.4,4,4,0,0
+king_william_street_seg1_005,King William Street,51.510539,-0.086678,13.9,193.9,5,3,0,0
+king_william_street_seg1_006,King William Street,51.510723,-0.086605,3.4,183.4,6,2,0,0
+king_william_street_seg1_007,King William Street,51.510869,-0.086592,3.4,183.4,7,1,0,0
+king_william_street_seg2_001,King William Street,51.509874,-0.087102,14.0,194.0,1,20,0,0
+king_william_street_seg2_002,King William Street,51.510048,-0.087033,14.4,194.4,2,19,0,0
+king_william_street_seg2_003,King William Street,51.510217,-0.086964,15.3,195.3,3,18,0,0
+king_william_street_seg2_004,King William Street,51.510368,-0.086898,15.2,195.2,4,17,0,0
+king_william_street_seg2_005,King William Street,51.510541,-0.086823,17.6,197.6,5,16,0,0
+king_william_street_seg2_006,King William Street,51.510726,-0.086729,29.4,209.4,6,15,0,0
+king_william_street_seg2_007,King William Street,51.510871,-0.086598,287.6,107.6,7,14,0,0
+king_william_street_seg2_008,King William Street,51.51092,-0.086842,342.4,162.4,8,13,0,0
+king_william_street_seg2_009,King William Street,51.511071,-0.086918,330.6,150.6,9,12,0,0
+king_william_street_seg2_010,King William Street,51.511245,-0.087075,332.7,152.7,10,11,0,0
+king_william_street_seg2_011,King William Street,51.511415,-0.087215,332.3,152.3,11,10,0,0
+king_william_street_seg2_012,King William Street,51.511572,-0.087347,331.7,151.7,12,9,0,0
+king_william_street_seg2_013,King William Street,51.511687,-0.087445,328.8,148.8,13,8,0,0
+king_william_street_seg2_014,King William Street,51.511853,-0.087606,332.5,152.5,14,7,0,0
+king_william_street_seg2_015,King William Street,51.51201,-0.087737,326.4,146.4,15,6,0,0
+king_william_street_seg2_016,King William Street,51.512149,-0.087884,336.7,156.7,16,5,0,0
+king_william_street_seg2_017,King William Street,51.512352,-0.088024,337.4,157.4,17,4,0,0
+king_william_street_seg2_018,King William Street,51.512523,-0.088137,334.8,154.8,18,3,0,0
+king_william_street_seg2_019,King William Street,51.512679,-0.088255,342.9,162.9,19,2,0,0
+king_william_street_seg2_020,King William Street,51.512833,-0.08833,342.9,162.9,20,1,0,0
+king_s_arms_yard_001,King's Arms Yard,51.515201,-0.088397,291.8,111.8,1,6,0,0
+king_s_arms_yard_002,King's Arms Yard,51.515279,-0.088709,277.6,97.6,2,5,0,0
+king_s_arms_yard_003,King's Arms Yard,51.515303,-0.088997,263.3,83.3,3,4,0,0
+king_s_arms_yard_004,King's Arms Yard,51.515285,-0.089244,294.6,114.6,4,3,0,0
+king_s_arms_yard_005,King's Arms Yard,51.515375,-0.089559,279.8,99.8,5,2,0,0
+king_s_arms_yard_006,King's Arms Yard,51.515405,-0.089835,279.8,99.8,6,1,0,0
+lambeth_hill_001,Lambeth Hill,51.511347,-0.096371,342.0,162.0,1,6,0,0
+lambeth_hill_002,Lambeth Hill,51.511442,-0.096421,281.3,101.3,2,5,0,0
+lambeth_hill_003,Lambeth Hill,51.511478,-0.096707,278.2,98.2,3,4,0,0
+lambeth_hill_004,Lambeth Hill,51.511503,-0.096989,312.4,132.4,4,3,0,0
+lambeth_hill_005,Lambeth Hill,51.511646,-0.097238,7.3,187.3,5,2,0,0
+lambeth_hill_006,Lambeth Hill,51.51185,-0.097196,7.3,187.3,6,1,0,0
+langthorn_court_001,Langthorn Court,51.516474,-0.087713,0.0,180.0,1,2,0,0
+langthorn_court_002,Langthorn Court,51.516474,-0.087713,0.0,180.0,2,1,0,0
+laurence_pountney_hill_001,Laurence Pountney Hill,51.510583,-0.088336,262.3,82.3,1,8,0,0
+laurence_pountney_hill_002,Laurence Pountney Hill,51.510562,-0.088579,289.0,109.0,2,7,0,0
+laurence_pountney_hill_003,Laurence Pountney Hill,51.510623,-0.088861,289.6,109.6,3,6,0,0
+laurence_pountney_hill_004,Laurence Pountney Hill,51.510686,-0.089145,109.6,289.6,4,5,0,0
+laurence_pountney_hill_005,Laurence Pountney Hill,51.510623,-0.088861,4.1,184.1,5,4,0,0
+laurence_pountney_hill_006,Laurence Pountney Hill,51.510796,-0.088841,357.4,177.4,6,3,0,0
+laurence_pountney_hill_007,Laurence Pountney Hill,51.510998,-0.088856,30.7,210.7,7,2,0,0
+laurence_pountney_hill_008,Laurence Pountney Hill,51.511154,-0.088708,30.7,210.7,8,1,0,0
+laurence_pountney_lane_001,Laurence Pountney Lane,51.509979,-0.088702,23.1,203.1,1,7,0,0
+laurence_pountney_lane_002,Laurence Pountney Lane,51.510164,-0.088577,19.6,199.6,2,6,0,0
+laurence_pountney_lane_003,Laurence Pountney Lane,51.510331,-0.088481,19.7,199.7,3,5,0,0
+laurence_pountney_lane_004,Laurence Pountney Lane,51.510498,-0.088387,20.5,200.5,4,4,0,0
+laurence_pountney_lane_005,Laurence Pountney Lane,51.510666,-0.088286,20.3,200.3,5,3,0,0
+laurence_pountney_lane_006,Laurence Pountney Lane,51.510843,-0.088181,20.3,200.3,6,2,0,0
+laurence_pountney_lane_007,Laurence Pountney Lane,51.511015,-0.08808,20.3,200.3,7,1,0,0
+lawrence_lane_001,Lawrence Lane,51.51425,-0.0925,309.1,129.1,1,5,0,0
+lawrence_lane_002,Lawrence Lane,51.514339,-0.092674,2.8,182.8,2,4,0,0
+lawrence_lane_003,Lawrence Lane,51.514544,-0.092658,11.3,191.3,3,3,0,0
+lawrence_lane_004,Lawrence Lane,51.514724,-0.092601,15.0,195.0,4,2,0,0
+lawrence_lane_005,Lawrence Lane,51.514898,-0.092526,15.0,195.0,5,1,0,0
+leadenhall_market_001,Leadenhall Market,51.512683,-0.083067,298.4,118.4,1,5,0,0
+leadenhall_market_002,Leadenhall Market,51.51277,-0.083322,286.9,106.9,2,4,0,0
+leadenhall_market_003,Leadenhall Market,51.512821,-0.083593,284.9,104.9,3,3,0,0
+leadenhall_market_004,Leadenhall Market,51.512862,-0.083838,284.9,104.9,4,2,0,0
+leadenhall_market_005,Leadenhall Market,51.512909,-0.084117,284.9,104.9,5,1,0,0
+leadenhall_place_001,Leadenhall Place,51.512445,-0.082409,310.7,130.7,1,3,0,0
+leadenhall_place_002,Leadenhall Place,51.512572,-0.082645,294.2,114.2,2,2,0,0
+leadenhall_place_003,Leadenhall Place,51.51265,-0.082922,294.2,114.2,3,1,0,0
+leadenhall_street_001,Leadenhall Street,51.513405,-0.079887,283.3,103.3,1,15,0,0
+leadenhall_street_002,Leadenhall Street,51.513448,-0.080181,275.3,95.3,2,14,0,0
+leadenhall_street_003,Leadenhall Street,51.513464,-0.080462,278.6,98.6,3,13,0,0
+leadenhall_street_004,Leadenhall Street,51.513493,-0.080757,276.5,96.5,4,12,0,0
+leadenhall_street_005,Leadenhall Street,51.513512,-0.081036,273.7,93.7,5,11,0,0
+leadenhall_street_006,Leadenhall Street,51.513526,-0.081383,269.1,89.1,6,10,0,0
+leadenhall_street_007,Leadenhall Street,51.513523,-0.081674,266.0,86.0,7,9,0,0
+leadenhall_street_008,Leadenhall Street,51.513511,-0.081965,267.0,87.0,8,8,0,0
+leadenhall_street_009,Leadenhall Street,51.513501,-0.082249,267.7,87.7,9,7,0,0
+leadenhall_street_010,Leadenhall Street,51.513494,-0.082531,258.7,78.7,10,6,0,0
+leadenhall_street_011,Leadenhall Street,51.513467,-0.082744,269.9,89.9,11,5,0,0
+leadenhall_street_012,Leadenhall Street,51.513467,-0.083123,265.8,85.8,12,4,0,0
+leadenhall_street_013,Leadenhall Street,51.513455,-0.083387,277.6,97.6,13,3,0,0
+leadenhall_street_014,Leadenhall Street,51.513477,-0.083649,252.8,72.8,14,2,0,0
+leadenhall_street_015,Leadenhall Street,51.513436,-0.083859,252.8,72.8,15,1,0,0
+lime_street_001,Lime Street,51.511667,-0.083785,17.1,197.1,1,15,0,0
+lime_street_002,Lime Street,51.511855,-0.083693,21.9,201.9,2,14,0,0
+lime_street_003,Lime Street,51.51202,-0.083587,49.6,229.6,3,13,0,0
+lime_street_004,Lime Street,51.512142,-0.083358,75.6,255.6,4,12,0,0
+lime_street_005,Lime Street,51.512177,-0.083143,69.7,249.7,5,11,0,0
+lime_street_006,Lime Street,51.512259,-0.082788,66.7,246.7,6,10,0,0
+lime_street_007,Lime Street,51.512328,-0.082532,33.4,213.4,7,9,0,0
+lime_street_008,Lime Street,51.512445,-0.082409,35.0,215.0,8,8,0,0
+lime_street_009,Lime Street,51.512636,-0.082195,71.7,251.7,9,7,0,0
+lime_street_010,Lime Street,51.512641,-0.082171,27.7,207.7,10,6,0,0
+lime_street_011,Lime Street,51.512805,-0.082035,23.0,203.0,11,5,0,0
+lime_street_012,Lime Street,51.512977,-0.081918,22.1,202.1,12,4,0,0
+lime_street_013,Lime Street,51.513156,-0.081802,20.3,200.3,13,3,0,0
+lime_street_014,Lime Street,51.513322,-0.081704,5.3,185.3,14,2,0,0
+lime_street_015,Lime Street,51.513523,-0.081674,5.3,185.3,15,1,0,0
+lime_street_passage_001,Lime Street Passage,51.512096,-0.083492,333.8,153.8,1,5,0,0
+lime_street_passage_002,Lime Street Passage,51.512258,-0.083619,353.4,173.4,2,4,0,0
+lime_street_passage_003,Lime Street Passage,51.512486,-0.083661,24.2,204.2,3,3,0,0
+lime_street_passage_004,Lime Street Passage,51.512628,-0.08356,10.8,190.8,4,2,0,0
+lime_street_passage_005,Lime Street Passage,51.512796,-0.083509,10.8,190.8,5,1,0,0
+little_britain_001,Little Britain,51.516994,-0.098164,77.5,257.5,1,5,0,0
+little_britain_002,Little Britain,51.517039,-0.097839,74.5,254.5,2,4,0,0
+little_britain_003,Little Britain,51.517063,-0.0977,80.3,260.3,3,3,0,0
+little_britain_004,Little Britain,51.5171,-0.097356,90.7,270.7,4,2,0,0
+little_britain_005,Little Britain,51.517097,-0.097028,90.7,270.7,5,1,0,0
+little_college_lane_001,Little College Lane,51.510763,-0.091937,34.6,214.6,1,2,0,0
+little_college_lane_002,Little College Lane,51.510907,-0.091778,34.6,214.6,2,1,0,0
+little_trinity_lane_001,Little Trinity Lane,51.511234,-0.09394,266.7,86.7,1,7,0,0
+little_trinity_lane_002,Little Trinity Lane,51.511223,-0.094255,275.8,95.8,2,6,0,0
+little_trinity_lane_003,Little Trinity Lane,51.511246,-0.094624,323.0,143.0,3,5,0,0
+little_trinity_lane_004,Little Trinity Lane,51.511387,-0.094794,9.4,189.4,4,4,0,0
+little_trinity_lane_005,Little Trinity Lane,51.511572,-0.094745,11.0,191.0,5,3,0,0
+little_trinity_lane_006,Little Trinity Lane,51.51175,-0.09469,10.6,190.6,6,2,0,0
+little_trinity_lane_007,Little Trinity Lane,51.511926,-0.094638,10.6,190.6,7,1,0,0
+liverpool_street_001,Liverpool Street,51.516904,-0.080981,313.7,133.7,1,13,0,0
+liverpool_street_002,Liverpool Street,51.517036,-0.081201,291.5,111.5,2,12,0,0
+liverpool_street_003,Liverpool Street,51.517116,-0.081524,321.0,141.0,3,11,0,0
+liverpool_street_004,Liverpool Street,51.517197,-0.081629,305.3,125.3,4,10,0,0
+liverpool_street_005,Liverpool Street,51.517321,-0.081909,290.9,110.9,5,9,0,0
+liverpool_street_006,Liverpool Street,51.517392,-0.082201,288.9,108.9,6,8,0,0
+liverpool_street_007,Liverpool Street,51.517445,-0.08245,280.9,100.9,7,7,0,0
+liverpool_street_008,Liverpool Street,51.517485,-0.082784,294.6,114.6,8,6,0,0
+liverpool_street_009,Liverpool Street,51.517557,-0.083035,300.0,120.0,9,5,0,0
+liverpool_street_010,Liverpool Street,51.517639,-0.083261,279.2,99.2,10,4,0,0
+liverpool_street_011,Liverpool Street,51.517666,-0.083524,287.2,107.2,11,3,0,0
+liverpool_street_012,Liverpool Street,51.517721,-0.08381,288.8,108.8,12,2,0,0
+liverpool_street_013,Liverpool Street,51.517781,-0.084092,288.8,108.8,13,1,0,0
+lombard_court_001,Lombard Court,51.511442,-0.085457,287.1,107.1,1,3,0,0
+lombard_court_002,Lombard Court,51.511481,-0.085658,286.0,106.0,2,2,0,0
+lombard_court_003,Lombard Court,51.511553,-0.08606,286.0,106.0,3,1,0,0
+lombard_street_001,Lombard Street,51.51192,-0.085155,299.7,119.7,1,17,0,0
+lombard_street_002,Lombard Street,51.512025,-0.08545,288.1,108.1,2,16,0,0
+lombard_street_003,Lombard Street,51.512079,-0.085714,290.2,110.2,3,15,0,0
+lombard_street_004,Lombard Street,51.512111,-0.085853,298.8,118.8,4,14,0,0
+lombard_street_005,Lombard Street,51.512203,-0.086117,305.3,125.3,5,13,0,0
+lombard_street_006,Lombard Street,51.512323,-0.086389,307.6,127.6,6,12,0,0
+lombard_street_007,Lombard Street,51.51246,-0.086673,302.1,122.1,7,11,0,0
+lombard_street_008,Lombard Street,51.512553,-0.086911,302.5,122.5,8,10,0,0
+lombard_street_009,Lombard Street,51.512651,-0.087156,298.2,118.2,9,9,0,0
+lombard_street_010,Lombard Street,51.512738,-0.087415,294.2,114.2,10,8,0,0
+lombard_street_011,Lombard Street,51.512814,-0.087685,294.2,114.2,11,7,0,0
+lombard_street_012,Lombard Street,51.512853,-0.087822,286.0,106.0,12,6,0,0
+lombard_street_013,Lombard Street,51.512918,-0.088186,254.9,74.9,13,5,0,0
+lombard_street_014,Lombard Street,51.512874,-0.08845,344.0,164.0,14,4,0,0
+lombard_street_015,Lombard Street,51.513036,-0.088524,309.7,129.7,15,3,0,0
+lombard_street_016,Lombard Street,51.513154,-0.088751,338.5,158.5,16,2,0,0
+lombard_street_017,Lombard Street,51.513321,-0.088856,338.5,158.5,17,1,0,0
+london_wall_seg1_001,London Wall,51.516447,-0.08363,280.8,100.8,1,35,0,0
+london_wall_seg1_002,London Wall,51.516478,-0.083887,280.2,100.2,2,34,0,0
+london_wall_seg1_003,London Wall,51.51651,-0.084171,283.0,103.0,3,33,0,0
+london_wall_seg1_004,London Wall,51.516549,-0.084438,287.5,107.5,4,32,0,0
+london_wall_seg1_005,London Wall,51.516602,-0.084708,292.8,112.8,5,31,0,0
+london_wall_seg1_006,London Wall,51.516673,-0.084976,296.0,116.0,6,30,0,0
+london_wall_seg1_007,London Wall,51.516754,-0.085242,293.1,113.1,7,29,0,0
+london_wall_seg1_008,London Wall,51.516829,-0.085523,264.3,84.3,8,28,0,0
+london_wall_seg1_009,London Wall,51.516814,-0.085771,304.7,124.7,9,27,0,0
+london_wall_seg1_010,London Wall,51.516915,-0.086004,277.0,97.0,10,26,0,0
+london_wall_seg1_011,London Wall,51.516935,-0.08626,282.3,102.3,11,25,0,0
+london_wall_seg1_012,London Wall,51.516972,-0.086532,286.7,106.7,12,24,0,0
+london_wall_seg1_013,London Wall,51.517025,-0.086817,280.2,100.2,13,23,0,0
+london_wall_seg1_014,London Wall,51.517058,-0.087106,285.2,105.2,14,22,0,0
+london_wall_seg1_015,London Wall,51.517106,-0.087387,290.4,110.4,15,21,0,0
+london_wall_seg1_016,London Wall,51.517183,-0.087717,275.6,95.6,16,20,0,0
+london_wall_seg1_017,London Wall,51.517196,-0.087931,282.7,102.7,17,19,0,0
+london_wall_seg1_018,London Wall,51.517236,-0.088214,284.7,104.7,18,18,0,0
+london_wall_seg1_019,London Wall,51.517284,-0.088508,296.9,116.9,19,17,0,0
+london_wall_seg1_020,London Wall,51.517373,-0.088786,287.0,107.0,20,16,0,0
+london_wall_seg1_021,London Wall,51.517433,-0.089099,289.2,109.2,21,15,0,0
+london_wall_seg1_022,London Wall,51.517472,-0.089279,290.5,110.5,22,14,0,0
+london_wall_seg1_023,London Wall,51.517546,-0.089597,282.4,102.4,23,13,0,0
+london_wall_seg1_024,London Wall,51.517586,-0.089883,273.3,93.3,24,12,0,0
+london_wall_seg1_025,London Wall,51.517596,-0.090178,265.8,85.8,25,11,0,0
+london_wall_seg1_026,London Wall,51.517583,-0.090471,267.9,87.9,26,10,0,0
+london_wall_seg1_027,London Wall,51.517576,-0.090772,268.7,88.7,27,9,0,0
+london_wall_seg1_028,London Wall,51.517572,-0.09107,268.6,88.6,28,8,0,0
+london_wall_seg1_029,London Wall,51.517568,-0.091359,268.5,88.5,29,7,0,0
+london_wall_seg1_030,London Wall,51.517563,-0.091642,268.5,88.5,30,6,0,0
+london_wall_seg1_031,London Wall,51.517559,-0.091931,268.8,88.8,31,5,0,0
+london_wall_seg1_032,London Wall,51.517555,-0.092223,268.9,88.9,32,4,0,0
+london_wall_seg1_033,London Wall,51.517551,-0.092518,269.4,89.4,33,3,0,0
+london_wall_seg1_034,London Wall,51.517549,-0.092803,270.3,90.3,34,2,0,0
+london_wall_seg1_035,London Wall,51.51755,-0.093091,270.3,90.3,35,1,0,0
+london_wall_seg2_001,London Wall,51.516348,-0.083584,281.9,101.9,1,8,0,0
+london_wall_seg2_002,London Wall,51.516385,-0.083859,283.0,103.0,2,7,0,0
+london_wall_seg2_003,London Wall,51.516441,-0.084246,284.9,104.9,3,6,0,0
+london_wall_seg2_004,London Wall,51.516464,-0.084388,286.1,106.1,4,5,0,0
+london_wall_seg2_005,London Wall,51.516515,-0.084667,291.6,111.6,5,4,0,0
+london_wall_seg2_006,London Wall,51.516582,-0.084937,296.1,116.1,6,3,0,0
+london_wall_seg2_007,London Wall,51.516662,-0.0852,295.3,115.3,7,2,0,0
+london_wall_seg2_008,London Wall,51.51674,-0.08546,295.3,115.3,8,1,0,0
+london_wall_seg3_001,London Wall,51.51731,-0.088713,279.9,99.9,1,16,0,0
+london_wall_seg3_002,London Wall,51.517346,-0.089037,284.9,104.9,2,15,0,0
+london_wall_seg3_003,London Wall,51.517382,-0.089254,285.7,105.7,3,14,0,0
+london_wall_seg3_004,London Wall,51.517432,-0.089536,283.7,103.7,4,13,0,0
+london_wall_seg3_005,London Wall,51.517474,-0.089816,273.9,93.9,5,12,0,0
+london_wall_seg3_006,London Wall,51.517486,-0.090104,271.1,91.1,6,11,0,0
+london_wall_seg3_007,London Wall,51.51749,-0.090393,270.1,90.1,7,10,0,0
+london_wall_seg3_008,London Wall,51.51749,-0.090684,269.0,89.0,8,9,0,0
+london_wall_seg3_009,London Wall,51.517487,-0.090968,269.0,89.0,9,8,0,0
+london_wall_seg3_010,London Wall,51.517484,-0.091256,268.9,88.9,10,7,0,0
+london_wall_seg3_011,London Wall,51.51748,-0.091548,269.0,89.0,11,6,0,0
+london_wall_seg3_012,London Wall,51.517477,-0.091834,269.7,89.7,12,5,0,0
+london_wall_seg3_013,London Wall,51.517476,-0.092158,268.1,88.1,13,4,0,0
+london_wall_seg3_014,London Wall,51.517471,-0.092411,269.0,89.0,14,3,0,0
+london_wall_seg3_015,London Wall,51.517467,-0.092741,269.1,89.1,15,2,0,0
+london_wall_seg3_016,London Wall,51.517464,-0.093029,269.1,89.1,16,1,0,0
+london_wall_seg4_001,London Wall,51.517461,-0.094295,270.3,90.3,1,8,0,0
+london_wall_seg4_002,London Wall,51.517462,-0.094562,270.3,90.3,2,7,0,0
+london_wall_seg4_003,London Wall,51.517462,-0.094812,270.3,90.3,3,6,0,0
+london_wall_seg4_004,London Wall,51.517463,-0.095063,270.3,90.3,4,5,0,0
+london_wall_seg4_005,London Wall,51.517464,-0.095353,270.3,90.3,5,4,0,0
+london_wall_seg4_006,London Wall,51.517465,-0.095639,270.3,90.3,6,3,0,0
+london_wall_seg4_007,London Wall,51.517466,-0.095966,269.2,89.2,7,2,0,0
+london_wall_seg4_008,London Wall,51.517464,-0.096249,269.2,89.2,8,1,0,0
+london_wall_seg5_001,London Wall,51.517549,-0.094243,268.8,88.8,1,8,0,0
+london_wall_seg5_002,London Wall,51.517546,-0.094538,268.9,88.9,2,7,0,0
+london_wall_seg5_003,London Wall,51.517541,-0.094895,268.8,88.8,3,6,0,0
+london_wall_seg5_004,London Wall,51.517538,-0.09515,268.9,88.9,4,5,0,0
+london_wall_seg5_005,London Wall,51.517535,-0.095424,269.9,89.9,5,4,0,0
+london_wall_seg5_006,London Wall,51.517534,-0.095716,270.1,90.1,6,3,0,0
+london_wall_seg5_007,London Wall,51.517535,-0.09601,287.8,107.8,7,2,0,0
+london_wall_seg5_008,London Wall,51.517588,-0.096275,287.8,107.8,8,1,0,0
+london_wall_place_001,London Wall Place,51.517555,-0.092223,17.2,197.2,1,2,0,0
+london_wall_place_002,London Wall Place,51.517797,-0.092103,17.2,197.2,2,1,0,0
+lothbury_seg1_001,Lothbury,51.514615,-0.087729,280.1,100.1,1,10,0,0
+lothbury_seg1_002,Lothbury,51.51466,-0.088131,274.1,94.1,2,9,0,0
+lothbury_seg1_003,Lothbury,51.514666,-0.088272,274.8,94.8,3,8,0,0
+lothbury_seg1_004,Lothbury,51.514684,-0.088604,278.3,98.3,4,7,0,0
+lothbury_seg1_005,Lothbury,51.514713,-0.088924,277.6,97.6,5,6,0,0
+lothbury_seg1_006,Lothbury,51.514737,-0.089214,280.7,100.7,6,5,0,0
+lothbury_seg1_007,Lothbury,51.514772,-0.089503,284.2,104.2,7,4,0,0
+lothbury_seg1_008,Lothbury,51.514813,-0.089765,284.9,104.9,8,3,0,0
+lothbury_seg1_009,Lothbury,51.514861,-0.090054,280.4,100.4,9,2,0,0
+lothbury_seg1_010,Lothbury,51.514895,-0.090348,280.4,100.4,10,1,0,0
+lothbury_seg2_001,Lothbury,51.514728,-0.089077,277.8,97.8,1,3,0,0
+lothbury_seg2_002,Lothbury,51.514754,-0.089376,283.3,103.3,2,2,0,0
+lothbury_seg2_003,Lothbury,51.514788,-0.089612,283.3,103.3,3,1,0,0
+lovat_lane_001,Lovat Lane,51.509502,-0.084294,17.6,197.6,1,7,0,0
+lovat_lane_002,Lovat Lane,51.509678,-0.084205,13.3,193.3,2,6,0,0
+lovat_lane_003,Lovat Lane,51.509854,-0.084139,14.5,194.5,3,5,0,0
+lovat_lane_004,Lovat Lane,51.510017,-0.084071,33.9,213.9,4,4,0,0
+lovat_lane_005,Lovat Lane,51.510107,-0.083975,357.1,177.1,5,3,0,0
+lovat_lane_006,Lovat Lane,51.510321,-0.083992,10.7,190.7,6,2,0,0
+lovat_lane_007,Lovat Lane,51.510465,-0.083949,10.7,190.7,7,1,0,0
+love_lane_001,Love Lane,51.516259,-0.093126,297.9,117.9,1,4,0,0
+love_lane_002,Love Lane,51.516352,-0.093405,289.0,109.0,2,3,0,0
+love_lane_003,Love Lane,51.516413,-0.093686,289.0,109.0,3,2,0,0
+love_lane_004,Love Lane,51.516466,-0.093935,289.0,109.0,4,1,0,0
+lower_thames_street_seg1_001,Lower Thames Street,51.508518,-0.07995,295.8,115.8,1,26,0,0
+lower_thames_street_seg1_002,Lower Thames Street,51.508596,-0.080207,298.3,118.3,2,25,0,0
+lower_thames_street_seg1_003,Lower Thames Street,51.508681,-0.080458,286.4,106.4,3,24,0,0
+lower_thames_street_seg1_004,Lower Thames Street,51.508738,-0.080771,293.7,113.7,4,23,0,0
+lower_thames_street_seg1_005,Lower Thames Street,51.508773,-0.080898,299.1,119.1,5,22,0,0
+lower_thames_street_seg1_006,Lower Thames Street,51.508884,-0.081215,284.8,104.8,6,21,0,0
+lower_thames_street_seg1_007,Lower Thames Street,51.50893,-0.081495,279.4,99.4,7,20,0,0
+lower_thames_street_seg1_008,Lower Thames Street,51.508963,-0.081814,288.7,108.7,8,19,0,0
+lower_thames_street_seg1_009,Lower Thames Street,51.509019,-0.082078,279.9,99.9,9,18,0,0
+lower_thames_street_seg1_010,Lower Thames Street,51.509042,-0.082288,278.6,98.6,10,17,0,0
+lower_thames_street_seg1_011,Lower Thames Street,51.509068,-0.082557,280.2,100.2,11,16,0,0
+lower_thames_street_seg1_012,Lower Thames Street,51.509098,-0.082829,279.8,99.8,12,15,0,0
+lower_thames_street_seg1_013,Lower Thames Street,51.509138,-0.083195,283.5,103.5,13,14,0,0
+lower_thames_street_seg1_014,Lower Thames Street,51.509167,-0.083389,281.0,101.0,14,13,0,0
+lower_thames_street_seg1_015,Lower Thames Street,51.509202,-0.083674,283.3,103.3,15,12,0,0
+lower_thames_street_seg1_016,Lower Thames Street,51.509257,-0.084042,277.3,97.3,16,11,0,0
+lower_thames_street_seg1_017,Lower Thames Street,51.509277,-0.084299,280.9,100.9,17,10,0,0
+lower_thames_street_seg1_018,Lower Thames Street,51.509312,-0.084589,281.0,101.0,18,9,0,0
+lower_thames_street_seg1_019,Lower Thames Street,51.509348,-0.084881,280.9,100.9,19,8,0,0
+lower_thames_street_seg1_020,Lower Thames Street,51.509383,-0.085174,281.4,101.4,20,7,0,0
+lower_thames_street_seg1_021,Lower Thames Street,51.50942,-0.085462,281.2,101.2,21,6,0,0
+lower_thames_street_seg1_022,Lower Thames Street,51.509456,-0.085757,281.0,101.0,22,5,0,0
+lower_thames_street_seg1_023,Lower Thames Street,51.509492,-0.086052,281.0,101.0,23,4,0,0
+lower_thames_street_seg1_024,Lower Thames Street,51.509527,-0.086345,282.6,102.6,24,3,0,0
+lower_thames_street_seg1_025,Lower Thames Street,51.50957,-0.086646,283.0,103.0,25,2,0,0
+lower_thames_street_seg1_026,Lower Thames Street,51.509612,-0.086937,283.0,103.0,26,1,0,0
+lower_thames_street_seg2_001,Lower Thames Street,51.508681,-0.080458,304.3,124.3,1,4,0,0
+lower_thames_street_seg2_002,Lower Thames Street,51.508827,-0.080801,295.4,115.4,2,3,0,0
+lower_thames_street_seg2_003,Lower Thames Street,51.508866,-0.080933,318.9,138.9,3,2,0,0
+lower_thames_street_seg2_004,Lower Thames Street,51.508999,-0.081118,318.9,138.9,4,1,0,0
+lower_thames_street_seg3_001,Lower Thames Street,51.509085,-0.08183,271.3,91.3,1,19,0,0
+lower_thames_street_seg3_002,Lower Thames Street,51.509089,-0.082131,277.4,97.4,2,18,0,0
+lower_thames_street_seg3_003,Lower Thames Street,51.509116,-0.082465,280.0,100.0,3,17,0,0
+lower_thames_street_seg3_004,Lower Thames Street,51.509148,-0.082754,282.1,102.1,4,16,0,0
+lower_thames_street_seg3_005,Lower Thames Street,51.509187,-0.083044,282.1,102.1,5,15,0,0
+lower_thames_street_seg3_006,Lower Thames Street,51.509226,-0.083334,280.9,100.9,6,14,0,0
+lower_thames_street_seg3_007,Lower Thames Street,51.509244,-0.083484,280.9,100.9,7,13,0,0
+lower_thames_street_seg3_008,Lower Thames Street,51.509279,-0.08377,281.8,101.8,8,12,0,0
+lower_thames_street_seg3_009,Lower Thames Street,51.509332,-0.084181,282.1,102.1,9,11,0,0
+lower_thames_street_seg3_010,Lower Thames Street,51.509353,-0.084331,281.7,101.7,10,10,0,0
+lower_thames_street_seg3_011,Lower Thames Street,51.509394,-0.084647,281.7,101.7,11,9,0,0
+lower_thames_street_seg3_012,Lower Thames Street,51.509429,-0.084923,281.7,101.7,12,8,0,0
+lower_thames_street_seg3_013,Lower Thames Street,51.509467,-0.085213,281.7,101.7,13,7,0,0
+lower_thames_street_seg3_014,Lower Thames Street,51.509505,-0.085505,281.8,101.8,14,6,0,0
+lower_thames_street_seg3_015,Lower Thames Street,51.509542,-0.085788,269.7,89.7,15,5,0,0
+lower_thames_street_seg3_016,Lower Thames Street,51.509541,-0.086095,277.8,97.8,16,4,0,0
+lower_thames_street_seg3_017,Lower Thames Street,51.509568,-0.086405,284.7,104.7,17,3,0,0
+lower_thames_street_seg3_018,Lower Thames Street,51.509611,-0.086668,297.0,117.0,18,2,0,0
+lower_thames_street_seg3_019,Lower Thames Street,51.509712,-0.086984,297.0,117.0,19,1,0,0
+mansion_house_place_001,Mansion House Place,51.512618,-0.088483,285.7,105.7,1,7,0,0
+mansion_house_place_002,Mansion House Place,51.512666,-0.088756,297.3,117.3,2,6,0,0
+mansion_house_place_003,Mansion House Place,51.51275,-0.089013,300.5,120.5,3,5,0,0
+mansion_house_place_004,Mansion House Place,51.512845,-0.089271,18.7,198.7,4,4,0,0
+mansion_house_place_005,Mansion House Place,51.513019,-0.089177,16.0,196.0,5,3,0,0
+mansion_house_place_006,Mansion House Place,51.513191,-0.089098,8.2,188.2,6,2,0,0
+mansion_house_place_007,Mansion House Place,51.513343,-0.089064,8.2,188.2,7,1,0,0
+mansion_house_street_001,Mansion House Street,51.513426,-0.089759,106.3,286.3,1,3,0,0
+mansion_house_street_002,Mansion House Street,51.51337,-0.089454,89.3,269.3,2,2,0,0
+mansion_house_street_003,Mansion House Street,51.513372,-0.089183,89.3,269.3,3,1,0,0
+mark_lane_001,Mark Lane,51.509732,-0.080695,40.7,220.7,1,13,0,0
+mark_lane_002,Mark Lane,51.509854,-0.080527,10.4,190.4,2,12,0,0
+mark_lane_003,Mark Lane,51.510041,-0.080473,10.1,190.1,3,11,0,0
+mark_lane_004,Mark Lane,51.510221,-0.080422,10.9,190.9,4,10,0,0
+mark_lane_005,Mark Lane,51.510447,-0.080352,11.8,191.8,5,9,0,0
+mark_lane_006,Mark Lane,51.510627,-0.080292,13.8,193.8,6,8,0,0
+mark_lane_007,Mark Lane,51.510797,-0.080226,18.5,198.5,7,7,0,0
+mark_lane_008,Mark Lane,51.510964,-0.080136,359.5,179.5,8,6,0,0
+mark_lane_009,Mark Lane,51.51114,-0.080138,5.9,185.9,9,5,0,0
+mark_lane_010,Mark Lane,51.51135,-0.080103,12.0,192.0,10,4,0,0
+mark_lane_011,Mark Lane,51.511507,-0.08005,345.4,165.4,11,3,0,0
+mark_lane_012,Mark Lane,51.511706,-0.080133,336.7,156.7,12,2,0,0
+mark_lane_013,Mark Lane,51.511875,-0.080249,336.7,156.7,13,1,0,0
+martin_lane_001,Martin Lane,51.510215,-0.087994,20.3,200.3,1,5,0,0
+martin_lane_002,Martin Lane,51.510361,-0.087908,16.6,196.6,2,4,0,0
+martin_lane_003,Martin Lane,51.510608,-0.087791,21.5,201.5,3,3,0,0
+martin_lane_004,Martin Lane,51.510771,-0.087689,20.5,200.5,4,2,0,0
+martin_lane_005,Martin Lane,51.510942,-0.087586,20.5,200.5,5,1,0,0
+masons_avenue_001,Masons Avenue,51.515748,-0.090038,278.2,98.2,1,3,0,0
+masons_avenue_002,Masons Avenue,51.515775,-0.09034,273.6,93.6,2,2,0,0
+masons_avenue_003,Masons Avenue,51.515786,-0.090634,273.6,93.6,3,1,0,0
+milk_street_001,Milk Street,51.514223,-0.094163,13.5,193.5,1,8,0,0
+milk_street_002,Milk Street,51.514393,-0.094098,13.3,193.3,2,7,0,0
+milk_street_003,Milk Street,51.514568,-0.094031,37.0,217.0,3,6,0,0
+milk_street_004,Milk Street,51.514642,-0.093943,32.0,212.0,4,5,0,0
+milk_street_005,Milk Street,51.514745,-0.09384,30.5,210.5,5,4,0,0
+milk_street_006,Milk Street,51.514971,-0.093627,25.5,205.5,6,3,0,0
+milk_street_007,Milk Street,51.51512,-0.093514,17.5,197.5,7,2,0,0
+milk_street_008,Milk Street,51.515301,-0.093423,17.5,197.5,8,1,0,0
+mincing_lane_001,Mincing Lane,51.510121,-0.081795,28.7,208.7,1,10,0,0
+mincing_lane_002,Mincing Lane,51.510292,-0.081646,10.6,190.6,2,9,0,0
+mincing_lane_003,Mincing Lane,51.510474,-0.081592,10.0,190.0,3,8,0,0
+mincing_lane_004,Mincing Lane,51.510653,-0.081542,9.0,189.0,4,7,0,0
+mincing_lane_005,Mincing Lane,51.510835,-0.081496,7.0,187.0,5,6,0,0
+mincing_lane_006,Mincing Lane,51.511023,-0.081459,342.0,162.0,6,5,0,0
+mincing_lane_007,Mincing Lane,51.511171,-0.081536,9.4,189.4,7,4,0,0
+mincing_lane_008,Mincing Lane,51.511393,-0.081477,355.8,175.8,8,3,0,0
+mincing_lane_009,Mincing Lane,51.511574,-0.081498,326.6,146.6,9,2,0,0
+mincing_lane_010,Mincing Lane,51.511706,-0.081637,326.6,146.6,10,1,0,0
+monkwell_square_south_seg1_001,Monkwell Square,51.518175,-0.093904,0.0,180.0,1,2,0,0
+monkwell_square_south_seg1_002,Monkwell Square,51.518175,-0.093904,0.0,180.0,2,1,0,0
+monkwell_square_south_seg2_001,Monkwell Square,51.517788,-0.094465,21.1,201.1,1,3,0,0
+monkwell_square_south_seg2_002,Monkwell Square,51.518021,-0.094322,0.0,180.0,2,2,0,0
+monkwell_square_south_seg2_003,Monkwell Square,51.518021,-0.094322,0.0,180.0,3,1,0,0
+monkwell_square_north_001,Monkwell Square,51.518077,-0.093324,280.4,100.4,1,5,0,0
+monkwell_square_north_002,Monkwell Square,51.518111,-0.09362,289.8,109.8,2,4,0,0
+monkwell_square_north_003,Monkwell Square,51.518175,-0.093904,290.8,110.8,3,3,0,0
+monkwell_square_north_004,Monkwell Square,51.518247,-0.094204,0.0,180.0,4,2,0,0
+monkwell_square_north_005,Monkwell Square,51.518247,-0.094204,0.0,180.0,5,1,0,0
+monument_street_001,Monument Street,51.509353,-0.084331,337.5,157.5,1,8,0,0
+monument_street_002,Monument Street,51.509504,-0.084431,313.6,133.6,2,7,0,0
+monument_street_003,Monument Street,51.509637,-0.084655,304.0,124.0,3,6,0,0
+monument_street_004,Monument Street,51.509742,-0.084904,303.5,123.5,4,5,0,0
+monument_street_005,Monument Street,51.509836,-0.085128,313.3,133.3,5,4,0,0
+monument_street_006,Monument Street,51.509987,-0.085385,282.1,102.1,6,3,0,0
+monument_street_007,Monument Street,51.51003,-0.085702,275.1,95.1,7,2,0,0
+monument_street_008,Monument Street,51.510047,-0.086003,275.1,95.1,8,1,0,0
+moor_lane_001,Moor Lane,51.518108,-0.091241,45.1,225.1,1,2,0,0
+moor_lane_002,Moor Lane,51.51828,-0.090965,45.1,225.1,2,1,0,0
+moorfields_001,Moorfields,51.517933,-0.089003,34.8,214.8,1,3,0,0
+moorfields_002,Moorfields,51.518112,-0.088805,6.0,186.0,2,2,0,0
+moorfields_003,Moorfields,51.518272,-0.088778,6.0,186.0,3,1,0,0
+moorgate_001,Moorgate,51.51479,-0.089772,32.7,212.7,1,21,0,0
+moorgate_002,Moorgate,51.514968,-0.089589,14.0,194.0,2,20,0,0
+moorgate_003,Moorgate,51.51511,-0.089533,14.0,194.0,3,19,0,0
+moorgate_004,Moorgate,51.515314,-0.089452,13.8,193.8,4,18,0,0
+moorgate_005,Moorgate,51.515505,-0.089377,17.5,197.5,5,17,0,0
+moorgate_006,Moorgate,51.515679,-0.08929,8.3,188.3,6,16,0,0
+moorgate_007,Moorgate,51.515871,-0.089245,13.4,193.4,7,15,0,0
+moorgate_008,Moorgate,51.516047,-0.089178,13.2,193.2,8,14,0,0
+moorgate_009,Moorgate,51.516256,-0.089099,13.4,193.4,9,13,0,0
+moorgate_010,Moorgate,51.51636,-0.08906,13.5,193.5,10,12,0,0
+moorgate_011,Moorgate,51.516549,-0.088988,13.2,193.2,11,11,0,0
+moorgate_012,Moorgate,51.516726,-0.088921,12.7,192.7,12,10,0,0
+moorgate_013,Moorgate,51.516902,-0.088858,8.6,188.6,13,9,0,0
+moorgate_014,Moorgate,51.517087,-0.088813,24.6,204.6,14,8,0,0
+moorgate_015,Moorgate,51.517229,-0.088709,357.3,177.3,15,7,0,0
+moorgate_016,Moorgate,51.517443,-0.088725,19.6,199.6,16,6,0,0
+moorgate_017,Moorgate,51.517615,-0.088628,19.1,199.1,17,5,0,0
+moorgate_018,Moorgate,51.517787,-0.088532,18.7,198.7,18,4,0,0
+moorgate_019,Moorgate,51.51796,-0.088439,18.7,198.7,19,3,0,0
+moorgate_020,Moorgate,51.518132,-0.088346,18.4,198.4,20,2,0,0
+moorgate_021,Moorgate,51.518359,-0.088225,18.4,198.4,21,1,0,0
+new_broad_street_001,New Broad Street,51.51681,-0.083333,280.6,100.6,1,12,0,0
+new_broad_street_002,New Broad Street,51.516845,-0.083634,283.6,103.6,2,11,0,0
+new_broad_street_003,New Broad Street,51.516889,-0.083924,284.3,104.3,3,10,0,0
+new_broad_street_004,New Broad Street,51.516935,-0.084207,285.8,105.8,4,9,0,0
+new_broad_street_005,New Broad Street,51.516985,-0.084491,287.5,107.5,5,8,0,0
+new_broad_street_006,New Broad Street,51.517041,-0.084773,293.5,113.5,6,7,0,0
+new_broad_street_007,New Broad Street,51.517113,-0.085036,8.5,188.5,7,6,0,0
+new_broad_street_008,New Broad Street,51.517289,-0.084994,58.7,238.7,8,5,0,0
+new_broad_street_009,New Broad Street,51.517362,-0.084803,15.0,195.0,9,4,0,0
+new_broad_street_010,New Broad Street,51.51751,-0.084739,46.3,226.3,10,3,0,0
+new_broad_street_011,New Broad Street,51.517669,-0.084474,34.7,214.7,11,2,0,0
+new_broad_street_012,New Broad Street,51.517809,-0.084319,34.7,214.7,12,1,0,0
+new_change_001,New Change,51.512835,-0.096469,11.1,191.1,1,10,0,0
+new_change_002,New Change,51.513098,-0.096387,7.8,187.8,2,9,0,0
+new_change_003,New Change,51.513275,-0.096348,2.7,182.7,3,8,0,0
+new_change_004,New Change,51.513425,-0.096337,358.0,178.0,4,7,0,0
+new_change_005,New Change,51.513623,-0.096348,346.0,166.0,5,6,0,0
+new_change_006,New Change,51.513789,-0.096414,334.8,154.8,6,5,0,0
+new_change_007,New Change,51.513961,-0.096543,326.0,146.0,7,4,0,0
+new_change_008,New Change,51.514146,-0.096742,332.5,152.5,8,3,0,0
+new_change_009,New Change,51.514254,-0.096832,351.0,171.0,9,2,0,0
+new_change_010,New Change,51.514429,-0.096876,351.0,171.0,10,1,0,0
+new_change_passage_001,New Change Passage,51.513868,-0.096256,100.4,280.4,1,4,0,0
+new_change_passage_002,New Change Passage,51.513847,-0.096081,103.4,283.4,2,3,0,0
+new_change_passage_003,New Change Passage,51.513799,-0.09576,67.1,247.1,3,2,0,0
+new_change_passage_004,New Change Passage,51.513877,-0.095468,67.1,247.1,4,1,0,0
+new_street_001,New Street,51.517346,-0.079907,302.5,122.5,1,3,0,0
+new_street_002,New Street,51.517444,-0.080153,292.4,112.4,2,2,0,0
+new_street_003,New Street,51.517518,-0.080436,292.4,112.4,3,1,0,0
+newgate_street_001,Newgate Street,51.515115,-0.097745,296.2,116.2,1,2,0,0
+newgate_street_002,Newgate Street,51.515194,-0.097999,296.2,116.2,2,1,0,0
+nicholas_lane_001,Nicholas Lane,51.511241,-0.087668,19.7,199.7,1,9,0,0
+nicholas_lane_002,Nicholas Lane,51.511323,-0.087621,27.9,207.9,2,8,0,0
+nicholas_lane_003,Nicholas Lane,51.511539,-0.087439,348.6,168.6,3,7,0,0
+nicholas_lane_004,Nicholas Lane,51.511729,-0.0875,58.0,238.0,4,6,0,0
+nicholas_lane_005,Nicholas Lane,51.51181,-0.087293,21.4,201.4,5,5,0,0
+nicholas_lane_006,Nicholas Lane,51.511984,-0.087184,23.2,203.2,6,4,0,0
+nicholas_lane_007,Nicholas Lane,51.512149,-0.087071,25.2,205.2,7,3,0,0
+nicholas_lane_008,Nicholas Lane,51.51231,-0.08695,26.3,206.3,8,2,0,0
+nicholas_lane_009,Nicholas Lane,51.512507,-0.086794,26.3,206.3,9,1,0,0
+nicholas_passage_001,Nicholas Passage,51.512067,-0.087131,297.4,117.4,1,3,0,0
+nicholas_passage_002,Nicholas Passage,51.512152,-0.087395,293.5,113.5,2,2,0,0
+nicholas_passage_003,Nicholas Passage,51.512189,-0.087528,293.5,113.5,3,1,0,0
+noble_street_001,Noble Street,51.516036,-0.096059,19.3,199.3,1,9,0,0
+noble_street_002,Noble Street,51.516255,-0.095936,20.1,200.1,2,8,0,0
+noble_street_003,Noble Street,51.516429,-0.095835,19.9,199.9,3,7,0,0
+noble_street_004,Noble Street,51.516601,-0.095735,20.1,200.1,4,6,0,0
+noble_street_005,Noble Street,51.51677,-0.095637,18.3,198.3,5,5,0,0
+noble_street_006,Noble Street,51.516946,-0.095544,19.5,199.5,6,4,0,0
+noble_street_007,Noble Street,51.517118,-0.095447,11.7,191.7,7,3,0,0
+noble_street_008,Noble Street,51.517299,-0.095387,7.3,187.3,8,2,0,0
+noble_street_009,Noble Street,51.517464,-0.095353,7.3,187.3,9,1,0,0
+oat_lane_001,Oat Lane,51.516443,-0.095176,20.2,200.2,1,4,0,0
+oat_lane_002,Oat Lane,51.516649,-0.095056,283.4,103.4,2,3,0,0
+oat_lane_003,Oat Lane,51.516697,-0.095376,294.0,114.0,3,2,0,0
+oat_lane_004,Oat Lane,51.51677,-0.095637,294.0,114.0,4,1,0,0
+old_billingsgate_walk_001,Old Billingsgate Walk,51.508417,-0.083678,281.7,101.7,1,4,0,0
+old_billingsgate_walk_002,Old Billingsgate Walk,51.508461,-0.084018,280.6,100.6,2,3,0,0
+old_billingsgate_walk_003,Old Billingsgate Walk,51.508495,-0.084306,279.4,99.4,3,2,0,0
+old_billingsgate_walk_004,Old Billingsgate Walk,51.508523,-0.084578,279.4,99.4,4,1,0,0
+old_broad_street_001,Old Broad Street,51.514103,-0.08625,18.9,198.9,1,23,0,0
+old_broad_street_002,Old Broad Street,51.514256,-0.086166,37.0,217.0,2,22,0,0
+old_broad_street_003,Old Broad Street,51.514456,-0.085926,35.1,215.1,3,21,0,0
+old_broad_street_004,Old Broad Street,51.514605,-0.085758,18.9,198.9,4,20,0,0
+old_broad_street_005,Old Broad Street,51.514727,-0.085692,51.1,231.1,5,19,0,0
+old_broad_street_006,Old Broad Street,51.514853,-0.085443,46.9,226.9,6,18,0,0
+old_broad_street_007,Old Broad Street,51.514975,-0.085235,74.8,254.8,7,17,0,0
+old_broad_street_008,Old Broad Street,51.515026,-0.084938,51.1,231.1,8,16,0,0
+old_broad_street_009,Old Broad Street,51.515139,-0.084713,40.9,220.9,9,15,0,0
+old_broad_street_010,Old Broad Street,51.515277,-0.084522,29.4,209.4,10,14,0,0
+old_broad_street_011,Old Broad Street,51.515441,-0.084375,29.6,209.6,11,13,0,0
+old_broad_street_012,Old Broad Street,51.5156,-0.084231,29.1,209.1,12,12,0,0
+old_broad_street_013,Old Broad Street,51.515761,-0.084088,29.7,209.7,13,11,0,0
+old_broad_street_014,Old Broad Street,51.51592,-0.083944,30.2,210.2,14,10,0,0
+old_broad_street_015,Old Broad Street,51.516075,-0.0838,25.4,205.4,15,9,0,0
+old_broad_street_016,Old Broad Street,51.516266,-0.083654,28.6,208.6,16,8,0,0
+old_broad_street_017,Old Broad Street,51.516357,-0.083575,17.9,197.9,17,7,0,0
+old_broad_street_018,Old Broad Street,51.516567,-0.083467,13.8,193.8,18,6,0,0
+old_broad_street_019,Old Broad Street,51.516728,-0.083404,14.5,194.5,19,5,0,0
+old_broad_street_020,Old Broad Street,51.516894,-0.083335,13.8,193.8,20,4,0,0
+old_broad_street_021,Old Broad Street,51.517067,-0.083267,9.2,189.2,21,3,0,0
+old_broad_street_022,Old Broad Street,51.517255,-0.083219,20.1,200.1,22,2,0,0
+old_broad_street_023,Old Broad Street,51.517443,-0.083109,20.1,200.1,23,1,0,0
+old_change_court_001,Old Change Court,51.512281,-0.097541,1.7,181.7,1,4,0,0
+old_change_court_002,Old Change Court,51.512456,-0.097533,19.0,199.0,2,3,0,0
+old_change_court_003,Old Change Court,51.512647,-0.097427,6.3,186.3,3,2,0,0
+old_change_court_004,Old Change Court,51.512826,-0.097396,6.3,186.3,4,1,0,0
+old_jewry_001,Old Jewry,51.513658,-0.091189,23.3,203.3,1,8,0,0
+old_jewry_002,Old Jewry,51.513827,-0.091073,17.2,197.2,2,7,0,0
+old_jewry_003,Old Jewry,51.514032,-0.090972,3.9,183.9,3,6,0,0
+old_jewry_004,Old Jewry,51.514119,-0.090963,20.4,200.4,4,5,0,0
+old_jewry_005,Old Jewry,51.514324,-0.090841,16.3,196.3,5,4,0,0
+old_jewry_006,Old Jewry,51.514512,-0.090753,17.9,197.9,6,3,0,0
+old_jewry_007,Old Jewry,51.514678,-0.090668,15.7,195.7,7,2,0,0
+old_jewry_008,Old Jewry,51.514861,-0.090585,15.7,195.7,8,1,0,0
+old_watermen_s_walk_001,Old Watermen's Walk,51.508627,-0.08541,11.2,191.2,1,4,0,0
+old_watermen_s_walk_002,Old Watermen's Walk,51.508833,-0.085345,11.2,191.2,2,3,0,0
+old_watermen_s_walk_003,Old Watermen's Walk,51.509014,-0.085287,11.3,191.3,3,2,0,0
+old_watermen_s_walk_004,Old Watermen's Walk,51.509195,-0.08523,11.3,191.3,4,1,0,0
+outwich_street_001,Outwich Street,51.515981,-0.080857,90.0,270.0,1,3,0,0
+outwich_street_002,Outwich Street,51.515981,-0.080589,43.4,223.4,2,2,0,0
+outwich_street_003,Outwich Street,51.516122,-0.080376,43.4,223.4,3,1,0,0
+oystergate_walk_001,Oystergate Walk,51.50907,-0.088601,261.0,81.0,1,4,0,0
+oystergate_walk_002,Oystergate Walk,51.509044,-0.088869,273.7,93.7,2,3,0,0
+oystergate_walk_003,Oystergate Walk,51.509056,-0.089181,270.8,90.8,3,2,0,0
+oystergate_walk_004,Oystergate Walk,51.509059,-0.089463,270.8,90.8,4,1,0,0
+pancras_lane_001,Pancras Lane,51.513172,-0.091441,273.5,93.5,1,4,0,0
+pancras_lane_002,Pancras Lane,51.513186,-0.091805,272.4,92.4,2,3,0,0
+pancras_lane_003,Pancras Lane,51.513194,-0.092099,272.7,92.7,3,2,0,0
+pancras_lane_004,Pancras Lane,51.513203,-0.092421,272.7,92.7,4,1,0,0
+panyer_alley_001,Panyer Alley,51.5144,-0.097586,356.3,176.3,1,4,0,0
+panyer_alley_002,Panyer Alley,51.514555,-0.097602,356.4,176.4,2,3,0,0
+panyer_alley_003,Panyer Alley,51.514803,-0.097627,354.8,174.8,3,2,0,0
+panyer_alley_004,Panyer Alley,51.514964,-0.09765,354.8,174.8,4,1,0,0
+paternoster_row_south_001,Paternoster Row,51.514451,-0.097237,8.8,188.8,1,2,0,0
+paternoster_row_south_002,Paternoster Row,51.514559,-0.09721,8.8,188.8,2,1,0,0
+paternoster_row_north_001,Paternoster Row,51.514698,-0.098173,83.7,263.7,1,2,0,0
+paternoster_row_north_002,Paternoster Row,51.51472,-0.097851,83.7,263.7,2,1,0,0
+paul_s_walk_001,Paul's Walk,51.510558,-0.097007,283.2,103.2,1,5,0,0
+paul_s_walk_002,Paul's Walk,51.510595,-0.097261,286.0,106.0,2,4,0,0
+paul_s_walk_003,Paul's Walk,51.510645,-0.097537,285.9,105.9,3,3,0,0
+paul_s_walk_004,Paul's Walk,51.510694,-0.097813,280.4,100.4,4,2,0,0
+paul_s_walk_005,Paul's Walk,51.510727,-0.098107,280.4,100.4,5,1,0,0
+philpot_lane_001,Philpot Lane,51.510686,-0.084253,9.2,189.2,1,6,0,0
+philpot_lane_002,Philpot Lane,51.510897,-0.084198,18.8,198.8,2,5,0,0
+philpot_lane_003,Philpot Lane,51.511071,-0.084104,15.9,195.9,3,4,0,0
+philpot_lane_004,Philpot Lane,51.511242,-0.084025,12.7,192.7,4,3,0,0
+philpot_lane_005,Philpot Lane,51.51137,-0.08398,14.1,194.1,5,2,0,0
+philpot_lane_006,Philpot Lane,51.511561,-0.083903,14.1,194.1,6,1,0,0
+plantation_lane_001,Plantation Lane,51.510835,-0.081496,285.2,105.2,1,6,0,0
+plantation_lane_002,Plantation Lane,51.510878,-0.081747,276.3,96.3,2,5,0,0
+plantation_lane_003,Plantation Lane,51.510897,-0.082032,258.3,78.3,3,4,0,0
+plantation_lane_004,Plantation Lane,51.510851,-0.082389,296.9,116.9,4,3,0,0
+plantation_lane_005,Plantation Lane,51.510942,-0.082675,276.3,96.3,5,2,0,0
+plantation_lane_006,Plantation Lane,51.510962,-0.082969,276.3,96.3,6,1,0,0
+plough_court_001,Plough Court,51.511657,-0.086216,22.7,202.7,1,2,0,0
+plough_court_002,Plough Court,51.511905,-0.08605,22.7,202.7,2,1,0,0
+post_office_court_001,Post Office Court,51.512587,-0.088056,43.7,223.7,1,2,0,0
+post_office_court_002,Post Office Court,51.512688,-0.087902,43.7,223.7,2,1,0,0
+poultry_001,Poultry,51.513426,-0.089759,283.1,103.1,1,6,0,0
+poultry_002,Poultry,51.513457,-0.089971,286.4,106.4,2,5,0,0
+poultry_003,Poultry,51.513529,-0.09036,278.2,98.2,3,4,0,0
+poultry_004,Poultry,51.513549,-0.090592,288.5,108.5,4,3,0,0
+poultry_005,Poultry,51.513616,-0.090909,283.4,103.4,5,2,0,0
+poultry_006,Poultry,51.513658,-0.091189,283.4,103.4,6,1,0,0
+princes_street_001,Princes Street,51.513388,-0.08894,357.1,177.1,1,9,0,0
+princes_street_002,Princes Street,51.513576,-0.088955,324.3,144.3,2,8,0,0
+princes_street_003,Princes Street,51.513736,-0.089139,338.6,158.6,3,7,0,0
+princes_street_004,Princes Street,51.513925,-0.089257,328.7,148.7,4,6,0,0
+princes_street_005,Princes Street,51.514079,-0.089407,336.3,156.3,5,5,0,0
+princes_street_006,Princes Street,51.514229,-0.089512,333.2,153.2,6,4,0,0
+princes_street_007,Princes Street,51.514418,-0.089664,339.8,159.8,7,3,0,0
+princes_street_008,Princes Street,51.514589,-0.089764,10.2,190.2,8,2,0,0
+princes_street_009,Princes Street,51.514705,-0.089731,10.2,190.2,9,1,0,0
+pudding_lane_001,Pudding Lane,51.509524,-0.085653,15.8,195.8,1,7,0,0
+pudding_lane_002,Pudding Lane,51.509726,-0.085562,24.6,204.6,2,6,0,0
+pudding_lane_003,Pudding Lane,51.509899,-0.085436,17.5,197.5,3,5,0,0
+pudding_lane_004,Pudding Lane,51.510069,-0.08535,9.5,189.5,4,4,0,0
+pudding_lane_005,Pudding Lane,51.510258,-0.0853,358.5,178.5,5,3,0,0
+pudding_lane_006,Pudding Lane,51.510367,-0.085305,357.0,177.0,6,2,0,0
+pudding_lane_007,Pudding Lane,51.510583,-0.085323,357.0,177.0,7,1,0,0
+queen_street_seg1_001,Queen Street,51.511113,-0.093,9.7,189.7,1,4,0,0
+queen_street_seg1_002,Queen Street,51.511285,-0.092954,11.3,191.3,2,3,0,0
+queen_street_seg1_003,Queen Street,51.511467,-0.092896,11.1,191.1,3,2,0,0
+queen_street_seg1_004,Queen Street,51.511643,-0.092841,11.1,191.1,4,1,0,0
+queen_street_seg2_001,Queen Street,51.512632,-0.092479,0.5,180.5,1,7,0,0
+queen_street_seg2_002,Queen Street,51.512843,-0.092476,6.6,186.6,2,6,0,0
+queen_street_seg2_003,Queen Street,51.513026,-0.092442,4.4,184.4,3,5,0,0
+queen_street_seg2_004,Queen Street,51.513203,-0.092421,6.1,186.1,4,4,0,0
+queen_street_seg2_005,Queen Street,51.513376,-0.092391,6.2,186.2,5,3,0,0
+queen_street_seg2_006,Queen Street,51.51357,-0.092357,6.7,186.7,6,2,0,0
+queen_street_seg2_007,Queen Street,51.513659,-0.09234,6.7,186.7,7,1,0,0
+queen_street_place_seg1_001,Queen Street Place,51.50986,-0.093482,20.5,200.5,1,7,0,0
+queen_street_place_seg1_002,Queen Street Place,51.510032,-0.09338,19.2,199.2,2,6,0,0
+queen_street_place_seg1_003,Queen Street Place,51.510203,-0.093285,15.4,195.4,3,5,0,0
+queen_street_place_seg1_004,Queen Street Place,51.510381,-0.093206,15.3,195.3,4,4,0,0
+queen_street_place_seg1_005,Queen Street Place,51.510469,-0.093168,25.0,205.0,5,3,0,0
+queen_street_place_seg1_006,Queen Street Place,51.510634,-0.093045,19.9,199.9,6,2,0,0
+queen_street_place_seg1_007,Queen Street Place,51.510869,-0.09291,19.9,199.9,7,1,0,0
+queen_street_place_seg2_001,Queen Street Place,51.510612,-0.093157,8.2,188.2,1,2,0,0
+queen_street_place_seg2_002,Queen Street Place,51.51077,-0.093121,8.2,188.2,2,1,0,0
+queen_victoria_street_seg1_001,Queen Victoria Street,51.511921,-0.098246,99.5,279.5,1,9,0,0
+queen_victoria_street_seg1_002,Queen Victoria Street,51.511888,-0.097925,82.7,262.7,2,8,0,0
+queen_victoria_street_seg1_003,Queen Victoria Street,51.511917,-0.097565,91.2,271.2,3,7,0,0
+queen_victoria_street_seg1_004,Queen Victoria Street,51.511913,-0.097276,87.1,267.1,4,6,0,0
+queen_victoria_street_seg1_005,Queen Victoria Street,51.511922,-0.096998,93.8,273.8,5,5,0,0
+queen_victoria_street_seg1_006,Queen Victoria Street,51.511913,-0.096796,80.4,260.4,6,4,0,0
+queen_victoria_street_seg1_007,Queen Victoria Street,51.511943,-0.096514,83.1,263.1,7,3,0,0
+queen_victoria_street_seg1_008,Queen Victoria Street,51.511963,-0.096263,77.8,257.8,8,2,0,0
+queen_victoria_street_seg1_009,Queen Victoria Street,51.512003,-0.095964,77.8,257.8,9,1,0,0
+queen_victoria_street_seg2_001,Queen Victoria Street,51.511882,-0.097855,97.3,277.3,1,21,0,0
+queen_victoria_street_seg2_002,Queen Victoria Street,51.511859,-0.097577,96.7,276.7,2,20,0,0
+queen_victoria_street_seg2_003,Queen Victoria Street,51.51184,-0.097312,90.6,270.6,3,19,0,0
+queen_victoria_street_seg2_004,Queen Victoria Street,51.511837,-0.096986,80.1,260.1,4,18,0,0
+queen_victoria_street_seg2_005,Queen Victoria Street,51.511866,-0.096726,84.0,264.0,5,17,0,0
+queen_victoria_street_seg2_006,Queen Victoria Street,51.511885,-0.09644,82.4,262.4,6,16,0,0
+queen_victoria_street_seg2_007,Queen Victoria Street,51.511908,-0.096158,78.8,258.8,7,15,0,0
+queen_victoria_street_seg2_008,Queen Victoria Street,51.511945,-0.095858,75.1,255.1,8,14,0,0
+queen_victoria_street_seg2_009,Queen Victoria Street,51.511994,-0.095566,66.5,246.5,9,13,0,0
+queen_victoria_street_seg2_010,Queen Victoria Street,51.512068,-0.095296,56.3,236.3,10,12,0,0
+queen_victoria_street_seg2_011,Queen Victoria Street,51.51216,-0.095075,72.6,252.6,11,11,0,0
+queen_victoria_street_seg2_012,Queen Victoria Street,51.512215,-0.094794,92.6,272.6,12,10,0,0
+queen_victoria_street_seg2_013,Queen Victoria Street,51.512205,-0.094437,43.5,223.5,13,9,0,0
+queen_victoria_street_seg2_014,Queen Victoria Street,51.512273,-0.094335,59.5,239.5,14,8,0,0
+queen_victoria_street_seg2_015,Queen Victoria Street,51.51236,-0.094098,68.1,248.1,15,7,0,0
+queen_victoria_street_seg2_016,Queen Victoria Street,51.512423,-0.093848,73.6,253.6,16,6,0,0
+queen_victoria_street_seg2_017,Queen Victoria Street,51.512484,-0.093519,74.5,254.5,17,5,0,0
+queen_victoria_street_seg2_018,Queen Victoria Street,51.51252,-0.093313,73.2,253.2,18,4,0,0
+queen_victoria_street_seg2_019,Queen Victoria Street,51.51257,-0.093046,69.8,249.8,19,3,0,0
+queen_victoria_street_seg2_020,Queen Victoria Street,51.512638,-0.092753,55.9,235.9,20,2,0,0
+queen_victoria_street_seg2_021,Queen Victoria Street,51.51275,-0.092489,55.9,235.9,21,1,0,0
+queen_victoria_street_seg3_001,Queen Victoria Street,51.512273,-0.094335,78.1,258.1,1,17,0,0
+queen_victoria_street_seg3_002,Queen Victoria Street,51.51231,-0.094052,82.6,262.6,2,16,0,0
+queen_victoria_street_seg3_003,Queen Victoria Street,51.512333,-0.093764,72.1,252.1,3,15,0,0
+queen_victoria_street_seg3_004,Queen Victoria Street,51.512381,-0.093529,68.7,248.7,4,14,0,0
+queen_victoria_street_seg3_005,Queen Victoria Street,51.51245,-0.093249,69.9,249.9,5,13,0,0
+queen_victoria_street_seg3_006,Queen Victoria Street,51.512524,-0.092924,69.0,249.0,6,12,0,0
+queen_victoria_street_seg3_007,Queen Victoria Street,51.512598,-0.092616,68.7,248.7,7,11,0,0
+queen_victoria_street_seg3_008,Queen Victoria Street,51.512632,-0.092479,62.1,242.1,8,10,0,0
+queen_victoria_street_seg3_009,Queen Victoria Street,51.512718,-0.092219,64.5,244.5,9,9,0,0
+queen_victoria_street_seg3_010,Queen Victoria Street,51.512802,-0.091938,69.1,249.1,10,8,0,0
+queen_victoria_street_seg3_011,Queen Victoria Street,51.512868,-0.091664,69.0,249.0,11,7,0,0
+queen_victoria_street_seg3_012,Queen Victoria Street,51.512928,-0.091412,72.1,252.1,12,6,0,0
+queen_victoria_street_seg3_013,Queen Victoria Street,51.512986,-0.091128,64.9,244.9,13,5,0,0
+queen_victoria_street_seg3_014,Queen Victoria Street,51.513062,-0.090868,70.4,250.4,14,4,0,0
+queen_victoria_street_seg3_015,Queen Victoria Street,51.513123,-0.090594,68.4,248.4,15,3,0,0
+queen_victoria_street_seg3_016,Queen Victoria Street,51.513191,-0.090319,69.4,249.4,16,2,0,0
+queen_victoria_street_seg3_017,Queen Victoria Street,51.513256,-0.090042,69.4,249.4,17,1,0,0
+queenhithe_001,Queenhithe,51.510171,-0.095175,10.2,190.2,1,5,0,0
+queenhithe_002,Queenhithe,51.510327,-0.095131,15.0,195.0,2,4,0,0
+queenhithe_003,Queenhithe,51.510502,-0.095056,7.1,187.1,3,3,0,0
+queenhithe_004,Queenhithe,51.510682,-0.09502,15.4,195.4,4,2,0,0
+queenhithe_005,Queenhithe,51.510856,-0.094944,15.4,195.4,5,1,0,0
+rood_lane_001,Rood Lane,51.510596,-0.08323,14.2,194.2,1,6,0,0
+rood_lane_002,Rood Lane,51.51081,-0.083144,9.8,189.8,2,5,0,0
+rood_lane_003,Rood Lane,51.510983,-0.083097,359.6,179.6,3,4,0,0
+rood_lane_004,Rood Lane,51.511141,-0.083098,5.0,185.0,4,3,0,0
+rood_lane_005,Rood Lane,51.511312,-0.083075,11.9,191.9,5,2,0,0
+rood_lane_006,Rood Lane,51.511503,-0.08301,11.9,191.9,6,1,0,0
+royal_exchange_avenue_001,Royal Exchange Avenue,51.51377,-0.086134,344.4,164.4,1,3,0,0
+royal_exchange_avenue_002,Royal Exchange Avenue,51.513857,-0.086173,278.9,98.9,2,2,0,0
+royal_exchange_avenue_003,Royal Exchange Avenue,51.513886,-0.086458,278.9,98.9,3,1,0,0
+royal_exchange_buildings_001,Royal Exchange Buildings,51.513376,-0.086345,332.8,152.8,1,4,0,0
+royal_exchange_buildings_002,Royal Exchange Buildings,51.513554,-0.086491,349.7,169.7,2,3,0,0
+royal_exchange_buildings_003,Royal Exchange Buildings,51.513731,-0.086542,350.9,170.9,3,2,0,0
+royal_exchange_buildings_004,Royal Exchange Buildings,51.513908,-0.086587,350.9,170.9,4,1,0,0
+russia_row_001,Russia Row,51.514424,-0.093261,297.3,117.3,1,3,0,0
+russia_row_002,Russia Row,51.514507,-0.093519,294.0,114.0,2,2,0,0
+russia_row_003,Russia Row,51.514584,-0.093795,294.0,114.0,3,1,0,0
+saint_george_s_lane_001,Saint George's Lane,51.510232,-0.084571,294.5,114.5,1,3,0,0
+saint_george_s_lane_002,Saint George's Lane,51.510308,-0.084838,274.9,94.9,2,2,0,0
+saint_george_s_lane_003,Saint George's Lane,51.510325,-0.085162,274.9,94.9,3,1,0,0
+saint_mary_axe_001,Saint Mary Axe,51.513584,-0.081615,45.3,225.3,1,12,0,0
+saint_mary_axe_002,Saint Mary Axe,51.513704,-0.081423,28.9,208.9,2,11,0,0
+saint_mary_axe_003,Saint Mary Axe,51.51386,-0.081285,2.2,182.2,3,10,0,0
+saint_mary_axe_004,Saint Mary Axe,51.514013,-0.081275,20.6,200.6,4,9,0,0
+saint_mary_axe_005,Saint Mary Axe,51.514185,-0.081173,20.8,200.8,5,8,0,0
+saint_mary_axe_006,Saint Mary Axe,51.514402,-0.081041,29.9,209.9,6,7,0,0
+saint_mary_axe_007,Saint Mary Axe,51.514543,-0.080912,16.5,196.5,7,6,0,0
+saint_mary_axe_008,Saint Mary Axe,51.51471,-0.080833,21.9,201.9,8,5,0,0
+saint_mary_axe_009,Saint Mary Axe,51.514873,-0.080728,41.2,221.2,9,4,0,0
+saint_mary_axe_010,Saint Mary Axe,51.515015,-0.080529,44.0,224.0,10,3,0,0
+saint_mary_axe_011,Saint Mary Axe,51.515156,-0.080312,42.4,222.4,11,2,0,0
+saint_mary_axe_012,Saint Mary Axe,51.515284,-0.080126,42.4,222.4,12,1,0,0
+salters_hall_court_001,Salters' Hall Court,51.511495,-0.089645,15.0,195.0,1,3,0,0
+salters_hall_court_002,Salters' Hall Court,51.511665,-0.089572,12.9,192.9,2,2,0,0
+salters_hall_court_003,Salters' Hall Court,51.511752,-0.08954,12.9,192.9,3,1,0,0
+sherborne_lane_001,Sherborne Lane,51.511796,-0.088473,328.6,148.6,1,5,0,0
+sherborne_lane_002,Sherborne Lane,51.511928,-0.088601,26.9,206.9,2,4,0,0
+sherborne_lane_003,Sherborne Lane,51.512089,-0.088471,27.8,207.8,3,3,0,0
+sherborne_lane_004,Sherborne Lane,51.512251,-0.088334,26.2,206.2,4,2,0,0
+sherborne_lane_005,Sherborne Lane,51.512413,-0.088207,26.2,206.2,5,1,0,0
+ship_tavern_passage_001,Ship Tavern Passage,51.512219,-0.084398,111.1,291.1,1,3,0,0
+ship_tavern_passage_002,Ship Tavern Passage,51.512154,-0.084127,25.5,205.5,2,2,0,0
+ship_tavern_passage_003,Ship Tavern Passage,51.51232,-0.084,25.5,205.5,3,1,0,0
+skinners_lane_001,Skinners Lane,51.511113,-0.093,292.9,112.9,1,4,0,0
+skinners_lane_002,Skinners Lane,51.51119,-0.09329,279.2,99.2,2,3,0,0
+skinners_lane_003,Skinners Lane,51.511219,-0.093583,274.5,94.5,3,2,0,0
+skinners_lane_004,Skinners Lane,51.511234,-0.093872,274.5,94.5,4,1,0,0
+st_alphage_garden_001,St Alphage Garden,51.517812,-0.092252,295.2,115.2,1,4,0,0
+st_alphage_garden_002,St Alphage Garden,51.517901,-0.092552,295.6,115.6,2,3,0,0
+st_alphage_garden_003,St Alphage Garden,51.517981,-0.09282,289.0,109.0,3,2,0,0
+st_alphage_garden_004,St Alphage Garden,51.51805,-0.093138,289.0,109.0,4,1,0,0
+st_helen_s_place_001,St Helen's Place,51.515251,-0.081803,0.0,180.0,1,2,0,0
+st_helen_s_place_002,St Helen's Place,51.515251,-0.081803,0.0,180.0,2,1,0,0
+st_paul_s_churchyard_seg1_001,St Paul's Churchyard,51.512959,-0.097088,299.2,119.2,1,5,0,0
+st_paul_s_churchyard_seg1_002,St Paul's Churchyard,51.513072,-0.097408,274.2,94.2,2,4,0,0
+st_paul_s_churchyard_seg1_003,St Paul's Churchyard,51.513081,-0.097619,291.2,111.2,3,3,0,0
+st_paul_s_churchyard_seg1_004,St Paul's Churchyard,51.513157,-0.097928,303.9,123.9,4,2,0,0
+st_paul_s_churchyard_seg1_005,St Paul's Churchyard,51.513254,-0.098159,303.9,123.9,5,1,0,0
+st_paul_s_churchyard_seg2_001,St Paul's Churchyard,51.514432,-0.097042,279.1,99.1,1,5,0,0
+st_paul_s_churchyard_seg2_002,St Paul's Churchyard,51.514451,-0.097237,256.8,76.8,2,4,0,0
+st_paul_s_churchyard_seg2_003,St Paul's Churchyard,51.5144,-0.097586,262.6,82.6,3,3,0,0
+st_paul_s_churchyard_seg2_004,St Paul's Churchyard,51.514371,-0.09794,264.5,84.5,4,2,0,0
+st_paul_s_churchyard_seg2_005,St Paul's Churchyard,51.514356,-0.098193,264.5,84.5,5,1,0,0
+st_stephen_s_row_001,St Stephen's Row,51.512786,-0.090104,105.2,285.2,1,4,0,0
+st_stephen_s_row_002,St Stephen's Row,51.512736,-0.08981,110.3,290.3,2,3,0,0
+st_stephen_s_row_003,St Stephen's Row,51.512671,-0.089532,51.0,231.0,3,2,0,0
+st_stephen_s_row_004,St Stephen's Row,51.512765,-0.089348,51.0,231.0,4,1,0,0
+st_swithin_s_lane_001,St Swithin's Lane,51.511447,-0.089378,18.9,198.9,1,9,0,0
+st_swithin_s_lane_002,St Swithin's Lane,51.511623,-0.089282,18.9,198.9,2,8,0,0
+st_swithin_s_lane_003,St Swithin's Lane,51.511799,-0.089186,21.5,201.5,3,7,0,0
+st_swithin_s_lane_004,St Swithin's Lane,51.511966,-0.089081,26.5,206.5,4,6,0,0
+st_swithin_s_lane_005,St Swithin's Lane,51.512131,-0.088949,29.2,209.2,5,5,0,0
+st_swithin_s_lane_006,St Swithin's Lane,51.512289,-0.088808,27.5,207.5,6,4,0,0
+st_swithin_s_lane_007,St Swithin's Lane,51.512449,-0.088675,35.5,215.5,7,3,0,0
+st_swithin_s_lane_008,St Swithin's Lane,51.512618,-0.088483,48.0,228.0,8,2,0,0
+st_swithin_s_lane_009,St Swithin's Lane,51.512706,-0.088326,48.0,228.0,9,1,0,0
+st_clement_s_court_001,St. Clement's Court,51.511294,-0.086524,321.4,141.4,1,2,0,0
+st_clement_s_court_002,St. Clement's Court,51.511379,-0.086633,321.4,141.4,2,1,0,0
+st_dunstan_s_alley_001,St. Dunstan's Alley,51.509778,-0.082057,295.8,115.8,1,3,0,0
+st_dunstan_s_alley_002,St. Dunstan's Alley,51.509876,-0.08238,284.2,104.2,2,2,0,0
+st_dunstan_s_alley_003,St. Dunstan's Alley,51.509921,-0.082662,284.2,104.2,3,1,0,0
+st_dunstan_s_hill_west_001,St. Dunstan's Hill,51.509231,-0.082792,8.9,188.9,1,3,0,0
+st_dunstan_s_hill_west_002,St. Dunstan's Hill,51.5094,-0.08275,0.3,180.3,2,2,0,0
+st_dunstan_s_hill_west_003,St. Dunstan's Hill,51.509561,-0.082749,0.3,180.3,3,1,0,0
+st_dunstan_s_hill_east_001,St. Dunstan's Hill,51.509341,-0.082752,78.7,258.7,1,6,0,0
+st_dunstan_s_hill_east_002,St. Dunstan's Hill,51.509372,-0.082502,43.5,223.5,2,5,0,0
+st_dunstan_s_hill_east_003,St. Dunstan's Hill,51.509502,-0.082305,29.8,209.8,3,4,0,0
+st_dunstan_s_hill_east_004,St. Dunstan's Hill,51.509651,-0.082168,28.7,208.7,4,3,0,0
+st_dunstan_s_hill_east_005,St. Dunstan's Hill,51.509778,-0.082057,27.0,207.0,5,2,0,0
+st_dunstan_s_hill_east_006,St. Dunstan's Hill,51.50994,-0.081925,27.0,207.0,6,1,0,0
+st_dunstan_s_lane_001,St. Dunstan's Lane,51.509712,-0.082827,272.4,92.4,1,3,0,0
+st_dunstan_s_lane_002,St. Dunstan's Lane,51.50972,-0.083125,286.7,106.7,2,2,0,0
+st_dunstan_s_lane_003,St. Dunstan's Lane,51.509773,-0.08341,286.7,106.7,3,1,0,0
+st_martin_s_le_grand_001,St. Martin's Le Grand,51.515115,-0.097745,69.7,249.7,1,12,0,0
+st_martin_s_le_grand_002,St. Martin's Le Grand,51.515204,-0.097361,36.2,216.2,2,11,0,0
+st_martin_s_le_grand_003,St. Martin's Le Grand,51.515328,-0.097217,18.9,198.9,3,10,0,0
+st_martin_s_le_grand_004,St. Martin's Le Grand,51.515482,-0.097132,6.8,186.8,4,9,0,0
+st_martin_s_le_grand_005,St. Martin's Le Grand,51.515653,-0.0971,7.3,187.3,5,8,0,0
+st_martin_s_le_grand_006,St. Martin's Le Grand,51.515832,-0.097063,343.4,163.4,6,7,0,0
+st_martin_s_le_grand_007,St. Martin's Le Grand,51.515892,-0.097091,17.8,197.8,7,6,0,0
+st_martin_s_le_grand_008,St. Martin's Le Grand,51.516014,-0.097029,9.7,189.7,8,5,0,0
+st_martin_s_le_grand_009,St. Martin's Le Grand,51.516244,-0.096966,0.3,180.3,9,4,0,0
+st_martin_s_le_grand_010,St. Martin's Le Grand,51.516373,-0.096965,6.7,186.7,10,3,0,0
+st_martin_s_le_grand_011,St. Martin's Le Grand,51.516552,-0.096931,6.4,186.4,11,2,0,0
+st_martin_s_le_grand_012,St. Martin's Le Grand,51.516733,-0.096899,6.4,186.4,12,1,0,0
+st_mary_at_hill_001,St. Mary at Hill,51.509369,-0.08382,20.0,200.0,1,8,0,0
+st_mary_at_hill_002,St. Mary at Hill,51.509556,-0.083711,20.8,200.8,2,7,0,0
+st_mary_at_hill_003,St. Mary at Hill,51.509725,-0.083608,18.9,198.9,3,6,0,0
+st_mary_at_hill_004,St. Mary at Hill,51.5099,-0.083513,16.0,196.0,4,5,0,0
+st_mary_at_hill_005,St. Mary at Hill,51.510075,-0.083432,15.0,195.0,5,4,0,0
+st_mary_at_hill_006,St. Mary at Hill,51.51025,-0.083358,14.9,194.9,6,3,0,0
+st_mary_at_hill_007,St. Mary at Hill,51.510434,-0.083279,10.7,190.7,7,2,0,0
+st_mary_at_hill_008,St. Mary at Hill,51.510596,-0.08323,10.7,190.7,8,1,0,0
+st_michaels_alley_west_001,St. Michaels Alley,51.51278,-0.085789,14.3,194.3,1,4,0,0
+st_michaels_alley_west_002,St. Michaels Alley,51.512934,-0.085726,9.5,189.5,2,3,0,0
+st_michaels_alley_west_003,St. Michaels Alley,51.51313,-0.085674,6.1,186.1,3,2,0,0
+st_michaels_alley_west_004,St. Michaels Alley,51.513307,-0.085644,6.1,186.1,4,1,0,0
+st_michaels_alley_east_001,St. Michaels Alley,51.512934,-0.085726,112.8,292.8,1,3,0,0
+st_michaels_alley_east_002,St. Michaels Alley,51.512866,-0.085468,79.5,259.5,2,2,0,0
+st_michaels_alley_east_003,St. Michaels Alley,51.512889,-0.085271,79.5,259.5,3,1,0,0
+staining_lane_001,Staining Lane,51.515931,-0.095397,20.1,200.1,1,3,0,0
+staining_lane_002,Staining Lane,51.516086,-0.095306,12.8,192.8,2,2,0,0
+staining_lane_003,Staining Lane,51.516265,-0.095241,12.8,192.8,3,1,0,0
+star_alley_001,Star Alley,51.511706,-0.080133,236.5,56.5,1,2,0,0
+star_alley_002,Star Alley,51.511596,-0.0804,236.5,56.5,2,1,0,0
+stew_lane_001,Stew Lane,51.510404,-0.096085,53.3,233.3,1,4,0,0
+stew_lane_002,Stew Lane,51.510473,-0.095937,13.1,193.1,2,3,0,0
+stew_lane_003,Stew Lane,51.51065,-0.095871,11.6,191.6,3,2,0,0
+stew_lane_004,Stew Lane,51.510831,-0.095812,11.6,191.6,4,1,0,0
+stone_house_court_001,Stone House Court,51.516462,-0.080706,303.7,123.7,1,2,0,0
+stone_house_court_002,Stone House Court,51.516563,-0.080946,303.7,123.7,2,1,0,0
+suffolk_lane_001,Suffolk Lane,51.510266,-0.089639,22.6,202.6,1,6,0,0
+suffolk_lane_002,Suffolk Lane,51.510451,-0.089516,29.1,209.1,2,5,0,0
+suffolk_lane_003,Suffolk Lane,51.510618,-0.089368,22.3,202.3,3,4,0,0
+suffolk_lane_004,Suffolk Lane,51.510789,-0.089256,34.0,214.0,4,3,0,0
+suffolk_lane_005,Suffolk Lane,51.510887,-0.089151,58.9,238.9,5,2,0,0
+suffolk_lane_006,Suffolk Lane,51.510998,-0.088856,58.9,238.9,6,1,0,0
+sun_street_passage_001,Sun Street Passage,51.517557,-0.083035,30.2,210.2,1,6,0,0
+sun_street_passage_002,Sun Street Passage,51.517722,-0.082883,20.4,200.4,2,5,0,0
+sun_street_passage_003,Sun Street Passage,51.517889,-0.082783,30.5,210.5,3,4,0,0
+sun_street_passage_004,Sun Street Passage,51.518031,-0.08265,10.1,190.1,4,3,0,0
+sun_street_passage_005,Sun Street Passage,51.518211,-0.082599,41.9,221.9,5,2,0,0
+sun_street_passage_006,Sun Street Passage,51.518369,-0.082373,41.9,221.9,6,1,0,0
+swan_lane_001,Swan Lane,51.50907,-0.088601,15.4,195.4,1,5,0,0
+swan_lane_002,Swan Lane,51.509258,-0.088518,15.1,195.1,2,4,0,0
+swan_lane_003,Swan Lane,51.509424,-0.088447,15.1,195.1,3,3,0,0
+swan_lane_004,Swan Lane,51.509605,-0.088369,8.8,188.8,4,2,0,0
+swan_lane_005,Swan Lane,51.509813,-0.088318,8.8,188.8,5,1,0,0
+talbot_court_001,Talbot Court,51.511089,-0.084843,293.5,113.5,1,2,0,0
+talbot_court_002,Talbot Court,51.511168,-0.085134,293.5,113.5,2,1,0,0
+telegraph_street_001,Telegraph Street,51.515672,-0.087704,264.9,84.9,1,6,0,0
+telegraph_street_002,Telegraph Street,51.515657,-0.087967,262.2,82.2,2,5,0,0
+telegraph_street_003,Telegraph Street,51.515635,-0.088222,270.6,90.6,3,4,0,0
+telegraph_street_004,Telegraph Street,51.515637,-0.088445,264.9,84.9,4,3,0,0
+telegraph_street_005,Telegraph Street,51.51562,-0.088752,278.6,98.6,5,2,0,0
+telegraph_street_006,Telegraph Street,51.515647,-0.089042,278.6,98.6,6,1,0,0
+threadneedle_street_001,Threadneedle Street,51.513959,-0.087305,99.6,279.6,1,14,0,0
+threadneedle_street_002,Threadneedle Street,51.513933,-0.087059,69.4,249.4,2,13,0,0
+threadneedle_street_003,Threadneedle Street,51.513992,-0.086805,72.1,252.1,3,12,0,0
+threadneedle_street_004,Threadneedle Street,51.514072,-0.086414,73.1,253.1,4,11,0,0
+threadneedle_street_005,Threadneedle Street,51.514103,-0.08625,80.4,260.4,5,10,0,0
+threadneedle_street_006,Threadneedle Street,51.514142,-0.085879,71.5,251.5,6,9,0,0
+threadneedle_street_007,Threadneedle Street,51.514193,-0.085634,83.1,263.1,7,8,0,0
+threadneedle_street_008,Threadneedle Street,51.514215,-0.085352,76.8,256.8,8,7,0,0
+threadneedle_street_009,Threadneedle Street,51.514248,-0.085129,74.6,254.6,9,6,0,0
+threadneedle_street_010,Threadneedle Street,51.514301,-0.084819,76.6,256.6,10,5,0,0
+threadneedle_street_011,Threadneedle Street,51.514346,-0.084517,75.5,255.5,11,4,0,0
+threadneedle_street_012,Threadneedle Street,51.514393,-0.084225,81.6,261.6,12,3,0,0
+threadneedle_street_013,Threadneedle Street,51.514419,-0.083945,97.4,277.4,13,2,0,0
+threadneedle_street_014,Threadneedle Street,51.514397,-0.083669,97.4,277.4,14,1,0,0
+three_barrels_walk_001,Three Barrels Walk,51.509821,-0.093612,282.1,102.1,1,6,0,0
+three_barrels_walk_002,Three Barrels Walk,51.509863,-0.093921,284.7,104.7,2,5,0,0
+three_barrels_walk_003,Three Barrels Walk,51.509917,-0.094247,284.5,104.5,3,4,0,0
+three_barrels_walk_004,Three Barrels Walk,51.509963,-0.094533,314.6,134.6,4,3,0,0
+three_barrels_walk_005,Three Barrels Walk,51.510066,-0.094699,293.3,113.3,5,2,0,0
+three_barrels_walk_006,Three Barrels Walk,51.510137,-0.094963,293.3,113.3,6,1,0,0
+three_cranes_walk_001,Three Cranes Walk,51.509645,-0.092535,272.7,92.7,1,4,0,0
+three_cranes_walk_002,Three Cranes Walk,51.509653,-0.092796,295.1,115.1,2,3,0,0
+three_cranes_walk_003,Three Cranes Walk,51.509744,-0.093108,291.4,111.4,3,2,0,0
+three_cranes_walk_004,Three Cranes Walk,51.509778,-0.093248,291.4,111.4,4,1,0,0
+throgmorton_avenue_seg1_001,Throgmorton Avenue,51.515671,-0.08668,0.0,180.0,1,3,0,0
+throgmorton_avenue_seg1_002,Throgmorton Avenue,51.515671,-0.08668,22.0,202.0,2,2,0,0
+throgmorton_avenue_seg1_003,Throgmorton Avenue,51.515833,-0.086575,22.0,202.0,3,1,0,0
+throgmorton_avenue_seg2_001,Throgmorton Avenue,51.516319,-0.086354,0.0,180.0,1,2,0,0
+throgmorton_avenue_seg2_002,Throgmorton Avenue,51.516319,-0.086354,0.0,180.0,2,1,0,0
+throgmorton_avenue_seg3_001,Throgmorton Avenue,51.516674,-0.086235,18.8,198.8,1,2,0,0
+throgmorton_avenue_seg3_002,Throgmorton Avenue,51.516837,-0.086147,18.8,198.8,2,1,0,0
+throgmorton_street_001,Throgmorton Street,51.514615,-0.087729,60.7,240.7,1,9,0,0
+throgmorton_street_002,Throgmorton Street,51.5147,-0.087489,74.5,254.5,2,8,0,0
+throgmorton_street_003,Throgmorton Street,51.514749,-0.087206,66.9,246.9,3,7,0,0
+throgmorton_street_004,Throgmorton Street,51.514812,-0.08697,79.1,259.1,4,6,0,0
+throgmorton_street_005,Throgmorton Street,51.51485,-0.086652,71.3,251.3,5,5,0,0
+throgmorton_street_006,Throgmorton Street,51.51489,-0.086466,86.2,266.2,6,4,0,0
+throgmorton_street_007,Throgmorton Street,51.514907,-0.086066,91.6,271.6,7,3,0,0
+throgmorton_street_008,Throgmorton Street,51.514902,-0.085775,114.1,294.1,8,2,0,0
+throgmorton_street_009,Throgmorton Street,51.514824,-0.085498,114.1,294.1,9,1,0,0
+tokenhouse_yard_001,Tokenhouse Yard,51.514675,-0.08846,6.9,186.9,1,6,0,0
+tokenhouse_yard_002,Tokenhouse Yard,51.514874,-0.088422,2.2,182.2,2,5,0,0
+tokenhouse_yard_003,Tokenhouse Yard,51.515047,-0.088412,3.4,183.4,3,4,0,0
+tokenhouse_yard_004,Tokenhouse Yard,51.515201,-0.088397,4.7,184.7,4,3,0,0
+tokenhouse_yard_005,Tokenhouse Yard,51.515415,-0.088369,51.5,231.5,5,2,0,0
+tokenhouse_yard_006,Tokenhouse Yard,51.515491,-0.088215,51.5,231.5,6,1,0,0
+trig_lane_001,Trig Lane,51.510786,-0.096904,0.0,180.0,1,2,0,0
+trig_lane_002,Trig Lane,51.510786,-0.096904,0.0,180.0,2,1,0,0
+trump_street_001,Trump Street,51.514362,-0.092243,278.7,98.7,1,4,0,0
+trump_street_002,Trump Street,51.51439,-0.092532,275.6,95.6,2,3,0,0
+trump_street_003,Trump Street,51.514408,-0.092821,270.4,90.4,3,2,0,0
+trump_street_004,Trump Street,51.514409,-0.093114,270.4,90.4,4,1,0,0
+undershaft_001,Undershaft,51.514013,-0.082687,27.2,207.2,1,8,0,0
+undershaft_002,Undershaft,51.514169,-0.08256,43.4,223.4,2,7,0,0
+undershaft_003,Undershaft,51.514269,-0.082409,56.2,236.2,3,6,0,0
+undershaft_004,Undershaft,51.514385,-0.082132,47.5,227.5,4,5,0,0
+undershaft_005,Undershaft,51.514513,-0.081908,90.3,270.3,5,4,0,0
+undershaft_006,Undershaft,51.514513,-0.081657,89.4,269.4,6,3,0,0
+undershaft_007,Undershaft,51.514514,-0.081406,104.4,284.4,7,2,0,0
+undershaft_008,Undershaft,51.514466,-0.081105,104.4,284.4,8,1,0,0
+upper_thames_street_seg1_001,Upper Thames Street,51.509631,-0.087077,282.3,102.3,1,12,0,0
+upper_thames_street_seg1_002,Upper Thames Street,51.50967,-0.087366,285.8,105.8,2,11,0,0
+upper_thames_street_seg1_003,Upper Thames Street,51.509727,-0.087687,280.7,100.7,3,10,0,0
+upper_thames_street_seg1_004,Upper Thames Street,51.509759,-0.087955,284.7,104.7,4,9,0,0
+upper_thames_street_seg1_005,Upper Thames Street,51.509807,-0.088247,284.5,104.5,5,8,0,0
+upper_thames_street_seg1_006,Upper Thames Street,51.509847,-0.088492,293.9,113.9,6,7,0,0
+upper_thames_street_seg1_007,Upper Thames Street,51.509936,-0.088811,293.2,113.2,7,6,0,0
+upper_thames_street_seg1_008,Upper Thames Street,51.509976,-0.088963,294.0,114.0,8,5,0,0
+upper_thames_street_seg1_009,Upper Thames Street,51.51005,-0.089227,294.5,114.5,9,4,0,0
+upper_thames_street_seg1_010,Upper Thames Street,51.510128,-0.089501,293.7,113.7,10,3,0,0
+upper_thames_street_seg1_011,Upper Thames Street,51.510208,-0.089789,291.3,111.3,11,2,0,0
+upper_thames_street_seg1_012,Upper Thames Street,51.510281,-0.090088,291.3,111.3,12,1,0,0
+upper_thames_street_seg2_001,Upper Thames Street,51.509697,-0.08705,283.8,103.8,1,3,0,0
+upper_thames_street_seg2_002,Upper Thames Street,51.509753,-0.087416,261.4,81.4,2,2,0,0
+upper_thames_street_seg2_003,Upper Thames Street,51.509727,-0.087687,261.4,81.4,3,1,0,0
+upper_thames_street_seg3_001,Upper Thames Street,51.509807,-0.088247,305.2,125.2,1,6,0,0
+upper_thames_street_seg3_002,Upper Thames Street,51.509939,-0.088545,291.8,111.8,2,5,0,0
+upper_thames_street_seg3_003,Upper Thames Street,51.509979,-0.088702,295.2,115.2,3,4,0,0
+upper_thames_street_seg3_004,Upper Thames Street,51.51006,-0.088979,295.2,115.2,4,3,0,0
+upper_thames_street_seg3_005,Upper Thames Street,51.510142,-0.089257,297.1,117.1,5,2,0,0
+upper_thames_street_seg3_006,Upper Thames Street,51.510224,-0.08951,297.1,117.1,6,1,0,0
+upper_thames_street_seg4_001,Upper Thames Street,51.510522,-0.091084,285.3,105.3,1,21,0,0
+upper_thames_street_seg4_002,Upper Thames Street,51.510576,-0.091402,287.2,107.2,2,20,0,0
+upper_thames_street_seg4_003,Upper Thames Street,51.510628,-0.091667,288.1,108.1,3,19,0,0
+upper_thames_street_seg4_004,Upper Thames Street,51.510686,-0.09195,287.5,107.5,4,18,0,0
+upper_thames_street_seg4_005,Upper Thames Street,51.510745,-0.092249,285.5,105.5,5,17,0,0
+upper_thames_street_seg4_006,Upper Thames Street,51.510788,-0.092498,287.7,107.7,6,16,0,0
+upper_thames_street_seg4_007,Upper Thames Street,51.510841,-0.092763,285.6,105.6,7,15,0,0
+upper_thames_street_seg4_008,Upper Thames Street,51.510894,-0.093065,284.2,104.2,8,14,0,0
+upper_thames_street_seg4_009,Upper Thames Street,51.510939,-0.093349,278.9,98.9,9,13,0,0
+upper_thames_street_seg4_010,Upper Thames Street,51.510966,-0.093627,285.3,105.3,10,12,0,0
+upper_thames_street_seg4_011,Upper Thames Street,51.511016,-0.093918,286.6,106.6,11,11,0,0
+upper_thames_street_seg4_012,Upper Thames Street,51.511063,-0.094172,281.8,101.8,12,10,0,0
+upper_thames_street_seg4_013,Upper Thames Street,51.511102,-0.094467,281.2,101.2,13,9,0,0
+upper_thames_street_seg4_014,Upper Thames Street,51.511138,-0.094754,279.2,99.2,14,8,0,0
+upper_thames_street_seg4_015,Upper Thames Street,51.51117,-0.095068,274.0,94.0,15,7,0,0
+upper_thames_street_seg4_016,Upper Thames Street,51.511182,-0.095357,271.5,91.5,16,6,0,0
+upper_thames_street_seg4_017,Upper Thames Street,51.511187,-0.095644,272.0,92.0,17,5,0,0
+upper_thames_street_seg4_018,Upper Thames Street,51.511193,-0.095933,272.0,92.0,18,4,0,0
+upper_thames_street_seg4_019,Upper Thames Street,51.511201,-0.096264,258.4,78.4,19,3,0,0
+upper_thames_street_seg4_020,Upper Thames Street,51.511165,-0.09654,290.5,110.5,20,2,0,0
+upper_thames_street_seg4_021,Upper Thames Street,51.511211,-0.096736,290.5,110.5,21,1,0,0
+upper_thames_street_seg5_001,Upper Thames Street,51.510472,-0.091203,286.7,106.7,1,21,0,0
+upper_thames_street_seg5_002,Upper Thames Street,51.510525,-0.091485,287.2,107.2,2,20,0,0
+upper_thames_street_seg5_003,Upper Thames Street,51.510578,-0.091761,287.4,107.4,3,19,0,0
+upper_thames_street_seg5_004,Upper Thames Street,51.510633,-0.092043,288.3,108.3,4,18,0,0
+upper_thames_street_seg5_005,Upper Thames Street,51.510693,-0.09233,286.0,106.0,5,17,0,0
+upper_thames_street_seg5_006,Upper Thames Street,51.510742,-0.092605,286.0,106.0,6,16,0,0
+upper_thames_street_seg5_007,Upper Thames Street,51.510792,-0.092884,286.7,106.7,7,15,0,0
+upper_thames_street_seg5_008,Upper Thames Street,51.510847,-0.093173,281.5,101.5,8,14,0,0
+upper_thames_street_seg5_009,Upper Thames Street,51.510865,-0.093316,281.4,101.4,9,13,0,0
+upper_thames_street_seg5_010,Upper Thames Street,51.510901,-0.093604,281.4,101.4,10,12,0,0
+upper_thames_street_seg5_011,Upper Thames Street,51.51095,-0.093985,281.2,101.2,11,11,0,0
+upper_thames_street_seg5_012,Upper Thames Street,51.510985,-0.094269,281.3,101.3,12,10,0,0
+upper_thames_street_seg5_013,Upper Thames Street,51.511022,-0.094566,280.7,100.7,13,9,0,0
+upper_thames_street_seg5_014,Upper Thames Street,51.511057,-0.094861,277.9,97.9,14,8,0,0
+upper_thames_street_seg5_015,Upper Thames Street,51.511082,-0.095152,284.4,104.4,15,7,0,0
+upper_thames_street_seg5_016,Upper Thames Street,51.511117,-0.09537,266.6,86.6,16,6,0,0
+upper_thames_street_seg5_017,Upper Thames Street,51.511108,-0.095599,273.6,93.6,17,5,0,0
+upper_thames_street_seg5_018,Upper Thames Street,51.51112,-0.095887,272.4,92.4,18,4,0,0
+upper_thames_street_seg5_019,Upper Thames Street,51.511128,-0.09618,279.5,99.5,19,3,0,0
+upper_thames_street_seg5_020,Upper Thames Street,51.511165,-0.09654,263.4,83.4,20,2,0,0
+upper_thames_street_seg5_021,Upper Thames Street,51.511145,-0.096823,263.4,83.4,21,1,0,0
+walbrook_001,Walbrook,51.511695,-0.090681,8.9,188.9,1,10,0,0
+walbrook_002,Walbrook,51.511884,-0.090634,18.7,198.7,2,9,0,0
+walbrook_003,Walbrook,51.512056,-0.090541,19.7,199.7,3,8,0,0
+walbrook_004,Walbrook,51.512225,-0.090444,20.8,200.8,4,7,0,0
+walbrook_005,Walbrook,51.512394,-0.090342,19.6,199.6,5,6,0,0
+walbrook_006,Walbrook,51.512545,-0.090256,21.3,201.3,6,5,0,0
+walbrook_007,Walbrook,51.512707,-0.090155,19.3,199.3,7,4,0,0
+walbrook_008,Walbrook,51.512898,-0.090049,73.3,253.3,8,3,0,0
+walbrook_009,Walbrook,51.51293,-0.089879,18.6,198.6,9,2,0,0
+walbrook_010,Walbrook,51.513103,-0.089786,18.6,198.6,10,1,0,0
+walbrook_wharf_001,Walbrook Wharf,51.509385,-0.09181,305.1,125.1,1,3,0,0
+walbrook_wharf_002,Walbrook Wharf,51.509525,-0.092128,298.9,118.9,2,2,0,0
+walbrook_wharf_003,Walbrook Wharf,51.509617,-0.092393,298.9,118.9,3,1,0,0
+water_lane_001,Water Lane,51.50838,-0.081274,7.6,187.6,1,3,0,0
+water_lane_002,Water Lane,51.508558,-0.081236,22.7,202.7,2,2,0,0
+water_lane_003,Water Lane,51.508724,-0.081126,22.7,202.7,3,1,0,0
+watling_court_001,Watling Court,51.512811,-0.094405,339.3,159.3,1,3,0,0
+watling_court_002,Watling Court,51.512894,-0.094454,8.0,188.0,2,2,0,0
+watling_court_003,Watling Court,51.513069,-0.094415,8.0,188.0,3,1,0,0
+watling_street_001,Watling Street,51.51275,-0.092489,282.7,102.7,1,14,0,0
+watling_street_002,Watling Street,51.512786,-0.092745,294.9,114.9,2,13,0,0
+watling_street_003,Watling Street,51.512858,-0.092994,293.4,113.4,3,12,0,0
+watling_street_004,Watling Street,51.512931,-0.093262,291.7,111.7,4,11,0,0
+watling_street_005,Watling Street,51.513004,-0.093554,283.4,103.4,5,10,0,0
+watling_street_006,Watling Street,51.513049,-0.093856,288.5,108.5,6,9,0,0
+watling_street_007,Watling Street,51.51311,-0.09415,285.0,105.0,7,8,0,0
+watling_street_008,Watling Street,51.513138,-0.094316,283.5,103.5,8,7,0,0
+watling_street_009,Watling Street,51.513183,-0.094614,282.1,102.1,9,6,0,0
+watling_street_010,Watling Street,51.513219,-0.094882,284.0,104.0,10,5,0,0
+watling_street_011,Watling Street,51.513264,-0.095169,283.2,103.2,11,4,0,0
+watling_street_012,Watling Street,51.513307,-0.095463,279.5,99.5,12,3,0,0
+watling_street_013,Watling Street,51.51334,-0.095774,279.8,99.8,13,2,0,0
+watling_street_014,Watling Street,51.51337,-0.096057,279.8,99.8,14,1,0,0
+well_court_001,Well Court,51.513178,-0.09289,86.7,266.7,1,2,0,0
+well_court_002,Well Court,51.513184,-0.092721,86.7,266.7,2,1,0,0
+whalebone_court_001,Whalebone Court,51.515637,-0.088342,3.4,183.4,1,2,0,0
+whalebone_court_002,Whalebone Court,51.515783,-0.088328,3.4,183.4,2,1,0,0
+whittington_avenue_001,Whittington Avenue,51.512878,-0.08346,4.5,184.5,1,4,0,0
+whittington_avenue_002,Whittington Avenue,51.513114,-0.083431,8.6,188.6,2,3,0,0
+whittington_avenue_003,Whittington Avenue,51.513248,-0.083398,1.9,181.9,3,2,0,0
+whittington_avenue_004,Whittington Avenue,51.513455,-0.083387,1.9,181.9,4,1,0,0
+wood_street_west_001,Wood Street,51.51574,-0.094588,14.3,194.3,1,5,0,0
+wood_street_west_002,Wood Street,51.515942,-0.094506,18.8,198.8,2,4,0,0
+wood_street_west_003,Wood Street,51.516032,-0.094457,18.7,198.7,3,3,0,0
+wood_street_west_004,Wood Street,51.516206,-0.094363,17.8,197.8,4,2,0,0
+wood_street_west_005,Wood Street,51.516381,-0.094273,17.8,197.8,5,1,0,0
+wood_street_east_seg1_001,Wood Street,51.514217,-0.094781,19.1,199.1,1,9,0,0
+wood_street_east_seg1_002,Wood Street,51.514439,-0.094658,8.8,188.8,2,8,0,0
+wood_street_east_seg1_003,Wood Street,51.514531,-0.094635,4.7,184.7,3,7,0,0
+wood_street_east_seg1_004,Wood Street,51.514711,-0.094612,2.4,182.4,4,6,0,0
+wood_street_east_seg1_005,Wood Street,51.51496,-0.094595,6.4,186.4,5,5,0,0
+wood_street_east_seg1_006,Wood Street,51.515128,-0.094565,7.9,187.9,6,4,0,0
+wood_street_east_seg1_007,Wood Street,51.515306,-0.094526,7.8,187.8,7,3,0,0
+wood_street_east_seg1_008,Wood Street,51.515491,-0.094485,7.9,187.9,8,2,0,0
+wood_street_east_seg1_009,Wood Street,51.515585,-0.094464,7.9,187.9,9,1,0,0
+wood_street_east_seg2_001,Wood Street,51.516482,-0.094007,11.1,191.1,1,3,0,0
+wood_street_east_seg2_002,Wood Street,51.51667,-0.093949,2.1,182.1,2,2,0,0
+wood_street_east_seg2_003,Wood Street,51.516853,-0.093938,2.1,182.1,3,1,0,0
+wood_street_east_seg3_001,Wood Street,51.517807,-0.093465,18.9,198.9,1,4,0,0
+wood_street_east_seg3_002,Wood Street,51.517991,-0.093364,17.3,197.3,2,3,0,0
+wood_street_east_seg3_003,Wood Street,51.518169,-0.093275,21.1,201.1,3,2,0,0
+wood_street_east_seg3_004,Wood Street,51.518345,-0.093167,21.1,201.1,4,1,0,0
+wormwood_street_seg1_001,Wormwood Street,51.516191,-0.08164,282.2,102.2,1,7,0,0
+wormwood_street_seg1_002,Wormwood Street,51.516229,-0.081923,282.8,102.8,2,6,0,0
+wormwood_street_seg1_003,Wormwood Street,51.51627,-0.08221,281.9,101.9,3,5,0,0
+wormwood_street_seg1_004,Wormwood Street,51.516307,-0.082488,281.2,101.2,4,4,0,0
+wormwood_street_seg1_005,Wormwood Street,51.516342,-0.082771,280.3,100.3,5,3,0,0
+wormwood_street_seg1_006,Wormwood Street,51.516374,-0.083057,281.1,101.1,6,2,0,0
+wormwood_street_seg1_007,Wormwood Street,51.516409,-0.083338,281.1,101.1,7,1,0,0
+wormwood_street_seg2_001,Wormwood Street,51.516116,-0.08171,281.5,101.5,1,7,0,0
+wormwood_street_seg2_002,Wormwood Street,51.516163,-0.08208,281.2,101.2,2,6,0,0
+wormwood_street_seg2_003,Wormwood Street,51.516186,-0.082261,281.2,101.2,3,5,0,0
+wormwood_street_seg2_004,Wormwood Street,51.516221,-0.082548,281.2,101.2,4,4,0,0
+wormwood_street_seg2_005,Wormwood Street,51.516257,-0.082837,281.2,101.2,5,3,0,0
+wormwood_street_seg2_006,Wormwood Street,51.516292,-0.083114,281.2,101.2,6,2,0,0
+wormwood_street_seg2_007,Wormwood Street,51.516328,-0.083411,281.2,101.2,7,1,0,0

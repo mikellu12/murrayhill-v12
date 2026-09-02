@@ -1,0 +1,17 @@
+i,street,flagged,truth_street,copyright,google,hw,ped,ceil
+1,leadenhall_market,True,True,© Rogerio mainardi Rogerio,False,pedestrian,True,0.143705
+2,leadenhall_market,True,True,© Google,True,pedestrian,True,0.06216
+3,leadenhall_market,False,True,© Google,True,pedestrian,True,0.063239
+4,bishopsgate_arcade,True,False,© Google,True,footway,True,0.130468
+5,bishopsgate_arcade,True,False,© Google,True,footway,True,0.341373
+6,bishopsgate_arcade,False,True,© Google,True,steps,True,0.0
+7,royal_exchange_buildings,False,True,© Google,True,footway,True,0.0
+8,new_change_passage,True,True,© Pascal Vuylsteker,False,footway,True,0.035965
+9,new_change_passage,True,False,© Pascal Vuylsteker,False,footway,True,0.058579
+10,new_change_passage,False,False,© Google,True,footway,True,0.006744
+11,beehive_passage,True,False,© Savas Kolan,False,footway,True,0.209401
+12,beehive_passage,True,False,© Arena 360,False,unclassified,False,0.315078
+13,beehive_passage,False,False,© Arena 360,False,unclassified,False,0.0
+14,post_office_court,True,False,© Google,True,footway,True,0.161207
+15,post_office_court,True,False,© Google,True,footway,True,0.223867
+16,post_office_court,False,False,© Google,True,footway,True,0.133564
