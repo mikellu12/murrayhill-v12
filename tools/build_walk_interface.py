@@ -4,12 +4,16 @@ Writes a self-contained HTML file that steps along one street node by node --
 the rendered view on the left, the ten field ratings and M on the right, and
 the model's own description beneath them.
 
-LOCAL ONLY, AND DELIBERATELY. The page references the rendered JPEGs by
-relative path rather than embedding them. Street View imagery is not
-redistributable -- Google caps caching at 30 days, and derived measurements are
-ours to publish while the photographs are not -- so this must never be uploaded
-or handed out as a link. Opening it from the repository is fine; that is a
-local view of local files.
+FRAMES ARE INLINED, so the page works wherever it is opened. Referencing them
+by relative path made a smaller file that only rendered from results/figures,
+and moving it produced a page of broken images rather than an error --  which
+is the first thing that happens to any file.
+
+LOCAL ONLY. Street View imagery is not redistributable: Google caps caching at
+30 days, and the derived measurements are ours to publish while the photographs
+are not. Inlining makes the file portable, which makes it easier to share by
+accident -- so it must not be uploaded or handed out. --link restores the
+reference-on-disk build.
 
 It degrades. Ratings, descriptions and M each appear if their table exists and
 are quietly absent if not, so the page can be built and looked at before the
@@ -64,6 +68,14 @@ def main():
     ap.add_argument("--descriptions", type=Path, default=None)
     ap.add_argument("--calc", type=Path, default=None)
     ap.add_argument("--out", type=Path, default=None)
+    ap.add_argument("--embed", action="store_true", default=True,
+                    help="inline the frames as data URIs so the file works "
+                         "wherever it is opened")
+    ap.add_argument("--link", dest="embed", action="store_false",
+                    help="reference the JPEGs on disk instead; smaller, but "
+                         "only opens correctly from inside the repository")
+    ap.add_argument("--embed-width", type=int, default=1400)
+    ap.add_argument("--quality", type=int, default=78)
     args = ap.parse_args()
     area = CFG.get("study_area_name", "study area")
     banner(f"walk-through page: {args.street}")
@@ -125,10 +137,27 @@ def main():
 
     out = args.out or (RES / "figures" / f"walk_{args.street}.html")
     out.parent.mkdir(parents=True, exist_ok=True)
+    # Embedded by default. A page that references ../../data/raw only opens
+    # from results/figures, and the first thing anyone does with a file is move
+    # it -- which silently produces a page of broken images rather than an
+    # error. Inlining costs size and makes it work anywhere.
+    if args.embed:
+        import base64, io
+        from PIL import Image
     steps = []
     for r in nf.itertuples():
         p = files[r.node_id]
-        rel = os.path.relpath(p, out.parent).replace("\\", "/")
+        if args.embed:
+            im = Image.open(p).convert("RGB")
+            wdt = min(args.embed_width, im.width)
+            im = im.resize((wdt, round(wdt * im.height / im.width)),
+                           Image.LANCZOS)
+            buf = io.BytesIO()
+            im.save(buf, "JPEG", quality=args.quality, optimize=True)
+            rel = ("data:image/jpeg;base64,"
+                   + base64.b64encode(buf.getvalue()).decode())
+        else:
+            rel = os.path.relpath(p, out.parent).replace("\\", "/")
         steps.append({"node": r.node_id, "img": rel,
                       "street": str(getattr(r, "osm_name", None)
                                     or getattr(r, "street_name", "")),
