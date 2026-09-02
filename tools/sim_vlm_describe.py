@@ -43,21 +43,31 @@ MODEL = "Qwen/Qwen2-VL-7B-Instruct"
 MAX_PIXELS = 1024 * 28 * 28
 NAME = re.compile(r"(\d+)_(n\d+)_([NESW])(?:_([LRF]))?\.jpg$")
 
-SYSTEM = ("You are describing a street for an urban design study. Be concrete "
-          "and specific about what is physically present. Do not speculate "
-          "about the neighbourhood, the residents, or the city.")
+# Every constraint here answers something the first test did. Two sentences,
+# because ground and frontage ran to numbered lists and truncated mid-word.
+# No text on signs or vehicles, because frontage was answered with the logo on
+# a parked truck. No season or purpose, because bare trees drew "likely late
+# autumn or winter" from imagery captured in April.
+SYSTEM = ("You are describing a street for an urban design study. Answer in at "
+          "most two sentences. Describe only what is visible in the image. Do "
+          "not read out text on signs or vehicles, do not name companies, and "
+          "do not speculate about the season, the weather, the purpose of a "
+          "building, or the neighbourhood. If something asked about is absent, "
+          "say so plainly.")
 
 # Open questions, deliberately not the rung prompts. Asking "why did you say 5"
 # invites the model to reverse-engineer a justification; asking what is there
 # gets a description that can be checked against the photograph.
 QUESTIONS = {
-    "scene": "In two sentences, what does this street look like to walk down?",
-    "greenery": "What vegetation is visible, and where is it -- street trees, "
+    "scene": "What is it like to walk down this street?",
+    "greenery": "What vegetation is visible and where -- street trees, "
                 "planting at ground level, greenery on the buildings, or none?",
-    "ground": "Describe the ground plane: the footway, its width and surface, "
-              "kerbs, and anything standing on it.",
-    "frontage": "Describe the building frontage at street level: entrances, "
-                "windows, shopfronts, or blank wall.",
+    "ground": "Describe the footway only: how wide it is, its surface, whether "
+              "there is a kerb, and what stands on it. Ignore the roadway and "
+              "ignore vehicles.",
+    "frontage": "Describe the buildings at street level only -- entrances, "
+                "windows, shopfronts, or blank wall. Ignore vehicles, people "
+                "and anything in the road.",
     "standout": "What is the single most noticeable thing in this view?",
 }
 
