@@ -74,9 +74,14 @@ def main():
     ap.add_argument("--link", dest="embed", action="store_false",
                     help="reference the JPEGs on disk instead; smaller, but "
                          "only opens correctly from inside the repository")
-    ap.add_argument("--embed-width", type=int, default=1400)
-    ap.add_argument("--quality", type=int, default=78)
+    ap.add_argument("--mast-set", default="svi_180",
+                    help="mast calibration for the erase; 'none' to leave the "
+                         "camera mast in frame")
+    ap.add_argument("--embed-width", type=int, default=1000)
+    ap.add_argument("--quality", type=int, default=72)
     args = ap.parse_args()
+    if str(args.mast_set).lower() == "none":
+        args.mast_set = None
     area = CFG.get("study_area_name", "study area")
     banner(f"walk-through page: {args.street}")
 
@@ -144,11 +149,17 @@ def main():
     if args.embed:
         import base64, io
         from PIL import Image
+        from mast import erase_mast
     steps = []
     for r in nf.itertuples():
         p = files[r.node_id]
         if args.embed:
             im = Image.open(p).convert("RGB")
+            # Erase the camera mast, because the model never saw it: the
+            # ratings beside each frame were made on an erased image, and a
+            # page showing the mast shows something other than what was rated.
+            if args.mast_set:
+                im, _ = erase_mast(im, args.mast_set)
             wdt = min(args.embed_width, im.width)
             im = im.resize((wdt, round(wdt * im.height / im.width)),
                            Image.LANCZOS)
@@ -193,7 +204,17 @@ header h1{font-size:17px;margin:0;font-weight:600}
 header .a{color:var(--mut);font-size:13px}
 main{display:grid;grid-template-columns:1fr 380px;gap:18px;padding:18px;
      align-items:start}
-#view{width:100%;border:1px solid var(--line);border-radius:3px;display:block}
+/* stack on anything narrow -- a side-by-side grid at phone width squeezes the
+   image into a sliver and the panel off the screen */
+@media (max-width:900px){
+  main{grid-template-columns:1fr;padding:12px;gap:12px}
+  header{flex-wrap:wrap;gap:6px 12px;padding:10px 12px}
+  aside{border-top:1px solid var(--line);padding-top:8px}
+}
+#view{width:100%;border:1px solid var(--line);border-radius:3px;display:block;
+      background:#171a1f;min-height:120px}
+#warn{display:none;padding:10px 12px;margin:8px 0;border:1px solid #7a3b3b;
+      border-radius:3px;background:#241a1a;color:#e8b4b4;font-size:13px}
 .bar{height:26px;background:#171a1f;border-radius:2px;position:relative;
      overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;background:var(--acc);opacity:.75}
@@ -222,6 +243,9 @@ input[type=range]{flex:1}
 </header>
 <main>
   <div>
+    <div id="warn">The frames did not load. This build references the JPEGs on
+      disk, so it only works from inside the repository -- rebuild with
+      --embed for a file that opens anywhere.</div>
     <img id="view" alt="street view">
     <div id="ctl">
       <button id="prev">&larr;</button>
@@ -247,6 +271,7 @@ let i=0, timer=null;
 const $=id=>document.getElementById(id);
 $("slider").max=STEPS.length-1;
 
+$("view").onerror=()=>{ $("warn").style.display="block"; };
 function draw(){
   const s=STEPS[i];
   $("view").src=s.img;

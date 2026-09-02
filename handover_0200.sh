@@ -23,7 +23,13 @@
 # ground plane" ran to a numbered list and truncated mid-word, and "describe
 # the frontage" described the truck rather than the buildings.
 set -u
-cd "$(dirname "$0")"
+# ABSOLUTE, not $(dirname "$0"). This script is copied to /tmp before launch --
+# bash reads a script by byte offset, so editing one in place while it runs
+# makes it execute garbage from mid-line -- and from /tmp, dirname is /tmp.
+# That is what killed the 02:00 run: Resolve-Path '.venv-gpu/...' returned
+# empty, Start-Process rejected a null FilePath, and every step failed in two
+# seconds while the log still ended with "all done".
+cd "C:/Users/lumic/Documents/murrayhill"
 mkdir -p logs
 GPU=".venv-gpu/Scripts/python.exe"
 run() { powershell.exe -NoProfile -Command \
@@ -31,7 +37,9 @@ run() { powershell.exe -NoProfile -Command \
    -RedirectStandardOutput '$2' -RedirectStandardError '$2.err'"; }
 rows() { echo $(( $(wc -l < "$1" 2>/dev/null || echo 1) - 1 )); }
 
-while :; do [ "$((10#$(date +%H)))" -eq 2 ] && break; sleep 240; done
+if [ "${WAIT_FOR_0200:-0}" = "1" ]; then
+  while :; do [ "$((10#$(date +%H)))" -eq 2 ] && break; sleep 240; done
+fi
 
 echo "[$(date '+%F %T')] 1/4  scores, 180 strips, placeless"
 run "'tools/sim_vlm_run.py','--src','data/raw/svi_180','--table','results/tables/sim_vlm_180_placeless.csv','--anchors','7','--mast-set','svi_180'" logs/mh_180_rate.log
