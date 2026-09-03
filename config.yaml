@@ -22,7 +22,13 @@ paths:
 # City's main streets dropped for sharing a number with a Manhattan viaduct.
 # A second study area sets its own list or leaves it empty.
 excluded_nodes:
-  viaduct: ["n00144", "n00145", "n00146", "n00147"]
+  # Eye-checked against the renders 2026-09-03: balustrade both kerbs, no
+  # sidewalk, roadway only. n00148/n00149 (east) and n00242/n00244 (west) are
+  # on the same deck and were missed by the lateral test because the deck runs
+  # straight there. n00241 stays usable -- it is UNDER the structure at grade,
+  # with pedestrians and crosswalks -- as do n00240 and n00143 beside the ramp.
+  viaduct: ["n00144", "n00145", "n00146", "n00147", "n00148", "n00149",
+            "n00242", "n00244"]
   # The approach ramp: nodes on the Park Avenue chains that leave the straight
   # avenue and curve toward Grand Central -- measured at 21-44 m lateral to a
   # line fitted through the straight part of each chain, against < 12 m for
