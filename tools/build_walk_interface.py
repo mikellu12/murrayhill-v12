@@ -113,6 +113,8 @@ def main():
     ap.add_argument("--street", required=True,
                     help="one street folder, several separated by commas, or 'all' for every street in --src")
     ap.add_argument("--walk", default=None)
+    ap.add_argument("--exclude", default="",
+                    help="street folders to leave out, comma separated")
     ap.add_argument("--src", type=Path, default=None)
     ap.add_argument("--ratings", type=Path, default=None)
     ap.add_argument("--descriptions", type=Path, default=None)
@@ -137,10 +139,32 @@ def main():
                          "the term maps use")
     ap.add_argument("--embed-width", type=int, default=680)
     ap.add_argument("--quality", type=int, default=62)
+    ap.add_argument("--frames-dir", type=Path, default=None,
+                    help="write the cleaned frames as files beside the page "
+                         "and link them, instead of inlining every one. Over a "
+                         "server the browser then fetches a frame per step, so "
+                         "the page can carry EVERY node rather than every "
+                         "second one -- inlining is what forced the thinning.")
+    ap.add_argument("--both-walks", action="store_true",
+                    help="carry both traversals of each street so the page "
+                         "can switch walking direction. Doubles the frames; "
+                         "meant for the served build, and for a study area "
+                         "whose walks are clean opposites -- London's are "
+                         "not, so it stays off there.")
+    ap.add_argument("--phone", action="store_true",
+                    help="a build a phone can hold: fewer nodes, smaller "
+                         "frames. 25 MB of base64 is not something a phone "
+                         "browser opens comfortably from a message.")
     ap.add_argument("--every", type=int, default=1,
                     help="keep every Nth node, to hold the file small enough "
                          "that a viewer does not truncate it")
     args = ap.parse_args()
+    if args.phone:
+        args.embed_width = min(args.embed_width, 560)
+        args.quality = min(args.quality, 55)
+        args.every = max(args.every, 3)
+        print(f"phone build: every {args.every}, {args.embed_width}px, "
+              f"q{args.quality}")
     if str(args.mast_set).lower() == "none":
         args.mast_set = None
     area = CFG.get("study_area_name", "study area")
@@ -151,19 +175,35 @@ def main():
         names = sorted(d.name for d in src.iterdir() if d.is_dir())
     else:
         names = [t.strip() for t in args.street.split(",") if t.strip()]
+    drop = {t.strip() for t in args.exclude.split(",") if t.strip()}
+    if drop:
+        names = [n for n in names if n not in drop]
+        print(f"excluded: {', '.join(sorted(drop))}")
     missing = [n for n in names if not (src / n).is_dir()]
     if missing:
         sys.exit(f"no such street folder: {', '.join(missing)}")
     print(f"{len(names)} street(s): {', '.join(names)}")
 
     def frames_for(name):
-        """The nodes of one street's first walk, in walking order."""
+        """Each walk of one street as (walk_name, nodes, files) tuples.
+
+        One walk by default, both with --both-walks. The reverse walk is not
+        the same frames backwards -- it is the OTHER render, facing the other
+        way down the street -- so switching direction needs both folders.
+        """
         base = src / name
         walks = ([base / args.walk] if args.walk
                  else sorted(q for q in base.iterdir() if q.is_dir()))
-        if not walks:
-            return None, None
-        w = walks[0]
+        if not args.both_walks:
+            walks = walks[:1]
+        out_walks = []
+        for w in walks:
+            r = _one_walk(w, name)
+            if r is not None:
+                out_walks.append((w.name,) + r)
+        return out_walks
+
+    def _one_walk(w, name):
         files, seqs = {}, {}
         for q in sorted(w.glob("*.jpg")):
             m = NAME.match(q.name)
@@ -171,17 +211,32 @@ def main():
                 files.setdefault(m.group(2), {})[m.group(4) or "F"] = q
                 seqs[m.group(2)] = int(m.group(1))
         if not files:
-            return None, None
+            return None
         nf = ALLNODES[ALLNODES.node_id.isin(files)].copy()
         if not len(nf):
-            return None, None
+            return None
         nf["_seq"] = nf.node_id.map(seqs)
-        seg = nf._seg.value_counts().idxmax()
-        nf = nf[nf._seg == seg].sort_values("_seq")
+        # THE FILENAME SEQUENCE IS THE WALK, wherever it is trustworthy.
+        # The exporter numbers every frame of a walk by its projection along
+        # the travel bearing, both kerbs interleaved correctly -- so when the
+        # seq values are unique, sorting on seq alone IS the walk. Grouping by
+        # chain first (added to stop dropping the smaller corridors) walked
+        # each chain separately, and on Park Avenue and 1st Avenue, whose one
+        # walk spans several chain labels over the same stretch, that meant
+        # walking down the street and teleporting back up to walk it again:
+        # east kerb, west kerb, east. Chain-grouping is now reserved for the
+        # one case that needs it -- duplicated seq values, where the sequence
+        # genuinely restarts per corridor and seq alone would interleave them.
+        if nf._seq.is_unique:
+            nf = nf.sort_values("_seq")
+        else:
+            nf = nf.sort_values(["_seg", "_seq"])
+        seg = ", ".join(str(x) for x in nf._seg.unique())
         if args.every > 1:
             nf = nf.iloc[::args.every]
         print(f"  {name:<26}{w.name:<16}{len(nf):>4} nodes  ({seg})")
         return nf, files
+
 
     # A NODE CAN HAVE TWO FRAMES. A vehicular street is rendered as two 90
     # degree halves, left and right of the direction of travel; a pedestrian
@@ -191,6 +246,16 @@ def main():
     # own numbers. Both halves are composed into one frame instead, seam down
     # the middle, which is the same pairing tools/walk_gif.py makes.
     ALLNODES = pd.read_csv(PROC / "nodes.csv")
+    # usable: False never reaches the page -- not as a step, not as a map dot.
+    # The tag (tools/node_usability.py) marks tunnel interiors, the viaduct
+    # deck, and user-contributed panoramas; a map that shows them anyway
+    # re-includes by picture what the calculations exclude by rule.
+    UNUSABLE = (set(ALLNODES.loc[~ALLNODES.usable.astype(bool), "node_id"])
+                if "usable" in ALLNODES.columns else set())
+    if UNUSABLE:
+        print(f"  {len(UNUSABLE)} nodes tagged unusable: excluded from the "
+              f"walk and the map")
+        ALLNODES = ALLNODES[ALLNODES.usable.astype(bool)].copy()
     ALLNODES["_seg"] = (
         ALLNODES.source_id.astype(str).str.rsplit("_", n=1).str[0]
         if "source_id" in ALLNODES.columns and ALLNODES.source_id.notna().any()
@@ -295,9 +360,9 @@ def main():
             return args.mast_set
         return "svi_180" if side == "F" else "svi_90"
 
-    def one_step(r, files, street_folder):
+    def one_step(r, files, street_folder, wk_tag=""):
         """One node: the frame, composed and erased, plus its street."""
-        rec = _render(r, files)
+        rec = _render(r, files, street_folder, wk_tag)
         rec["sf"] = street_folder
         return rec
 
@@ -373,7 +438,7 @@ def main():
         # something other than what was rated.
         return clean(im, mast_set)
 
-    def _render(r, files):
+    def _render(r, files, street_folder="", wk_tag=""):
         sides = files[r.node_id]
         if args.embed:
             if "L" in sides and "R" in sides:
@@ -397,10 +462,17 @@ def main():
                 wdt = min(args.embed_width, im.width)
                 im = im.resize((wdt, round(wdt * im.height / im.width)),
                                Image.LANCZOS)
-            buf = io.BytesIO()
-            im.save(buf, "JPEG", quality=args.quality, optimize=True)
-            rel = ("data:image/jpeg;base64,"
-                   + base64.b64encode(buf.getvalue()).decode())
+            if args.frames_dir:
+                args.frames_dir.mkdir(parents=True, exist_ok=True)
+                fp = (args.frames_dir /
+                      f"{r.node_id}_{street_folder}_{wk_tag}.jpg")
+                im.save(fp, "JPEG", quality=args.quality, optimize=True)
+                rel = (os.path.relpath(fp, out.parent).replace("\\", "/"))
+            else:
+                buf = io.BytesIO()
+                im.save(buf, "JPEG", quality=args.quality, optimize=True)
+                rel = ("data:image/jpeg;base64,"
+                       + base64.b64encode(buf.getvalue()).decode())
         else:
             rel = os.path.relpath(next(iter(sides.values())),
                                   out.parent).replace("\\", "/")
@@ -416,12 +488,15 @@ def main():
     # so the selector switches street without a page load and without the
     # walk-through becoming a folder of files that have to travel together.
     for name in names:
-        nf, files = frames_for(name)
-        if nf is None:
+        got = frames_for(name)
+        if not got:
             print(f"  {name:<26}skipped: no frames")
             continue
-        for r in nf.itertuples():
-            steps.append(one_step(r, files, name))
+        for wname, nf, files in got:
+            for r in nf.itertuples():
+                st = one_step(r, files, name, wname)
+                st["wk"] = wname
+                steps.append(st)
 
     # THE SAME RAMP AND THE SAME CLIP AS THE MAPS. sim_vlm_maps normalises to
     # the 2nd-98th percentile of the study area's own distribution, so a colour
@@ -539,6 +614,8 @@ def main():
         import geopandas as gpd
         from common import PROJ_CRS
         gdf = gpd.read_file(PROC / "nodes.gpkg").to_crs(PROJ_CRS)
+        if UNUSABLE:
+            gdf = gdf[~gdf.node_id.isin(UNUSABLE)].copy()
         mser = (ca.groupby("node_id")[mcol].mean()
                 if ca is not None and mcol in ca.columns else None)
         xs_, ys_ = gdf.geometry.x.to_numpy(), gdf.geometry.y.to_numpy()
@@ -579,6 +656,15 @@ def main():
                                                          side="right"))
                                    / len(sorted_M) * 100))
                 NODEDATA[nid] = rec
+        # A SCALE BAR IN METRES, computed from the projection rather than
+        # guessed: sc is map-units per metre, so a round distance that fills
+        # about a quarter of the frame is 1/2/5 x 10^k below that quarter.
+        raw = (1000.0 * 0.28) / sc
+        mag = 10 ** int(np.floor(np.log10(max(raw, 1.0))))
+        nice = next((m * mag for m in (5, 2, 1) if m * mag <= raw), mag)
+        MAP["bar"] = {"len": round(float(nice * sc), 1),
+                      "label": (f"{int(nice)} m" if nice < 1000
+                                else f"{nice/1000:g} km")}
         MAP["data"] = NODEDATA
         print(f"  locator map: {len(MAP['nodes'])} nodes, "
               f"{len(NODEDATA)} with scores")
@@ -620,10 +706,11 @@ def main():
     # truncated file simply ends early: every frame before the cut still works.
     frag = []
     for st in steps:
-        meta = json.dumps({k: st[k] for k in ("node", "street", "r", "d", "c", "k", "kc", "pc", "sf", "kf", "mx", "my")})
-        frag.append('<img class="f" data-meta="'
+        meta = json.dumps({k: st[k] for k in ("node", "street", "r", "d", "c", "k", "kc", "pc", "sf", "kf", "mx", "my", "wk")})
+        frag.append('<i class="f" data-meta="'
                     + html.escape(meta, quote=True)
-                    + '" src="' + st["img"] + '" alt="">')
+                    + '" data-src="' + html.escape(st["img"], quote=True)
+                    + '"></i>')
     page = TEMPLATE.replace("__FRAMES__", "\n".join(frag))
     page = page.replace("__TOTAL__", str(len(steps)))
     page = page.replace("__MCOL__", json.dumps(mcol))
@@ -648,6 +735,11 @@ def main():
 
 TEMPLATE = r"""<!doctype html>
 <meta charset="utf-8">
+<!-- Without this a phone lays the page out at 980px and then zooms out to
+     fit, so every control is a third of its intended size and the ratings are
+     unreadable. It is one line and it is the whole difference between the
+     page working on a phone and not. -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>__TITLE__</title>
 <style>
 :root{--bg:#0e0f12;--fg:#e8e6e1;--mut:#9a9aa2;--line:#23262b;--acc:#5fbf6a}
@@ -738,7 +830,6 @@ h2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;
      margin:9px 0 3px}
 .grp:first-child{margin-top:0}
 .gdot{width:8px;height:8px;border-radius:2px;flex:none}
-.row span.inv{color:#d4726a}
 #fields.off{visibility:hidden}
 #mapwrap{position:absolute;inset:0;display:flex;flex-direction:column;
          align-items:center;justify-content:flex-start;gap:4px}
@@ -757,6 +848,7 @@ h2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;
 #ctl{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;
      align-items:center;margin-top:10px}
 #btns{display:flex;gap:8px}
+#dir{white-space:nowrap}
 /* A SCALE BAR, not a full-width colourbar. It does the job the 200 m ruler
    does on the maps: small, in the corner, there when you look for it and out
    of the way when you are not. Spanning the profile made the legend louder
@@ -782,7 +874,11 @@ h2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;
 button{background:#171a1f;color:var(--fg);border:1px solid var(--line);
        border-radius:3px;padding:6px 12px;font-size:13px;cursor:pointer}
 button:hover{border-color:#3a3f46}
-#pos{color:var(--mut);font-variant-numeric:tabular-nums}
+/* NEVER WRAPS, AND NEVER CHANGES WIDTH. "9 / 16" fits on one line and
+   "10 / 16" did not, so the counter wrapped, the control row grew a line, and
+   every node with a two-digit index pushed the page down a step. */
+#pos{color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap;
+     min-width:7ch;text-align:right}
 input[type=range]{display:block}
 .M{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
 /* The composite sits under the view, not in the sidebar: three numbers and a
@@ -807,6 +903,53 @@ input[type=range]{display:block}
 @media (max-width:900px){#foot{grid-template-columns:1fr;gap:12px}}
 .none{color:#6b7078;font-style:italic}
 .note{color:var(--mut);font-size:11px;line-height:1.45;margin:-2px 0 4px}
+
+/* ---- PHONE ---------------------------------------------------------------
+   LAST IN THE FILE, and that is the whole point. These rules first sat above
+   the base layout, and a media query adds no specificity, so every later #map
+   and #pane rule quietly overrode them: the map kept height:100% from the
+   desktop rule and rendered 480x150 inside a 180px box, which is why it stayed
+   small however large it was told to be. Overrides go last.
+
+   The page scrolls vertically on a phone and that is the right answer -- a
+   panorama, ten ratings and four paragraphs cannot share a 390px screen at a
+   readable size. What it must NOT do is scroll sideways: horizontal panning
+   fights the draggable profile and makes the whole page feel loose. */
+@media (max-width:900px){
+  html,body{height:auto;overflow-y:auto;overflow-x:hidden;
+            max-width:100%;overscroll-behavior-x:none}
+  body{touch-action:pan-y}
+  main{grid-template-columns:1fr;padding:10px;gap:14px;min-height:0;
+       max-width:100%}
+  #left,aside,#foot,#pane,#fields,#mapwrap,#dims,#dist{min-width:0;
+       max-width:100%}
+  #left{display:block}
+  #view{flex:none;height:auto;width:100%}
+  aside{overflow:visible;display:block;padding-right:0;
+        border-top:1px solid var(--line);padding-top:8px}
+  #qual{overflow:visible;max-height:none;flex:none}
+  #pane{height:auto !important;min-height:0;aspect-ratio:auto}
+  #fields{height:auto;overflow:visible}
+  #fields.off{display:none;visibility:visible}
+  #mapwrap{display:block;position:static;visibility:visible}
+  #mapwrap.off{display:none}
+  #map{width:100%;height:auto !important;aspect-ratio:1/1;
+       max-height:none !important;flex:none}
+  #maphint{margin-top:8px;text-align:left}
+  #foot{grid-template-columns:1fr;gap:14px}
+  #dist svg{height:64px}
+  header{flex-wrap:wrap;gap:4px 12px;padding:10px 12px}
+  #pick{max-width:100%}
+  button{padding:10px 14px;font-size:14px}
+  #ctl{gap:6px 8px}
+  #sl{height:26px}
+  #strip{top:6px;height:14px}
+  #mark{height:26px;width:4px}
+  .q dd{font-size:13.5px;line-height:1.45}
+  .row{grid-template-columns:minmax(96px,42%) 1fr 26px;gap:6px}
+  .row span{overflow-wrap:anywhere}
+  #legend{flex-wrap:wrap}
+}
 </style>
 <header>
   <select id="pick" aria-label="street"></select><span class="a">__AREA__</span>
@@ -823,6 +966,7 @@ input[type=range]{display:block}
         <button id="prev">&larr;</button>
         <button id="play">play</button>
         <button id="next">&rarr;</button>
+        <button id="dir" hidden title="walk the street the other way"></button>
       </div>
       <div id="sl" tabindex="0" role="slider" aria-label="position along the walk">
         <div id="strip"></div>
@@ -883,7 +1027,7 @@ const DIST=__DIST__, TERMRAMP=__TERMRAMP__, MAP=__MAP__;
 // finished parsing. Order matters: interface and logic first, payload last, so
 // a viewer that truncates a large file cuts only frames off the end. Whatever
 // arrived still works; nothing above the cut depends on what is below it.
-let STEPS=[], ALL=[], CUR="";
+let STEPS=[], ALL=[], CUR="", CURWK="";
 let i=0, timer=null;
 const $=id=>document.getElementById(id);
 const TOTAL=__TOTAL__;
@@ -964,7 +1108,7 @@ function paint(s, scoresOnly){
       // interpolated median still drives M -- the display rounds, the
       // calculation does not.
       const r=Math.max(1,Math.min(7,Math.round(v)));
-      return `<div class="row"><span class="${inv?"inv":""}"
+      return `<div class="row"><span
         title="${inv?"enters its term inverted: a higher rung lowers it":""}"
         >${f.replace(/_/g," ")}</span>
         <div class="bar"><i style="width:${(r-1)/6*100}%"></i></div>
@@ -988,8 +1132,20 @@ $("next").onclick=()=>go(i+1);
 // switching street first if the node belongs to another one -- and nodes that
 // are not in the file are drawn anyway, because a map showing only the streets
 // that happen to be loaded misrepresents the study area.
+let NEAR = 0;
 function drawMap(){
   if(!MAP.nodes || !MAP.nodes.length){ $("tabM").style.display="none"; return; }
+  // "near enough to be the same place": a couple of steps of the walk, taken
+  // from the actual spacing between consecutive frames rather than guessed, so
+  // it holds for either city and any --every.
+  const gaps = [];
+  for(let j = 1; j < ALL.length; j++){
+    const a = ALL[j-1], b = ALL[j];
+    if(a.sf === b.sf && a.mx != null && b.mx != null)
+      gaps.push(Math.hypot(b.mx - a.mx, b.my - a.my));
+  }
+  gaps.sort((x,y)=>x-y);
+  NEAR = gaps.length ? gaps[Math.floor(gaps.length/2)] * 1.6 : 40;
   const inFile = new Set(ALL.map(s=>s.node));
   // every node with scores is clickable; the ones whose frames are in this
   // file are drawn larger, because those are the ones that also show a view
@@ -999,7 +1155,32 @@ function drawMap(){
       cy="${y}" r="${has?7:5}" fill="${c}" opacity="${has?1:.5}"
       ><title>${id}${has?"":" (scores only)"}</title></circle>`;
   }).join("");
-  $("map").innerHTML = dots +
+  // North is straight up: the projection maps northing to screen-y inverted,
+  // so the compass is a fact about the drawing rather than a decoration. The
+  // ramp legend repeats the scale bar because the map can be read on its own.
+  // North is straight up: the projection maps northing to screen-y inverted,
+  // so the compass is a fact about the drawing, not a decoration. The scale is
+  // in metres -- the colour scale already sits under the profile, and a map
+  // wants to say how far, not how green.
+  const b = MAP.bar || {len: 200, label: ""};
+  const x0 = 28, yb = 962;
+  const chrome =
+    `<g id="compass" style="pointer-events:none" opacity=".85">
+       <path d="M952,26 L972,80 L952,66 L932,80 Z" fill="var(--fg)"/>
+       <text x="952" y="116" fill="var(--fg)" font-size="40"
+             text-anchor="middle" font-family="inherit">N</text>
+     </g>
+     <g id="mscale" style="pointer-events:none" font-family="inherit">
+       <line x1="${x0}" y1="${yb}" x2="${x0 + b.len}" y2="${yb}"
+             stroke="var(--fg)" stroke-width="5" opacity=".8"/>
+       <line x1="${x0}" y1="${yb-11}" x2="${x0}" y2="${yb+11}"
+             stroke="var(--fg)" stroke-width="5" opacity=".8"/>
+       <line x1="${x0 + b.len}" y1="${yb-11}" x2="${x0 + b.len}" y2="${yb+11}"
+             stroke="var(--fg)" stroke-width="5" opacity=".8"/>
+       <text x="${x0 + b.len/2}" y="${yb-20}" fill="var(--mut)" font-size="34"
+             text-anchor="middle">${b.label}</text>
+     </g>`;
+  $("map").innerHTML = chrome + dots +
     `<g id="here" style="pointer-events:none">
        <circle r="30" fill="#3aa0ff" opacity=".16"/>
        <circle r="30" fill="none" stroke="#0b1520" stroke-width="9"/>
@@ -1016,7 +1197,29 @@ function jumpTo(id){
   let k = STEPS.findIndex(s=>s.node===id);
   if(k >= 0){ go(k); return; }
   const other = ALL.find(s=>s.node===id);          // another street in the file
-  if(other){ pickStreet(other.sf); go(STEPS.findIndex(s=>s.node===id)); return; }
+  if(other){ pickStreet(other.sf, other.wk);
+             go(STEPS.findIndex(s=>s.node===id)); return; }
+
+  // NEAREST VIEW, not a dead end. The file holds every Nth node, so most of
+  // the dots on a loaded street have no frame of their own -- and clicking one
+  // used to drop into scores-only on a street that is right there in the file,
+  // which reads as broken. Jump to the closest node that does have a view, if
+  // one is near enough to be the same place; only somewhere genuinely not in
+  // the file falls back to scores.
+  const at = MAP.nodes.find(n=>n[0]===id);
+  if(at){
+    let best = null, bd = Infinity;
+    ALL.forEach(st=>{
+      if(st.mx==null) return;
+      const d = Math.hypot(st.mx - at[1], st.my - at[2]);
+      if(d < bd){ bd = d; best = st; }
+    });
+    if(best && bd <= NEAR){
+      if(best.sf !== CUR || best.wk !== CURWK) pickStreet(best.sf, best.wk);
+      go(STEPS.indexOf(best));
+      return;
+    }
+  }
   showScoresOnly(id);
 }
 
@@ -1094,6 +1297,24 @@ $("sl").addEventListener("pointerdown",e=>{
   $("sl").setPointerCapture(e.pointerId); seek(e);
 });
 $("sl").addEventListener("pointermove",e=>{ if(e.buttons&1) seek(e); });
+$("dir").onclick=()=>{
+  const wks=walksOf(CUR);
+  if(wks.length<2) return;
+  const other=wks[(wks.indexOf(CURWK)+1)%wks.length];
+  const was=STEPS[i];
+  pickStreet(CUR, other);
+  // same node in the other direction -- and when --every sampled the two
+  // walks onto different node subsets, the nearest position instead of the
+  // start of the street
+  let k=STEPS.findIndex(s=>s.node===(was&&was.node));
+  if(k<0 && was && was.mx!=null){
+    let bd=Infinity;
+    STEPS.forEach((s,j)=>{ if(s.mx!=null){
+      const d=Math.hypot(s.mx-was.mx, s.my-was.my);
+      if(d<bd){ bd=d; k=j; } }});
+  }
+  if(k>=0) go(k);
+};
 $("play").onclick=function(){
   if(timer){clearInterval(timer);timer=null;this.textContent="play";}
   else{timer=setInterval(()=>go(i+1),900);this.textContent="pause";}
@@ -1103,11 +1324,11 @@ addEventListener("keydown",e=>{
   if(e.key==="ArrowRight")go(i+1);
 });
 function start(){
-  ALL=[...document.querySelectorAll("#frames img.f")].map(el=>{
+  ALL=[...document.querySelectorAll("#frames .f")].map(el=>{
     let m={}; try{ m=JSON.parse(el.dataset.meta||"{}"); }catch(e){}
-    return {img:el.getAttribute("src"), node:m.node||"", street:m.street||"",
+    return {img:el.dataset.src, node:m.node||"", street:m.street||"",
             r:m.r||{}, d:m.d||{}, c:m.c||{}, k:m.k||"#3a3f46", kc:m.kc||{}, pc:m.pc, sf:m.sf||"", kf:m.kf||"#6b7078",
-          mx:m.mx, my:m.my};
+          mx:m.mx, my:m.my, wk:m.wk||""};
   });
   // one <option> per street, in the order the build wrote them
   const seen=[];
@@ -1216,9 +1437,33 @@ function setTab(mapOn){
   if(mapOn) markMap();
 }
 
-function pickStreet(name){
+// THE REVERSE WALK IS THE OTHER RENDER, not the same frames backwards:
+// facing the other way down the street is a different set of images. The
+// button shows the direction you are heading, read off the frame filenames'
+// cardinal, and only appears when this file carries both traversals.
+function walksOf(name){
+  const seen=[];
+  ALL.forEach(s=>{ if(s.sf===name && !seen.includes(s.wk)) seen.push(s.wk); });
+  return seen;
+}
+function headingOf(steps){
+  // the cardinal letter the exporter put in every filename of this walk
+  const m=(steps[0]||{}).img && steps[0].img.match(/_([NSEW])(_[LRF])?\.jpg/);
+  if(m) return m[1];
+  const t={east_to_west:"W", west_to_east:"E",
+           north_to_south:"S", south_to_north:"N"}[ (steps[0]||{}).wk ];
+  return t||"";
+}
+function pickStreet(name, wk){
   CUR=name; $("pick").value=name;
-  STEPS=ALL.filter(s=>s.sf===name);
+  const wks=walksOf(name);
+  CURWK = (wk && wks.includes(wk)) ? wk : wks[0]||"";
+  STEPS=ALL.filter(s=>s.sf===name && s.wk===CURWK);
+  const d=$("dir");
+  if(wks.length>1){
+    d.hidden=false;
+    d.textContent="heading "+headingOf(STEPS)+"  \u21c4";
+  } else d.hidden=true;
   i=0;
   if(STEPS.length>1){
     const n=STEPS.length;

@@ -187,3 +187,7 @@ logs/
 # rebuildable from OSM with the tools already here.
 **/processed/basemap_16.gpkg
 **/processed/context_1600m.gpkg
+
+# hourly-cost tables, snapshotted before risky operations; local only
+backups/
+results/tables/*.pre_parkave

@@ -102,11 +102,14 @@ TUNNEL_MAX_MASS = 0.78
 # separate these four within Park Avenue but collides with ordinary nodes
 # whose sidewalk is merely occluded by traffic.
 #
-# node_id is POSITIONAL -- see CLAUDE.md. Rebuild the frame and these ids
+# node_id is POSITIONAL. Rebuild the frame and these ids
 # point somewhere else, so this list must be re-checked by eye, not trusted.
 # From config, because node IDs are positional and a hardcoded set silently
 # follows the code into another study area. See config.yaml: excluded_nodes.
-VIADUCT_NODES = set(CFG.get("excluded_nodes", {}).get("viaduct", []))
+# every named exclusion list in config counts, not only "viaduct" -- the
+# approach ramp got its own list and silently did not exist to this set
+VIADUCT_NODES = set().union(*(v for v in
+    CFG.get("excluded_nodes", {}).values())) if CFG.get("excluded_nodes")     else set()
 
 
 def _tunnel_nodes(node_ids) -> dict[str, tuple[float, float]]:
@@ -215,6 +218,10 @@ def main():
                     help="bare sequence numbers instead of zero padded")
     ap.add_argument("--keep-tunnels", action="store_true",
                     help="keep tunnel interiors and viaduct deck nodes")
+    ap.add_argument("--only", default="",
+                    help="render only these street folders, comma separated; "
+                         "for re-rendering one street after a fix rather than "
+                         "the whole frame")
     ap.add_argument("--limit", type=int, default=None,
                     help="only the first N streets, for a quick check")
     ap.add_argument("--no-segments", action="store_true",
@@ -256,9 +263,32 @@ def main():
     by_node = {n: g for n, g in manifest.groupby("node_id")}
     written, missing, summary = 0, [], []
 
+    only = {t.strip() for t in args.only.split(",") if t.strip()}
+    if only:
+        streets = [s_ for s_ in streets if s_ in only]
+        print(f"rendering only: {', '.join(streets)}")
     for street in tqdm(streets, desc="streets", mininterval=1.0):
         g = info[info.folder == street]
-        axis = _street_axis(g._e.to_numpy(), g._n.to_numpy())
+        # FIT ON ONE CHAIN, NOT THE WHOLE FOLDER. The docstring below assumes a
+        # folder is one straight street, and for eighteen of nineteen it is --
+        # pooled and per-chain axes agree to within a degree. Park Avenue's
+        # tunnel segment is four disjoint chains spread over 970 by 690 m, and
+        # pooling them returned 99.5 degrees against the chains' own 28.5, so
+        # every one of its 57 frames was rendered facing across the avenue
+        # instead of along it. The dominant chain is the street; the others are
+        # the same street resumed after an interruption, and are parallel to it.
+        if "chain" in g.columns and g.chain.notna().any():
+            dom = g.chain.value_counts().idxmax()
+            gm = g[g.chain == dom]
+            axis = _street_axis(gm._e.to_numpy(), gm._n.to_numpy())
+            pooled = _street_axis(g._e.to_numpy(), g._n.to_numpy())
+            off = min(abs(pooled - axis), 180 - abs(pooled - axis))
+            if off > 5:
+                print(f"  {street}: chains disagree with the pooled fit by "
+                      f"{off:.1f} deg -- using the dominant chain "
+                      f"({axis:.1f}, pooled was {pooled:.1f})")
+        else:
+            axis = _street_axis(g._e.to_numpy(), g._n.to_numpy())
 
         for bearing, walk in _walks(axis):
             # Along-street distance measured in the direction of travel,

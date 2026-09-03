@@ -31,6 +31,7 @@ sys.path.insert(0, str(HERE.parent / "src"))
 sys.path.insert(0, str(HERE))
 from common import CFG, PROC, RES, banner, bin_mask
 from sim_fields import FIELDS
+from sim_readout import prune_once, interpolated_median
 from half_target import walk_bearings, SIDE_OFF
 
 RATINGS = list(FIELDS)
@@ -43,10 +44,49 @@ def main():
     sim_compute.main()
 
 
-def write_split(sc):
-    """Split a computed frame into the two study tables and write them."""
+def write_split(sc, dropped=None):
+    """Split a computed frame into the two study tables and write them.
+
+    `dropped` carries the raw rating rows of nodes tagged usable: False. They
+    are OBSERVATIONS -- the model rated the frame -- so they appear in
+    vlm_observations with the tag, and never in vlm_calculations: a tourist
+    bus interior must be visible in the record and invisible to the score.
+    """
     banner("split the run into observed and derived")
     sc = sc.copy()
+    sc["usable"] = True
+    if dropped is not None and len(dropped):
+        dropped = dropped.copy()
+        dropped["usable"] = False
+        sc = pd.concat([sc, dropped], ignore_index=True)
+    reason_map = {}
+    npath = PROC / "nodes.csv"
+    if npath.exists():
+        nu = pd.read_csv(npath)
+        if "exclude_reason" in nu.columns:
+            reason_map = dict(zip(nu.node_id, nu.exclude_reason.fillna("")))
+    sc["exclude_reason"] = sc.node_id.map(reason_map).fillna("")
+
+    # THE MEDIAN, NOT JUST round(EV) AND argmax. The bare column used to be the
+    # rounded expected value with nothing in its name saying so -- a reader
+    # opening the file could not tell it apart from a raw survey answer.
+    # interpolated_median(prune_once(p)) is what the study actually builds M
+    # from (sim_compute.rung); it belongs in the table that claims to hold
+    # every observation, not only inside the function that consumes it once
+    # and discards it.
+    # median_round is what the interface displays and median is what M is
+    # built from; they lead, because the reader should meet the readout the
+    # study uses before its alternatives. Both EV columns are gone -- round(EV)
+    # was the deprecated readout and keeping it "for continuity" next to the
+    # median just invited picking the wrong column.
+    for f in RATINGS:
+        pcols = [f"{f}_p{k}" for k in range(1, 8)]
+        if all(c in sc.columns for c in pcols):
+            P = sc[pcols].to_numpy(float)
+            P = P / P.sum(axis=1, keepdims=True)
+            med = interpolated_median(prune_once(P))
+            sc[f + "_median"] = med
+            sc[f + "_median_round"] = np.clip(np.round(med), 1, 7).astype(int)
 
     # Both of the joins below are Murray Hill artefacts: metrics.csv comes from
     # s05's footprint geometry and azimuth_profiles.npz from s03's
@@ -109,7 +149,11 @@ def write_split(sc):
 def _write(sc):
     """The split itself, once the optional geometry columns are present."""
     # ---- observed ---------------------------------------------------------
-    obs = sc[ID + ["osm_name", "typology", "face_id"] + RATINGS
+    lead = [c for f in RATINGS
+            for c in (f + "_median_round", f + "_median")
+            if c in sc.columns]
+    obs = sc[ID + ["usable", "exclude_reason",
+                   "osm_name", "typology", "face_id"] + lead
              + ["arc_vegetation", "arc_sky", "arc_building",
                 "H_m", "W_facade", "HW_facade", "HW_effective", "HW_source",
                 "GVI", "VEI", "SVF_band"]].copy()
@@ -123,8 +167,7 @@ def _write(sc):
     # belong here rather than in the calculations. Placed last so opening the
     # file shows the ratings and the geometry without scrolling past 90
     # columns nobody reads day to day.
-    tail = ([f + "_ev" for f in RATINGS]
-            + [f + "_argmax" for f in RATINGS]
+    tail = ([f + "_argmax" for f in RATINGS]
             + [f"{f}_p{k}" for f in RATINGS for k in range(1, 8)])
     have = [c for c in tail if c in sc.columns]
     obs = pd.concat([obs, sc[have]], axis=1)
@@ -144,6 +187,9 @@ def _write(sc):
               f"({n/len(obs)*100:.1f}%) -- UNVALIDATED, see the docstring")
 
     obs = obs.sort_values(["osm_name", "walk", "seq", "side"])
+    print(f"  readouts per field, in order: <field>_median_round (the rung "
+          f"the interface shows), <field>_median (what M is built from), "
+          f"then <field>_argmax and the full <field>_p1.._p7 distribution")
 
     # ---- derived ----------------------------------------------------------
     # The alternative calibrations and the un-penalised score ride along.
@@ -156,6 +202,7 @@ def _write(sc):
     EXTRA = [c for c in ("M_local", "M_noA", "M_local_noA",
                          "I_local", "D_local", "Omega_local")
              if c in sc.columns]
+    sc = sc[sc.usable].copy()   # calculations never see an unusable frame
     calc = sc[ID + ["nat_built", "GVI_eye", "GMI", "V_sign", "SVF", "SFV",
                     "V_pave", "GFAPI", "IAS", "I_raw", "I", "Y", "D_raw", "D",
                     "HW_effective", "Omega", "a", "b", "c", "M"]
@@ -194,7 +241,8 @@ def _write(sc):
 
     print(f"vlm_observations.csv        {len(obs):>5} rows x {obs.shape[1]:>2} cols")
     print(f"  identity            {', '.join(ID)}")
-    print(f"  VLM ratings, 1-7    {', '.join(RATINGS)}")
+    print(f"  VLM ratings, 1-7    <field>_median_round / _median for: "
+          f"{', '.join(RATINGS)}")
     print(f"  measured over arc   arc_vegetation, arc_sky, arc_building")
     print(f"  canyon geometry     H_m, W_facade, HW_facade, HW_effective, HW_source")
     print(f"  node-level context  node_GVI, node_VEI, node_SVF_band")

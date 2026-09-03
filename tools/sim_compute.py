@@ -68,6 +68,32 @@ def main():
     print(f"ratings: {tbl}")
     d = pd.read_csv(tbl)
 
+    # NODES TAGGED usable: False ARE OUT, before anything is computed. The tag
+    # lives on nodes.csv (tools/node_usability.py): tunnel interiors and the
+    # viaduct deck for Murray Hill, user-contributed panoramas for London --
+    # tourist buses and interiors wearing a street's coordinates. Rendering
+    # already skips most of these, but a table built earlier, or a study area
+    # whose renders predate the tag, can still carry their rows, and a
+    # calibration that includes a bus interior moves every threshold.
+    dropped_raw = None
+    npath = PROC / "nodes.csv"
+    if npath.exists():
+        nu = pd.read_csv(npath)
+        if "usable" in nu.columns:
+            bad = set(nu.loc[~nu.usable.astype(bool), "node_id"])
+            if "node_id" not in d.columns:
+                d["node_id"] = d.file.astype(str).str.extract(r"(n\d+)")[0]
+            before = len(d)
+            # kept aside, not discarded: the ratings of an unusable frame are
+            # still observations and belong in vlm_observations with the tag,
+            # they just must not touch the calibration or the calculations
+            dropped_raw = d[d.node_id.isin(bad)].copy()
+            d = d[~d.node_id.isin(bad)].copy()
+            if before - len(d):
+                print(f"set aside {before - len(d)} rows on "
+                      f"{len(bad)} unusable nodes (tagged in "
+                      f"vlm_observations, absent from vlm_calculations)")
+
     # A study area without building footprints has no H/W, and therefore no
     # metrics.csv. Those columns are filled with NaN rather than skipped, so
     # the code below is one path: regime_exponents already falls back to the
@@ -240,7 +266,7 @@ def main():
     # split on the frame in memory, so the names in the results folder are
     # the names the study uses.
     import sim_export
-    sim_export.write_split(d)
+    sim_export.write_split(d, dropped=dropped_raw)
 
 
 if __name__ == "__main__":

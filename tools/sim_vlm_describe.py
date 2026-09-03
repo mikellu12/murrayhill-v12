@@ -81,12 +81,34 @@ QUESTIONS = {
 
 
 def _write(rows, prior, table):
-    """The new rows plus whatever the table already held, never just the new."""
+    """The new rows plus whatever the table already held, never just the new.
+
+    THE TABLE CANNOT SHRINK. Hours of generation live in this file and it has
+    been destroyed twice -- once by a restarted stage rewriting from row one,
+    once by an exit path that skipped the merge. Both had the same signature:
+    a write smaller than the file it replaced. So that signature is now
+    checked at the last moment before the bytes move, where no bug upstream
+    can argue with it: a shrinking write is diverted to <table>.rej and the
+    table is left alone. Shrinking on purpose (dropping rows) is done by the
+    tools that own the table, not through this function.
+    """
     d = pd.DataFrame(rows)
     if prior is not None and len(prior):
         d = pd.concat([prior, d], ignore_index=True)
         d = d.drop_duplicates(subset="file", keep="last")
     table.parent.mkdir(parents=True, exist_ok=True)
+    if table.exists():
+        try:
+            existing = sum(1 for _ in open(table, encoding="utf-8")) - 1
+        except OSError:
+            existing = 0
+        if len(d) < existing:
+            rej = table.with_suffix(table.suffix + ".rej")
+            d.to_csv(rej, index=False)
+            print(f"REFUSED to shrink {table.name}: {existing} rows on disk, "
+                  f"{len(d)} about to be written. New rows saved to "
+                  f"{rej.name}; the table is untouched.")
+            return d
     d.to_csv(table, index=False)
     return d
 
@@ -226,10 +248,15 @@ def main():
             table.parent.mkdir(parents=True, exist_ok=True)
             _write(out, prior, table)
 
-    t = args.table or (RES / "tables" / "vlm_descriptions.csv")
-    d = pd.DataFrame(out)
-    d.to_csv(t, index=False)
-    print(f"\nwrote {t}  ({len(d)} frames x {len(ask)} questions)")
+    # THE FINAL WRITE GOES THROUGH _write TOO. This used to be a bare
+    # to_csv of the run's own rows, so every run ENDED by discarding
+    # whatever the table already held -- the checkpoints merged with
+    # prior and the last write threw prior away. It destroyed a
+    # 1,254-row table twice before being caught: the resume machinery
+    # is worthless if the exit path does not use it.
+    d = _write(out, prior, table)
+    print(f"\nwrote {table}  ({len(d)} rows now in the table)")
+
     if "M" in d.columns and d.M.notna().any():
         lo = d.nsmallest(1, "M").iloc[0]
         hi = d.nlargest(1, "M").iloc[0]

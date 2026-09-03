@@ -23,6 +23,12 @@ paths:
 # A second study area sets its own list or leaves it empty.
 excluded_nodes:
   viaduct: ["n00144", "n00145", "n00146", "n00147"]
+  # The approach ramp: nodes on the Park Avenue chains that leave the straight
+  # avenue and curve toward Grand Central -- measured at 21-44 m lateral to a
+  # line fitted through the straight part of each chain, against < 12 m for
+  # every other node. Structurally they are the bridge approach, not the
+  # avenue. Same caveat as above: node ids are positional to THIS frame.
+  viaduct_approach: ["n00150", "n00151", "n00243", "n00245"]
 
 # A place name to put in every rating prompt, or null for none.
 #
