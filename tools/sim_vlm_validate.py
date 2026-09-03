@@ -18,6 +18,7 @@ far too narrow.
 
     .venv/Scripts/python tools/sim_vlm_validate.py
 """
+import argparse
 import sys
 from pathlib import Path
 
@@ -63,8 +64,20 @@ def spearman_ci(x, y, groups, n=3000):
 
 
 def main():
+    # THE TABLE IS AN ARGUMENT. Two copies of this tool existed, identical
+    # except that one named sim_vlm.csv and the other sim_vlm_v2.csv in the
+    # code -- and by the time anyone looked, the study had moved on to a third
+    # table and both were validating runs nobody used. A --table argument is
+    # the reason a second copy is never needed again.
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--table", type=Path,
+                    default=RES / "tables" / "sim_vlm_180_placeless.csv",
+                    help="ratings table to validate; default is the current run")
+    ap.add_argument("--out", type=Path, default=None)
+    args = ap.parse_args()
     banner("VLM ratings against the measured arc")
-    d = pd.read_csv(RES / "tables" / "sim_vlm.csv")
+    print(f"ratings: {args.table}")
+    d = pd.read_csv(args.table)
     z = np.load(PROC / "azimuth_profiles.npz")
     prof = {k: z[k] for k in z.files}
     bear = walk_bearings()
@@ -134,7 +147,7 @@ def main():
         s = d.groupby("side")[f].mean()
         print(f"    {f:<23}L {s.get('L', np.nan):.2f}   R {s.get('R', np.nan):.2f}")
 
-    out = RES / "tables" / "sim_vlm_validation.csv"
+    out = args.out or (RES / "tables" / "sim_vlm_validation.csv")
     pd.DataFrame(rows).to_csv(out, index=False)
     d.to_csv(RES / "tables" / "sim_vlm_with_arcs.csv", index=False)
     print(f"\nwrote {out}")

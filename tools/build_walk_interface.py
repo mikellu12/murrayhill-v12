@@ -184,6 +184,42 @@ def main():
         sys.exit(f"no such street folder: {', '.join(missing)}")
     print(f"{len(names)} street(s): {', '.join(names)}")
 
+    def _dedupe_runs(g):
+        """One node per position along a run; the rest marked auxiliary.
+
+        Parallel service-road strips sit beside the main line at the same
+        block position, and walking them in sequence hops across the street.
+        Grouping by proximity along the run and keeping the node nearest its
+        centre line leaves one node per position, in order.
+        """
+        if len(g) < 8:
+            return g
+        import numpy as _np
+        lat0 = float(g.lat.mean())
+        _x = (g.lon - g.lon.mean()).to_numpy() * 111320 * _np.cos(_np.radians(lat0))
+        _y = (g.lat - g.lat.mean()).to_numpy() * 110540
+        _v = _np.linalg.svd(_np.c_[_x, _y], full_matrices=False)[2][0]
+        along = _x * _v[0] + _y * _v[1]
+        latr = _x * (-_v[1]) + _y * _v[0]
+        if latr.max() - latr.min() <= 8.0:
+            return g
+        gap = 10.0
+        order = _np.argsort(along)
+        keep = _np.zeros(len(g), dtype=bool)
+        grp = [order[0]]
+        for k in range(1, len(order)):
+            if along[order[k]] - along[grp[-1]] > gap:
+                arr = _np.array(grp)
+                keep[arr[_np.argmin(_np.abs(latr[arr]))]] = True
+                grp = []
+            grp.append(order[k])
+        if grp:
+            arr = _np.array(grp)
+            keep[arr[_np.argmin(_np.abs(latr[arr]))]] = True
+        g = g.copy()
+        g.loc[g.index[~keep], "auxflag"] = 1
+        return g
+
     def frames_for(name):
         """Each walk of one street as (walk_name, nodes, files) tuples.
 
@@ -215,7 +251,7 @@ def main():
         nf = ALLNODES[ALLNODES.node_id.isin(files)].copy()
         if not len(nf):
             return None
-        nf["_seq"] = nf.node_id.map(seqs)
+        nf["fseq"] = nf.node_id.map(seqs)
         # THE FILENAME SEQUENCE IS THE WALK, wherever it is trustworthy.
         # The exporter numbers every frame of a walk by its projection along
         # the travel bearing, both kerbs interleaved correctly -- so when the
@@ -227,11 +263,43 @@ def main():
         # east kerb, west kerb, east. Chain-grouping is now reserved for the
         # one case that needs it -- duplicated seq values, where the sequence
         # genuinely restarts per corridor and seq alone would interleave them.
-        if nf._seq.is_unique:
-            nf = nf.sort_values("_seq")
+        if nf.fseq.is_unique:
+            nf = nf.sort_values("fseq")
         else:
-            nf = nf.sort_values(["_seg", "_seq"])
-        seg = ", ".join(str(x) for x in nf._seg.unique())
+            nf = nf.sort_values(["segname", "fseq"])
+        # ONE NODE PER POSITION ALONG THE STREET, not one run per street.
+        #
+        # An avenue's folder can carry parallel runs: the main line of nodes
+        # plus strips on the service roads either side. Walked in sequence the
+        # view hopped across the street and back, and the arrow pointed at the
+        # hop -- so the first fix kept only the largest run. That was wrong
+        # here: on 1st Avenue the main run STOPS at the tunnel portal and the
+        # northern 120 m exists only as the two flanking runs, so dropping
+        # them deleted the north end from the walk entirely.
+        #
+        # The stride instead takes ONE node per position along the street --
+        # the one nearest the street's own centre line -- so it is continuous
+        # wherever any node exists, and never doubles back. Everything else is
+        # marked auxiliary: still in the file, still on the map, still
+        # clickable with its frame and scores, just not part of the stride.
+        #
+        # auxflag, not _aux: itertuples() renames leading-underscore columns
+        # to positional _1, _2, and the flag silently read 0 for every row.
+        nf["auxflag"] = 0
+        if nf.cstreet.notna().all():
+            # the cleaning already resolved which street each node is on and
+            # where it sits: nothing to reconstruct, nothing to de-duplicate
+            nf = nf.sort_values("cseq")
+        elif nf.segname.nunique() > 1:
+            # dedupe within each chain; across disjoint chains "position along
+            # the street" has no meaning and grouped unrelated nodes together
+            parts = []
+            for _sg, _g in nf.groupby("segname", sort=False):
+                parts.append(_dedupe_runs(_g))
+            nf = pd.concat(parts)
+        else:
+            nf = _dedupe_runs(nf)
+        seg = ", ".join(str(x) for x in nf.segname.unique())
         if args.every > 1:
             nf = nf.iloc[::args.every]
         print(f"  {name:<26}{w.name:<16}{len(nf):>4} nodes  ({seg})")
@@ -256,7 +324,27 @@ def main():
         print(f"  {len(UNUSABLE)} nodes tagged unusable: excluded from the "
               f"walk and the map")
         ALLNODES = ALLNODES[ALLNODES.usable.astype(bool)].copy()
-    ALLNODES["_seg"] = (
+    # NO LEADING UNDERSCORES ON COLUMNS READ BACK THROUGH itertuples(): it
+    # renames them to positional _1, _2 and every getattr silently returns the
+    # default. It cost this file a broken chain split and a broken street
+    # split before the rule was finally applied everywhere.
+    #
+    # STREET AND SEQUENCE COME FROM cleaned_id, the hand-cleaned labelling
+    # carried in nodes.csv: "1st_avenue_west_branch_004" names the street and
+    # its position on it. That column already separates the branch from the
+    # avenue and gives the tunnel approach its own name, which is exactly what
+    # this tool spent several rounds trying to reconstruct from geometry --
+    # badly. Where it is absent (54 nodes the cleaning did not cover) the
+    # render folder and filename sequence stand in.
+    if "cleaned_id" in ALLNODES.columns and ALLNODES.cleaned_id.notna().any():
+        cid = ALLNODES.cleaned_id.astype(str)
+        ok = ALLNODES.cleaned_id.notna()
+        ALLNODES["cstreet"] = cid.str.rsplit("_", n=1).str[0].where(ok)
+        ALLNODES["cseq"] = pd.to_numeric(
+            cid.str.rsplit("_", n=1).str[1], errors="coerce").where(ok)
+    else:
+        ALLNODES["cstreet"], ALLNODES["cseq"] = None, None
+    ALLNODES["segname"] = (
         ALLNODES.source_id.astype(str).str.rsplit("_", n=1).str[0]
         if "source_id" in ALLNODES.columns and ALLNODES.source_id.notna().any()
         else ALLNODES.get("chain", "all"))
@@ -493,9 +581,30 @@ def main():
             print(f"  {name:<26}skipped: no frames")
             continue
         for wname, nf, files in got:
+            # A FOLDER IS NOT ALWAYS ONE STREET. Park Avenue's tunnel segment
+            # is five chains scattered over 970 by 690 m -- disjoint runs the
+            # frame happens to label with one name. Walked as a single street
+            # the stride is nonsense (57 nodes collapsed to 4 positions), and
+            # the selector claims four unrelated places are the same street.
+            # Chains of a folder therefore become their own selector entries
+            # whenever the folder holds more than one; a chain too short to
+            # walk rides along as auxiliary rather than becoming an entry of
+            # its own.
+            segs = list(nf.segname.unique())
+            multi = len(segs) > 1
             for r in nf.itertuples():
                 st = one_step(r, files, name, wname)
                 st["wk"] = wname
+                st["aux"] = int(getattr(r, "auxflag", 0))
+                cs = getattr(r, "cstreet", None)
+                if isinstance(cs, str) and cs:
+                    st["sf"] = cs              # the cleaned street name
+                else:
+                    sg = str(getattr(r, "segname", name))
+                    if multi:
+                        if int((nf.segname == sg).sum()) < 4:
+                            st["aux"] = 1      # stray, not a street
+                        st["sf"] = sg
                 steps.append(st)
 
     # THE SAME RAMP AND THE SAME CLIP AS THE MAPS. sim_vlm_maps normalises to
@@ -695,6 +804,20 @@ def main():
                 st["kc"][k] = to_hex(TERM_CMAP[k](tnorm[k](float(dv))))
     print(f"  ramp {mcol} clipped to {float(lo):.3f}-{float(hi):.3f}")
 
+    # A SINGLE STRAY IS NOT A STREET. Park Ave Tunnel Segment #4 is one node;
+    # as its own selector entry it offers a walk of length zero. Entries with
+    # fewer than three walkable nodes become auxiliary -- still on the map,
+    # still clickable, just not somewhere the selector offers to walk.
+    from collections import Counter
+    stride_n = Counter((st["sf"], st.get("wk")) for st in steps if not st.get("aux"))
+    thin = {sf for (sf, _), c in stride_n.items() if c < 3}
+    if thin:
+        for st in steps:
+            if st["sf"] in thin:
+                st["aux"] = 1
+        print(f"  {len(thin)} entr{'y' if len(thin)==1 else 'ies'} too short to "
+              f"walk, kept on the map only: {', '.join(sorted(thin))}")
+
     have_q = sum(1 for s in steps if s["d"])
     print(f"  ratings on {sum(1 for s in steps if s['r'])} nodes, "
           f"descriptions on {have_q}, M on {sum(1 for s in steps if s['c'])}")
@@ -706,7 +829,7 @@ def main():
     # truncated file simply ends early: every frame before the cut still works.
     frag = []
     for st in steps:
-        meta = json.dumps({k: st[k] for k in ("node", "street", "r", "d", "c", "k", "kc", "pc", "sf", "kf", "mx", "my", "wk")})
+        meta = json.dumps({k: st[k] for k in ("node", "street", "r", "d", "c", "k", "kc", "pc", "sf", "kf", "mx", "my", "wk", "aux")})
         frag.append('<i class="f" data-meta="'
                     + html.escape(meta, quote=True)
                     + '" data-src="' + html.escape(st["img"], quote=True)
@@ -1046,7 +1169,7 @@ function paint(s, scoresOnly){
   $("node").textContent=s.node+(s.street?"  ·  "+s.street:"")
     +(scoresOnly?"   scores only -- this view is not in this file":"");
   $("pos").textContent=scoresOnly?"--":((i+1)+" / "+STEPS.length);
-  if(!scoresOnly)
+  if(!scoresOnly && i >= 0)
     $("mark").style.left=(STEPS.length<2?0:i/(STEPS.length-1)*100)+"%";
 
   // NAME THE NUMBER. Neither city's vlm_calculations carries A_i, so what is
@@ -1197,8 +1320,24 @@ function jumpTo(id){
   let k = STEPS.findIndex(s=>s.node===id);
   if(k >= 0){ go(k); return; }
   const other = ALL.find(s=>s.node===id);          // another street in the file
+  if(other && other.aux){
+    // an auxiliary-run node: real frame, real scores, just not on the
+    // stride. Shown standalone; the counter shows a dot.
+    if(other.sf !== CUR) pickStreet(other.sf, other.wk);
+    i = -1;
+    paint(other, false);
+    $("pos").textContent = "·";
+    const g = document.getElementById("here");
+    if(g && other.mx != null){
+      g.setAttribute("opacity", "1");
+      g.setAttribute("transform",
+        "translate(" + other.mx + "," + other.my + ") rotate(0)");
+    }
+    return;
+  }
   if(other){ pickStreet(other.sf, other.wk);
-             go(STEPS.findIndex(s=>s.node===id)); return; }
+             const kk = STEPS.findIndex(s=>s.node===id);
+             if(kk >= 0){ go(kk); return; } }
 
   // NEAREST VIEW, not a dead end. The file holds every Nth node, so most of
   // the dots on a loaded street have no frame of their own -- and clicking one
@@ -1328,7 +1467,7 @@ function start(){
     let m={}; try{ m=JSON.parse(el.dataset.meta||"{}"); }catch(e){}
     return {img:el.dataset.src, node:m.node||"", street:m.street||"",
             r:m.r||{}, d:m.d||{}, c:m.c||{}, k:m.k||"#3a3f46", kc:m.kc||{}, pc:m.pc, sf:m.sf||"", kf:m.kf||"#6b7078",
-          mx:m.mx, my:m.my, wk:m.wk||""};
+          mx:m.mx, my:m.my, wk:m.wk||"", aux:m.aux||0};
   });
   // one <option> per street, in the order the build wrote them
   const seen=[];
@@ -1458,7 +1597,7 @@ function pickStreet(name, wk){
   CUR=name; $("pick").value=name;
   const wks=walksOf(name);
   CURWK = (wk && wks.includes(wk)) ? wk : wks[0]||"";
-  STEPS=ALL.filter(s=>s.sf===name && s.wk===CURWK);
+  STEPS=ALL.filter(s=>s.sf===name && s.wk===CURWK && !s.aux);
   const d=$("dir");
   if(wks.length>1){
     d.hidden=false;

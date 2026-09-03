@@ -1,6 +1,6 @@
 # What a clean repository would carry
 
-384 files tracked today. Proposed: keep 240, drop 144.
+388 files tracked today. Proposed: keep 244, drop 144.
 
 Nothing is deleted from this machine -- the drop list simply does not go into the new repository.
 
@@ -12,7 +12,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - **.gitignore** (8 KB)
 - **README.md** (34 KB)  
   Murray Hill streetscape pipeline
-- **config.yaml** (34 KB)  
+- **config.yaml** (35 KB)  
   seed: 42
 - **config_london.yaml** (34 KB)  
   seed: 42
@@ -26,7 +26,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - **data/london/processed/indoor_flag.csv** (523 KB)
 - **data/london/processed/indoor_labels.csv** (1 KB)
 - **data/london/processed/manifest.csv** (679 KB)
-- **data/london/processed/nodes.csv** (404 KB)
+- **data/london/processed/nodes.csv** (425 KB)
 - **data/london/processed/nodes.gpkg** (636 KB)
 - **data/london/processed/offstreet_flag.csv** (501 KB)
 - **data/london/processed/provenance.csv** (42 KB)
@@ -40,7 +40,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - **data/processed/manifest.csv** (264 KB)
 - **data/processed/metrics.csv** (347 KB)
 - **data/processed/metrics.gpkg** (400 KB)
-- **data/processed/nodes.csv** (209 KB)
+- **data/processed/nodes.csv** (213 KB)
 - **data/processed/nodes.gpkg** (336 KB)
 - **data/processed/nodes_infill.csv** (1 KB)
 - **data/processed/nodes_infill.gpkg** (96 KB)
@@ -80,6 +80,8 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
   Figures
 - **docs/handpicking.md** (6 KB)  
   Handpicking images for the scaffolding ground truth
+- **docs/jling888_manifest.md** (24 KB)  
+  What a clean repository would carry
 - **docs/london.md** (6 KB)  
   The London frame: what the imagery is, and what it costs
 - **docs/model_selection.md** (12 KB)  
@@ -105,10 +107,10 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - **results/DATA_NOTES.md** (4 KB)  
   Reading these tables
 - **results/london/tables/sim_vlm_london.csv** (5001 KB)
-- **results/london/tables/vlm_calculations.csv** (3218 KB)
-- **results/london/tables/vlm_calculations_london.csv** (3218 KB)
-- **results/london/tables/vlm_observations.csv** (5437 KB)
-- **results/london/tables/vlm_observations_london.csv** (5437 KB)
+- **results/london/tables/vlm_calculations.csv** (2907 KB)
+- **results/london/tables/vlm_calculations_london.csv** (2907 KB)
+- **results/london/tables/vlm_observations.csv** (5513 KB)
+- **results/london/tables/vlm_observations_london.csv** (5513 KB)
 - **results/tables/README.md** (13 KB)  
   SIM run tables
 - **results/tables/block_matrices.docx** (37 KB)
@@ -144,7 +146,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - **results/tables/segmentation_categories.csv** (2 KB)
 - **results/tables/sim_samples.csv** (1 KB)
 - **results/tables/sim_vlm.csv** (342 KB)
-- **results/tables/sim_vlm_180_placeless.csv** (1180 KB)
+- **results/tables/sim_vlm_180_placeless.csv** (1179 KB)
 - **results/tables/sim_vlm_fix_smoke.csv** (2 KB)
 - **results/tables/sim_vlm_ias.csv** (493 KB)
 - **results/tables/sim_vlm_smoke.csv** (4 KB)
@@ -167,8 +169,10 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - **results/tables/svi_90_sim.partial_fullschema.csv** (200 KB)
 - **results/tables/validation_twins.csv** (1 KB)
 - **results/tables/vlm_benchmark.csv** (1 KB)
-- **results/tables/vlm_calculations.csv** (1654 KB)
-- **results/tables/vlm_observations.csv** (3080 KB)
+- **results/tables/vlm_calculations.csv** (805 KB)
+- **results/tables/vlm_descriptions_180.csv** (1121 KB)
+- **results/tables/vlm_greenery_open.csv** (20 KB)
+- **results/tables/vlm_observations.csv** (1459 KB)
 - **results/tables/vlm_prompts.txt** (9 KB)  
   ==============================================================================
 - **results/tables/vlm_rung_ab.csv** (190 KB)
@@ -219,7 +223,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - **tools/block_matrix_docx.py** (4 KB)  
   The block matrices as a Word document with real, editable tables.
 - **tools/build_sim_report.py** (39 KB)
-- **tools/build_walk_interface.py** (63 KB)  
+- **tools/build_walk_interface.py** (75 KB)  
   A walk-through page: the view, the scores, and what the model said.
 - **tools/classify_street_type.py** (6 KB)  
   Label every node vehicular or pedestrian, so the render can match the view.
@@ -229,7 +233,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
   Sidewalk sheds and scaffolding from DOB permits, as ground truth.
 - **tools/export_gis.py** (4 KB)  
   Every layer the figures draw, as one GeoPackage for QGIS or ArcGIS.
-- **tools/export_svi_180.py** (15 KB)  
+- **tools/export_svi_180.py** (16 KB)  
   Export 180-degree along-street panoramas as two walks per street.
 - **tools/export_svi_90.py** (17 KB)  
   Export the forward view, split by street type: 90-degree halves or one 180.
@@ -273,6 +277,8 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
   Every model on the same two targets, the same images, the same metric.
 - **tools/node_map.py** (8 KB)  
   The sampling nodes on a basemap, for either study area.
+- **tools/node_usability.py** (4 KB)  
+  usable: True/False on nodes.csv, instead of a node quietly not being there.
 - **tools/pedestrian.py** (16 KB)  
   Pedestrian-realm composition, by node and by travel direction.
 - **tools/prompt_place_ab.py** (4 KB)  
@@ -307,7 +313,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
   Exploded axonometric of the SIM layers over the built fabric.
 - **tools/sim_axonometric_blender.py** (11 KB)  
   The SIM axonometric, rendered in Blender rather than drawn in matplotlib.
-- **tools/sim_compute.py** (13 KB)  
+- **tools/sim_compute.py** (14 KB)  
   M_i for every half-view, from the VLM ratings, per manuscript section 2.7.
 - **tools/sim_cube.py** (5 KB)  
   The three SIM dimensions plotted against each other, by typology.
@@ -315,7 +321,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
   Street Interface Matrix and the demonstration dwell index.
 - **tools/sim_exploded.py** (25 KB)  
   Exploded axonometric: the SIM's three dimensions as strata over the plan.
-- **tools/sim_export.py** (12 KB)  
+- **tools/sim_export.py** (14 KB)  
   Split the SIM run into two tables: what was observed, and what was derived.
 - **tools/sim_maps.py** (7 KB)  
   I, Y, D and M mapped for both study areas, one colour scale per dimension.
@@ -331,7 +337,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
   The three SIM terms, one row per city.
 - **tools/sim_vlm_converge.py** (9 KB)  
   Rate every half-view by elimination: prune to the rungs above chance, ask again among the survivors, repeat until one rung is left.
-- **tools/sim_vlm_describe.py** (12 KB)  
+- **tools/sim_vlm_describe.py** (13 KB)  
   Ask the model to say what it sees, in its own words.
 - **tools/sim_vlm_maps.py** (5 KB)  
   Four maps for the VLM index: M, then I_raw, Y, D_raw.
@@ -459,7 +465,7 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - results/figures/model_selection_slides.pptx (43 KB)
 - ... and 21 more
 
-### experiment or duplicate of a final table -- 58 files, 10.8 MB
+### experiment or duplicate of a final table -- 58 files, 8.4 MB
 
 - cubemap_check.py (12 KB)
 - migrate_gridaxis.py (5 KB)
@@ -488,11 +494,11 @@ Nothing is deleted from this machine -- the drop list simply does not go into th
 - results/tables/svi_180_cone_eval.csv (3 KB)
 - results/tables/svi_180_cone_test.csv (28 KB)
 - results/tables/svi_180_projection_test.csv (11 KB)
-- results/tables/vlm_calculations_murrayhill.csv (1654 KB)
+- results/tables/vlm_calculations_murrayhill.csv (805 KB)
 - results/tables/vlm_describe_probe.csv (120 KB)
 - results/tables/vlm_mast_probe.csv (7 KB)
 - results/tables/vlm_mast_prompt_probe.csv (10 KB)
-- results/tables/vlm_observations_murrayhill.csv (3080 KB)
+- results/tables/vlm_observations_murrayhill.csv (1459 KB)
 - results/tables/vlm_reask_probe.csv (178 KB)
 - results/tables/vlm_reask_probe_oldrungs.csv (233 KB)
 - tools/anchor_probe.py (7 KB)
