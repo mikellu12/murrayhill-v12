@@ -191,3 +191,9 @@ logs/
 # hourly-cost tables, snapshotted before risky operations; local only
 backups/
 results/tables/*.pre_parkave
+
+# The description tables are derived text over Street View frames. Keep the
+# tool in the repo and the output on disk: 50b1ed7 pushed 4,723 rows of them
+# before this rule existed, and the commit had to be rewritten.
+results/tables/vlm_descriptions*.csv
+results/london/tables/vlm_descriptions*.csv

@@ -36,7 +36,7 @@ import pandas as pd
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE.parent / "src"))
 sys.path.insert(0, str(HERE))
-from common import RES, banner
+from common import PROC, RES, banner
 from mast import erase_mast
 
 MODEL = "Qwen/Qwen2-VL-7B-Instruct"
@@ -48,12 +48,20 @@ NAME = re.compile(r"(\d+)_(n\d+)_([NESW])(?:_([LRF]))?\.jpg$")
 # No text on signs or vehicles, because frontage was answered with the logo on
 # a parked truck. No season or purpose, because bare trees drew "likely late
 # autumn or winter" from imagery captured in April.
+# NOTHING FORBIDDEN THAT IS NOT MEASURED. The system message used to forbid
+# four things -- reading sign text, naming companies, guessing the season or
+# weather, guessing a building's purpose or the neighbourhood -- each added
+# from a single observed answer and none of them ever tested. Tested at last
+# (tools/describe_system_ab.py, 24 frames, both wordings on every frame), the
+# prohibitions did not prevent what they named: the version carrying them
+# produced MORE sign text (2 against 0), more company names (2 against 0) and
+# more speculation about purpose (18 against 13), in answers a third longer.
+# A list of things not to say is still a list, and the model spends its
+# attention answering it. What remains is the instruction that actually
+# constrains: describe what is there, and say so when it is not.
 SYSTEM = ("You are describing a street for an urban design study. Answer in at "
-          "most two sentences. Describe only what is visible in the image. Do "
-          "not read out text on signs or vehicles, do not name companies, and "
-          "do not speculate about the season, the weather, the purpose of a "
-          "building, or the neighbourhood. If something asked about is absent, "
-          "say so plainly.")
+          "most two sentences. Describe only what is visible in the image. If "
+          "something asked about is absent, say so plainly.")
 
 # Open questions, deliberately not the rung prompts. Asking "why did you say 5"
 # invites the model to reverse-engineer a justification; asking what is there
@@ -70,12 +78,36 @@ QUESTIONS = {
     # 30 frames. tools/describe_prompt_ab.py is the test; the crops are in
     # results/tables/describe_prompt_ab.csv.
     "greenery": "What vegetation is visible in this view, and where?",
-    "ground": "Describe the footway only: how wide it is, its surface, whether "
-              "there is a kerb, and what stands on it. Ignore the roadway and "
-              "ignore vehicles.",
-    "frontage": "Describe the buildings at street level only -- entrances, "
-                "windows, shopfronts, or blank wall. Ignore vehicles, people "
-                "and anything in the road.",
+    # ENUMERATION AGAIN, MEASURED AGAIN. The earlier wording listed what to
+    # cover -- "how wide it is, its surface, whether there is a kerb, and what
+    # stands on it" -- and the model answered the checklist rather than the
+    # frame: 99.9 per cent of 1,514 answers mentioned a kerb, 92 per cent
+    # opened with the same seven words, and exactly 2 said a kerb was absent.
+    # A phrase that appears in every answer carries no information about any
+    # of them. Asked openly, the model reports what is actually underfoot.
+    "ground": "Describe the footway.",
+    # Same shape, same result: 97.8 per cent mentioned windows and 71 per cent
+    # reached for "a mix of", which is what a model says when handed a list and
+    # asked to cover it.
+    # SEARCHED, not chosen by taste. Six wordings were scored on the
+    # avenue/side-street gap -- Murray Hill's avenues carry continuous retail
+    # and its brownstone mid-blocks almost none, so a question that READS the
+    # image should claim shopfronts far more often on the avenues. Priming
+    # inflates both strata and starvation deflates both, so either failure
+    # collapses the gap from its own end, which is why the gap scores and the
+    # rate does not.
+    #
+    #   buildings           gap  +0   95% of answers described building MASS,
+    #                            and one identical sentence on 26% of frames
+    #   ground_floor        gap -15   claimed shopfronts on 100% of SIDE
+    #                            STREETS against 85% of avenues -- it primes
+    #                            retail, and hedging it with "if it is blank
+    #                            wall, say so" left it at 95%/95%
+    #   base                gap +10   8% mass, 88% distinct, 22.8 words
+    #
+    # No wording ever said "blank wall" on any frame, including the one that
+    # explicitly licensed it. That is a limit of the model, not the prompt.
+    "frontage": "Describe the base of the buildings along this street.",
     "standout": "What is the single most noticeable thing in this view?",
 }
 
@@ -127,6 +159,11 @@ def main():
     ap.add_argument("--mast-set", default=None)
     ap.add_argument("--max-new", type=int, default=110)
     ap.add_argument("--fields", nargs="+", default=list(QUESTIONS))
+    ap.add_argument("--skip-unusable", action="store_true",
+                    help="leave out frames on nodes tagged usable: False. They "
+                         "are excluded from the calculations anyway, and in "
+                         "the City of London they are 618 frames -- an hour of "
+                         "GPU describing tourist-bus interiors.")
     ap.add_argument("--resume", action="store_true",
                     help="keep what the table already holds and describe only "
                          "the frames missing from it")
@@ -186,6 +223,17 @@ def main():
     # rewritten from row one while a later stage was being resumed. Generation
     # is deterministic here, so a frame already described does not need doing
     # twice, and the cost of being wrong about that is only a repeated frame.
+    if args.skip_unusable:
+        npath = PROC / "nodes.csv"
+        if npath.exists():
+            nu = pd.read_csv(npath)
+            if "usable" in nu.columns:
+                bad = set(nu.loc[~nu.usable.astype(bool), "node_id"])
+                before = len(fl)
+                fl = fl[~fl.node_id.isin(bad)]
+                print(f"skipping {before - len(fl)} frames on "
+                      f"{len(bad)} unusable nodes")
+
     table = args.table or (RES / "tables" / "vlm_descriptions.csv")
     prior = None
     if args.resume and table.exists():
